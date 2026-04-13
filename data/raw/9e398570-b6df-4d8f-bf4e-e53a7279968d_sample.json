@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2026-04-13T10:10:01",
+    "tool_id": "ETCH_01",
+    "temperature": 85.2,
+    "status": "RUNNING"
+  },
+  {
+    "timestamp": "2026-04-13T10:10:03",
+    "tool_id": "ETCH_01",
+    "temperature": 84.9,
+    "status": "RUNNING"
+  }
+]

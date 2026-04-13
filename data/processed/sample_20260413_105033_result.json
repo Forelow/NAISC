@@ -1,0 +1,81 @@
+{
+    "ingested": {
+        "file_id": "9e398570-b6df-4d8f-bf4e-e53a7279968d",
+        "filename": "sample.json",
+        "extension": ".json",
+        "size_bytes": 263,
+        "raw_path": "data\\raw\\9e398570-b6df-4d8f-bf4e-e53a7279968d_sample.json",
+        "ingestion_time": "2026-04-13T10:50:33.714023",
+        "sha256": "96593ddf2883c6a59e915374c8b3105426188e20d6753a297b3d2cdc4d2c2e28"
+    },
+    "detection": {
+        "format_guess": "json",
+        "content_class": "structured_text",
+        "confidence": 0.99,
+        "notes": "Valid JSON detected",
+        "extension_hint": ".json",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "json",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "json is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "parsed_result": {
+        "file_id": "9e398570-b6df-4d8f-bf4e-e53a7279968d",
+        "filename": "sample.json",
+        "source_format": "json",
+        "parser_name": "json_structured_parser",
+        "parse_status": "parsed",
+        "record_count": 2,
+        "records": [
+            {
+                "record_id": "f9693a4c-d66d-4dee-a89e-73670720b302",
+                "record_type": "generic_structured_log",
+                "raw_fields": {
+                    "timestamp": "2026-04-13T10:10:01",
+                    "tool_id": "ETCH_01",
+                    "temperature": 85.2,
+                    "status": "RUNNING"
+                },
+                "candidate_fields": {
+                    "timestamp": "2026-04-13T10:10:01",
+                    "tool_id": "ETCH_01",
+                    "temperature": 85.2,
+                    "status": "RUNNING"
+                },
+                "source_reference": "record_1",
+                "confidence": 1.0,
+                "warnings": []
+            },
+            {
+                "record_id": "50bdbcfd-3c72-4e96-ad17-a0efe9456f9e",
+                "record_type": "generic_structured_log",
+                "raw_fields": {
+                    "timestamp": "2026-04-13T10:10:03",
+                    "tool_id": "ETCH_01",
+                    "temperature": 84.9,
+                    "status": "RUNNING"
+                },
+                "candidate_fields": {
+                    "timestamp": "2026-04-13T10:10:03",
+                    "tool_id": "ETCH_01",
+                    "temperature": 84.9,
+                    "status": "RUNNING"
+                },
+                "source_reference": "record_2",
+                "confidence": 1.0,
+                "warnings": []
+            }
+        ],
+        "warnings": []
+    }
+}
