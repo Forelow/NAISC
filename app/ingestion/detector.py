@@ -10,10 +10,12 @@ import xml.etree.ElementTree as ET
 
 @dataclass
 class DetectionResult:
-    file_class: str
-    format_name: str
+    format_guess: str
+    content_class: str
     confidence: float
     notes: str
+    extension_hint: str
+    is_text: bool
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -65,10 +67,26 @@ def try_csv(text: str) -> bool:
         return False
 
 
-def detect_text_pattern(text: str) -> DetectionResult:
+def looks_like_hex_dump(text: str) -> bool:
+    allowed = set("0123456789abcdefABCDEF \n\r\t:")
+    snippet = text[:1000]
+    if not snippet.strip():
+        return False
+    ratio = sum(1 for ch in snippet if ch in allowed) / len(snippet)
+    return ratio > 0.95
+
+
+def detect_text_pattern(text: str, extension_hint: str) -> DetectionResult:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
     if not lines:
-        return DetectionResult("unstructured", "empty_text", 0.60, "Empty text file")
+        return DetectionResult(
+            format_guess="empty_text",
+            content_class="unstructured_text",
+            confidence=0.60,
+            notes="Empty text file",
+            extension_hint=extension_hint,
+            is_text=True,
+        )
 
     sample_lines = lines[:20]
 
@@ -77,34 +95,41 @@ def detect_text_pattern(text: str) -> DetectionResult:
 
     if syslog_hits >= max(3, len(sample_lines) // 3):
         return DetectionResult(
-            "semi_structured",
-            "syslog_like_text",
-            0.88,
-            "Repeated timestamp/syslog-like line pattern detected",
+            format_guess="syslog_like_text",
+            content_class="semi_structured_text",
+            confidence=0.88,
+            notes="Repeated timestamp/syslog-like pattern detected",
+            extension_hint=extension_hint,
+            is_text=True,
         )
 
     if kv_hits >= max(3, len(sample_lines) // 3):
         return DetectionResult(
-            "semi_structured",
-            "key_value_text",
-            0.86,
-            "Repeated key=value pattern detected",
+            format_guess="key_value_text",
+            content_class="semi_structured_text",
+            confidence=0.86,
+            notes="Repeated key=value pattern detected",
+            extension_hint=extension_hint,
+            is_text=True,
         )
 
-    hex_chars = set("0123456789abcdefABCDEF \n\r\t")
-    if all(ch in hex_chars for ch in text[:500]):
+    if looks_like_hex_dump(text):
         return DetectionResult(
-            "unstructured",
-            "hex_dump_text",
-            0.75,
-            "Content resembles hexadecimal dump text",
+            format_guess="hex_dump_text",
+            content_class="unstructured_text",
+            confidence=0.78,
+            notes="Text resembles hexadecimal dump",
+            extension_hint=extension_hint,
+            is_text=True,
         )
 
     return DetectionResult(
-        "unstructured",
-        "free_text_log",
-        0.70,
-        "No strong deterministic line structure detected",
+        format_guess="free_text_log",
+        content_class="unstructured_text",
+        confidence=0.70,
+        notes="No strong deterministic line structure detected",
+        extension_hint=extension_hint,
+        is_text=True,
     )
 
 
@@ -113,40 +138,106 @@ def detect_file(file_path: str) -> DetectionResult:
     if not path.exists():
         raise FileNotFoundError(f"File not found: {file_path}")
 
+    extension_hint = path.suffix.lower()
     data = path.read_bytes()
 
+    # Cheap extension hint first
+    if extension_hint == ".parquet":
+        return DetectionResult(
+            format_guess="parquet",
+            content_class="structured_binary",
+            confidence=0.95,
+            notes="Extension indicates Parquet",
+            extension_hint=extension_hint,
+            is_text=False,
+        )
+
+    if extension_hint == ".json":
+        try:
+            text = data.decode("utf-8", errors="replace").strip()
+            if try_json(text):
+                return DetectionResult(
+                    format_guess="json",
+                    content_class="structured_text",
+                    confidence=0.99,
+                    notes="Valid JSON detected",
+                    extension_hint=extension_hint,
+                    is_text=True,
+                )
+        except Exception:
+            pass
+
+    if extension_hint == ".xml":
+        try:
+            text = data.decode("utf-8", errors="replace").strip()
+            if try_xml(text):
+                return DetectionResult(
+                    format_guess="xml",
+                    content_class="structured_text",
+                    confidence=0.99,
+                    notes="Valid XML detected",
+                    extension_hint=extension_hint,
+                    is_text=True,
+                )
+        except Exception:
+            pass
+
+    if extension_hint == ".csv":
+        try:
+            text = data.decode("utf-8", errors="replace").strip()
+            if try_csv(text):
+                return DetectionResult(
+                    format_guess="csv",
+                    content_class="structured_text",
+                    confidence=0.95,
+                    notes="Consistent CSV structure detected",
+                    extension_hint=extension_hint,
+                    is_text=True,
+                )
+        except Exception:
+            pass
+
+    # Content sniffing next
     if not is_probably_text(data):
         return DetectionResult(
-            "unstructured",
-            "binary_blob",
-            0.90,
-            "High proportion of non-printable bytes",
+            format_guess="opaque_binary",
+            content_class="binary",
+            confidence=0.90,
+            notes="High proportion of non-printable bytes",
+            extension_hint=extension_hint,
+            is_text=False,
         )
 
     text = data.decode("utf-8", errors="replace").strip()
 
     if try_json(text):
         return DetectionResult(
-            "structured",
-            "json",
-            0.98,
-            "Valid JSON detected",
+            format_guess="json",
+            content_class="structured_text",
+            confidence=0.98,
+            notes="Valid JSON detected from content",
+            extension_hint=extension_hint,
+            is_text=True,
         )
 
     if try_xml(text):
         return DetectionResult(
-            "structured",
-            "xml",
-            0.98,
-            "Valid XML detected",
+            format_guess="xml",
+            content_class="structured_text",
+            confidence=0.98,
+            notes="Valid XML detected from content",
+            extension_hint=extension_hint,
+            is_text=True,
         )
 
     if try_csv(text):
         return DetectionResult(
-            "structured",
-            "csv",
-            0.92,
-            "Consistent delimited rows detected",
+            format_guess="csv",
+            content_class="structured_text",
+            confidence=0.92,
+            notes="Consistent delimited rows detected",
+            extension_hint=extension_hint,
+            is_text=True,
         )
 
-    return detect_text_pattern(text)
+    return detect_text_pattern(text, extension_hint)
