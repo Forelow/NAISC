@@ -89,6 +89,45 @@ def _build_result(
 
 
 # =========================
+# HELPER FUNCTIONS
+# =========================
+
+def _is_missing(value: Any) -> bool:
+    return value is None or value == ""
+
+
+def _get_path(obj: Any, path: str, default: Any = None) -> Any:
+    """
+    Read nested dict paths like:
+    - Recipe.RecipeID
+    - Keys.SensorID
+    """
+    current = obj
+    for part in path.split("."):
+        if not isinstance(current, dict):
+            return default
+        if part not in current:
+            return default
+        current = current[part]
+    return current
+
+
+def _first_available(obj: dict, paths: list[str], default: Any = None) -> Any:
+    for path in paths:
+        value = _get_path(obj, path, default=None)
+        if not _is_missing(value):
+            return value
+    return default
+
+
+def _pick_preferred(*values: Any, default: Any = None) -> Any:
+    for value in values:
+        if not _is_missing(value):
+            return value
+    return default
+
+
+# =========================
 # JSON PARSING
 # =========================
 
@@ -98,11 +137,9 @@ def _parse_json(file_path: str) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8", errors="replace") as f:
         data = json.load(f)
 
-    # Special vendor-style nested JSON
     if isinstance(data, dict) and "ControlJob" in data and isinstance(data["ControlJob"], dict):
-        return _extract_vendor_control_job_records(data["ControlJob"])
+        return _extract_control_job_family_records(data["ControlJob"])
 
-    # Generic fallback
     return _extract_json_records_generic(data)
 
 
@@ -176,14 +213,14 @@ def _extract_json_records_generic(data: Any) -> list[dict[str, Any]]:
     ]
 
 
-def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dict[str, Any]]:
+def _extract_control_job_family_records(control_job: dict[str, Any]) -> list[dict[str, Any]]:
     extracted: list[dict[str, Any]] = []
 
-    control_job_id = control_job.get("ControlJobID")
-    equipment_id = control_job.get("EquipmentID")
-    operator_id = control_job.get("OperatorID")
-    start_time = control_job.get("StartTime")
-    end_time = control_job.get("EndTime")
+    control_job_id = _first_available(control_job, ["ControlJobID"])
+    equipment_id = _first_available(control_job, ["EquipmentID", "ToolID", "MachineID"])
+    operator_id = _first_available(control_job, ["OperatorID"])
+    start_time = _first_available(control_job, ["StartTime"])
+    end_time = _first_available(control_job, ["EndTime"])
 
     # 1) Control job record
     extracted.append(
@@ -204,14 +241,20 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
 
     process_jobs = control_job.get("ProcessJobs", [])
     for pj_index, process_job in enumerate(process_jobs, start=1):
-        prjob_id = process_job.get("PRJobID")
-        lot_id = process_job.get("LotID")
-        wafer_id = process_job.get("WaferID")
-        slot_id = process_job.get("SlotID")
-        recipe_name = process_job.get("RecipeName")
-        recipe_step_name = process_job.get("RecipeStepName")
+        prjob_id = _first_available(process_job, ["PRJobID", "ProcessJobID"])
+        lot_id = _first_available(process_job, ["LotID"])
+        wafer_id = _first_available(process_job, ["WaferID"])
+        slot_id = _first_available(process_job, ["SlotID"])
 
-        # 2) Process job record
+        recipe_name = _first_available(
+            process_job,
+            ["RecipeName", "Recipe.RecipeID", "RecipeID"]
+        )
+        recipe_step_name = _first_available(
+            process_job,
+            ["RecipeStepName", "Recipe.Type"]
+        )
+
         extracted.append(
             {
                 "record_type": "process_job",
@@ -237,13 +280,25 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
             attrs = report.get("Attributes", {})
             events = attrs.get("Events", {})
 
-            module_id = keys.get("ModuleID")
-            recipe_step_id = keys.get("RecipeStepID")
-            key_wafer_id = keys.get("WaferID")
+            module_id = _first_available(keys, ["ModuleID"])
+            recipe_step_id = _first_available(keys, ["RecipeStepID"])
+            key_wafer_id = _first_available(keys, ["WaferID"])
 
-            effective_slot_id = attrs.get("SlotID", slot_id)
-            effective_recipe_name = attrs.get("RecipeName", recipe_name)
-            effective_recipe_step_name = attrs.get("RecipeStepName", recipe_step_name)
+            effective_slot_id = _pick_preferred(
+                _first_available(attrs, ["SlotID"]),
+                slot_id
+            )
+
+            effective_recipe_name = _pick_preferred(
+                _first_available(attrs, ["RecipeName", "Recipe.RecipeID"]),
+                recipe_name
+            )
+
+            effective_recipe_step_name = _pick_preferred(
+                _first_available(attrs, ["RecipeStepName"]),
+                recipe_step_name,
+                recipe_step_id
+            )
 
             base_context = {
                 "control_job_id": control_job_id,
@@ -261,14 +316,20 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
 
             # 3) Control state events
             for ev_index, event in enumerate(events.get("ControlStateEvents", []), start=1):
+                event_id = _first_available(event, ["EventID"])
+                event_name = _first_available(event, ["Name"])
+                message = _first_available(event, ["Text", "Message", "Name"])
+                timestamp = _first_available(event, ["DateTime", "Timestamp", "TimeStamp"])
+
                 extracted.append(
                     {
                         "record_type": "control_state_event",
                         "raw_fields": {
                             **base_context,
-                            "event_id": event.get("EventID"),
-                            "timestamp": event.get("DateTime"),
-                            "message": event.get("Text"),
+                            "event_id": event_id,
+                            "event_name": event_name,
+                            "timestamp": timestamp,
+                            "message": message,
                         },
                         "source_reference": (
                             f"ControlJob.ProcessJobs[{pj_index}]."
@@ -287,14 +348,14 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
                         "record_type": "alarm_event",
                         "raw_fields": {
                             **base_context,
-                            "alarm_id": alarm.get("AlarmID"),
-                            "severity": alarm.get("Severity"),
-                            "timestamp": alarm.get("DateTime"),
-                            "message": alarm.get("Text"),
-                            "chamber": alarm.get("Chamber"),
-                            "value": alarm.get("Value"),
-                            "unit": alarm.get("Unit"),
-                            "threshold": alarm.get("Threshold"),
+                            "alarm_id": _first_available(alarm, ["AlarmID"]),
+                            "severity": _first_available(alarm, ["Severity"]),
+                            "timestamp": _first_available(alarm, ["DateTime", "Timestamp"]),
+                            "message": _first_available(alarm, ["Text", "Message", "Name"]),
+                            "chamber": _first_available(alarm, ["Chamber"]),
+                            "value": _first_available(alarm, ["Value"]),
+                            "unit": _first_available(alarm, ["Unit"]),
+                            "threshold": _first_available(alarm, ["Threshold"]),
                         },
                         "source_reference": (
                             f"ControlJob.ProcessJobs[{pj_index}]."
@@ -313,13 +374,13 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
                         "record_type": "error_event",
                         "raw_fields": {
                             **base_context,
-                            "error_id": error.get("ErrorID"),
-                            "severity": error.get("Severity"),
-                            "timestamp": error.get("DateTime"),
-                            "message": error.get("Text"),
-                            "expected_value": error.get("ExpectedValue"),
-                            "actual_value": error.get("ActualValue"),
-                            "unit": error.get("Unit"),
+                            "error_id": _first_available(error, ["ErrorID"]),
+                            "severity": _first_available(error, ["Severity"]),
+                            "timestamp": _first_available(error, ["DateTime", "Timestamp"]),
+                            "message": _first_available(error, ["Text", "Message", "Name"]),
+                            "expected_value": _first_available(error, ["ExpectedValue"]),
+                            "actual_value": _first_available(error, ["ActualValue"]),
+                            "unit": _first_available(error, ["Unit"]),
                         },
                         "source_reference": (
                             f"ControlJob.ProcessJobs[{pj_index}]."
@@ -334,9 +395,9 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
             # 6) Sensor measurements
             sensor_data = report.get("SensorData", [])
             for sd_index, sensor in enumerate(sensor_data, start=1):
-                sensor_id = sensor.get("SensorID")
-                sensor_name = sensor.get("SensorName")
-                sensor_unit = sensor.get("Unit")
+                sensor_id = _first_available(sensor, ["SensorID", "Keys.SensorID"])
+                sensor_name = _first_available(sensor, ["SensorName"])
+                sensor_unit = _first_available(sensor, ["Unit"])
 
                 measurements = sensor.get("Measurements", [])
                 for ms_index, measurement in enumerate(measurements, start=1):
@@ -348,8 +409,11 @@ def _extract_vendor_control_job_records(control_job: dict[str, Any]) -> list[dic
                                 "sensor_id": sensor_id,
                                 "sensor_name": sensor_name,
                                 "unit": sensor_unit,
-                                "timestamp": measurement.get("DateTime"),
-                                "value": measurement.get("Value"),
+                                "timestamp": _first_available(
+                                    measurement,
+                                    ["DateTime", "Timestamp", "TimeStamp"]
+                                ),
+                                "value": _first_available(measurement, ["Value"]),
                             },
                             "source_reference": (
                                 f"ControlJob.ProcessJobs[{pj_index}]."

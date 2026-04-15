@@ -1,0 +1,627 @@
+{
+    "ingested": {
+        "file_id": "fda6205f-2f47-4259-9816-9d0350889d20",
+        "filename": "vendorB.json",
+        "extension": ".json",
+        "size_bytes": 2406,
+        "raw_path": "data\\raw\\fda6205f-2f47-4259-9816-9d0350889d20_vendorB.json",
+        "ingestion_time": "2026-04-15T08:56:58.179421",
+        "sha256": "ba1595312cb1e552e012b14f339ea6e9b4f19f7f90ee1d5027ff03e1e482c885"
+    },
+    "detection": {
+        "format_guess": "json",
+        "content_class": "structured_text",
+        "confidence": 0.99,
+        "notes": "Valid JSON detected",
+        "extension_hint": ".json",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "json",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "json is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "structure_summary": {
+        "format": "json",
+        "top_level_type": "dict",
+        "top_level_keys": [
+            "ControlJob"
+        ],
+        "repeated_paths": [
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Attributes.Events.ControlStateEvents[]",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].SensorData.[].Measurements[]",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].SensorData[]",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports[]",
+            "ControlJob.ProcessJobs[]"
+        ],
+        "sample_leaf_paths": [
+            "ControlJob.ControlJobID",
+            "ControlJob.EquipmentID",
+            "ControlJob.ProcessJobs.[].LotID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Attributes.Events.ControlStateEvents.[].DateTime",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Attributes.Events.ControlStateEvents.[].Name",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Attributes.LPID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Attributes.PoolID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Attributes.SlotID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Keys.ModuleID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Keys.RecipeStepID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].Keys.WaferID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].SensorData.[].Keys.SensorID",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].SensorData.[].Measurements.[].DateTime",
+            "ControlJob.ProcessJobs.[].ModuleProcessReports.[].SensorData.[].Measurements.[].Value",
+            "ControlJob.ProcessJobs.[].PRJobID",
+            "ControlJob.ProcessJobs.[].Recipe.RecipeID",
+            "ControlJob.ProcessJobs.[].Recipe.Type",
+            "ControlJob.ProcessJobs.[].SlotID",
+            "ControlJob.ProcessJobs.[].WaferID"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "machine_log_json",
+        "record_groups": [
+            {
+                "record_type": "process_job",
+                "path": "ControlJob.ProcessJobs[]",
+                "context_paths": [
+                    "ControlJob.ControlJobID",
+                    "ControlJob.EquipmentID"
+                ],
+                "field_paths": [
+                    "PRJobID",
+                    "LotID",
+                    "SlotID",
+                    "WaferID",
+                    "Recipe.RecipeID",
+                    "Recipe.Type"
+                ]
+            },
+            {
+                "record_type": "module_process_report",
+                "path": "ControlJob.ProcessJobs[].ModuleProcessReports[]",
+                "context_paths": [
+                    "ControlJob.ControlJobID",
+                    "ControlJob.EquipmentID",
+                    "ControlJob.ProcessJobs[].PRJobID",
+                    "ControlJob.ProcessJobs[].LotID",
+                    "ControlJob.ProcessJobs[].SlotID",
+                    "ControlJob.ProcessJobs[].WaferID"
+                ],
+                "field_paths": [
+                    "Keys.ModuleID",
+                    "Keys.RecipeStepID",
+                    "Keys.WaferID",
+                    "Attributes.LPID",
+                    "Attributes.PoolID",
+                    "Attributes.SlotID"
+                ]
+            },
+            {
+                "record_type": "control_state_event",
+                "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].Attributes.Events.ControlStateEvents[]",
+                "context_paths": [
+                    "ControlJob.ControlJobID",
+                    "ControlJob.EquipmentID",
+                    "ControlJob.ProcessJobs[].PRJobID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID"
+                ],
+                "field_paths": [
+                    "DateTime",
+                    "Name"
+                ]
+            },
+            {
+                "record_type": "sensor_measurement",
+                "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[]",
+                "context_paths": [
+                    "ControlJob.ControlJobID",
+                    "ControlJob.EquipmentID",
+                    "ControlJob.ProcessJobs[].PRJobID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID"
+                ],
+                "field_paths": [
+                    "DateTime",
+                    "Value"
+                ]
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "machine_log_json",
+        "records": [
+            {
+                "record_type": "process_job",
+                "source_reference": "ControlJob.ProcessJobs[][1]",
+                "data": {
+                    "PRJobID": "PRJOB_0010",
+                    "LotID": "LOT_0043",
+                    "SlotID": "SLOT_0001",
+                    "WaferID": "WFR_0010",
+                    "Recipe.RecipeID": "RCP_0001",
+                    "Recipe.Type": "PROCESS",
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02"
+                }
+            },
+            {
+                "record_type": "module_process_report",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[][1]",
+                "data": {
+                    "Keys.ModuleID": "",
+                    "Keys.RecipeStepID": "1.0",
+                    "Keys.WaferID": "",
+                    "Attributes.LPID": "1",
+                    "Attributes.PoolID": "",
+                    "Attributes.SlotID": "SLOT_0001",
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].LotID": "LOT_0043",
+                    "ControlJob.ProcessJobs[].SlotID": "SLOT_0001",
+                    "ControlJob.ProcessJobs[].WaferID": "WFR_0010"
+                }
+            },
+            {
+                "record_type": "control_state_event",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].Attributes.Events.ControlStateEvents[][1]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.000000Z",
+                    "Name": "NAME_0001",
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": ""
+                }
+            },
+            {
+                "record_type": "control_state_event",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].Attributes.Events.ControlStateEvents[][2]",
+                "data": {
+                    "DateTime": "2026-01-12T06:17:53.000000Z",
+                    "Name": "NAME_0002",
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": ""
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][1]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.100000Z",
+                    "Value": 0,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0001"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][2]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.200000Z",
+                    "Value": 0,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0001"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][3]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.300000Z",
+                    "Value": 4,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0001"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][4]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.400000Z",
+                    "Value": 4,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0001"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][5]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.500000Z",
+                    "Value": 12,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0001"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][6]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.600000Z",
+                    "Value": 18,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0001"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][7]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.100000Z",
+                    "Value": 85.1,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0002"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][8]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.200000Z",
+                    "Value": 85.3,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0002"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][9]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.300000Z",
+                    "Value": 86.0,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0002"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][10]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.400000Z",
+                    "Value": 86.4,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0002"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][11]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.500000Z",
+                    "Value": 87.0,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0002"
+                }
+            },
+            {
+                "record_type": "sensor_measurement",
+                "source_reference": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[][12]",
+                "data": {
+                    "DateTime": "2026-01-12T06:11:00.600000Z",
+                    "Value": 87.2,
+                    "ControlJob.ControlJobID": "CJOB_0002",
+                    "ControlJob.EquipmentID": "EQP_ETCH_02",
+                    "ControlJob.ProcessJobs[].PRJobID": "PRJOB_0010",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "1.0",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID": "",
+                    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "SENSOR_0002"
+                }
+            }
+        ],
+        "record_count": 16
+    },
+    "agent_debug": {
+        "final_source": "initial_valid",
+        "initial_config_raw": {
+            "schema_family": "machine_log_json",
+            "record_groups": [
+                {
+                    "record_type": "process_job",
+                    "path": "ControlJob.ProcessJobs[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID"
+                    ],
+                    "field_paths": [
+                        "PRJobID",
+                        "LotID",
+                        "SlotID",
+                        "WaferID",
+                        "Recipe.RecipeID",
+                        "Recipe.Type"
+                    ]
+                },
+                {
+                    "record_type": "module_process_report",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].LotID",
+                        "ControlJob.ProcessJobs[].SlotID",
+                        "ControlJob.ProcessJobs[].WaferID"
+                    ],
+                    "field_paths": [
+                        "Keys.ModuleID",
+                        "Keys.RecipeStepID",
+                        "Keys.WaferID",
+                        "Attributes.LPID",
+                        "Attributes.PoolID",
+                        "Attributes.SlotID"
+                    ]
+                },
+                {
+                    "record_type": "control_state_event",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].Attributes.Events.ControlStateEvents[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID"
+                    ],
+                    "field_paths": [
+                        "DateTime",
+                        "Name"
+                    ]
+                },
+                {
+                    "record_type": "sensor_measurement",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID"
+                    ],
+                    "field_paths": [
+                        "DateTime",
+                        "Value"
+                    ]
+                }
+            ]
+        },
+        "initial_config_normalized": {
+            "schema_family": "machine_log_json",
+            "record_groups": [
+                {
+                    "record_type": "process_job",
+                    "path": "ControlJob.ProcessJobs[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID"
+                    ],
+                    "field_paths": [
+                        "PRJobID",
+                        "LotID",
+                        "SlotID",
+                        "WaferID",
+                        "Recipe.RecipeID",
+                        "Recipe.Type"
+                    ]
+                },
+                {
+                    "record_type": "module_process_report",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].LotID",
+                        "ControlJob.ProcessJobs[].SlotID",
+                        "ControlJob.ProcessJobs[].WaferID"
+                    ],
+                    "field_paths": [
+                        "Keys.ModuleID",
+                        "Keys.RecipeStepID",
+                        "Keys.WaferID",
+                        "Attributes.LPID",
+                        "Attributes.PoolID",
+                        "Attributes.SlotID"
+                    ]
+                },
+                {
+                    "record_type": "control_state_event",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].Attributes.Events.ControlStateEvents[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID"
+                    ],
+                    "field_paths": [
+                        "DateTime",
+                        "Name"
+                    ]
+                },
+                {
+                    "record_type": "sensor_measurement",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[]",
+                    "context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID"
+                    ],
+                    "field_paths": [
+                        "DateTime",
+                        "Value"
+                    ]
+                }
+            ]
+        },
+        "initial_validation_report": {
+            "schema_family": "machine_log_json",
+            "group_count_before": 4,
+            "group_count_after": 4,
+            "valid_group_count": 4,
+            "groups": [
+                {
+                    "record_type": "process_job",
+                    "path": "ControlJob.ProcessJobs[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "PRJobID",
+                        "LotID",
+                        "SlotID",
+                        "WaferID",
+                        "Recipe.RecipeID",
+                        "Recipe.Type"
+                    ],
+                    "valid_context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID"
+                    ]
+                },
+                {
+                    "record_type": "module_process_report",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "Keys.ModuleID",
+                        "Keys.RecipeStepID",
+                        "Keys.WaferID",
+                        "Attributes.LPID",
+                        "Attributes.PoolID",
+                        "Attributes.SlotID"
+                    ],
+                    "valid_context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].LotID",
+                        "ControlJob.ProcessJobs[].SlotID",
+                        "ControlJob.ProcessJobs[].WaferID"
+                    ]
+                },
+                {
+                    "record_type": "control_state_event",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].Attributes.Events.ControlStateEvents[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "DateTime",
+                        "Name"
+                    ],
+                    "valid_context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID"
+                    ]
+                },
+                {
+                    "record_type": "sensor_measurement",
+                    "path": "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Measurements[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "DateTime",
+                        "Value"
+                    ],
+                    "valid_context_paths": [
+                        "ControlJob.ControlJobID",
+                        "ControlJob.EquipmentID",
+                        "ControlJob.ProcessJobs[].PRJobID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.WaferID",
+                        "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID"
+                    ]
+                }
+            ]
+        },
+        "invalid_repair_config_raw": null,
+        "invalid_repair_config_normalized": null,
+        "invalid_repair_validation_report": null,
+        "uncovered_leaf_paths_before": [],
+        "coverage_repair_config_raw": null,
+        "coverage_repair_config_normalized": null,
+        "coverage_repair_validation_report": null,
+        "uncovered_leaf_paths_after": []
+    }
+}

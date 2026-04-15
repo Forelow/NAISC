@@ -8,7 +8,10 @@ from ingestion.receiver import ingest_file
 from ingestion.detector import detect_file
 from ingestion.support_registry import check_support
 from ingestion.router import route_file
-from parser.structured_parser import parse_structured_file
+
+from readers.json_reader import load_json_file, summarize_json_structure
+from ai.structure_agent import detect_structure_with_agent
+from parser.generic_structured_parser import parse_with_structure_config
 
 
 OUTPUT_DIR = Path("data/processed")
@@ -16,9 +19,6 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def save_result_to_file(file_info: dict, result_payload: dict) -> str:
-    """
-    Save pipeline output to a readable JSON file.
-    """
     original_name = Path(file_info["filename"]).stem
     timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
     output_path = OUTPUT_DIR / f"{original_name}_{timestamp}_result.json"
@@ -42,16 +42,25 @@ def run_pipeline(file_path: str) -> str:
         "detection": detection.to_dict(),
         "support": support.to_dict(),
         "routing": routing.to_dict(),
+        "structure_summary": None,
+        "structure_config": None,
         "parsed_result": None,
+        "agent_debug": None,
     }
 
-    if routing.next_route == "structured_parser":
-        parsed = parse_structured_file(file_info, detection.format_guess)
-        result_payload["parsed_result"] = parsed.to_dict()
+    if detection.format_guess == "json":
+        raw_json = load_json_file(file_info["raw_path"])
+        structure_summary = summarize_json_structure(raw_json)
+        structure_config, agent_debug = detect_structure_with_agent(structure_summary, raw_json)
+        parsed_result = parse_with_structure_config(raw_json, structure_config)
+
+        result_payload["structure_summary"] = structure_summary
+        result_payload["structure_config"] = structure_config
+        result_payload["agent_debug"] = agent_debug
+        result_payload["parsed_result"] = parsed_result
     else:
         result_payload["parsed_result"] = {
-            "status": "not_executed_in_this_phase",
-            "reason": f"Current route is '{routing.next_route}'"
+            "status": "not_implemented_for_this_format_yet"
         }
 
     output_file = save_result_to_file(file_info, result_payload)
@@ -60,4 +69,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorB_etch_tool_log.json")
+    run_pipeline("data/synthetic_logs/vendorF.json")

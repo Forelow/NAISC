@@ -1,0 +1,532 @@
+{
+    "ingested": {
+        "file_id": "e25844e3-2f50-4b5c-bd46-909ffe7e01e5",
+        "filename": "vendorE.json",
+        "extension": ".json",
+        "size_bytes": 8144,
+        "raw_path": "data\\raw\\e25844e3-2f50-4b5c-bd46-909ffe7e01e5_vendorE.json",
+        "ingestion_time": "2026-04-15T08:56:14.994544",
+        "sha256": "7d79e7ea7996bb8b947e797c492ca5d326ef787e6bb8cc350a7845ec29d270db"
+    },
+    "detection": {
+        "format_guess": "json",
+        "content_class": "structured_text",
+        "confidence": 0.99,
+        "notes": "Valid JSON detected",
+        "extension_hint": ".json",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "json",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "json is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "structure_summary": {
+        "format": "json",
+        "top_level_type": "list",
+        "top_level_keys": [],
+        "repeated_paths": [
+            "[]"
+        ],
+        "sample_leaf_paths": [
+            "[].from_state",
+            "[].log_time",
+            "[].lot",
+            "[].notes",
+            "[].operator",
+            "[].params.pump_speed_rpm",
+            "[].params.target_pressure_Pa",
+            "[].record_class",
+            "[].record_id",
+            "[].step_action",
+            "[].step_name",
+            "[].step_seq",
+            "[].to_state",
+            "[].tool",
+            "[].wafer"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "json_machine_logs",
+        "record_groups": [
+            {
+                "record_type": "log_record",
+                "path": "$[]",
+                "context_paths": [],
+                "field_paths": [
+                    "from_state",
+                    "log_time",
+                    "lot",
+                    "notes",
+                    "operator",
+                    "params.pump_speed_rpm",
+                    "params.target_pressure_Pa",
+                    "record_class",
+                    "record_id",
+                    "step_action",
+                    "step_name",
+                    "step_seq",
+                    "to_state",
+                    "tool",
+                    "wafer"
+                ]
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "json_machine_logs",
+        "records": [
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][1]",
+                "data": {
+                    "from_state": "OFFLINE",
+                    "log_time": "2026-04-13T07:00:00.000Z",
+                    "lot": "LOT_0101",
+                    "operator": "OPR_021",
+                    "record_class": "state_change",
+                    "record_id": "EVT_000001",
+                    "to_state": "IDLE",
+                    "tool": "EQP_LPCVD_01"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][2]",
+                "data": {
+                    "from_state": "IDLE",
+                    "log_time": "2026-04-13T07:05:00.000Z",
+                    "lot": "LOT_0101",
+                    "notes": "Loading lot LOT_0101, recipe LPCVD_POLY_01",
+                    "operator": "OPR_021",
+                    "record_class": "state_change",
+                    "record_id": "EVT_000002",
+                    "to_state": "SETUP",
+                    "tool": "EQP_LPCVD_01"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][3]",
+                "data": {
+                    "log_time": "2026-04-13T07:10:00.000Z",
+                    "lot": "LOT_0101",
+                    "params.pump_speed_rpm": 3000,
+                    "params.target_pressure_Pa": 0.05,
+                    "record_class": "step_event",
+                    "record_id": "EVT_000003",
+                    "step_action": "START",
+                    "step_name": "Pump_Down",
+                    "step_seq": 1,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][4]",
+                "data": {
+                    "log_time": "2026-04-13T07:10:10.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000004",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][5]",
+                "data": {
+                    "log_time": "2026-04-13T07:10:20.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000005",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][6]",
+                "data": {
+                    "log_time": "2026-04-13T07:10:30.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000006",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][7]",
+                "data": {
+                    "log_time": "2026-04-13T07:10:40.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000007",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][8]",
+                "data": {
+                    "log_time": "2026-04-13T07:10:50.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000008",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][9]",
+                "data": {
+                    "log_time": "2026-04-13T07:11:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000009",
+                    "step_action": "END",
+                    "step_name": "Pump_Down",
+                    "step_seq": 1,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][10]",
+                "data": {
+                    "log_time": "2026-04-13T07:11:01.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000010",
+                    "step_action": "START",
+                    "step_name": "Temp_Ramp",
+                    "step_seq": 2,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][11]",
+                "data": {
+                    "log_time": "2026-04-13T07:11:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000011",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][12]",
+                "data": {
+                    "log_time": "2026-04-13T07:16:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000012",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][13]",
+                "data": {
+                    "log_time": "2026-04-13T07:21:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000013",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][14]",
+                "data": {
+                    "log_time": "2026-04-13T07:26:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000014",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][15]",
+                "data": {
+                    "log_time": "2026-04-13T07:31:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000015",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][16]",
+                "data": {
+                    "log_time": "2026-04-13T07:32:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000016",
+                    "step_action": "END",
+                    "step_name": "Temp_Ramp",
+                    "step_seq": 2,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][17]",
+                "data": {
+                    "log_time": "2026-04-13T07:32:01.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000017",
+                    "step_action": "START",
+                    "step_name": "Deposition",
+                    "step_seq": 3,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][18]",
+                "data": {
+                    "log_time": "2026-04-13T07:32:01.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000018",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][19]",
+                "data": {
+                    "log_time": "2026-04-13T07:40:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000019",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][20]",
+                "data": {
+                    "log_time": "2026-04-13T07:50:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "alarm",
+                    "record_id": "EVT_000020",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][21]",
+                "data": {
+                    "log_time": "2026-04-13T07:50:30.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000021",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][22]",
+                "data": {
+                    "log_time": "2026-04-13T07:51:00.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "sensor",
+                    "record_id": "EVT_000022",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][23]",
+                "data": {
+                    "log_time": "2026-04-13T08:02:01.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000023",
+                    "step_action": "END",
+                    "step_name": "Deposition",
+                    "step_seq": 3,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][24]",
+                "data": {
+                    "log_time": "2026-04-13T08:02:02.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000024",
+                    "step_action": "START",
+                    "step_name": "Cooldown",
+                    "step_seq": 4,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][25]",
+                "data": {
+                    "log_time": "2026-04-13T08:22:02.000Z",
+                    "lot": "LOT_0101",
+                    "record_class": "step_event",
+                    "record_id": "EVT_000025",
+                    "step_action": "END",
+                    "step_name": "Cooldown",
+                    "step_seq": 4,
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            },
+            {
+                "record_type": "log_record",
+                "source_reference": "$[][26]",
+                "data": {
+                    "from_state": "PROCESSING",
+                    "log_time": "2026-04-13T08:23:00.000Z",
+                    "lot": "LOT_0101",
+                    "notes": "Lot LOT_0101 processing complete",
+                    "record_class": "state_change",
+                    "record_id": "EVT_000026",
+                    "to_state": "IDLE",
+                    "tool": "EQP_LPCVD_01",
+                    "wafer": "WFR_0101"
+                }
+            }
+        ],
+        "record_count": 26
+    },
+    "agent_debug": {
+        "final_source": "initial_valid",
+        "initial_config_raw": {
+            "schema_family": "json_machine_logs",
+            "record_groups": [
+                {
+                    "record_type": "log_record",
+                    "path": "[]",
+                    "context_paths": [],
+                    "field_paths": [
+                        "from_state",
+                        "log_time",
+                        "lot",
+                        "notes",
+                        "operator",
+                        "params.pump_speed_rpm",
+                        "params.target_pressure_Pa",
+                        "record_class",
+                        "record_id",
+                        "step_action",
+                        "step_name",
+                        "step_seq",
+                        "to_state",
+                        "tool",
+                        "wafer"
+                    ]
+                }
+            ]
+        },
+        "initial_config_normalized": {
+            "schema_family": "json_machine_logs",
+            "record_groups": [
+                {
+                    "record_type": "log_record",
+                    "path": "$[]",
+                    "context_paths": [],
+                    "field_paths": [
+                        "from_state",
+                        "log_time",
+                        "lot",
+                        "notes",
+                        "operator",
+                        "params.pump_speed_rpm",
+                        "params.target_pressure_Pa",
+                        "record_class",
+                        "record_id",
+                        "step_action",
+                        "step_name",
+                        "step_seq",
+                        "to_state",
+                        "tool",
+                        "wafer"
+                    ]
+                }
+            ]
+        },
+        "initial_validation_report": {
+            "schema_family": "json_machine_logs",
+            "group_count_before": 1,
+            "group_count_after": 1,
+            "valid_group_count": 1,
+            "groups": [
+                {
+                    "record_type": "log_record",
+                    "path": "$[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "from_state",
+                        "log_time",
+                        "lot",
+                        "notes",
+                        "operator",
+                        "params.pump_speed_rpm",
+                        "params.target_pressure_Pa",
+                        "record_class",
+                        "record_id",
+                        "step_action",
+                        "step_name",
+                        "step_seq",
+                        "to_state",
+                        "tool",
+                        "wafer"
+                    ],
+                    "valid_context_paths": []
+                }
+            ]
+        },
+        "invalid_repair_config_raw": null,
+        "invalid_repair_config_normalized": null,
+        "invalid_repair_validation_report": null,
+        "uncovered_leaf_paths_before": [],
+        "coverage_repair_config_raw": null,
+        "coverage_repair_config_normalized": null,
+        "coverage_repair_validation_report": null,
+        "uncovered_leaf_paths_after": []
+    }
+}
