@@ -69,6 +69,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorA.json")
-    run_pipeline("data/synthetic_logs/vendorB.json")
-    run_pipeline("data/synthetic_logs/vendorF.json")
+    run_pipeline("data/synthetic_logs/vendorE.json")
