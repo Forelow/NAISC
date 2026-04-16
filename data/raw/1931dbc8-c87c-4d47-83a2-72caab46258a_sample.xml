@@ -1,0 +1,14 @@
+<events>
+    <event>
+        <timestamp>2026-04-13T10:10:01</timestamp>
+        <tool_id>ETCH_01</tool_id>
+        <alarm_code>V101</alarm_code>
+        <message>Vacuum pressure low</message>
+    </event>
+    <event>
+        <timestamp>2026-04-13T10:10:05</timestamp>
+        <tool_id>ETCH_01</tool_id>
+        <alarm_code>R201</alarm_code>
+        <message>RF mismatch detected</message>
+    </event>
+</events>

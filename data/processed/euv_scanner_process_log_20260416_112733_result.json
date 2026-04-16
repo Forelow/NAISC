@@ -1,0 +1,1279 @@
+{
+    "ingested": {
+        "file_id": "84e9be1d-9201-4e0b-ab7f-469b391e0548",
+        "filename": "euv_scanner_process_log.xml",
+        "extension": ".xml",
+        "size_bytes": 5638,
+        "raw_path": "data\\raw\\84e9be1d-9201-4e0b-ab7f-469b391e0548_euv_scanner_process_log.xml",
+        "ingestion_time": "2026-04-16T11:27:15.470418",
+        "sha256": "c68cd6154d91d6a0eb82ad8546a37ca383166222e010c2873cab8fc6c47f276e"
+    },
+    "detection": {
+        "format_guess": "xml",
+        "content_class": "structured_text",
+        "confidence": 0.99,
+        "notes": "Valid XML detected",
+        "extension_hint": ".xml",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "xml",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "xml is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "structure_summary": {
+        "format": "json",
+        "top_level_type": "dict",
+        "top_level_keys": [
+            "ToolLog"
+        ],
+        "repeated_paths": [
+            "ToolLog.EquipmentStateLog.StateChange[]",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Alarms.Alarm[]",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Parameters.Param[]",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step[]",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor.[].Readings.R[]",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor[]",
+            "ToolLog.WaferSequence.Wafer[]"
+        ],
+        "sample_leaf_paths": [
+            "ToolLog.@LogType",
+            "ToolLog.@SchemaVersion",
+            "ToolLog.@ToolID",
+            "ToolLog.ApprovedBy",
+            "ToolLog.EquipmentStateLog.StateChange.[].FromState",
+            "ToolLog.EquipmentStateLog.StateChange.[].Reason",
+            "ToolLog.EquipmentStateLog.StateChange.[].Time",
+            "ToolLog.EquipmentStateLog.StateChange.[].ToState",
+            "ToolLog.ExpirationTime",
+            "ToolLog.Header.CreateTime",
+            "ToolLog.Header.CreatedBy",
+            "ToolLog.Header.DocumentID",
+            "ToolLog.Header.MachineCustomerName",
+            "ToolLog.Header.MachineID",
+            "ToolLog.Header.MachineType",
+            "ToolLog.Header.SoftwareRelease",
+            "ToolLog.RecipeName",
+            "ToolLog.WaferSequence.LotID",
+            "ToolLog.WaferSequence.Wafer.[].@SlotID",
+            "ToolLog.WaferSequence.Wafer.[].@WaferID",
+            "ToolLog.WaferSequence.Wafer.[].ProcessEndTime",
+            "ToolLog.WaferSequence.Wafer.[].ProcessStartTime",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].@ID",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].@Name",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Alarms.Alarm.[].@Code",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Alarms.Alarm.[].@ID",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Alarms.Alarm.[].@Severity",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Alarms.Alarm.[].Message",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Alarms.Alarm.[].Time",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].EndTime",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Parameters.Param.[].@name",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Parameters.Param.[].@unit",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Parameters.Param.[].@value",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].StartTime",
+            "ToolLog.WaferSequence.Wafer.[].ProcessSteps.Step.[].Status",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor.[].@ID",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor.[].@Name",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor.[].Readings.R.[].@ts",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor.[].Readings.R.[].@u",
+            "ToolLog.WaferSequence.Wafer.[].SensorTrace.Sensor.[].Readings.R.[].@v",
+            "ToolLog.WaferSequence.Wafer.[].Status",
+            "ToolLog.WaferSequence.WaferCount"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "tool_log",
+        "record_groups": [
+            {
+                "record_type": "wafer",
+                "path": "ToolLog.WaferSequence.Wafer[]",
+                "context_paths": [
+                    "ToolLog.@LogType",
+                    "ToolLog.@SchemaVersion",
+                    "ToolLog.@ToolID",
+                    "ToolLog.Header.DocumentID",
+                    "ToolLog.Header.CreateTime",
+                    "ToolLog.Header.MachineID",
+                    "ToolLog.WaferSequence.LotID",
+                    "ToolLog.WaferSequence.WaferCount"
+                ],
+                "field_paths": [
+                    "@SlotID",
+                    "@WaferID",
+                    "ProcessStartTime",
+                    "ProcessEndTime",
+                    "Status"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "process_step",
+                "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[]",
+                "context_paths": [
+                    "ToolLog.@ToolID",
+                    "ToolLog.WaferSequence.LotID",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID"
+                ],
+                "field_paths": [
+                    "@ID",
+                    "@Name",
+                    "StartTime",
+                    "EndTime",
+                    "Status"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "alarm",
+                "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[]",
+                "context_paths": [
+                    "ToolLog.@ToolID",
+                    "ToolLog.WaferSequence.LotID",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID",
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                ],
+                "field_paths": [
+                    "@Code",
+                    "@ID",
+                    "@Severity",
+                    "Message",
+                    "Time"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "sensor_reading",
+                "path": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[]",
+                "context_paths": [
+                    "ToolLog.@ToolID",
+                    "ToolLog.WaferSequence.LotID",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name"
+                ],
+                "field_paths": [
+                    "@ts",
+                    "@u",
+                    "@v"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "equipment_state_change",
+                "path": "ToolLog.EquipmentStateLog.StateChange[]",
+                "context_paths": [
+                    "ToolLog.@ToolID",
+                    "ToolLog.Header.DocumentID",
+                    "ToolLog.Header.CreateTime"
+                ],
+                "field_paths": [
+                    "FromState",
+                    "ToState",
+                    "Reason",
+                    "Time"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "step_parameter",
+                "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[]",
+                "context_paths": [
+                    "ToolLog.@ToolID",
+                    "ToolLog.WaferSequence.LotID",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID",
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                ],
+                "field_paths": [
+                    "@name",
+                    "@unit",
+                    "@value"
+                ],
+                "where": null
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "tool_log",
+        "records": [
+            {
+                "record_type": "wafer",
+                "source_reference": "ToolLog.WaferSequence.Wafer[][1]",
+                "data": {
+                    "@SlotID": 1,
+                    "@WaferID": "WFR_0001",
+                    "ProcessStartTime": "2026-04-13T08:00:00.000+08:00",
+                    "ProcessEndTime": "2026-04-13T08:03:42.000+08:00",
+                    "Status": "COMPLETED",
+                    "ToolLog.@LogType": "ProcessLog",
+                    "ToolLog.@SchemaVersion": "v2.1",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.Header.DocumentID": "DOC_EUV_20260413_001",
+                    "ToolLog.Header.CreateTime": "2026-04-13T06:00:00.000+08:00",
+                    "ToolLog.Header.MachineID": "MCH_EUV_001",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.WaferCount": 25
+                }
+            },
+            {
+                "record_type": "wafer",
+                "source_reference": "ToolLog.WaferSequence.Wafer[][2]",
+                "data": {
+                    "@SlotID": 2,
+                    "@WaferID": "WFR_0002",
+                    "ProcessStartTime": "2026-04-13T08:04:00.000+08:00",
+                    "ProcessEndTime": "2026-04-13T08:07:55.000+08:00",
+                    "Status": "FAILED",
+                    "ToolLog.@LogType": "ProcessLog",
+                    "ToolLog.@SchemaVersion": "v2.1",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.Header.DocumentID": "DOC_EUV_20260413_001",
+                    "ToolLog.Header.CreateTime": "2026-04-13T06:00:00.000+08:00",
+                    "ToolLog.Header.MachineID": "MCH_EUV_001",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.WaferCount": 25
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[][1]",
+                "data": {
+                    "@ID": 1,
+                    "@Name": "PreAlign",
+                    "StartTime": "2026-04-13T08:00:00.000+08:00",
+                    "EndTime": "2026-04-13T08:00:45.000+08:00",
+                    "Status": "PASS",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[][2]",
+                "data": {
+                    "@ID": 2,
+                    "@Name": "Exposure",
+                    "StartTime": "2026-04-13T08:00:45.000+08:00",
+                    "EndTime": "2026-04-13T08:02:30.000+08:00",
+                    "Status": "PASS",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[][3]",
+                "data": {
+                    "@ID": 3,
+                    "@Name": "PostExposureBake",
+                    "StartTime": "2026-04-13T08:02:30.000+08:00",
+                    "EndTime": "2026-04-13T08:03:42.000+08:00",
+                    "Status": "PASS",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[][4]",
+                "data": {
+                    "@ID": 1,
+                    "@Name": "PreAlign",
+                    "StartTime": "2026-04-13T08:04:00.000+08:00",
+                    "EndTime": "2026-04-13T08:04:45.000+08:00",
+                    "Status": "PASS",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[][5]",
+                "data": {
+                    "@ID": 2,
+                    "@Name": "Exposure",
+                    "StartTime": "2026-04-13T08:04:45.000+08:00",
+                    "EndTime": "2026-04-13T08:06:30.000+08:00",
+                    "Status": "FAIL",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2
+                }
+            },
+            {
+                "record_type": "alarm",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[][1]",
+                "data": {
+                    "@Code": "DOSE_LOW",
+                    "@ID": "ALM_EUV_004",
+                    "@Severity": "ERROR",
+                    "Message": "Actual dose below minimum threshold (min: 19.0 mJ/cm2)",
+                    "Time": "2026-04-13T08:05:55.000+08:00",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][1]",
+                "data": {
+                    "@ts": "2026-04-13T08:00:45.000+08:00",
+                    "@u": "W",
+                    "@v": 250.1,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "SourcePower"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][2]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:00.000+08:00",
+                    "@u": "W",
+                    "@v": 250.4,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "SourcePower"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][3]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:15.000+08:00",
+                    "@u": "W",
+                    "@v": 249.8,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "SourcePower"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][4]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:30.000+08:00",
+                    "@u": "W",
+                    "@v": 250.0,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "SourcePower"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][5]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:45.000+08:00",
+                    "@u": "W",
+                    "@v": 250.2,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "SourcePower"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][6]",
+                "data": {
+                    "@ts": "2026-04-13T08:02:00.000+08:00",
+                    "@u": "W",
+                    "@v": 250.3,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "SourcePower"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][7]",
+                "data": {
+                    "@ts": "2026-04-13T08:00:45.000+08:00",
+                    "@u": "Pa",
+                    "@v": 1.2e-05,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_002",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "VacuumLevel"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][8]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:00.000+08:00",
+                    "@u": "Pa",
+                    "@v": 1.1e-05,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_002",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "VacuumLevel"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][9]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:15.000+08:00",
+                    "@u": "Pa",
+                    "@v": 1.3e-05,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_002",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "VacuumLevel"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[][10]",
+                "data": {
+                    "@ts": "2026-04-13T08:01:30.000+08:00",
+                    "@u": "Pa",
+                    "@v": 1.2e-05,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID": "EUV_SEN_002",
+                    "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name": "VacuumLevel"
+                }
+            },
+            {
+                "record_type": "equipment_state_change",
+                "source_reference": "ToolLog.EquipmentStateLog.StateChange[][1]",
+                "data": {
+                    "FromState": "IDLE",
+                    "ToState": "SETUP",
+                    "Reason": "Lot LOT_0042 scheduled for processing",
+                    "Time": "2026-04-13T07:55:00.000+08:00",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.Header.DocumentID": "DOC_EUV_20260413_001",
+                    "ToolLog.Header.CreateTime": "2026-04-13T06:00:00.000+08:00"
+                }
+            },
+            {
+                "record_type": "equipment_state_change",
+                "source_reference": "ToolLog.EquipmentStateLog.StateChange[][2]",
+                "data": {
+                    "FromState": "SETUP",
+                    "ToState": "PROCESSING",
+                    "Reason": "First wafer processing started",
+                    "Time": "2026-04-13T08:00:00.000+08:00",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.Header.DocumentID": "DOC_EUV_20260413_001",
+                    "ToolLog.Header.CreateTime": "2026-04-13T06:00:00.000+08:00"
+                }
+            },
+            {
+                "record_type": "equipment_state_change",
+                "source_reference": "ToolLog.EquipmentStateLog.StateChange[][3]",
+                "data": {
+                    "FromState": "PROCESSING",
+                    "ToState": "ALARM",
+                    "Reason": "Dose alarm triggered on WFR_0002",
+                    "Time": "2026-04-13T08:06:30.000+08:00",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.Header.DocumentID": "DOC_EUV_20260413_001",
+                    "ToolLog.Header.CreateTime": "2026-04-13T06:00:00.000+08:00"
+                }
+            },
+            {
+                "record_type": "equipment_state_change",
+                "source_reference": "ToolLog.EquipmentStateLog.StateChange[][4]",
+                "data": {
+                    "FromState": "ALARM",
+                    "ToState": "IDLE",
+                    "Reason": "Alarm cleared by operator OPR_007",
+                    "Time": "2026-04-13T08:10:00.000+08:00",
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.Header.DocumentID": "DOC_EUV_20260413_001",
+                    "ToolLog.Header.CreateTime": "2026-04-13T06:00:00.000+08:00"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][1]",
+                "data": {
+                    "@name": "AlignOffsetX",
+                    "@unit": "um",
+                    "@value": 0.012,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "PreAlign"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][2]",
+                "data": {
+                    "@name": "AlignOffsetY",
+                    "@unit": "um",
+                    "@value": -0.005,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "PreAlign"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][3]",
+                "data": {
+                    "@name": "DoseTarget",
+                    "@unit": "mJ/cm2",
+                    "@value": 20.0,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][4]",
+                "data": {
+                    "@name": "DoseActual",
+                    "@unit": "mJ/cm2",
+                    "@value": 19.87,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][5]",
+                "data": {
+                    "@name": "FocusOffset",
+                    "@unit": "nm",
+                    "@value": 0.0,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][6]",
+                "data": {
+                    "@name": "ScanSpeed",
+                    "@unit": "mm/s",
+                    "@value": 750,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][7]",
+                "data": {
+                    "@name": "BakeTemp",
+                    "@unit": "C",
+                    "@value": 110.0,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 3,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "PostExposureBake"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][8]",
+                "data": {
+                    "@name": "BakeTime",
+                    "@unit": "s",
+                    "@value": 60,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0001",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 3,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "PostExposureBake"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][9]",
+                "data": {
+                    "@name": "AlignOffsetX",
+                    "@unit": "um",
+                    "@value": 0.02,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "PreAlign"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][10]",
+                "data": {
+                    "@name": "AlignOffsetY",
+                    "@unit": "um",
+                    "@value": -0.018,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 1,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "PreAlign"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][11]",
+                "data": {
+                    "@name": "DoseTarget",
+                    "@unit": "mJ/cm2",
+                    "@value": 20.0,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][12]",
+                "data": {
+                    "@name": "DoseActual",
+                    "@unit": "mJ/cm2",
+                    "@value": 17.3,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][13]",
+                "data": {
+                    "@name": "FocusOffset",
+                    "@unit": "nm",
+                    "@value": 0.0,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            },
+            {
+                "record_type": "step_parameter",
+                "source_reference": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[][14]",
+                "data": {
+                    "@name": "ScanSpeed",
+                    "@unit": "mm/s",
+                    "@value": 750,
+                    "ToolLog.@ToolID": "EQP_EUV_01",
+                    "ToolLog.WaferSequence.LotID": "LOT_0042",
+                    "ToolLog.WaferSequence.Wafer[].@WaferID": "WFR_0002",
+                    "ToolLog.WaferSequence.Wafer[].@SlotID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID": 2,
+                    "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name": "Exposure"
+                }
+            }
+        ],
+        "record_count": 36
+    },
+    "agent_debug": {
+        "final_source": "coverage_repair",
+        "initial_config_raw": {
+            "schema_family": "tool_log",
+            "record_groups": [
+                {
+                    "record_type": "wafer",
+                    "path": "ToolLog.WaferSequence.Wafer[]",
+                    "context_paths": [
+                        "ToolLog.@LogType",
+                        "ToolLog.@SchemaVersion",
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime",
+                        "ToolLog.Header.MachineID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.WaferCount"
+                    ],
+                    "field_paths": [
+                        "@SlotID",
+                        "@WaferID",
+                        "ProcessStartTime",
+                        "ProcessEndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "process_step",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID"
+                    ],
+                    "field_paths": [
+                        "@ID",
+                        "@Name",
+                        "StartTime",
+                        "EndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "alarm",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ],
+                    "field_paths": [
+                        "@Code",
+                        "@ID",
+                        "@Severity",
+                        "Message",
+                        "Time"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name"
+                    ],
+                    "field_paths": [
+                        "@ts",
+                        "@u",
+                        "@v"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_change",
+                    "path": "ToolLog.EquipmentStateLog.StateChange[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime"
+                    ],
+                    "field_paths": [
+                        "FromState",
+                        "ToState",
+                        "Reason",
+                        "Time"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_config_normalized": {
+            "schema_family": "tool_log",
+            "record_groups": [
+                {
+                    "record_type": "wafer",
+                    "path": "ToolLog.WaferSequence.Wafer[]",
+                    "context_paths": [
+                        "ToolLog.@LogType",
+                        "ToolLog.@SchemaVersion",
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime",
+                        "ToolLog.Header.MachineID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.WaferCount"
+                    ],
+                    "field_paths": [
+                        "@SlotID",
+                        "@WaferID",
+                        "ProcessStartTime",
+                        "ProcessEndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "process_step",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID"
+                    ],
+                    "field_paths": [
+                        "@ID",
+                        "@Name",
+                        "StartTime",
+                        "EndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "alarm",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ],
+                    "field_paths": [
+                        "@Code",
+                        "@ID",
+                        "@Severity",
+                        "Message",
+                        "Time"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name"
+                    ],
+                    "field_paths": [
+                        "@ts",
+                        "@u",
+                        "@v"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_change",
+                    "path": "ToolLog.EquipmentStateLog.StateChange[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime"
+                    ],
+                    "field_paths": [
+                        "FromState",
+                        "ToState",
+                        "Reason",
+                        "Time"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_validation_report": {
+            "schema_family": "tool_log",
+            "group_count_before": 5,
+            "group_count_after": 5,
+            "valid_group_count": 5,
+            "groups": [
+                {
+                    "record_type": "wafer",
+                    "path": "ToolLog.WaferSequence.Wafer[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@SlotID",
+                        "@WaferID",
+                        "ProcessStartTime",
+                        "ProcessEndTime",
+                        "Status"
+                    ],
+                    "valid_context_paths": [
+                        "ToolLog.@LogType",
+                        "ToolLog.@SchemaVersion",
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime",
+                        "ToolLog.Header.MachineID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.WaferCount"
+                    ]
+                },
+                {
+                    "record_type": "process_step",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@ID",
+                        "@Name",
+                        "StartTime",
+                        "EndTime",
+                        "Status"
+                    ],
+                    "valid_context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID"
+                    ]
+                },
+                {
+                    "record_type": "alarm",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@Code",
+                        "@ID",
+                        "@Severity",
+                        "Message",
+                        "Time"
+                    ],
+                    "valid_context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ]
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@ts",
+                        "@u",
+                        "@v"
+                    ],
+                    "valid_context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name"
+                    ]
+                },
+                {
+                    "record_type": "equipment_state_change",
+                    "path": "ToolLog.EquipmentStateLog.StateChange[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "FromState",
+                        "ToState",
+                        "Reason",
+                        "Time"
+                    ],
+                    "valid_context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime"
+                    ]
+                }
+            ]
+        },
+        "invalid_repair_config_raw": null,
+        "invalid_repair_config_normalized": null,
+        "invalid_repair_validation_report": null,
+        "uncovered_leaf_paths_before": [
+            "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[]"
+        ],
+        "coverage_repair_config_raw": {
+            "schema_family": "tool_log",
+            "record_groups": [
+                {
+                    "record_type": "wafer",
+                    "path": "ToolLog.WaferSequence.Wafer[]",
+                    "context_paths": [
+                        "ToolLog.@LogType",
+                        "ToolLog.@SchemaVersion",
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime",
+                        "ToolLog.Header.MachineID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.WaferCount"
+                    ],
+                    "field_paths": [
+                        "@SlotID",
+                        "@WaferID",
+                        "ProcessStartTime",
+                        "ProcessEndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "process_step",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID"
+                    ],
+                    "field_paths": [
+                        "@ID",
+                        "@Name",
+                        "StartTime",
+                        "EndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "alarm",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ],
+                    "field_paths": [
+                        "@Code",
+                        "@ID",
+                        "@Severity",
+                        "Message",
+                        "Time"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name"
+                    ],
+                    "field_paths": [
+                        "@ts",
+                        "@u",
+                        "@v"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_change",
+                    "path": "ToolLog.EquipmentStateLog.StateChange[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime"
+                    ],
+                    "field_paths": [
+                        "FromState",
+                        "ToState",
+                        "Reason",
+                        "Time"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "step_parameter",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ],
+                    "field_paths": [
+                        "@name",
+                        "@unit",
+                        "@value"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "coverage_repair_config_normalized": {
+            "schema_family": "tool_log",
+            "record_groups": [
+                {
+                    "record_type": "wafer",
+                    "path": "ToolLog.WaferSequence.Wafer[]",
+                    "context_paths": [
+                        "ToolLog.@LogType",
+                        "ToolLog.@SchemaVersion",
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime",
+                        "ToolLog.Header.MachineID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.WaferCount"
+                    ],
+                    "field_paths": [
+                        "@SlotID",
+                        "@WaferID",
+                        "ProcessStartTime",
+                        "ProcessEndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "process_step",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID"
+                    ],
+                    "field_paths": [
+                        "@ID",
+                        "@Name",
+                        "StartTime",
+                        "EndTime",
+                        "Status"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "alarm",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Alarms.Alarm[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ],
+                    "field_paths": [
+                        "@Code",
+                        "@ID",
+                        "@Severity",
+                        "Message",
+                        "Time"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].Readings.R[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].SensorTrace.Sensor[].@Name"
+                    ],
+                    "field_paths": [
+                        "@ts",
+                        "@u",
+                        "@v"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_change",
+                    "path": "ToolLog.EquipmentStateLog.StateChange[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.Header.DocumentID",
+                        "ToolLog.Header.CreateTime"
+                    ],
+                    "field_paths": [
+                        "FromState",
+                        "ToState",
+                        "Reason",
+                        "Time"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "step_parameter",
+                    "path": "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].Parameters.Param[]",
+                    "context_paths": [
+                        "ToolLog.@ToolID",
+                        "ToolLog.WaferSequence.LotID",
+                        "ToolLog.WaferSequence.Wafer[].@WaferID",
+                        "ToolLog.WaferSequence.Wafer[].@SlotID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@ID",
+                        "ToolLog.WaferSequence.Wafer[].ProcessSteps.Step[].@Name"
+                    ],
+                    "field_paths": [
+                        "@name",
+                        "@unit",
+                        "@value"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "coverage_repair_validation_report": null,
+        "uncovered_leaf_paths_after": []
+    }
+}

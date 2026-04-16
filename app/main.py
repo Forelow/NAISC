@@ -15,6 +15,9 @@ from parser.generic_structured_parser import parse_with_structure_config
 from structured.json.structure_builder import build_json_parse_spec
 from structured.csv.reader import load_csv_rows
 from structured.csv.structure_builder import build_csv_parse_spec
+from readers.json_reader import load_json_file, summarize_json_structure
+from structured.xml.reader import load_xml_file
+from structured.xml.structure_builder import build_xml_parse_spec
 
 
 
@@ -79,6 +82,17 @@ def run_pipeline(file_path: str) -> str:
             "final_source": "deterministic_csv_builder"
         }
         result_payload["parsed_result"] = parsed_result
+    elif detection.format_guess == "xml":
+        raw_xml = load_xml_file(file_info["raw_path"])
+        structure_summary = summarize_json_structure(raw_xml)
+        structure_config, agent_debug = detect_structure_with_agent(structure_summary, raw_xml)
+        parse_spec = build_xml_parse_spec(raw_xml, structure_config)
+        parsed_result = parse_with_structure_config(raw_xml, parse_spec)
+
+        result_payload["structure_summary"] = structure_summary
+        result_payload["structure_config"] = structure_config
+        result_payload["agent_debug"] = agent_debug
+        result_payload["parsed_result"] = parsed_result
     else:
         result_payload["parsed_result"] = {
             "status": "not_implemented_for_this_format_yet"
@@ -90,4 +104,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/sensor_readings.csv")
+    run_pipeline("data/synthetic_logs/euv_scanner_process_log.xml")

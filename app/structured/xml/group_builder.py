@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from app.structured.shared.contract import StructuredParseSpec
+from structured.shared.contract import StructuredParseSpec, spec_from_dict
 
 
-def build_xml_group_spec(*args, **kwargs) -> StructuredParseSpec:
-    raise NotImplementedError("XML group builder not implemented yet.")
+def xml_groups_from_existing_config(config: dict) -> StructuredParseSpec:
+    return spec_from_dict(config)
