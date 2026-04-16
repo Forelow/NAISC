@@ -17,8 +17,12 @@ def build_csv_parse_spec(rows: list[dict[str, Any]]) -> StructuredParseSpec:
             record_groups=[],
         )
 
-    discriminator = _detect_discriminator(rows)
+    # 1) deterministic family detection first
+    if _looks_like_sensor_measurement_csv(rows):
+        return _build_sensor_measurement_csv_spec(rows)
 
+    # 2) generic discriminator split if applicable
+    discriminator = _detect_discriminator(rows)
     if discriminator:
         groups = _build_split_groups(rows, discriminator)
         return StructuredParseSpec(
@@ -26,6 +30,7 @@ def build_csv_parse_spec(rows: list[dict[str, Any]]) -> StructuredParseSpec:
             record_groups=groups,
         )
 
+    # 3) safe fallback
     field_paths = _collect_common_scalar_fields(rows)
 
     return StructuredParseSpec(
@@ -40,6 +45,72 @@ def build_csv_parse_spec(rows: list[dict[str, Any]]) -> StructuredParseSpec:
             )
         ],
     )
+
+
+def _looks_like_sensor_measurement_csv(rows: list[dict[str, Any]]) -> bool:
+    required = {"timestamp", "sensor_id", "parameter", "value", "unit"}
+    first = rows[0] if rows else {}
+
+    if not required.issubset(set(first.keys())):
+        return False
+
+    non_empty_required_rows = 0
+    for row in rows:
+        if all(row.get(col) not in (None, "") for col in ["timestamp", "sensor_id", "parameter", "unit"]):
+            non_empty_required_rows += 1
+
+    return non_empty_required_rows >= max(3, int(len(rows) * 0.7))
+
+
+def _build_sensor_measurement_csv_spec(rows: list[dict[str, Any]]) -> StructuredParseSpec:
+    primary_fields = [
+        "timestamp",
+        "sensor_id",
+        "parameter",
+        "value",
+        "unit",
+    ]
+
+    row_metadata_fields = [
+        "tool_id",
+        "chamber",
+        "lot_id",
+        "wafer_id",
+        "recipe_step",
+    ]
+
+    field_paths = [
+        p for p in primary_fields + row_metadata_fields
+        if _field_exists_in_enough_rows(rows, p, threshold_ratio=0.5)
+    ]
+
+    return StructuredParseSpec(
+        schema_family="sensor_measurement_csv",
+        record_groups=[
+            RecordGroupSpec(
+                record_type="sensor_measurement_csv",
+                path="$[]",
+                field_paths=field_paths,
+                context_paths=[],
+                where=None,
+            )
+        ],
+    )
+
+
+def _field_exists_in_enough_rows(
+    rows: list[dict[str, Any]],
+    field: str,
+    threshold_ratio: float = 0.5,
+) -> bool:
+    threshold = max(1, int(len(rows) * threshold_ratio))
+    count = 0
+
+    for row in rows:
+        if field in row and row.get(field) not in (None, ""):
+            count += 1
+
+    return count >= threshold
 
 
 def _detect_discriminator(rows: list[dict[str, Any]]) -> str | None:
