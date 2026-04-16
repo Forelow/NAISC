@@ -2,8 +2,13 @@ from __future__ import annotations
 
 from typing import Any
 
+from structured.shared.contract import StructuredParseSpec
+
 
 def parse_with_structure_config(data: Any, structure_config: dict) -> dict:
+    if isinstance(structure_config, StructuredParseSpec):
+        structure_config = structure_config.to_dict()
+        
     schema_family = structure_config.get("schema_family", "unknown")
     record_groups = structure_config.get("record_groups", [])
     

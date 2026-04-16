@@ -12,6 +12,10 @@ from ingestion.router import route_file
 from readers.json_reader import load_json_file, summarize_json_structure
 from ai.structure_agent import detect_structure_with_agent
 from parser.generic_structured_parser import parse_with_structure_config
+from structured.json.structure_builder import build_json_parse_spec
+from structured.csv.reader import load_csv_rows
+from structured.csv.structure_builder import build_csv_parse_spec
+
 
 
 OUTPUT_DIR = Path("data/processed")
@@ -52,11 +56,28 @@ def run_pipeline(file_path: str) -> str:
         raw_json = load_json_file(file_info["raw_path"])
         structure_summary = summarize_json_structure(raw_json)
         structure_config, agent_debug = detect_structure_with_agent(structure_summary, raw_json)
-        parsed_result = parse_with_structure_config(raw_json, structure_config)
+        parse_spec = build_json_parse_spec(raw_json, structure_config)
+        parsed_result = parse_with_structure_config(raw_json, parse_spec)
 
         result_payload["structure_summary"] = structure_summary
         result_payload["structure_config"] = structure_config
         result_payload["agent_debug"] = agent_debug
+        result_payload["parsed_result"] = parsed_result
+    elif detection.format_guess == "csv":
+        rows = load_csv_rows(file_info["raw_path"])
+        parse_spec = build_csv_parse_spec(rows)
+        parsed_result = parse_with_structure_config(rows, parse_spec)
+
+        result_payload["structure_summary"] = {
+            "format": "csv",
+            "top_level_type": "list",
+            "row_count": len(rows),
+            "columns": list(rows[0].keys()) if rows else [],
+        }
+        result_payload["structure_config"] = parse_spec.to_dict()
+        result_payload["agent_debug"] = {
+            "final_source": "deterministic_csv_builder"
+        }
         result_payload["parsed_result"] = parsed_result
     else:
         result_payload["parsed_result"] = {
@@ -69,4 +90,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorE.json")
+    run_pipeline("data/synthetic_logs/sample.csv")
