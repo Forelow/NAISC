@@ -6,6 +6,7 @@ from typing import Any
 def parse_with_structure_config(data: Any, structure_config: dict) -> dict:
     schema_family = structure_config.get("schema_family", "unknown")
     record_groups = structure_config.get("record_groups", [])
+    
 
     records = []
 
@@ -14,6 +15,7 @@ def parse_with_structure_config(data: Any, structure_config: dict) -> dict:
         group_path = group["path"]
         context_paths = group.get("context_paths", [])
         field_paths = group.get("field_paths", [])
+        where = group.get("where")
 
         matches = _resolve_path_with_bindings(data, group_path)
 
@@ -22,6 +24,8 @@ def parse_with_structure_config(data: Any, structure_config: dict) -> dict:
             bindings = match["bindings"]
 
             if not isinstance(node, dict):
+                continue
+            if where and not _matches_where(node, where):
                 continue
 
             extracted_data = {}
@@ -223,3 +227,17 @@ def _normalize_runtime_path(path: str) -> str:
     if path.startswith("[]."):
         return "$" + path
     return path
+
+def _matches_where(node: Any, where: dict | None) -> bool:
+    if not where:
+        return True
+    if not isinstance(node, dict):
+        return False
+
+    field = where.get("field")
+    expected = where.get("equals")
+
+    if field not in node:
+        return False
+
+    return node[field] == expected

@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import json
 import os
-from typing import Any
+from typing import Any, Optional
 
 from dotenv import load_dotenv
 from openai import OpenAI
 from pydantic import BaseModel, Field
+from collections import Counter
 
 from ai.config_guard import (
     normalize_structure_config,
@@ -16,12 +17,16 @@ from ai.config_guard import (
 
 load_dotenv()
 
+class WhereClause(BaseModel):
+    field: str
+    equals: str
 
 class RecordGroup(BaseModel):
     record_type: str
     path: str
     context_paths: list[str] = Field(default_factory=list)
     field_paths: list[str] = Field(default_factory=list)
+    where: Optional[WhereClause] = None
 
 
 class StructureConfig(BaseModel):
@@ -64,6 +69,16 @@ def detect_structure_with_agent(
         return cleaned, debug
 
     client = OpenAI(api_key=api_key)
+
+    root_array_config = _build_root_array_event_config(raw_data)
+    if root_array_config is not None:
+        normalized = normalize_structure_config(root_array_config)
+        cleaned, _ = validate_and_prune_structure_config(normalized, raw_data)
+        if cleaned["record_groups"]:
+            debug["final_source"] = "deterministic_root_array_split"
+            debug["initial_config_raw"] = root_array_config
+            debug["initial_config_normalized"] = normalized
+            return cleaned, debug
 
     try:
         # -------------------------
@@ -408,4 +423,98 @@ def _fallback_structure_config(structure_summary: dict[str, Any]) -> dict[str, A
                 "field_paths": [],
             }
         ],
+    }
+
+
+def _build_root_array_event_config(raw_data: Any) -> dict | None:
+    if not isinstance(raw_data, list) or not raw_data:
+        return None
+    if not all(isinstance(item, dict) for item in raw_data[:20]):
+        return None
+
+    candidate_fields = ["record_class", "event_type", "type", "category", "kind"]
+
+    discriminator = None
+    for field in candidate_fields:
+        values = [item.get(field) for item in raw_data if isinstance(item.get(field), str)]
+        unique = sorted(set(values))
+        if len(values) >= max(3, len(raw_data) // 2) and 2 <= len(unique) <= 10:
+            discriminator = field
+            break
+
+    if not discriminator:
+        return None
+
+    def collect_scalar_paths(obj: dict, prefix: str = "") -> list[str]:
+        paths = []
+        for k, v in obj.items():
+            path = f"{prefix}.{k}" if prefix else k
+            if isinstance(v, dict):
+                paths.extend(collect_scalar_paths(v, path))
+            elif isinstance(v, list):
+                continue
+            else:
+                paths.append(path)
+        return paths
+
+    values = sorted(set(
+        item[discriminator]
+        for item in raw_data
+        if isinstance(item, dict) and isinstance(item.get(discriminator), str)
+    ))
+
+    groups = []
+
+    for value in values:
+        subset = [
+            item for item in raw_data
+            if isinstance(item, dict) and item.get(discriminator) == value
+        ]
+        if not subset:
+            continue
+
+        counts = Counter()
+        for item in subset:
+            for path in collect_scalar_paths(item):
+                counts[path] += 1
+
+        threshold = max(1, int(len(subset) * 0.5))
+
+        field_paths = [
+            path for path, count in counts.items()
+            if count >= threshold
+        ]
+
+        # keep useful identity-ish fields first if present
+        preferred = [
+            "record_id", "log_time", discriminator, "tool", "lot", "wafer",
+            "step_name", "step_action", "step_seq",
+            "sensor_id", "measurand", "value", "unit",
+            "alarm_id", "severity", "message",
+            "from_state", "to_state", "operator", "notes"
+        ]
+
+        ordered = [p for p in preferred if p in field_paths] + [
+            p for p in field_paths if p not in preferred
+        ]
+
+        groups.append(
+            {
+                "record_type": f"{value}_event",
+                "path": "$[]",
+                "where": {
+                    "field": discriminator,
+                    "equals": value,
+                },
+                "context_paths": [],
+                "field_paths": ordered[:30],
+            }
+        )
+
+    if not groups:
+        return None
+
+    return {
+        "schema_family": "root_array_event_log",
+        "record_groups": groups,
     }

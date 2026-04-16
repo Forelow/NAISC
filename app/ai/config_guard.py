@@ -19,6 +19,7 @@ def normalize_structure_config(config: dict[str, Any]) -> dict[str, Any]:
 
     for group in config.get("record_groups", []):
         group_path = _normalize_path_syntax(group.get("path", ""))
+        where = group.get("where")
         context_paths = [
             _normalize_path_syntax(p) for p in group.get("context_paths", [])
         ]
@@ -39,6 +40,7 @@ def normalize_structure_config(config: dict[str, Any]) -> dict[str, Any]:
                 "path": group_path,
                 "context_paths": _dedupe(context_paths),
                 "field_paths": _dedupe(field_paths),
+                "where": where,
             }
         )
 
@@ -75,6 +77,13 @@ def validate_and_prune_structure_config(
         field_paths = group.get("field_paths", [])
 
         matches = _resolve_path_with_bindings(data, group_path)
+        where = group.get("where")
+
+        if where:
+            matches = [
+                m for m in matches
+                if _matches_where(m["node"], where)
+            ]
         if not matches:
             report["groups"].append(
                 {
@@ -123,6 +132,7 @@ def validate_and_prune_structure_config(
             "path": group_path,
             "context_paths": _dedupe(valid_context_paths),
             "field_paths": _dedupe(valid_field_paths),
+            "where": where
         }
         cleaned["record_groups"].append(cleaned_group)
 
@@ -398,3 +408,17 @@ def _normalize_runtime_path(path: str) -> str:
     if path.startswith("[]."):
         return "$" + path
     return path
+
+def _matches_where(node: Any, where: dict | None) -> bool:
+    if not where:
+        return True
+    if not isinstance(node, dict):
+        return False
+
+    field = where.get("field")
+    expected = where.get("equals")
+
+    if field not in node:
+        return False
+
+    return node[field] == expected
