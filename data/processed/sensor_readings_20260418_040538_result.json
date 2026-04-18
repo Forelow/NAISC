@@ -1,0 +1,720 @@
+{
+    "ingested": {
+        "file_id": "8bb69ee2-8f97-4d2a-bd4d-c619c7a6173f",
+        "filename": "sensor_readings.csv",
+        "extension": ".csv",
+        "size_bytes": 3558,
+        "raw_path": "data\\raw\\8bb69ee2-8f97-4d2a-bd4d-c619c7a6173f_sensor_readings.csv",
+        "ingestion_time": "2026-04-18T04:05:38.928334",
+        "sha256": "203ddecf95a62efdcabfb7fd476671985386d9c14e35749822438b57f45aff20"
+    },
+    "detection": {
+        "format_guess": "csv",
+        "content_class": "structured_text",
+        "confidence": 0.95,
+        "notes": "Consistent CSV structure detected",
+        "extension_hint": ".csv",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "csv",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "csv is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "structure_summary": {
+        "format": "csv",
+        "top_level_type": "list",
+        "row_count": 40,
+        "columns": [
+            "timestamp",
+            "tool_id",
+            "chamber",
+            "sensor_id",
+            "parameter",
+            "value",
+            "unit",
+            "lot_id",
+            "wafer_id",
+            "recipe_step"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "sensor_measurement_csv",
+        "record_groups": [
+            {
+                "record_type": "sensor_measurement_csv",
+                "path": "$[]",
+                "field_paths": [
+                    "timestamp",
+                    "sensor_id",
+                    "parameter",
+                    "value",
+                    "unit",
+                    "tool_id",
+                    "chamber",
+                    "lot_id",
+                    "wafer_id",
+                    "recipe_step"
+                ],
+                "context_paths": [],
+                "where": null
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "sensor_measurement_csv",
+        "records": [
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][1]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:15Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.92,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][2]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:16Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.9,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][3]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:17Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.88,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][4]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:15Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 85.2,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][5]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:16Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 85.5,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][6]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:17Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 85.9,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][7]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:15Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 0,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][8]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:16Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 0,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][9]",
+                "data": {
+                    "timestamp": "2026-04-13T08:00:17Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 150,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "Prereq"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][10]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:00Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.75,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][11]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:01Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.74,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][12]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:02Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.72,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][13]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:03Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.69,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][14]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:04Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.65,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][15]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:05Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][16]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:06Z",
+                    "sensor_id": "SEN_001",
+                    "parameter": "pressure",
+                    "value": 0.61,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][17]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:00Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 90.1,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][18]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:01Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 90.4,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][19]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:02Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 90.8,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][20]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:03Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 91.2,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][21]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:04Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 91.5,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][22]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:05Z",
+                    "sensor_id": "SEN_002",
+                    "parameter": "temperature",
+                    "value": 91.9,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][23]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:00Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 150,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][24]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:01Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 149,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][25]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:02Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 148,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][26]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:03Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 132,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][27]",
+                "data": {
+                    "timestamp": "2026-04-13T08:05:04Z",
+                    "sensor_id": "SEN_003",
+                    "parameter": "rf_power",
+                    "value": 150,
+                    "unit": "W",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0042",
+                    "wafer_id": "WFR_0001",
+                    "recipe_step": "EtchMain"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][28]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:00Z",
+                    "sensor_id": "SEN_004",
+                    "parameter": "pressure",
+                    "value": 0.91,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][29]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:01Z",
+                    "sensor_id": "SEN_004",
+                    "parameter": "pressure",
+                    "value": 0.92,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][30]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:02Z",
+                    "sensor_id": "SEN_004",
+                    "parameter": "pressure",
+                    "value": 0.93,
+                    "unit": "Pa",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][31]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:00Z",
+                    "sensor_id": "SEN_005",
+                    "parameter": "temperature",
+                    "value": 65.0,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][32]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:01Z",
+                    "sensor_id": "SEN_005",
+                    "parameter": "temperature",
+                    "value": 63.2,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][33]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:02Z",
+                    "sensor_id": "SEN_005",
+                    "parameter": "temperature",
+                    "value": 61.8,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][34]",
+                "data": {
+                    "timestamp": "2026-04-13T08:10:03Z",
+                    "sensor_id": "SEN_005",
+                    "parameter": "temperature",
+                    "value": 60.1,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_01",
+                    "chamber": "C2",
+                    "lot_id": "LOT_0043",
+                    "wafer_id": "WFR_0005",
+                    "recipe_step": "Cooldown"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][35]",
+                "data": {
+                    "timestamp": "2026-04-13T08:15:00Z",
+                    "sensor_id": "SEN_006",
+                    "parameter": "pressure",
+                    "value": 0.88,
+                    "unit": "kPa",
+                    "tool_id": "EQP_CVD_02",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0044",
+                    "wafer_id": "WFR_0010",
+                    "recipe_step": "Deposit"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][36]",
+                "data": {
+                    "timestamp": "2026-04-13T08:15:01Z",
+                    "sensor_id": "SEN_006",
+                    "parameter": "pressure",
+                    "value": 0.87,
+                    "unit": "kPa",
+                    "tool_id": "EQP_CVD_02",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0044",
+                    "wafer_id": "WFR_0010",
+                    "recipe_step": "Deposit"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][37]",
+                "data": {
+                    "timestamp": "2026-04-13T08:15:02Z",
+                    "sensor_id": "SEN_006",
+                    "parameter": "pressure",
+                    "value": 0.89,
+                    "unit": "kPa",
+                    "tool_id": "EQP_CVD_02",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0044",
+                    "wafer_id": "WFR_0010",
+                    "recipe_step": "Deposit"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][38]",
+                "data": {
+                    "timestamp": "2026-04-13T08:15:00Z",
+                    "sensor_id": "SEN_007",
+                    "parameter": "temperatureC",
+                    "value": 200.5,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_02",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0044",
+                    "wafer_id": "WFR_0010",
+                    "recipe_step": "Deposit"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][39]",
+                "data": {
+                    "timestamp": "2026-04-13T08:15:01Z",
+                    "sensor_id": "SEN_007",
+                    "parameter": "temperatureC",
+                    "value": 200.9,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_02",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0044",
+                    "wafer_id": "WFR_0010",
+                    "recipe_step": "Deposit"
+                }
+            },
+            {
+                "record_type": "sensor_measurement_csv",
+                "source_reference": "$[][40]",
+                "data": {
+                    "timestamp": "2026-04-13T08:15:02Z",
+                    "sensor_id": "SEN_007",
+                    "parameter": "temperatureC",
+                    "value": 201.2,
+                    "unit": "C",
+                    "tool_id": "EQP_CVD_02",
+                    "chamber": "C1",
+                    "lot_id": "LOT_0044",
+                    "wafer_id": "WFR_0010",
+                    "recipe_step": "Deposit"
+                }
+            }
+        ],
+        "record_count": 40
+    },
+    "agent_debug": {
+        "final_source": "deterministic_csv_builder"
+    }
+}

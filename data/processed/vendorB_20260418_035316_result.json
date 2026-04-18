@@ -1,0 +1,751 @@
+{
+    "ingested": {
+        "file_id": "b18c9c10-a178-41be-bc83-5bd2b115e132",
+        "filename": "vendorB.csv",
+        "extension": ".csv",
+        "size_bytes": 4074,
+        "raw_path": "data\\raw\\b18c9c10-a178-41be-bc83-5bd2b115e132_vendorB.csv",
+        "ingestion_time": "2026-04-18T03:53:16.607904",
+        "sha256": "0b5b215bb107b098f9e772cd2b6f974e0b0252ae08fcf6df18f92e44a8bf2aba"
+    },
+    "detection": {
+        "format_guess": "csv",
+        "content_class": "structured_text",
+        "confidence": 0.95,
+        "notes": "Consistent CSV structure detected",
+        "extension_hint": ".csv",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "csv",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "csv is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "structure_summary": {
+        "format": "csv",
+        "top_level_type": "list",
+        "row_count": 37,
+        "columns": [
+            "sample_ts",
+            "eqp_name",
+            "chamber_no",
+            "tag_id",
+            "param",
+            "raw_val",
+            "eng_val",
+            "uom",
+            "lot_ref",
+            "wfr_ref",
+            "process_stage",
+            "qc_flag"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "csv_rows",
+        "record_groups": [
+            {
+                "record_type": "csv_row",
+                "path": "$[]",
+                "field_paths": [
+                    "sample_ts",
+                    "eqp_name",
+                    "chamber_no",
+                    "tag_id",
+                    "param",
+                    "raw_val",
+                    "eng_val",
+                    "uom",
+                    "lot_ref",
+                    "wfr_ref",
+                    "process_stage",
+                    "qc_flag"
+                ],
+                "context_paths": [],
+                "where": null
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "csv_rows",
+        "records": [
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][1]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3142,
+                    "eng_val": 301.5,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][2]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3143,
+                    "eng_val": 301.6,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][3]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3141,
+                    "eng_val": 301.4,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][4]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:30Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3144,
+                    "eng_val": 301.7,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][5]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 412,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][6]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 411,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][7]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 413,
+                    "eng_val": 0.0051,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][8]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:30Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 410,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][9]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_F_TMA",
+                    "param": "precursor_flow",
+                    "raw_val": 200,
+                    "eng_val": 2.0,
+                    "uom": "sccm",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][10]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_F_TMA",
+                    "param": "precursor_flow",
+                    "raw_val": 199,
+                    "eng_val": 1.99,
+                    "uom": "sccm",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][11]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:00:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_F_TMA",
+                    "param": "precursor_flow",
+                    "raw_val": 201,
+                    "eng_val": 2.01,
+                    "uom": "sccm",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][12]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:05:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3140,
+                    "eng_val": 301.3,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][13]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:05:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3142,
+                    "eng_val": 301.5,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][14]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:05:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3145,
+                    "eng_val": 301.8,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][15]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:05:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 411,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][16]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:05:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 409,
+                    "eng_val": 0.0049,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][17]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:05:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 412,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][18]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:10:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3155,
+                    "eng_val": 302.8,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "WARN"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][19]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:10:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3162,
+                    "eng_val": 303.5,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "WARN"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][20]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:10:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3170,
+                    "eng_val": 304.3,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "ALARM"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][21]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:10:30Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3165,
+                    "eng_val": 303.8,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "WARN"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][22]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:10:40Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3148,
+                    "eng_val": 302.1,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][23]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3141,
+                    "eng_val": 301.4,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Post_Anneal",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][24]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3140,
+                    "eng_val": 301.3,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Post_Anneal",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][25]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_T_Z1",
+                    "param": "reactor_temperature",
+                    "raw_val": 3142,
+                    "eng_val": 301.5,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Post_Anneal",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][26]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 410,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Post_Anneal",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][27]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 1,
+                    "tag_id": "ALD_P_Z1",
+                    "param": "chamber_pressure",
+                    "raw_val": 411,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W001",
+                    "process_stage": "Post_Anneal",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][28]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_T_Z2",
+                    "param": "reactor_temperature",
+                    "raw_val": 3138,
+                    "eng_val": 301.1,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][29]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_T_Z2",
+                    "param": "reactor_temperature",
+                    "raw_val": 3139,
+                    "eng_val": 301.2,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][30]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_T_Z2",
+                    "param": "reactor_temperature",
+                    "raw_val": 3140,
+                    "eng_val": 301.3,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][31]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_P_Z2",
+                    "param": "chamber_pressure",
+                    "raw_val": 415,
+                    "eng_val": 0.0051,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][32]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:15:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_P_Z2",
+                    "param": "chamber_pressure",
+                    "raw_val": 413,
+                    "eng_val": 0.005,
+                    "uom": "Torr",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "Surface_Prep",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][33]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:20:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_T_Z2",
+                    "param": "reactor_temperature",
+                    "raw_val": 3142,
+                    "eng_val": 301.5,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][34]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:20:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_T_Z2",
+                    "param": "reactor_temperature",
+                    "raw_val": 3141,
+                    "eng_val": 301.4,
+                    "uom": "degC",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][35]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:20:00Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_F_TMA",
+                    "param": "precursor_flow",
+                    "raw_val": 198,
+                    "eng_val": 1.98,
+                    "uom": "sccm",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][36]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:20:10Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_F_TMA",
+                    "param": "precursor_flow",
+                    "raw_val": 200,
+                    "eng_val": 2.0,
+                    "uom": "sccm",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            },
+            {
+                "record_type": "csv_row",
+                "source_reference": "$[][37]",
+                "data": {
+                    "sample_ts": "2026-04-13T10:20:20Z",
+                    "eqp_name": "TOOL_ALD_03",
+                    "chamber_no": 2,
+                    "tag_id": "ALD_F_TMA",
+                    "param": "precursor_flow",
+                    "raw_val": 202,
+                    "eng_val": 2.02,
+                    "uom": "sccm",
+                    "lot_ref": "LOT_0210",
+                    "wfr_ref": "W002",
+                    "process_stage": "ALD_Cycles",
+                    "qc_flag": "OK"
+                }
+            }
+        ],
+        "record_count": 37
+    },
+    "agent_debug": {
+        "final_source": "deterministic_csv_builder"
+    }
+}

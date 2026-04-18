@@ -7,6 +7,8 @@ import json
 import re
 import xml.etree.ElementTree as ET
 
+from structured.csv.reader import looks_like_delimited_table, sniff_csv_delimiter_from_text
+
 
 @dataclass
 class DetectionResult:
@@ -54,17 +56,22 @@ def try_xml(text: str) -> bool:
 
 
 def try_csv(text: str) -> bool:
-    try:
-        lines = [line for line in text.splitlines() if line.strip()]
-        if len(lines) < 2:
-            return False
-        sample = "\n".join(lines[:10])
-        dialect = csv.Sniffer().sniff(sample)
-        reader = csv.reader(lines[:10], dialect)
-        row_lengths = [len(row) for row in reader]
-        return len(set(row_lengths)) == 1 and row_lengths[0] > 1
-    except Exception:
-        return False
+    return looks_like_delimited_table(text)
+
+def detect_delimited_text(text: str, extension_hint: str) -> DetectionResult | None:
+    if not looks_like_delimited_table(text):
+        return None
+
+    delimiter = sniff_csv_delimiter_from_text(text)
+
+    return DetectionResult(
+        format_guess="csv",
+        content_class="structured_text",
+        confidence=0.95,
+        notes=f"Consistent delimited table detected (delimiter={repr(delimiter)})",
+        extension_hint=extension_hint,
+        is_text=True,
+    )
 
 
 def looks_like_hex_dump(text: str) -> bool:
@@ -182,18 +189,12 @@ def detect_file(file_path: str) -> DetectionResult:
         except Exception:
             pass
 
-    if extension_hint == ".csv":
+    if extension_hint in {".csv", ".tsv"}:
         try:
             text = data.decode("utf-8", errors="replace").strip()
-            if try_csv(text):
-                return DetectionResult(
-                    format_guess="csv",
-                    content_class="structured_text",
-                    confidence=0.95,
-                    notes="Consistent CSV structure detected",
-                    extension_hint=extension_hint,
-                    is_text=True,
-                )
+            detected = detect_delimited_text(text, extension_hint)
+            if detected is not None:
+                return detected
         except Exception:
             pass
 
@@ -230,14 +231,8 @@ def detect_file(file_path: str) -> DetectionResult:
             is_text=True,
         )
 
-    if try_csv(text):
-        return DetectionResult(
-            format_guess="csv",
-            content_class="structured_text",
-            confidence=0.92,
-            notes="Consistent delimited rows detected",
-            extension_hint=extension_hint,
-            is_text=True,
-        )
+    detected_csv = detect_delimited_text(text, extension_hint)
+    if detected_csv is not None:
+        return detected_csv
 
     return detect_text_pattern(text, extension_hint)

@@ -104,4 +104,5 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/euv_scanner_process_log.xml")
+    run_pipeline("data/synthetic_logs/vendorC.csv")
+    run_pipeline("data/synthetic_logs/vendorD.csv")
