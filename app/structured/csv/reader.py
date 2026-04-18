@@ -2,33 +2,75 @@ from __future__ import annotations
 
 import csv
 import io
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 CANDIDATE_DELIMITERS = [",", ";", "\t", "|"]
 
 
-def load_csv_rows(file_path: str) -> list[dict[str, Any]]:
+@dataclass
+class CSVLoadResult:
+    rows: list[dict[str, Any]]
+    delimiter: str
+    header: list[str]
+    warnings: list[str] = field(default_factory=list)
+    malformed_row_numbers: list[int] = field(default_factory=list)
+
+
+def load_csv_with_diagnostics(file_path: str) -> CSVLoadResult:
     text = Path(file_path).read_text(encoding="utf-8-sig", errors="replace")
     delimiter = sniff_csv_delimiter_from_text(text)
 
-    reader = csv.DictReader(io.StringIO(text), delimiter=delimiter)
+    reader = csv.reader(io.StringIO(text), delimiter=delimiter)
+    raw_rows = [
+        [cell.strip() for cell in row]
+        for row in reader
+        if row and any(cell.strip() for cell in row)
+    ]
+
+    if not raw_rows:
+        return CSVLoadResult(
+            rows=[],
+            delimiter=delimiter,
+            header=[],
+            warnings=["Empty delimited file."],
+            malformed_row_numbers=[],
+        )
+
+    header = raw_rows[0]
+    expected_width = len(header)
 
     rows: list[dict[str, Any]] = []
-    for row in reader:
-        if row is None:
+    warnings: list[str] = []
+    malformed_row_numbers: list[int] = []
+
+    for line_no, row in enumerate(raw_rows[1:], start=2):
+        if len(row) != expected_width:
+            malformed_row_numbers.append(line_no)
+            warnings.append(
+                f"Row {line_no} has {len(row)} fields; expected {expected_width}. Skipped as malformed."
+            )
             continue
 
-        cleaned: dict[str, Any] = {}
-        for key, value in row.items():
-            if key is None:
-                continue
-            cleaned[key.strip()] = _coerce_value(value)
+        record: dict[str, Any] = {}
+        for key, value in zip(header, row):
+            record[key] = _coerce_value(value)
 
-        if any(v is not None for v in cleaned.values()):
-            rows.append(cleaned)
+        if any(v is not None for v in record.values()):
+            rows.append(record)
 
-    return rows
+    return CSVLoadResult(
+        rows=rows,
+        delimiter=delimiter,
+        header=header,
+        warnings=warnings,
+        malformed_row_numbers=malformed_row_numbers,
+    )
+
+
+def load_csv_rows(file_path: str) -> list[dict[str, Any]]:
+    return load_csv_with_diagnostics(file_path).rows
 
 
 def sniff_csv_delimiter_from_text(text: str) -> str:

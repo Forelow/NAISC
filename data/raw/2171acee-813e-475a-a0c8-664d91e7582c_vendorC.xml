@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RcpExecLog ver="2.5" eqp="EQP_IMP_09" sn="SN_IMP_009" site="FAB2">
+
+  <Hdr>
+    <Lot>LOT_0260</Lot>
+    <Rcp>IMP_BF2_30K_5E14</Rcp>
+    <Tech>1A</Tech>
+    <Op>OPR_080</Op>
+    <TStart>2026-04-13T13:00:00Z</TStart>
+    <TEnd>2026-04-13T15:00:00Z</TEnd>
+    <WfrCnt>25</WfrCnt>
+    <PassCnt>22</PassCnt>
+    <FailCnt>1</FailCnt>
+    <HoldCnt>2</HoldCnt>
+  </Hdr>
+
+  <RcpDef>
+    <Param n="Species"           v="BF2+"       u=""    />
+    <Param n="Energy_keV"        v="30"         u="keV" />
+    <Param n="Dose_cm2"          v="5E14"       u="cm2" />
+    <Param n="BeamCurr_mA"       v="8.0"        u="mA"  />
+    <Param n="TiltAngle_deg"     v="0.0"        u="deg" />
+    <Param n="TwistAngle_deg"    v="0.0"        u="deg" />
+    <Param n="DoseUnif_pct_max"  v="2.0"        u="pct" />
+  </RcpDef>
+
+  <WfrLog>
+
+    <W n="1" id="WFR_0260" st="2026-04-13T13:05:00Z" en="2026-04-13T13:12:00Z" res="P">
+      <M n="DoseAchvd"    v="5.01E14" u="cm2" />
+      <M n="DoseUnif"     v="0.9"     u="pct" />
+      <M n="BeamCurr_avg" v="8.01"    u="mA"  />
+      <M n="ImpTime_s"    v="380"     u="s"   />
+    </W>
+
+    <W n="2" id="WFR_0261" st="2026-04-13T13:13:00Z" en="2026-04-13T13:20:00Z" res="P">
+      <M n="DoseAchvd"    v="4.99E14" u="cm2" />
+      <M n="DoseUnif"     v="1.0"     u="pct" />
+      <M n="BeamCurr_avg" v="7.98"    u="mA"  />
+      <M n="ImpTime_s"    v="382"     u="s"   />
+    </W>
+
+    <W n="3" id="WFR_0262" st="2026-04-13T13:21:00Z" en="2026-04-13T13:29:00Z" res="H">
+      <M n="DoseAchvd"    v="4.82E14" u="cm2" />
+      <M n="DoseUnif"     v="2.8"     u="pct" />
+      <M n="BeamCurr_avg" v="7.60"    u="mA"  />
+      <M n="ImpTime_s"    v="395"     u="s"   />
+      <Evt cd="BEAM_DRIFT" sev="W" t="2026-04-13T13:24:00Z" msg="Beam current drifted below 95% setpoint" dur_s="120"/>
+    </W>
+
+    <W n="4" id="WFR_0263" st="2026-04-13T13:30:00Z" en="2026-04-13T13:37:00Z" res="P">
+      <M n="DoseAchvd"    v="5.00E14" u="cm2" />
+      <M n="DoseUnif"     v="0.8"     u="pct" />
+      <M n="BeamCurr_avg" v="8.00"    u="mA"  />
+      <M n="ImpTime_s"    v="381"     u="s"   />
+    </W>
+
+    <W n="5" id="WFR_0264" st="2026-04-13T13:38:00Z" en="2026-04-13T13:45:00Z" res="P">
+      <M n="DoseAchvd"    v="5.02E14" u="cm2" />
+      <M n="DoseUnif"     v="0.7"     u="pct" />
+      <M n="BeamCurr_avg" v="8.02"    u="mA"  />
+      <M n="ImpTime_s"    v="379"     u="s"   />
+    </W>
+
+    <W n="10" id="WFR_0269" st="2026-04-13T14:20:00Z" en="2026-04-13T14:28:00Z" res="F">
+      <M n="DoseAchvd"    v="4.41E14" u="cm2" />
+      <M n="DoseUnif"     v="5.2"     u="pct" />
+      <M n="BeamCurr_avg" v="6.90"    u="mA"  />
+      <M n="ImpTime_s"    v="430"     u="s"   />
+      <Evt cd="BEAM_INSTAB"  sev="E" t="2026-04-13T14:21:30Z" msg="Beam current unstable — dose compensation failed" dur_s="300"/>
+      <Evt cd="DOSE_FAIL"    sev="E" t="2026-04-13T14:28:00Z" msg="Final dose below 95% of target — wafer failed"/>
+    </W>
+
+    <W n="15" id="WFR_0274" st="2026-04-13T14:50:00Z" en="2026-04-13T14:58:00Z" res="H">
+      <M n="DoseAchvd"    v="4.88E14" u="cm2" />
+      <M n="DoseUnif"     v="2.2"     u="pct" />
+      <M n="BeamCurr_avg" v="7.80"    u="mA"  />
+      <M n="ImpTime_s"    v="390"     u="s"   />
+      <Evt cd="BEAM_DRIFT" sev="W" t="2026-04-13T14:53:00Z" msg="Beam current borderline — held for engineering review" dur_s="60"/>
+    </W>
+
+  </WfrLog>
+
+  <FltSummary>
+    <Flt id="1" cd="BEAM_DRIFT"   sev="W" cnt="2" first_t="2026-04-13T13:24:00Z" last_t="2026-04-13T14:53:00Z"/>
+    <Flt id="2" cd="BEAM_INSTAB"  sev="E" cnt="1" first_t="2026-04-13T14:21:30Z" last_t="2026-04-13T14:21:30Z"/>
+    <Flt id="3" cd="DOSE_FAIL"    sev="E" cnt="1" first_t="2026-04-13T14:28:00Z" last_t="2026-04-13T14:28:00Z"/>
+  </FltSummary>
+
+</RcpExecLog>

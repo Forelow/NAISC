@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fab:FabricationRecord
+  xmlns:fab="http://schemas.semicon.org/fab/v3"
+  xmlns:sens="http://schemas.semicon.org/sensor/v2"
+  xmlns:evt="http://schemas.semicon.org/event/v1"
+  fab:recordID="FAB_REC_20260413_003"
+  fab:createdAt="2026-04-13T11:00:00+08:00">
+
+  <fab:Equipment>
+    <fab:EquipmentID>EQP_FURNACE_05</fab:EquipmentID>
+    <fab:EquipmentClass>DiffusionFurnace</fab:EquipmentClass>
+    <fab:FabLocation>
+      <fab:FabID>FAB2</fab:FabID>
+      <fab:Bay>C4</fab:Bay>
+      <fab:Row>2</fab:Row>
+    </fab:FabLocation>
+    <fab:FirmwareVersion>DFO-FW-12.3.1</fab:FirmwareVersion>
+  </fab:Equipment>
+
+  <fab:ProductionOrder>
+    <fab:LotID>LOT_0250</fab:LotID>
+    <fab:RecipeID>FURN_DRIVE_850C_60MIN</fab:RecipeID>
+    <fab:TechNode>1B</fab:TechNode>
+    <fab:OperatorID>OPR_071</fab:OperatorID>
+    <fab:OrderStart>2026-04-13T08:00:00+08:00</fab:OrderStart>
+    <fab:OrderEnd>2026-04-13T10:00:00+08:00</fab:OrderEnd>
+    <fab:WaferCount>25</fab:WaferCount>
+  </fab:ProductionOrder>
+
+  <fab:EquipmentStateTransitions>
+    <evt:Transition seq="1">
+      <evt:Timestamp>2026-04-13T07:55:00+08:00</evt:Timestamp>
+      <evt:FromState>STANDBY</evt:FromState>
+      <evt:ToState>LOADING</evt:ToState>
+      <evt:InitiatedBy>OPR_071</evt:InitiatedBy>
+    </evt:Transition>
+    <evt:Transition seq="2">
+      <evt:Timestamp>2026-04-13T08:00:00+08:00</evt:Timestamp>
+      <evt:FromState>LOADING</evt:FromState>
+      <evt:ToState>PROCESSING</evt:ToState>
+      <evt:InitiatedBy>SYSTEM</evt:InitiatedBy>
+    </evt:Transition>
+    <evt:Transition seq="3">
+      <evt:Timestamp>2026-04-13T09:40:00+08:00</evt:Timestamp>
+      <evt:FromState>PROCESSING</evt:FromState>
+      <evt:ToState>FAULTED</evt:ToState>
+      <evt:InitiatedBy>SYSTEM</evt:InitiatedBy>
+      <evt:FaultReference>FLT_HTR_Z3_20260413</evt:FaultReference>
+    </evt:Transition>
+    <evt:Transition seq="4">
+      <evt:Timestamp>2026-04-13T09:55:00+08:00</evt:Timestamp>
+      <evt:FromState>FAULTED</evt:FromState>
+      <evt:ToState>STANDBY</evt:ToState>
+      <evt:InitiatedBy>TECH_022</evt:InitiatedBy>
+    </evt:Transition>
+  </fab:EquipmentStateTransitions>
+
+  <fab:ProcessSequence>
+
+    <fab:ProcessStep stepSeq="1" stepName="LoadAndPurge">
+      <fab:StepStart>2026-04-13T08:00:00+08:00</fab:StepStart>
+      <fab:StepEnd>2026-04-13T08:15:00+08:00</fab:StepEnd>
+      <fab:StepOutcome>PASS</fab:StepOutcome>
+      <fab:Setpoints>
+        <fab:Setpoint name="N2_Flow_slm" value="20.0"/>
+        <fab:Setpoint name="PurgeTime_min" value="15"/>
+      </fab:Setpoints>
+      <sens:SensorTrace>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:00:00+08:00" value="200.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:05:00+08:00" value="200.2" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:10:00+08:00" value="200.1" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:15:00+08:00" value="200.0" unit="degC"/>
+        <sens:Reading sensor="N2_FLOW"  timestamp="2026-04-13T08:00:00+08:00" value="20.1"  unit="slm"/>
+        <sens:Reading sensor="N2_FLOW"  timestamp="2026-04-13T08:05:00+08:00" value="20.0"  unit="slm"/>
+        <sens:Reading sensor="N2_FLOW"  timestamp="2026-04-13T08:10:00+08:00" value="19.9"  unit="slm"/>
+        <sens:Reading sensor="N2_FLOW"  timestamp="2026-04-13T08:15:00+08:00" value="20.0"  unit="slm"/>
+      </sens:SensorTrace>
+    </fab:ProcessStep>
+
+    <fab:ProcessStep stepSeq="2" stepName="RampTo850">
+      <fab:StepStart>2026-04-13T08:15:00+08:00</fab:StepStart>
+      <fab:StepEnd>2026-04-13T08:55:00+08:00</fab:StepEnd>
+      <fab:StepOutcome>PASS</fab:StepOutcome>
+      <fab:Setpoints>
+        <fab:Setpoint name="TargetTemp_C" value="850"/>
+        <fab:Setpoint name="RampRate_C_per_min" value="16.25"/>
+      </fab:Setpoints>
+      <sens:SensorTrace>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:15:00+08:00" value="200.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:25:00+08:00" value="362.5" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:35:00+08:00" value="525.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:45:00+08:00" value="687.5" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:55:00+08:00" value="849.8" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T08:15:00+08:00" value="200.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T08:25:00+08:00" value="361.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T08:35:00+08:00" value="523.5" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T08:45:00+08:00" value="685.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T08:55:00+08:00" value="848.5" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T08:15:00+08:00" value="200.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T08:25:00+08:00" value="360.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T08:35:00+08:00" value="522.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T08:45:00+08:00" value="684.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T08:55:00+08:00" value="848.0" unit="degC"/>
+      </sens:SensorTrace>
+    </fab:ProcessStep>
+
+    <fab:ProcessStep stepSeq="3" stepName="AnnealSoak">
+      <fab:StepStart>2026-04-13T08:55:00+08:00</fab:StepStart>
+      <fab:StepEnd>2026-04-13T09:55:00+08:00</fab:StepEnd>
+      <fab:StepOutcome>PARTIAL_FAIL</fab:StepOutcome>
+      <fab:Setpoints>
+        <fab:Setpoint name="SoakTemp_C" value="850"/>
+        <fab:Setpoint name="SoakTime_min" value="60"/>
+        <fab:Setpoint name="N2_Flow_slm" value="10.0"/>
+      </fab:Setpoints>
+      <sens:SensorTrace>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T08:55:00+08:00" value="850.1" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T09:10:00+08:00" value="850.3" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T09:25:00+08:00" value="850.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z1" timestamp="2026-04-13T09:40:00+08:00" value="850.2" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T08:55:00+08:00" value="850.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T09:10:00+08:00" value="849.8" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T09:25:00+08:00" value="850.1" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z2" timestamp="2026-04-13T09:40:00+08:00" value="849.9" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T08:55:00+08:00" value="850.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T09:10:00+08:00" value="849.5" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T09:25:00+08:00" value="845.2" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T09:35:00+08:00" value="838.0" unit="degC"/>
+        <sens:Reading sensor="TEMP_Z3" timestamp="2026-04-13T09:40:00+08:00" value="831.5" unit="degC"/>
+      </sens:SensorTrace>
+      <fab:FaultEvents>
+        <evt:Fault faultID="FLT_HTR_Z3_20260413" seq="1">
+          <evt:Timestamp>2026-04-13T09:40:00+08:00</evt:Timestamp>
+          <evt:FaultCode>HTR_ZONE_DRIFT</evt:FaultCode>
+          <evt:Severity>ERROR</evt:Severity>
+          <evt:Description>Zone 3 temperature dropped 18.5 degC below setpoint — heater degradation suspected</evt:Description>
+          <evt:AffectedSensor>TEMP_Z3</evt:AffectedSensor>
+          <evt:MeasuredValue>831.5</evt:MeasuredValue>
+          <evt:SetpointValue>850.0</evt:SetpointValue>
+          <evt:Unit>degC</evt:Unit>
+          <evt:AutoAction>HALT_PROCESS</evt:AutoAction>
+          <evt:LotImpact>ALL_WAFERS_AT_RISK</evt:LotImpact>
+        </evt:Fault>
+      </fab:FaultEvents>
+    </fab:ProcessStep>
+
+  </fab:ProcessSequence>
+
+  <fab:WaferDispositions>
+    <fab:Disposition waferID="ALL" lotID="LOT_0250">
+      <fab:Decision>ENGINEERING_HOLD</fab:Decision>
+      <fab:Reason>Incomplete anneal soak due to Zone 3 heater fault at 45 of 60 minutes</fab:Reason>
+      <fab:DecisionBy>ENG_041</fab:DecisionBy>
+      <fab:DecisionTime>2026-04-13T10:30:00+08:00</fab:DecisionTime>
+    </fab:Disposition>
+  </fab:WaferDispositions>
+
+</fab:FabricationRecord>

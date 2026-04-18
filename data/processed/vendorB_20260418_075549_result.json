@@ -1,0 +1,1460 @@
+{
+    "ingested": {
+        "file_id": "4b00e3a2-cbce-4e46-8119-c319c5e2c689",
+        "filename": "vendorB.xml",
+        "extension": ".xml",
+        "size_bytes": 8607,
+        "raw_path": "data\\raw\\4b00e3a2-cbce-4e46-8119-c319c5e2c689_vendorB.xml",
+        "ingestion_time": "2026-04-18T07:55:34.815428",
+        "sha256": "8c1dd1651d159ade9b28ad615195b3921472cc09a1d28306245fd4ba4d562639"
+    },
+    "detection": {
+        "format_guess": "xml",
+        "content_class": "structured_text",
+        "confidence": 0.99,
+        "notes": "Valid XML detected",
+        "extension_hint": ".xml",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "xml",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "xml is handled by structured_parser"
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Known structured format"
+    },
+    "structure_summary": {
+        "format": "json",
+        "top_level_type": "dict",
+        "top_level_keys": [
+            "FabricationRecord"
+        ],
+        "repeated_paths": [
+            "FabricationRecord.EquipmentStateTransitions.Transition[]",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault[]",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].SensorTrace.Reading[]",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].Setpoints.Setpoint[]",
+            "FabricationRecord.ProcessSequence.ProcessStep[]"
+        ],
+        "sample_leaf_paths": [
+            "FabricationRecord.@createdAt",
+            "FabricationRecord.@recordID",
+            "FabricationRecord.Equipment.EquipmentClass",
+            "FabricationRecord.Equipment.EquipmentID",
+            "FabricationRecord.Equipment.FabLocation.Bay",
+            "FabricationRecord.Equipment.FabLocation.FabID",
+            "FabricationRecord.Equipment.FabLocation.Row",
+            "FabricationRecord.Equipment.FirmwareVersion",
+            "FabricationRecord.EquipmentStateTransitions.Transition.[].@seq",
+            "FabricationRecord.EquipmentStateTransitions.Transition.[].FaultReference",
+            "FabricationRecord.EquipmentStateTransitions.Transition.[].FromState",
+            "FabricationRecord.EquipmentStateTransitions.Transition.[].InitiatedBy",
+            "FabricationRecord.EquipmentStateTransitions.Transition.[].Timestamp",
+            "FabricationRecord.EquipmentStateTransitions.Transition.[].ToState",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].@stepName",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].@stepSeq",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].@faultID",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].@seq",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].AffectedSensor",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].AutoAction",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].Description",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].FaultCode",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].LotImpact",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].MeasuredValue",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].SetpointValue",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].Severity",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].Timestamp",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].FaultEvents.Fault.[].Unit",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].SensorTrace.Reading.[].@sensor",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].SensorTrace.Reading.[].@timestamp",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].SensorTrace.Reading.[].@unit",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].SensorTrace.Reading.[].@value",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].Setpoints.Setpoint.[].@name",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].Setpoints.Setpoint.[].@value",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].StepEnd",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].StepOutcome",
+            "FabricationRecord.ProcessSequence.ProcessStep.[].StepStart",
+            "FabricationRecord.ProductionOrder.LotID",
+            "FabricationRecord.ProductionOrder.OperatorID",
+            "FabricationRecord.ProductionOrder.OrderEnd",
+            "FabricationRecord.ProductionOrder.OrderStart",
+            "FabricationRecord.ProductionOrder.RecipeID",
+            "FabricationRecord.ProductionOrder.TechNode",
+            "FabricationRecord.ProductionOrder.WaferCount",
+            "FabricationRecord.WaferDispositions.Disposition.@lotID",
+            "FabricationRecord.WaferDispositions.Disposition.@waferID",
+            "FabricationRecord.WaferDispositions.Disposition.Decision",
+            "FabricationRecord.WaferDispositions.Disposition.DecisionBy",
+            "FabricationRecord.WaferDispositions.Disposition.DecisionTime",
+            "FabricationRecord.WaferDispositions.Disposition.Reason"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "machine_log",
+        "record_groups": [
+            {
+                "record_type": "process_step",
+                "path": "FabricationRecord.ProcessSequence.ProcessStep[]",
+                "context_paths": [
+                    "FabricationRecord.@recordID",
+                    "FabricationRecord.@createdAt",
+                    "FabricationRecord.Equipment.EquipmentID",
+                    "FabricationRecord.ProductionOrder.LotID",
+                    "FabricationRecord.ProductionOrder.RecipeID",
+                    "FabricationRecord.ProductionOrder.OperatorID"
+                ],
+                "field_paths": [
+                    "@stepName",
+                    "@stepSeq",
+                    "StepStart",
+                    "StepEnd",
+                    "StepOutcome"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "fault_event",
+                "path": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[]",
+                "context_paths": [
+                    "FabricationRecord.@recordID",
+                    "FabricationRecord.Equipment.EquipmentID",
+                    "FabricationRecord.ProductionOrder.LotID",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                ],
+                "field_paths": [
+                    "@faultID",
+                    "@seq",
+                    "AffectedSensor",
+                    "AutoAction",
+                    "Description",
+                    "FaultCode",
+                    "LotImpact",
+                    "MeasuredValue",
+                    "SetpointValue",
+                    "Severity",
+                    "Timestamp",
+                    "Unit"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "sensor_reading",
+                "path": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[]",
+                "context_paths": [
+                    "FabricationRecord.@recordID",
+                    "FabricationRecord.Equipment.EquipmentID",
+                    "FabricationRecord.ProductionOrder.LotID",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                ],
+                "field_paths": [
+                    "@sensor",
+                    "@timestamp",
+                    "@unit",
+                    "@value"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "equipment_state_transition",
+                "path": "FabricationRecord.EquipmentStateTransitions.Transition[]",
+                "context_paths": [
+                    "FabricationRecord.@recordID",
+                    "FabricationRecord.@createdAt",
+                    "FabricationRecord.Equipment.EquipmentID",
+                    "FabricationRecord.ProductionOrder.LotID"
+                ],
+                "field_paths": [
+                    "@seq",
+                    "FaultReference",
+                    "FromState",
+                    "InitiatedBy",
+                    "Timestamp",
+                    "ToState"
+                ],
+                "where": null
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "path": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[]",
+                "context_paths": [
+                    "FabricationRecord.@recordID",
+                    "FabricationRecord.Equipment.EquipmentID",
+                    "FabricationRecord.ProductionOrder.LotID",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                ],
+                "field_paths": [
+                    "@name",
+                    "@value"
+                ],
+                "where": null
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "machine_log",
+        "records": [
+            {
+                "record_type": "process_step",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[][1]",
+                "data": {
+                    "@stepName": "LoadAndPurge",
+                    "@stepSeq": 1,
+                    "StepStart": "2026-04-13T08:00:00+08:00",
+                    "StepEnd": "2026-04-13T08:15:00+08:00",
+                    "StepOutcome": "PASS",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProductionOrder.RecipeID": "FURN_DRIVE_850C_60MIN",
+                    "FabricationRecord.ProductionOrder.OperatorID": "OPR_071"
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[][2]",
+                "data": {
+                    "@stepName": "RampTo850",
+                    "@stepSeq": 2,
+                    "StepStart": "2026-04-13T08:15:00+08:00",
+                    "StepEnd": "2026-04-13T08:55:00+08:00",
+                    "StepOutcome": "PASS",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProductionOrder.RecipeID": "FURN_DRIVE_850C_60MIN",
+                    "FabricationRecord.ProductionOrder.OperatorID": "OPR_071"
+                }
+            },
+            {
+                "record_type": "process_step",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[][3]",
+                "data": {
+                    "@stepName": "AnnealSoak",
+                    "@stepSeq": 3,
+                    "StepStart": "2026-04-13T08:55:00+08:00",
+                    "StepEnd": "2026-04-13T09:55:00+08:00",
+                    "StepOutcome": "PARTIAL_FAIL",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProductionOrder.RecipeID": "FURN_DRIVE_850C_60MIN",
+                    "FabricationRecord.ProductionOrder.OperatorID": "OPR_071"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[][1]",
+                "data": {
+                    "@faultID": "FLT_HTR_Z3_20260413",
+                    "@seq": 1,
+                    "AffectedSensor": "TEMP_Z3",
+                    "AutoAction": "HALT_PROCESS",
+                    "Description": "Zone 3 temperature dropped 18.5 degC below setpoint — heater degradation suspected",
+                    "FaultCode": "HTR_ZONE_DRIFT",
+                    "LotImpact": "ALL_WAFERS_AT_RISK",
+                    "MeasuredValue": 831.5,
+                    "SetpointValue": 850.0,
+                    "Severity": "ERROR",
+                    "Timestamp": "2026-04-13T09:40:00+08:00",
+                    "Unit": "degC",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][1]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:00:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][2]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:05:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.2,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][3]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:10:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.1,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][4]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:15:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][5]",
+                "data": {
+                    "@sensor": "N2_FLOW",
+                    "@timestamp": "2026-04-13T08:00:00+08:00",
+                    "@unit": "slm",
+                    "@value": 20.1,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][6]",
+                "data": {
+                    "@sensor": "N2_FLOW",
+                    "@timestamp": "2026-04-13T08:05:00+08:00",
+                    "@unit": "slm",
+                    "@value": 20.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][7]",
+                "data": {
+                    "@sensor": "N2_FLOW",
+                    "@timestamp": "2026-04-13T08:10:00+08:00",
+                    "@unit": "slm",
+                    "@value": 19.9,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][8]",
+                "data": {
+                    "@sensor": "N2_FLOW",
+                    "@timestamp": "2026-04-13T08:15:00+08:00",
+                    "@unit": "slm",
+                    "@value": 20.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][9]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:15:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][10]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:25:00+08:00",
+                    "@unit": "degC",
+                    "@value": 362.5,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][11]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:35:00+08:00",
+                    "@unit": "degC",
+                    "@value": 525.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][12]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:45:00+08:00",
+                    "@unit": "degC",
+                    "@value": 687.5,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][13]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:55:00+08:00",
+                    "@unit": "degC",
+                    "@value": 849.8,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][14]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T08:15:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][15]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T08:25:00+08:00",
+                    "@unit": "degC",
+                    "@value": 361.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][16]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T08:35:00+08:00",
+                    "@unit": "degC",
+                    "@value": 523.5,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][17]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T08:45:00+08:00",
+                    "@unit": "degC",
+                    "@value": 685.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][18]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T08:55:00+08:00",
+                    "@unit": "degC",
+                    "@value": 848.5,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][19]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T08:15:00+08:00",
+                    "@unit": "degC",
+                    "@value": 200.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][20]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T08:25:00+08:00",
+                    "@unit": "degC",
+                    "@value": 360.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][21]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T08:35:00+08:00",
+                    "@unit": "degC",
+                    "@value": 522.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][22]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T08:45:00+08:00",
+                    "@unit": "degC",
+                    "@value": 684.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][23]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T08:55:00+08:00",
+                    "@unit": "degC",
+                    "@value": 848.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][24]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T08:55:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.1,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][25]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T09:10:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.3,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][26]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T09:25:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][27]",
+                "data": {
+                    "@sensor": "TEMP_Z1",
+                    "@timestamp": "2026-04-13T09:40:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.2,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][28]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T08:55:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][29]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T09:10:00+08:00",
+                    "@unit": "degC",
+                    "@value": 849.8,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][30]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T09:25:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.1,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][31]",
+                "data": {
+                    "@sensor": "TEMP_Z2",
+                    "@timestamp": "2026-04-13T09:40:00+08:00",
+                    "@unit": "degC",
+                    "@value": 849.9,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][32]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T08:55:00+08:00",
+                    "@unit": "degC",
+                    "@value": 850.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][33]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T09:10:00+08:00",
+                    "@unit": "degC",
+                    "@value": 849.5,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][34]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T09:25:00+08:00",
+                    "@unit": "degC",
+                    "@value": 845.2,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][35]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T09:35:00+08:00",
+                    "@unit": "degC",
+                    "@value": 838.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[][36]",
+                "data": {
+                    "@sensor": "TEMP_Z3",
+                    "@timestamp": "2026-04-13T09:40:00+08:00",
+                    "@unit": "degC",
+                    "@value": 831.5,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "equipment_state_transition",
+                "source_reference": "FabricationRecord.EquipmentStateTransitions.Transition[][1]",
+                "data": {
+                    "@seq": 1,
+                    "FromState": "STANDBY",
+                    "InitiatedBy": "OPR_071",
+                    "Timestamp": "2026-04-13T07:55:00+08:00",
+                    "ToState": "LOADING",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250"
+                }
+            },
+            {
+                "record_type": "equipment_state_transition",
+                "source_reference": "FabricationRecord.EquipmentStateTransitions.Transition[][2]",
+                "data": {
+                    "@seq": 2,
+                    "FromState": "LOADING",
+                    "InitiatedBy": "SYSTEM",
+                    "Timestamp": "2026-04-13T08:00:00+08:00",
+                    "ToState": "PROCESSING",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250"
+                }
+            },
+            {
+                "record_type": "equipment_state_transition",
+                "source_reference": "FabricationRecord.EquipmentStateTransitions.Transition[][3]",
+                "data": {
+                    "@seq": 3,
+                    "FaultReference": "FLT_HTR_Z3_20260413",
+                    "FromState": "PROCESSING",
+                    "InitiatedBy": "SYSTEM",
+                    "Timestamp": "2026-04-13T09:40:00+08:00",
+                    "ToState": "FAULTED",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250"
+                }
+            },
+            {
+                "record_type": "equipment_state_transition",
+                "source_reference": "FabricationRecord.EquipmentStateTransitions.Transition[][4]",
+                "data": {
+                    "@seq": 4,
+                    "FromState": "FAULTED",
+                    "InitiatedBy": "TECH_022",
+                    "Timestamp": "2026-04-13T09:55:00+08:00",
+                    "ToState": "STANDBY",
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.@createdAt": "2026-04-13T11:00:00+08:00",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250"
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][1]",
+                "data": {
+                    "@name": "N2_Flow_slm",
+                    "@value": 20.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][2]",
+                "data": {
+                    "@name": "PurgeTime_min",
+                    "@value": 15,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "LoadAndPurge",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 1
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][3]",
+                "data": {
+                    "@name": "TargetTemp_C",
+                    "@value": 850,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][4]",
+                "data": {
+                    "@name": "RampRate_C_per_min",
+                    "@value": 16.25,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "RampTo850",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 2
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][5]",
+                "data": {
+                    "@name": "SoakTemp_C",
+                    "@value": 850,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][6]",
+                "data": {
+                    "@name": "SoakTime_min",
+                    "@value": 60,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            },
+            {
+                "record_type": "process_step_setpoint",
+                "source_reference": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[][7]",
+                "data": {
+                    "@name": "N2_Flow_slm",
+                    "@value": 10.0,
+                    "FabricationRecord.@recordID": "FAB_REC_20260413_003",
+                    "FabricationRecord.Equipment.EquipmentID": "EQP_FURNACE_05",
+                    "FabricationRecord.ProductionOrder.LotID": "LOT_0250",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepName": "AnnealSoak",
+                    "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq": 3
+                }
+            }
+        ],
+        "record_count": 51
+    },
+    "agent_debug": {
+        "final_source": "coverage_repair",
+        "initial_config_raw": {
+            "schema_family": "machine_log",
+            "record_groups": [
+                {
+                    "record_type": "process_step",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProductionOrder.RecipeID",
+                        "FabricationRecord.ProductionOrder.OperatorID"
+                    ],
+                    "field_paths": [
+                        "@stepName",
+                        "@stepSeq",
+                        "StepStart",
+                        "StepEnd",
+                        "StepOutcome"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "fault_event",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@faultID",
+                        "@seq",
+                        "AffectedSensor",
+                        "AutoAction",
+                        "Description",
+                        "FaultCode",
+                        "LotImpact",
+                        "MeasuredValue",
+                        "SetpointValue",
+                        "Severity",
+                        "Timestamp",
+                        "Unit"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@sensor",
+                        "@timestamp",
+                        "@unit",
+                        "@value"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_transition",
+                    "path": "FabricationRecord.EquipmentStateTransitions.Transition[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID"
+                    ],
+                    "field_paths": [
+                        "@seq",
+                        "FaultReference",
+                        "FromState",
+                        "InitiatedBy",
+                        "Timestamp",
+                        "ToState"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_config_normalized": {
+            "schema_family": "machine_log",
+            "record_groups": [
+                {
+                    "record_type": "process_step",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProductionOrder.RecipeID",
+                        "FabricationRecord.ProductionOrder.OperatorID"
+                    ],
+                    "field_paths": [
+                        "@stepName",
+                        "@stepSeq",
+                        "StepStart",
+                        "StepEnd",
+                        "StepOutcome"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "fault_event",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@faultID",
+                        "@seq",
+                        "AffectedSensor",
+                        "AutoAction",
+                        "Description",
+                        "FaultCode",
+                        "LotImpact",
+                        "MeasuredValue",
+                        "SetpointValue",
+                        "Severity",
+                        "Timestamp",
+                        "Unit"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@sensor",
+                        "@timestamp",
+                        "@unit",
+                        "@value"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_transition",
+                    "path": "FabricationRecord.EquipmentStateTransitions.Transition[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID"
+                    ],
+                    "field_paths": [
+                        "@seq",
+                        "FaultReference",
+                        "FromState",
+                        "InitiatedBy",
+                        "Timestamp",
+                        "ToState"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_validation_report": {
+            "schema_family": "machine_log",
+            "group_count_before": 4,
+            "group_count_after": 4,
+            "valid_group_count": 4,
+            "groups": [
+                {
+                    "record_type": "process_step",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@stepName",
+                        "@stepSeq",
+                        "StepStart",
+                        "StepEnd",
+                        "StepOutcome"
+                    ],
+                    "valid_context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProductionOrder.RecipeID",
+                        "FabricationRecord.ProductionOrder.OperatorID"
+                    ]
+                },
+                {
+                    "record_type": "fault_event",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@faultID",
+                        "@seq",
+                        "AffectedSensor",
+                        "AutoAction",
+                        "Description",
+                        "FaultCode",
+                        "LotImpact",
+                        "MeasuredValue",
+                        "SetpointValue",
+                        "Severity",
+                        "Timestamp",
+                        "Unit"
+                    ],
+                    "valid_context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ]
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@sensor",
+                        "@timestamp",
+                        "@unit",
+                        "@value"
+                    ],
+                    "valid_context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ]
+                },
+                {
+                    "record_type": "equipment_state_transition",
+                    "path": "FabricationRecord.EquipmentStateTransitions.Transition[]",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "@seq",
+                        "FaultReference",
+                        "FromState",
+                        "InitiatedBy",
+                        "Timestamp",
+                        "ToState"
+                    ],
+                    "valid_context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID"
+                    ]
+                }
+            ]
+        },
+        "invalid_repair_config_raw": null,
+        "invalid_repair_config_normalized": null,
+        "invalid_repair_validation_report": null,
+        "uncovered_leaf_paths_before": [
+            "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[]"
+        ],
+        "coverage_repair_config_raw": {
+            "schema_family": "machine_log",
+            "record_groups": [
+                {
+                    "record_type": "process_step",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProductionOrder.RecipeID",
+                        "FabricationRecord.ProductionOrder.OperatorID"
+                    ],
+                    "field_paths": [
+                        "@stepName",
+                        "@stepSeq",
+                        "StepStart",
+                        "StepEnd",
+                        "StepOutcome"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "fault_event",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@faultID",
+                        "@seq",
+                        "AffectedSensor",
+                        "AutoAction",
+                        "Description",
+                        "FaultCode",
+                        "LotImpact",
+                        "MeasuredValue",
+                        "SetpointValue",
+                        "Severity",
+                        "Timestamp",
+                        "Unit"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@sensor",
+                        "@timestamp",
+                        "@unit",
+                        "@value"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_transition",
+                    "path": "FabricationRecord.EquipmentStateTransitions.Transition[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID"
+                    ],
+                    "field_paths": [
+                        "@seq",
+                        "FaultReference",
+                        "FromState",
+                        "InitiatedBy",
+                        "Timestamp",
+                        "ToState"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "process_step_setpoint",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@name",
+                        "@value"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "coverage_repair_config_normalized": {
+            "schema_family": "machine_log",
+            "record_groups": [
+                {
+                    "record_type": "process_step",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProductionOrder.RecipeID",
+                        "FabricationRecord.ProductionOrder.OperatorID"
+                    ],
+                    "field_paths": [
+                        "@stepName",
+                        "@stepSeq",
+                        "StepStart",
+                        "StepEnd",
+                        "StepOutcome"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "fault_event",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].FaultEvents.Fault[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@faultID",
+                        "@seq",
+                        "AffectedSensor",
+                        "AutoAction",
+                        "Description",
+                        "FaultCode",
+                        "LotImpact",
+                        "MeasuredValue",
+                        "SetpointValue",
+                        "Severity",
+                        "Timestamp",
+                        "Unit"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "sensor_reading",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].SensorTrace.Reading[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@sensor",
+                        "@timestamp",
+                        "@unit",
+                        "@value"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "equipment_state_transition",
+                    "path": "FabricationRecord.EquipmentStateTransitions.Transition[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.@createdAt",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID"
+                    ],
+                    "field_paths": [
+                        "@seq",
+                        "FaultReference",
+                        "FromState",
+                        "InitiatedBy",
+                        "Timestamp",
+                        "ToState"
+                    ],
+                    "where": null
+                },
+                {
+                    "record_type": "process_step_setpoint",
+                    "path": "FabricationRecord.ProcessSequence.ProcessStep[].Setpoints.Setpoint[]",
+                    "context_paths": [
+                        "FabricationRecord.@recordID",
+                        "FabricationRecord.Equipment.EquipmentID",
+                        "FabricationRecord.ProductionOrder.LotID",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepName",
+                        "FabricationRecord.ProcessSequence.ProcessStep[].@stepSeq"
+                    ],
+                    "field_paths": [
+                        "@name",
+                        "@value"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "coverage_repair_validation_report": null,
+        "uncovered_leaf_paths_after": []
+    }
+}

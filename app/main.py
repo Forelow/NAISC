@@ -14,6 +14,7 @@ from ai.structure_agent import detect_structure_with_agent
 from parser.generic_structured_parser import parse_with_structure_config
 from structured.json.structure_builder import build_json_parse_spec
 from structured.csv.reader import load_csv_rows
+from structured.csv.reader import load_csv_with_diagnostics
 from structured.csv.structure_builder import build_csv_parse_spec
 from readers.json_reader import load_json_file, summarize_json_structure
 from structured.xml.reader import load_xml_file
@@ -67,7 +68,9 @@ def run_pipeline(file_path: str) -> str:
         result_payload["agent_debug"] = agent_debug
         result_payload["parsed_result"] = parsed_result
     elif detection.format_guess == "csv":
-        rows = load_csv_rows(file_info["raw_path"])
+        csv_result = load_csv_with_diagnostics(file_info["raw_path"])
+        rows = csv_result.rows
+
         parse_spec = build_csv_parse_spec(rows)
         parsed_result = parse_with_structure_config(rows, parse_spec)
 
@@ -75,11 +78,14 @@ def run_pipeline(file_path: str) -> str:
             "format": "csv",
             "top_level_type": "list",
             "row_count": len(rows),
-            "columns": list(rows[0].keys()) if rows else [],
+            "columns": csv_result.header,
+            "delimiter": csv_result.delimiter,
         }
         result_payload["structure_config"] = parse_spec.to_dict()
         result_payload["agent_debug"] = {
-            "final_source": "deterministic_csv_builder"
+            "final_source": "deterministic_csv_builder",
+            "csv_warnings": csv_result.warnings,
+            "malformed_row_numbers": csv_result.malformed_row_numbers,
         }
         result_payload["parsed_result"] = parsed_result
     elif detection.format_guess == "xml":
@@ -104,5 +110,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorC.csv")
-    run_pipeline("data/synthetic_logs/vendorD.csv")
+    run_pipeline("data/synthetic_logs/vendorB.xml")

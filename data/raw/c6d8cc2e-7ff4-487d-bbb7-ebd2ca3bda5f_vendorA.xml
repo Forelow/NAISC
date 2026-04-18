@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EventLog
+  toolID="EQP_CVD_10"
+  toolType="CVD"
+  lotID="LOT_0240"
+  recipeID="CVD_SiN_RCP_002"
+  logStart="2026-04-13T07:00:00Z"
+  logEnd="2026-04-13T09:30:00Z"
+  schemaVersion="4.0"
+  generatedBy="CVDController_v7.1">
+
+  <Event id="1"  ts="2026-04-13T07:00:00Z" type="STATE"   tool="EQP_CVD_10" prevSt="OFFLINE"    currSt="IDLE"       op="OPR_060" msg="System brought online"/>
+  <Event id="2"  ts="2026-04-13T07:05:00Z" type="STATE"   tool="EQP_CVD_10" prevSt="IDLE"       currSt="SETUP"      op="OPR_060" msg="Lot LOT_0240 loaded"/>
+  <Event id="3"  ts="2026-04-13T07:10:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="PumpDown"     seq="1" action="START" target_Pa="0.10"/>
+  <Event id="4"  ts="2026-04-13T07:10:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="5.20"   unit="Pa"   step="PumpDown"/>
+  <Event id="5"  ts="2026-04-13T07:10:10Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="2.80"   unit="Pa"   step="PumpDown"/>
+  <Event id="6"  ts="2026-04-13T07:10:20Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="1.10"   unit="Pa"   step="PumpDown"/>
+  <Event id="7"  ts="2026-04-13T07:10:30Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="0.40"   unit="Pa"   step="PumpDown"/>
+  <Event id="8"  ts="2026-04-13T07:10:40Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="0.12"   unit="Pa"   step="PumpDown"/>
+  <Event id="9"  ts="2026-04-13T07:10:50Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="0.10"   unit="Pa"   step="PumpDown"/>
+  <Event id="10" ts="2026-04-13T07:11:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="PumpDown"     seq="1" action="END"   result="PASS" dur_s="60"/>
+  <Event id="11" ts="2026-04-13T07:11:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="TempRamp"     seq="2" action="START" target_C="780"/>
+  <Event id="12" ts="2026-04-13T07:11:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="200.0"  unit="C"    step="TempRamp"/>
+  <Event id="13" ts="2026-04-13T07:20:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="380.5"  unit="C"    step="TempRamp"/>
+  <Event id="14" ts="2026-04-13T07:30:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="560.2"  unit="C"    step="TempRamp"/>
+  <Event id="15" ts="2026-04-13T07:40:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="720.1"  unit="C"    step="TempRamp"/>
+  <Event id="16" ts="2026-04-13T07:48:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="779.8"  unit="C"    step="TempRamp"/>
+  <Event id="17" ts="2026-04-13T07:49:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="TempRamp"     seq="2" action="END"   result="PASS" dur_s="2280"/>
+  <Event id="18" ts="2026-04-13T07:49:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="Deposition"   seq="3" action="START" target_C="780" sih4_sccm="80" n2_sccm="300" target_A="2000"/>
+  <Event id="19" ts="2026-04-13T07:49:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="780.2"  unit="C"    step="Deposition"/>
+  <Event id="20" ts="2026-04-13T07:49:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="0.08"   unit="Pa"   step="Deposition"/>
+  <Event id="21" ts="2026-04-13T08:00:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="780.5"  unit="C"    step="Deposition"/>
+  <Event id="22" ts="2026-04-13T08:00:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="PRESS_C1"   val="0.08"   unit="Pa"   step="Deposition"/>
+  <Event id="23" ts="2026-04-13T08:10:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="782.0"  unit="C"    step="Deposition"/>
+  <Event id="24" ts="2026-04-13T08:15:00Z" type="ALARM"   tool="EQP_CVD_10" wafer="WFR_0240"    code="CVD_T_HIGH"   sev="WARNING" val="785.2" unit="C" limit="785.0" msg="Deposition temp at upper warning limit" step="Deposition"/>
+  <Event id="25" ts="2026-04-13T08:20:00Z" type="SENSOR"  tool="EQP_CVD_10" wafer="WFR_0240"    sensor="TEMP_C1"    val="781.0"  unit="C"    step="Deposition"/>
+  <Event id="26" ts="2026-04-13T08:49:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="Deposition"   seq="3" action="END"   result="PASS_WITH_WARNING" dur_s="3600" measured_A="2005"/>
+  <Event id="27" ts="2026-04-13T08:49:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="Cooldown"     seq="4" action="START" target_C="200"/>
+  <Event id="28" ts="2026-04-13T09:09:00Z" type="STEP"    tool="EQP_CVD_10" wafer="WFR_0240"    step="Cooldown"     seq="4" action="END"   result="PASS" dur_s="1200"/>
+  <Event id="29" ts="2026-04-13T09:09:00Z" type="STATE"   tool="EQP_CVD_10" prevSt="PROCESSING" currSt="IDLE"       op=""    msg="WFR_0240 complete"/>
+
+</EventLog>
