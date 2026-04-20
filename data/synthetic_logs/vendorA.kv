@@ -1,0 +1,39 @@
+
+
+datetime=2026-04-13T10:00:00Z tool=ALD_05 event=EQUIP_STATE prev_state=OFFLINE curr_state=STANDBY initiated_by=SYSTEM reason=boot_complete
+datetime=2026-04-13T10:02:00Z tool=ALD_05 event=EQUIP_STATE prev_state=STANDBY curr_state=IDLE initiated_by=OPR_121 reason=self_check_passed
+datetime=2026-04-13T10:03:00Z tool=ALD_05 event=RECIPE_DEFINE recipe=ALD_HfO2_V3 rev=2.0 cycles=200 cycle_time_s=4 target_thickness_A=25 max_temp_C=300
+datetime=2026-04-13T10:03:01Z tool=ALD_05 event=RECIPE_STEP recipe=ALD_HfO2_V3 step_name=Surface_Prep seq=1 purge_gas=N2 purge_flow_sccm=200 duration_s=60
+datetime=2026-04-13T10:03:02Z tool=ALD_05 event=RECIPE_STEP recipe=ALD_HfO2_V3 step_name=ALD_Cycle seq=2 precursor_A=HfCl4 pulse_A_ms=200 purge_A_ms=5000 precursor_B=H2O pulse_B_ms=200 purge_B_ms=5000 repeat=200
+datetime=2026-04-13T10:03:03Z tool=ALD_05 event=RECIPE_STEP recipe=ALD_HfO2_V3 step_name=Post_Anneal seq=3 anneal_temp_C=400 anneal_gas=N2 duration_s=1800
+datetime=2026-04-13T10:04:00Z tool=ALD_05 event=LOT_START lot=LOT_0330 wafer_qty=5 recipe=ALD_HfO2_V3 op=OPR_121
+datetime=2026-04-13T10:04:01Z tool=ALD_05 event=EQUIP_STATE prev_state=IDLE curr_state=PROCESSING lot=LOT_0330
+datetime=2026-04-13T10:04:10Z tool=ALD_05 event=WAFER_LOAD lot=LOT_0330 wafer=WFR_0330 slot=1
+datetime=2026-04-13T10:04:15Z tool=ALD_05 event=STEP_START lot=LOT_0330 wafer=WFR_0330 step=Surface_Prep seq=1
+datetime=2026-04-13T10:04:15Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=Surface_Prep reactor_temp_C=300.1 chamber_press_Pa=0.00665 n2_flow_sccm=200.0
+datetime=2026-04-13T10:04:45Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=Surface_Prep reactor_temp_C=300.2 chamber_press_Pa=0.00664 n2_flow_sccm=200.1
+datetime=2026-04-13T10:05:15Z tool=ALD_05 event=STEP_END lot=LOT_0330 wafer=WFR_0330 step=Surface_Prep seq=1 dur_s=60 result=PASS
+datetime=2026-04-13T10:05:16Z tool=ALD_05 event=STEP_START lot=LOT_0330 wafer=WFR_0330 step=ALD_Cycle seq=2 planned_cycles=200
+datetime=2026-04-13T10:05:16Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=ALD_Cycle reactor_temp_C=300.0 chamber_press_Pa=0.00665 cycle_no=1 precursor=HfCl4 pulse_actual_ms=200
+datetime=2026-04-13T10:10:16Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=ALD_Cycle reactor_temp_C=300.1 chamber_press_Pa=0.00666 cycle_no=75 precursor=H2O pulse_actual_ms=200
+datetime=2026-04-13T10:15:16Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=ALD_Cycle reactor_temp_C=300.3 chamber_press_Pa=0.00665 cycle_no=150 precursor=HfCl4 pulse_actual_ms=200
+datetime=2026-04-13T10:16:00Z tool=ALD_05 event=ALARM alarm_code=ALD_TEMP_HIGH severity=WARNING wafer=WFR_0330 step=ALD_Cycle reactor_temp_C=308.5 limit_C=305.0 msg="Reactor temperature above upper warning limit" cycle_no=162
+datetime=2026-04-13T10:16:30Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=ALD_Cycle reactor_temp_C=304.2 chamber_press_Pa=0.00665 cycle_no=170 precursor=HfCl4 pulse_actual_ms=200
+datetime=2026-04-13T10:18:16Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=ALD_Cycle reactor_temp_C=300.1 chamber_press_Pa=0.00665 cycle_no=200 precursor=H2O pulse_actual_ms=200
+datetime=2026-04-13T10:18:17Z tool=ALD_05 event=STEP_END lot=LOT_0330 wafer=WFR_0330 step=ALD_Cycle seq=2 dur_s=781 cycles_completed=200 result=PASS_WITH_WARNING
+datetime=2026-04-13T10:18:18Z tool=ALD_05 event=STEP_START lot=LOT_0330 wafer=WFR_0330 step=Post_Anneal seq=3 target_temp_C=400
+datetime=2026-04-13T10:18:18Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=Post_Anneal reactor_temp_C=300.2 chamber_press_Pa=0.00665 n2_flow_sccm=200.0
+datetime=2026-04-13T10:28:18Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=Post_Anneal reactor_temp_C=400.1 chamber_press_Pa=0.00665 n2_flow_sccm=200.0
+datetime=2026-04-13T10:48:18Z tool=ALD_05 event=STEP_END lot=LOT_0330 wafer=WFR_0330 step=Post_Anneal seq=3 dur_s=1800 result=PASS
+datetime=2026-04-13T10:48:19Z tool=ALD_05 event=WAFER_RESULT lot=LOT_0330 wafer=WFR_0330 slot=1 final_result=PASS thickness_A=24.8 uniformity_pct=1.1
+datetime=2026-04-13T10:48:20Z tool=ALD_05 event=WAFER_LOAD lot=LOT_0330 wafer=WFR_0331 slot=2
+datetime=2026-04-13T10:48:25Z tool=ALD_05 event=STEP_START lot=LOT_0330 wafer=WFR_0331 step=Surface_Prep seq=1
+datetime=2026-04-13T10:48:25Z tool=ALD_05 event=SENSOR wafer=WFR_0331 step=Surface_Prep reactor_temp_C=300.0 chamber_press_Pa=0.00665 n2_flow_sccm=200.0
+datetime=2026-04-13T10:49:25Z tool=ALD_05 event=STEP_END lot=LOT_0330 wafer=WFR_0331 step=Surface_Prep seq=1 dur_s=60 result=PASS
+datetime=2026-04-13T10:49:26Z tool=ALD_05 event=STEP_START lot=LOT_0330 wafer=WFR_0331 step=ALD_Cycle seq=2 planned_cycles=200
+datetime=2026-04-13T10:55:00Z tool=ALD_05 event=ALARM alarm_code=ALD_PRESS_LOW severity=ERROR wafer=WFR_0331 step=ALD_Cycle chamber_press_Pa=0.00200 nominal_Pa=0.00665 msg="Chamber pressure critically low — possible leak" cycle_no=88
+datetime=2026-04-13T10:55:01Z tool=ALD_05 event=STEP_ABORT lot=LOT_0330 wafer=WFR_0331 step=ALD_Cycle seq=2 elapsed_s=335 reason=PRESS_CRITICAL cycles_done=88
+datetime=2026-04-13T10:55:02Z tool=ALD_05 event=EQUIP_STATE prev_state=PROCESSING curr_state=FAULTED lot=LOT_0330 fault=ALD_PRESS_LOW
+datetime=2026-04-13T10:55:03Z tool=ALD_05 event=WAFER_RESULT lot=LOT_0330 wafer=WFR_0331 slot=2 final_result=ABORT reason=PRESS_CRITICAL
+datetime=2026-04-13T11:10:00Z tool=ALD_05 event=ALARM_CLR alarm_code=ALD_PRESS_LOW cleared_by=ENG_081 action="Leak check performed, O-ring replaced at chamber lid"
+datetime=2026-04-13T11:10:01Z tool=ALD_05 event=EQUIP_STATE prev_state=FAULTED curr_state=IDLE cleared_by=ENG_081

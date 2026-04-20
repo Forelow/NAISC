@@ -1,0 +1,59 @@
+DIFFUSION FURNACE LOG - DIFF_04
+Date: 13-Apr-26 | AM Shift | Op: K. Selvam (OPR_141)
+Tool: DIFF_04 | Recipe in use: DIFF_N2_ANNEAL_850C
+
+--- STARTUP ---
+0600: Tool IDLE from night shift. No active alarms. Tube temp stable at 200C (standby). Last boat load: 12-Apr-26 PM shift.
+0602: Pre-run checks OK. N2 purge active, O2 <0.1 ppm confirmed by O2 analyser.
+0605: Loaded recipe DIFF_N2_ANNEAL_850C (ver 2.3). Recipe params:
+      Ramp: 200→850C @ 15C/min
+      Soak: 850C x 60 min, N2 = 15 slm
+      Cool: 850→200C @ natural + N2 assist
+      Total est. cycle time: ~110 min
+
+--- LOT_0360 ---
+0610: LOT_0360 loaded. 50 wfrs. Boat inserted at Z1–Z5. Recipe DIFF_N2_ANNEAL_850C.
+0610: Equip state → PROCESSING. Ramp started.
+0610: Sensor: Z1=200C Z2=200C Z3=200C Z4=200C Z5=200C | N2=15 slm
+0625: Sensor: Z1=425C Z2=420C Z3=418C Z4=415C Z5=412C | N2=15 slm (ramp in progress)
+0640: Sensor: Z1=650C Z2=645C Z3=643C Z4=638C Z5=633C | N2=15 slm
+0655: Sensor: Z1=848C Z2=844C Z3=841C Z4=839C Z5=835C | N2=15 slm
+0657: Ramp complete. All zones within ±5C of 850C setpoint. Soak started.
+0657: Sensor: Z1=850C Z2=848C Z3=847C Z4=845C Z5=843C | N2=15 slm
+0710: Sensor: Z1=850C Z2=850C Z3=849C Z4=848C Z5=846C | N2=15 slm — stable
+0730: Sensor: Z1=850C Z2=850C Z3=849C Z4=848C Z5=847C | N2=15 slm
+0745: WARN: Z5 temp deviation. Reading: Z5=839C (setpoint 850C, deviation 11C, threshold 10C). Auto-adjusted heater Z5 setpoint.
+0750: Z5 recovered to 847C. Still 3C below nominal but within SOP tolerance. Noted.
+0757: Soak complete (60 min). All zones 848–850C. Soak passed.
+0757: Cooling started. N2 continued at 15 slm.
+0830: Sensor: Z1=600C Z2=598C Z3=597C Z4=595C Z5=590C | N2=15 slm
+0900: Sensor: Z1=350C Z2=349C Z3=348C Z4=347C Z5=344C | N2=15 slm
+0930: Sensor: Z1=200C Z2=200C Z3=199C Z4=199C Z5=197C | N2=15 slm
+0935: Boat unloaded. LOT_0360 complete. Result: PASS (Z5 deviation noted but within SOP).
+      Summary: 50 wfrs processed, 50 PASS, 0 FAIL, 0 HOLD.
+
+--- LOT_0361 ---
+0940: LOT_0361 loaded. 50 wfrs. Same recipe.
+0940: Ramp started.
+0955: Sensor: Z1=425C Z2=422C Z3=420C Z4=418C Z5=414C | N2=15 slm
+1010: Sensor: Z1=652C Z2=648C Z3=645C Z4=641C Z5=638C | N2=15 slm
+1025: Sensor: Z1=850C Z2=849C Z3=847C Z4=845C Z5=841C | N2=15 slm
+1025: Ramp complete. Soak started.
+1025: Sensor (soak start): Z1=850C Z2=849C Z3=847C Z4=846C Z5=843C | N2=15 slm
+1055: Sensor (mid-soak): Z1=851C Z2=850C Z3=849C Z4=848C Z5=845C | N2=15 slm
+1115: Sensor (soak end, 50min mark): Z1=850C Z2=850C Z3=849C Z4=848C Z5=846C | N2=15 slm
+
+1120: ALARM - Z3 HEATER FAILURE. Z3 temp: 831C and falling. Heater fault code: HTR_OPEN_CIRCUIT.
+1120: Auto-action: HALT PROCESS. Equip state → FAULTED.
+1120: Lot LOT_0361 placed on hold. Partial soak achieved: ~55 min of 60 min.
+1120: On-call eng notified (ENG_091).
+
+1135: ENG_091 on site. Confirmed Z3 heater element failure. Replacement required.
+1200: Heater element Z3 replaced (old: HTR_Z3_0022, new: HTR_Z3_0031).
+1220: Temp verification: all zones ramped to 850C, held 5 min — all zones within ±2C. Heater confirmed OK.
+1230: ENG_091 disposition: LOT_0361 — 50 wfrs on hold. Need thermal budget calc to determine if 55/60 min soak is acceptable. Pending MRB decision.
+1230: Tool fault cleared. Equip state → IDLE.
+
+--- SHIFT CLOSE ---
+1355: Tool in IDLE. LOT_0361 on engineering hold (pending MRB). No active alarms. New Z3 heater running normally.
+1400: Handover to PM shift: A. Ramachandran (OPR_151). Briefed on LOT_0361 hold status and Z3 heater replacement.

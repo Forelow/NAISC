@@ -1,0 +1,63 @@
+SPUTTER DEPOSITION TOOL - PVD_03
+Shift Log | Date: 13-Apr-2026 | Shift: Night (2200-0600)
+Logged by: S. Muthu (Shift Supervisor)
+==================================================
+
+2200h - PVD_03 handed over from PM shift. Tool in IDLE. Previous shift noted intermittent arc events on TiN target (target age: 87%). PM shift cleared arcs, no further action taken.
+
+2210h - Loaded lot LOT_0080 (25 wfrs). Recipe: PVD_TiN_BARRIER_V3. Eqp status OK before run.
+
+2212h - Wafer 1 (W001) loaded. Pre-dep pump-down started.
+  Pump-down start pres: 5.2e-4 Pa
+  Target base pressure: < 5.0e-6 Pa
+
+2225h - W001 base pressure reached 3.8e-6 Pa. Within spec. Deposition started.
+  Dep params: Ar flow = 30 sccm, N2 flow = 10 sccm, DC power = 3000 W, temp = 250 degC
+
+2235h - W001 deposition complete. Film thickness (in-situ): 520 A. Target: 500 A +/- 30 A. PASS.
+
+2237h - W002 loaded. Pump-down OK (base 4.1e-6 Pa). Dep started.
+
+2247h - W002 dep complete. Thickness: 498 A. PASS.
+
+2249h - W003 loaded. Pump-down to 4.0e-6 Pa. Dep started.
+
+2252h - Arc event detected on TiN target during W003 dep. System auto-suppressed. Arc count this session: 1.
+  DC power dipped from 3000 W to 2750 W for ~2s then recovered.
+
+2259h - W003 dep complete. Thickness: 485 A. Marginally low but within tolerance. PASS.
+
+2301h - W004 loaded. Second arc event during pump-down phase. Arc count: 2.
+
+2303h - Third arc event. Arc count: 3. Arc frequency threshold (3 arcs in 30 min) reached.
+  Per SOP, deposition halted. Lot LOT_0080 put on hold at W004.
+  Notified on-call engineer (Eng. Priya R.) at 2304h.
+
+2315h - Eng. Priya R. on-site. Inspected target. Target surface shows micro-nodule formation consistent with late-life arcing. Decision: replace target before resuming.
+
+2330h - Target replacement started. Old target removed (serial: TGT_TiN_0044, age: 87%, arc count: 412 lifetime).
+
+0010h - New target installed (serial: TGT_TiN_0051, age: 0%). Break-in procedure started per SOP PVD-BRK-001.
+  Break-in: 30 min at 30% power, 30 min at 60% power, 10 min at 100% power.
+
+0110h - Break-in complete. Sputter rate verified: 52 A/min (target: 50 +/- 5 A/min). OK.
+
+0115h - Lot LOT_0080 resumed from W004. Eqp state: RUNNING.
+
+0117h - W004 dep started with new target. No arcs.
+
+0127h - W004 dep complete. Thickness: 503 A. PASS.
+
+0128h - Subsequent wafers W005 through W025 processed without incident.
+  All thicknesses within 500 +/- 25 A.
+  No arc events on new target.
+
+0530h - Lot LOT_0080 complete. Final summary:
+  - W001 to W003: PASS (old target, pre-replacement)
+  - W004 to W025: PASS (new target)
+  - W003: borderline thickness flagged for review (485 A)
+  - No wafers scrapped.
+  - Total target arc events this shift: 3 (all on old target)
+
+0540h - Tool returned to IDLE. LOT_0080 unloaded and staged for next step.
+0550h - Shift handover notes written. AM shift engineer Lim K.H. briefed at 0558h.

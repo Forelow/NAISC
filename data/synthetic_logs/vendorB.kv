@@ -1,0 +1,45 @@
+// CMP_BENCH_07 Process Log | System: PolishPro v4.0 | Generated: 2026-04-13
+// Format: [TIMESTAMP] | EVT_TYPE | key:value, key:value, ...
+// Note: timestamp is local time (UTC+8). Numeric values carry no unit suffix — see header.
+// Units: pressure=Pa, temperature=degC, force=N, speed=rpm, flow=mlpm, thickness=angstrom
+
+[2026-04-13 11:00:00.000] | SYS_INIT | sw_ver:4.0.1, hw_sn:SN_CMP_007, site:FAB2, bay:F3
+[2026-04-13 11:00:05.000] | EQUIP_CHG | from_st:OFFLINE, to_st:STANDBY, trig:BOOT, op:SYSTEM
+[2026-04-13 11:02:00.000] | EQUIP_CHG | from_st:STANDBY, to_st:READY, trig:SELF_TEST_OK, op:OPR_131
+[2026-04-13 11:03:00.000] | PROC_SETUP | recipe:CMP_W2_OX_STD, ver:1.8, op:OPR_131, platen:P1
+[2026-04-13 11:03:01.000] | PROC_STEP_DEF | recipe:CMP_W2_OX_STD, step:PreCondition, seq:1, down_force:28, platen_rpm:93, carrier_rpm:0, slurry:NONE, duration:30
+[2026-04-13 11:03:02.000] | PROC_STEP_DEF | recipe:CMP_W2_OX_STD, step:PolishMain, seq:2, down_force:28, platen_rpm:93, carrier_rpm:87, slurry:SiO2_STD, slurry_flow:200, duration:300, target_removal:3000
+[2026-04-13 11:03:03.000] | PROC_STEP_DEF | recipe:CMP_W2_OX_STD, step:BuffPolish, seq:3, down_force:14, platen_rpm:60, carrier_rpm:60, slurry:SiO2_LIGHT, slurry_flow:100, duration:60
+[2026-04-13 11:03:04.000] | PROC_STEP_DEF | recipe:CMP_W2_OX_STD, step:PostRinse, seq:4, down_force:0, platen_rpm:0, carrier_rpm:0, di_flow:500, duration:60
+[2026-04-13 11:04:00.000] | LOT_RCV | lot:LOT_0340, qty:10, recipe:CMP_W2_OX_STD, op:OPR_131
+[2026-04-13 11:04:01.000] | EQUIP_CHG | from_st:READY, to_st:PROCESSING, trig:LOT_START, lot:LOT_0340
+[2026-04-13 11:04:10.000] | WFR_IN | lot:LOT_0340, wfr:WFR_0340, slot:1
+[2026-04-13 11:04:15.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0340, step:PreCondition, seq:1
+[2026-04-13 11:04:15.000] | SENS_RD | wfr:WFR_0340, step:PreCondition, platen_tmp:38.2, slurry_flow:0, down_force:28.0, platen_spd:93, carrier_spd:0
+[2026-04-13 11:04:45.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0340, step:PreCondition, seq:1, dur:30, outcome:OK
+[2026-04-13 11:04:46.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0340, step:PolishMain, seq:2
+[2026-04-13 11:04:46.000] | SENS_RD | wfr:WFR_0340, step:PolishMain, platen_tmp:38.5, slurry_flow:200, down_force:28.1, platen_spd:93, carrier_spd:87, removal_rate:1850
+[2026-04-13 11:07:46.000] | SENS_RD | wfr:WFR_0340, step:PolishMain, platen_tmp:39.8, slurry_flow:200, down_force:28.0, platen_spd:93, carrier_spd:87, removal_rate:1840
+[2026-04-13 11:09:46.000] | FAULT_EVT | code:SLURRY_HIFLOW, sev:WARN, wfr:WFR_0340, step:PolishMain, slurry_flow:245, nominal:200, dev_pct:22.5, msg:Slurry flow above upper control limit
+[2026-04-13 11:09:50.000] | SENS_RD | wfr:WFR_0340, step:PolishMain, platen_tmp:40.1, slurry_flow:220, down_force:28.0, platen_spd:93, carrier_spd:87, removal_rate:1870
+[2026-04-13 11:09:55.000] | FAULT_CLR | code:SLURRY_HIFLOW, wfr:WFR_0340, slurry_flow:202, by:AUTO
+[2026-04-13 11:09:46.000] | SENS_RD | wfr:WFR_0340, step:PolishMain, platen_tmp:40.2, slurry_flow:201, down_force:28.0, platen_spd:93, carrier_spd:87, removal_rate:1845
+[2026-04-13 11:09:46.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0340, step:PolishMain, seq:2, dur:300, outcome:OK, removal_A:3005
+[2026-04-13 11:09:47.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0340, step:BuffPolish, seq:3
+[2026-04-13 11:09:47.000] | SENS_RD | wfr:WFR_0340, step:BuffPolish, platen_tmp:39.5, slurry_flow:100, down_force:14.0, platen_spd:60, carrier_spd:60, removal_rate:420
+[2026-04-13 11:10:47.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0340, step:BuffPolish, seq:3, dur:60, outcome:OK, removal_A:420
+[2026-04-13 11:10:48.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0340, step:PostRinse, seq:4
+[2026-04-13 11:11:48.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0340, step:PostRinse, seq:4, dur:60, outcome:OK
+[2026-04-13 11:11:49.000] | WFR_OUT | lot:LOT_0340, wfr:WFR_0340, slot:1, result:PASS, total_removal_A:3425
+[2026-04-13 11:11:50.000] | WFR_IN | lot:LOT_0340, wfr:WFR_0341, slot:2
+[2026-04-13 11:11:55.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0341, step:PreCondition, seq:1
+[2026-04-13 11:12:25.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0341, step:PreCondition, seq:1, dur:30, outcome:OK
+[2026-04-13 11:12:26.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0341, step:PolishMain, seq:2
+[2026-04-13 11:12:26.000] | SENS_RD | wfr:WFR_0341, step:PolishMain, platen_tmp:39.0, slurry_flow:200, down_force:28.0, platen_spd:93, carrier_spd:87, removal_rate:1840
+[2026-04-13 11:17:26.000] | FAULT_EVT | code:PAD_WEAR, sev:WARN, wfr:WFR_0341, step:PolishMain, removal_rate:1620, nominal:1840, dev_pct:11.9, msg:Removal rate below lower warning limit — pad may need conditioning
+[2026-04-13 11:17:26.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0341, step:PolishMain, seq:2, dur:300, outcome:WARN, removal_A:2890
+[2026-04-13 11:17:27.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0341, step:BuffPolish, seq:3
+[2026-04-13 11:18:27.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0341, step:BuffPolish, seq:3, dur:60, outcome:OK, removal_A:380
+[2026-04-13 11:18:28.000] | STEP_BGN | lot:LOT_0340, wfr:WFR_0341, step:PostRinse, seq:4
+[2026-04-13 11:19:28.000] | STEP_FIN | lot:LOT_0340, wfr:WFR_0341, step:PostRinse, seq:4, dur:60, outcome:OK
+[2026-04-13 11:19:29.000] | WFR_OUT | lot:LOT_0340, wfr:WFR_0341, slot:2, result:WARN_HOLD, total_removal_A:3270, hold_reason:LOW_REMOVAL_RATE

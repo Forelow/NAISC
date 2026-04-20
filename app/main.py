@@ -19,6 +19,9 @@ from structured.csv.structure_builder import build_csv_parse_spec
 from readers.json_reader import load_json_file, summarize_json_structure
 from structured.xml.reader import load_xml_file
 from structured.xml.structure_builder import build_xml_parse_spec
+from semi_structured.reader import load_text_file
+from semi_structured.family_detector import detect_semi_structured_family
+from semi_structured.parser import parse_semi_structured
 
 
 
@@ -99,6 +102,34 @@ def run_pipeline(file_path: str) -> str:
         result_payload["structure_config"] = structure_config
         result_payload["agent_debug"] = agent_debug
         result_payload["parsed_result"] = parsed_result
+    elif routing.next_route == "semi_structured_parser":
+        text_payload = load_text_file(file_info["raw_path"])
+
+        if detection.format_guess == "syslog_like_text":
+            family_info = {
+                "family": "syslog_like_log",
+                "confidence": detection.confidence,
+                "notes": "Upstream detector identified syslog-like text",
+            }
+        else:
+            family_info = detect_semi_structured_family(text_payload)
+
+        parsed_result = parse_semi_structured(text_payload, family_info)
+
+        result_payload["structure_summary"] = {
+            "format": "text",
+            "line_count": len(text_payload["lines"]),
+            "family_info": family_info,
+        }
+        result_payload["structure_config"] = {
+            "family": family_info["family"],
+            "confidence": family_info["confidence"],
+            "notes": family_info["notes"],
+        }
+        result_payload["parsed_result"] = parsed_result
+        result_payload["agent_debug"] = {
+            "final_source": "deterministic_semi_structured_parser"
+        }
     else:
         result_payload["parsed_result"] = {
             "status": "not_implemented_for_this_format_yet"
@@ -110,4 +141,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorB.xml")
+    run_pipeline("data/synthetic_logs/vendorA.syslog")
