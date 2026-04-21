@@ -1,3 +1,4 @@
+
 Apr 13 06:00:00 TOOL_CVD_20 kernel.info: [SYS_BOOT] System initialised sw_ver=5.1.2 hw_rev=B uptime_s=0
 Apr 13 06:00:05 TOOL_CVD_20 local0.notice: [STATE] prev=OFFLINE curr=STANDBY trigger=SYSTEM_BOOT
 Apr 13 06:02:00 TOOL_CVD_20 local0.notice: [STATE] prev=STANDBY curr=IDLE trigger=SELF_CHECK_PASS op=OPR_091

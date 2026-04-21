@@ -22,7 +22,8 @@ from structured.xml.structure_builder import build_xml_parse_spec
 from semi_structured.reader import load_text_file
 from semi_structured.family_detector import detect_semi_structured_family
 from semi_structured.parser import parse_semi_structured
-
+from semi_structured.spec_builder import build_semi_structured_parse_spec
+from semi_structured.family_detector import detect_semi_structured_family
 
 
 OUTPUT_DIR = Path("data/processed")
@@ -105,31 +106,23 @@ def run_pipeline(file_path: str) -> str:
     elif routing.next_route == "semi_structured_parser":
         text_payload = load_text_file(file_info["raw_path"])
 
-        if detection.format_guess == "syslog_like_text":
-            family_info = {
-                "family": "syslog_like_log",
-                "confidence": detection.confidence,
-                "notes": "Upstream detector identified syslog-like text",
-            }
-        else:
-            family_info = detect_semi_structured_family(text_payload)
+        family_info = {
+            "family": "semi_structured_text",
+            "confidence": detection.confidence,
+            "notes": f"Unified semi-structured lane from {detection.format_guess}",
+        }
 
-        parsed_result = parse_semi_structured(text_payload, family_info)
+        parse_spec, agent_debug = build_semi_structured_parse_spec(text_payload, family_info)
+        parsed_result = parse_semi_structured(text_payload, family_info, parse_spec)
 
         result_payload["structure_summary"] = {
             "format": "text",
             "line_count": len(text_payload["lines"]),
             "family_info": family_info,
         }
-        result_payload["structure_config"] = {
-            "family": family_info["family"],
-            "confidence": family_info["confidence"],
-            "notes": family_info["notes"],
-        }
+        result_payload["structure_config"] = parse_spec
         result_payload["parsed_result"] = parsed_result
-        result_payload["agent_debug"] = {
-            "final_source": "deterministic_semi_structured_parser"
-        }
+        result_payload["agent_debug"] = agent_debug
     else:
         result_payload["parsed_result"] = {
             "status": "not_implemented_for_this_format_yet"
@@ -141,4 +134,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorA.syslog")
+    run_pipeline("data/synthetic_logs/vendorC.syslog")

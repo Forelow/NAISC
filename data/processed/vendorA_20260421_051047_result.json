@@ -1,0 +1,976 @@
+{
+    "ingested": {
+        "file_id": "b59a1d87-be8d-440d-a0ff-ba27f96c4f1d",
+        "filename": "vendorA.kv",
+        "extension": ".kv",
+        "size_bytes": 5501,
+        "raw_path": "data\\raw\\b59a1d87-be8d-440d-a0ff-ba27f96c4f1d_vendorA.kv",
+        "ingestion_time": "2026-04-21T05:10:36.805352",
+        "sha256": "18123b22e641c2bfc8efd3501c390ae8d206285fe15320950c1371a7142b2616"
+    },
+    "detection": {
+        "format_guess": "key_value_text",
+        "content_class": "semi_structured_text",
+        "confidence": 0.86,
+        "notes": "Repeated key=value pattern detected",
+        "extension_hint": ".kv",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "key_value_text",
+        "is_supported": true,
+        "parser_family": "semi_structured_parser",
+        "support_status": "supported",
+        "notes": "key_value_text is handled by semi_structured_parser"
+    },
+    "routing": {
+        "next_route": "semi_structured_parser",
+        "processing_mode": "regex_or_rule_parse",
+        "should_attempt_parse": true,
+        "notes": "Known semi-structured text pattern"
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 40,
+        "family_info": {
+            "family": "semi_structured_text",
+            "confidence": 0.86,
+            "notes": "Unified semi-structured lane from key_value_text"
+        }
+    },
+    "structure_config": {
+        "family": "semi_structured_text",
+        "parser_strategy": "llm_spec_with_deterministic_validation",
+        "record_boundary": {
+            "type": "per_line"
+        },
+        "timestamp_styles": [
+            "iso8601"
+        ],
+        "header_layout_candidates": [
+            "tool_token_message"
+        ],
+        "event_extraction_candidates": [
+            "none"
+        ],
+        "payload_candidates": [
+            "space_kv"
+        ],
+        "classification_hints": {
+            "equipment_state": {
+                "event_codes": [
+                    "STATE",
+                    "EQUIP_STATE",
+                    "SYS_BOOT",
+                    "STARTUP",
+                    "SHUTDOWN"
+                ],
+                "required_any_fields": [
+                    "prev",
+                    "curr",
+                    "state",
+                    "from",
+                    "to",
+                    "from_state",
+                    "to_state",
+                    "trigger"
+                ]
+            },
+            "process_parameter_recipe": {
+                "event_codes": [
+                    "RCP_LOAD",
+                    "RCP_PARAM",
+                    "RECIPE",
+                    "RECIPE_STEP",
+                    "LOT_OPEN"
+                ],
+                "required_any_fields": [
+                    "recipe",
+                    "recipe_id",
+                    "name",
+                    "rev",
+                    "parameter",
+                    "setpoint",
+                    "target_temp_C",
+                    "duration_s",
+                    "version"
+                ]
+            },
+            "sensor_reading": {
+                "event_codes": [
+                    "SENSOR",
+                    "TRACE",
+                    "READING",
+                    "MEASURE"
+                ],
+                "required_any_fields": [
+                    "sensor",
+                    "sensor_id",
+                    "value",
+                    "reading",
+                    "temp_C",
+                    "pressure_mTorr",
+                    "base_pres_Pa",
+                    "proc_pres_Pa",
+                    "dep_rate_A_s",
+                    "zone"
+                ]
+            },
+            "fault_event": {
+                "event_codes": [
+                    "WARN",
+                    "WARNING",
+                    "ALARM",
+                    "FAULT",
+                    "FAULT_CLEAR",
+                    "ALARM_CLR",
+                    "ERROR",
+                    "ERR",
+                    "CRITICAL",
+                    "INTERLOCK"
+                ],
+                "required_any_fields": [
+                    "fault",
+                    "fault_code",
+                    "alarm_code",
+                    "code",
+                    "error_code",
+                    "reason"
+                ]
+            },
+            "wafer_processing_sequence": {
+                "event_codes": [
+                    "WAFER",
+                    "STEP",
+                    "STEP_START",
+                    "STEP_END",
+                    "STEP_ABORT",
+                    "WFR_SEQ",
+                    "WF_MOVE",
+                    "ACTION",
+                    "LOAD_COMPLETE",
+                    "UNLOAD_COMPLETE",
+                    "LOT_IN",
+                    "LOT_OUT",
+                    "LOT_RESUME",
+                    "MAINT"
+                ],
+                "required_any_fields": [
+                    "wafer",
+                    "wafer_id",
+                    "wfr",
+                    "step",
+                    "step_name",
+                    "seq",
+                    "action",
+                    "slot",
+                    "lot"
+                ]
+            },
+            "generic_text_record": {
+                "event_codes": [],
+                "required_any_fields": []
+            }
+        },
+        "notes": [
+            "Do not treat this as free text; it is structured key=value content with stable field names.",
+            "Although event is present in the line, it is not a separate non-payload header segment; parse the whole line as space_kv and then read event from the resulting map.",
+            "Observed timestamps use UTC ISO8601 with trailing Z.",
+            "Values appear unquoted and contain no spaces in the sample; underscore is used where multi-word content is needed.",
+            "Numeric values may be integers or decimals and units are encoded in field names, e.g. *_C, *_Pa, *_sccm, *_ms, *_A.",
+            "Useful reusable anchors: datetime, tool, event, lot, wafer, recipe, step/step_name, seq."
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "semi_structured_log",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:3",
+                "data": {
+                    "reason": "boot_complete",
+                    "initiated_by": "SYSTEM",
+                    "curr_state": "STANDBY",
+                    "prev_state": "OFFLINE",
+                    "event": "EQUIP_STATE",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:00:00Z",
+                    "event_code": "EQUIP_STATE",
+                    "event_type": "EQUIP_STATE",
+                    "ts": "2026-04-13T10:00:00Z"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:4",
+                "data": {
+                    "reason": "self_check_passed",
+                    "initiated_by": "OPR_121",
+                    "curr_state": "IDLE",
+                    "prev_state": "STANDBY",
+                    "event": "EQUIP_STATE",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:02:00Z",
+                    "event_code": "EQUIP_STATE",
+                    "event_type": "EQUIP_STATE",
+                    "ts": "2026-04-13T10:02:00Z"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:5",
+                "data": {
+                    "max_temp_C": 300,
+                    "target_thickness_A": 25,
+                    "cycle_time_s": 4,
+                    "cycles": 200,
+                    "rev": 2.0,
+                    "recipe": "ALD_HfO2_V3",
+                    "event": "RECIPE_DEFINE",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:03:00Z",
+                    "event_code": "RECIPE_DEFINE",
+                    "event_type": "RECIPE_DEFINE",
+                    "ts": "2026-04-13T10:03:00Z"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:6",
+                "data": {
+                    "duration_s": 60,
+                    "purge_flow_sccm": 200,
+                    "purge_gas": "N2",
+                    "seq": 1,
+                    "step_name": "Surface_Prep",
+                    "recipe": "ALD_HfO2_V3",
+                    "event": "RECIPE_STEP",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:03:01Z",
+                    "event_code": "RECIPE_STEP",
+                    "event_type": "RECIPE_STEP",
+                    "ts": "2026-04-13T10:03:01Z"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:7",
+                "data": {
+                    "repeat": 200,
+                    "purge_B_ms": 5000,
+                    "pulse_B_ms": 200,
+                    "precursor_B": "H2O",
+                    "purge_A_ms": 5000,
+                    "pulse_A_ms": 200,
+                    "precursor_A": "HfCl4",
+                    "seq": 2,
+                    "step_name": "ALD_Cycle",
+                    "recipe": "ALD_HfO2_V3",
+                    "event": "RECIPE_STEP",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:03:02Z",
+                    "event_code": "RECIPE_STEP",
+                    "event_type": "RECIPE_STEP",
+                    "ts": "2026-04-13T10:03:02Z"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:8",
+                "data": {
+                    "duration_s": 1800,
+                    "anneal_gas": "N2",
+                    "anneal_temp_C": 400,
+                    "seq": 3,
+                    "step_name": "Post_Anneal",
+                    "recipe": "ALD_HfO2_V3",
+                    "event": "RECIPE_STEP",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:03:03Z",
+                    "event_code": "RECIPE_STEP",
+                    "event_type": "RECIPE_STEP",
+                    "ts": "2026-04-13T10:03:03Z"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:9",
+                "data": {
+                    "op": "OPR_121",
+                    "recipe": "ALD_HfO2_V3",
+                    "wafer_qty": 5,
+                    "lot": "LOT_0330",
+                    "event": "LOT_START",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:04:00Z",
+                    "event_code": "LOT_START",
+                    "event_type": "LOT_START",
+                    "ts": "2026-04-13T10:04:00Z"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:10",
+                "data": {
+                    "lot": "LOT_0330",
+                    "curr_state": "PROCESSING",
+                    "prev_state": "IDLE",
+                    "event": "EQUIP_STATE",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:04:01Z",
+                    "event_code": "EQUIP_STATE",
+                    "event_type": "EQUIP_STATE",
+                    "ts": "2026-04-13T10:04:01Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:11",
+                "data": {
+                    "slot": 1,
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "WAFER_LOAD",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:04:10Z",
+                    "event_code": "WAFER_LOAD",
+                    "event_type": "WAFER_LOAD",
+                    "ts": "2026-04-13T10:04:10Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:12",
+                "data": {
+                    "seq": 1,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "STEP_START",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:04:15Z",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "ts": "2026-04-13T10:04:15Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:13",
+                "data": {
+                    "n2_flow_sccm": 200.0,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 300.1,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:04:15Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:04:15Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:14",
+                "data": {
+                    "n2_flow_sccm": 200.1,
+                    "chamber_press_Pa": 0.00664,
+                    "reactor_temp_C": 300.2,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:04:45Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:04:45Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:15",
+                "data": {
+                    "result": "PASS",
+                    "dur_s": 60,
+                    "seq": 1,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "STEP_END",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:05:15Z",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "ts": "2026-04-13T10:05:15Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:16",
+                "data": {
+                    "planned_cycles": 200,
+                    "seq": 2,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "STEP_START",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:05:16Z",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "ts": "2026-04-13T10:05:16Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:17",
+                "data": {
+                    "pulse_actual_ms": 200,
+                    "precursor": "HfCl4",
+                    "cycle_no": 1,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 300.0,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:05:16Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:05:16Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:18",
+                "data": {
+                    "pulse_actual_ms": 200,
+                    "precursor": "H2O",
+                    "cycle_no": 75,
+                    "chamber_press_Pa": 0.00666,
+                    "reactor_temp_C": 300.1,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:10:16Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:10:16Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:19",
+                "data": {
+                    "pulse_actual_ms": 200,
+                    "precursor": "HfCl4",
+                    "cycle_no": 150,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 300.3,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:15:16Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:15:16Z"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:20",
+                "data": {
+                    "cycle_no": 162,
+                    "msg": "Reactor temperature above upper warning limit",
+                    "limit_C": 305.0,
+                    "reactor_temp_C": 308.5,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "severity": "WARNING",
+                    "alarm_code": "ALD_TEMP_HIGH",
+                    "event": "ALARM",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:16:00Z",
+                    "event_code": "ALARM",
+                    "event_type": "ALARM",
+                    "ts": "2026-04-13T10:16:00Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:21",
+                "data": {
+                    "pulse_actual_ms": 200,
+                    "precursor": "HfCl4",
+                    "cycle_no": 170,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 304.2,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:16:30Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:16:30Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:22",
+                "data": {
+                    "pulse_actual_ms": 200,
+                    "precursor": "H2O",
+                    "cycle_no": 200,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 300.1,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:18:16Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:18:16Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:23",
+                "data": {
+                    "result": "PASS_WITH_WARNING",
+                    "cycles_completed": 200,
+                    "dur_s": 781,
+                    "seq": 2,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "STEP_END",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:18:17Z",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "ts": "2026-04-13T10:18:17Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:24",
+                "data": {
+                    "target_temp_C": 400,
+                    "seq": 3,
+                    "step": "Post_Anneal",
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "STEP_START",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:18:18Z",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "ts": "2026-04-13T10:18:18Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:25",
+                "data": {
+                    "n2_flow_sccm": 200.0,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 300.2,
+                    "step": "Post_Anneal",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:18:18Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:18:18Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:26",
+                "data": {
+                    "n2_flow_sccm": 200.0,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 400.1,
+                    "step": "Post_Anneal",
+                    "wafer": "WFR_0330",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:28:18Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:28:18Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:27",
+                "data": {
+                    "result": "PASS",
+                    "dur_s": 1800,
+                    "seq": 3,
+                    "step": "Post_Anneal",
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "STEP_END",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:48:18Z",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "ts": "2026-04-13T10:48:18Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:28",
+                "data": {
+                    "uniformity_pct": 1.1,
+                    "thickness_A": 24.8,
+                    "final_result": "PASS",
+                    "slot": 1,
+                    "wafer": "WFR_0330",
+                    "lot": "LOT_0330",
+                    "event": "WAFER_RESULT",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:48:19Z",
+                    "event_code": "WAFER_RESULT",
+                    "event_type": "WAFER_RESULT",
+                    "ts": "2026-04-13T10:48:19Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:29",
+                "data": {
+                    "slot": 2,
+                    "wafer": "WFR_0331",
+                    "lot": "LOT_0330",
+                    "event": "WAFER_LOAD",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:48:20Z",
+                    "event_code": "WAFER_LOAD",
+                    "event_type": "WAFER_LOAD",
+                    "ts": "2026-04-13T10:48:20Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:30",
+                "data": {
+                    "seq": 1,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0331",
+                    "lot": "LOT_0330",
+                    "event": "STEP_START",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:48:25Z",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "ts": "2026-04-13T10:48:25Z"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:31",
+                "data": {
+                    "n2_flow_sccm": 200.0,
+                    "chamber_press_Pa": 0.00665,
+                    "reactor_temp_C": 300.0,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0331",
+                    "event": "SENSOR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:48:25Z",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "ts": "2026-04-13T10:48:25Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:32",
+                "data": {
+                    "result": "PASS",
+                    "dur_s": 60,
+                    "seq": 1,
+                    "step": "Surface_Prep",
+                    "wafer": "WFR_0331",
+                    "lot": "LOT_0330",
+                    "event": "STEP_END",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:49:25Z",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "ts": "2026-04-13T10:49:25Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:33",
+                "data": {
+                    "planned_cycles": 200,
+                    "seq": 2,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0331",
+                    "lot": "LOT_0330",
+                    "event": "STEP_START",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:49:26Z",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "ts": "2026-04-13T10:49:26Z"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:34",
+                "data": {
+                    "cycle_no": 88,
+                    "msg": "Chamber pressure critically low — possible leak",
+                    "nominal_Pa": 0.00665,
+                    "chamber_press_Pa": 0.002,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0331",
+                    "severity": "ERROR",
+                    "alarm_code": "ALD_PRESS_LOW",
+                    "event": "ALARM",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:55:00Z",
+                    "event_code": "ALARM",
+                    "event_type": "ALARM",
+                    "ts": "2026-04-13T10:55:00Z"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:35",
+                "data": {
+                    "cycles_done": 88,
+                    "reason": "PRESS_CRITICAL",
+                    "elapsed_s": 335,
+                    "seq": 2,
+                    "step": "ALD_Cycle",
+                    "wafer": "WFR_0331",
+                    "lot": "LOT_0330",
+                    "event": "STEP_ABORT",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:55:01Z",
+                    "event_code": "STEP_ABORT",
+                    "event_type": "STEP_ABORT",
+                    "ts": "2026-04-13T10:55:01Z"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:36",
+                "data": {
+                    "fault": "ALD_PRESS_LOW",
+                    "lot": "LOT_0330",
+                    "curr_state": "FAULTED",
+                    "prev_state": "PROCESSING",
+                    "event": "EQUIP_STATE",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:55:02Z",
+                    "event_code": "EQUIP_STATE",
+                    "event_type": "EQUIP_STATE",
+                    "ts": "2026-04-13T10:55:02Z"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:37",
+                "data": {
+                    "reason": "PRESS_CRITICAL",
+                    "final_result": "ABORT",
+                    "slot": 2,
+                    "wafer": "WFR_0331",
+                    "lot": "LOT_0330",
+                    "event": "WAFER_RESULT",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T10:55:03Z",
+                    "event_code": "WAFER_RESULT",
+                    "event_type": "WAFER_RESULT",
+                    "ts": "2026-04-13T10:55:03Z"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:38",
+                "data": {
+                    "action": "Leak check performed, O-ring replaced at chamber lid",
+                    "cleared_by": "ENG_081",
+                    "alarm_code": "ALD_PRESS_LOW",
+                    "event": "ALARM_CLR",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T11:10:00Z",
+                    "event_code": "ALARM_CLR",
+                    "event_type": "ALARM_CLR",
+                    "ts": "2026-04-13T11:10:00Z"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:39",
+                "data": {
+                    "cleared_by": "ENG_081",
+                    "curr_state": "IDLE",
+                    "prev_state": "FAULTED",
+                    "event": "EQUIP_STATE",
+                    "tool": "ALD_05",
+                    "datetime": "2026-04-13T11:10:01Z",
+                    "event_code": "EQUIP_STATE",
+                    "event_type": "EQUIP_STATE",
+                    "ts": "2026-04-13T11:10:01Z"
+                }
+            }
+        ],
+        "record_count": 37
+    },
+    "agent_debug": {
+        "final_source": "llm_semi_structured_spec",
+        "sample_lines": [
+            "datetime=2026-04-13T10:00:00Z tool=ALD_05 event=EQUIP_STATE prev_state=OFFLINE curr_state=STANDBY initiated_by=SYSTEM reason=boot_complete",
+            "datetime=2026-04-13T10:02:00Z tool=ALD_05 event=EQUIP_STATE prev_state=STANDBY curr_state=IDLE initiated_by=OPR_121 reason=self_check_passed",
+            "datetime=2026-04-13T10:03:00Z tool=ALD_05 event=RECIPE_DEFINE recipe=ALD_HfO2_V3 rev=2.0 cycles=200 cycle_time_s=4 target_thickness_A=25 max_temp_C=300",
+            "datetime=2026-04-13T10:03:01Z tool=ALD_05 event=RECIPE_STEP recipe=ALD_HfO2_V3 step_name=Surface_Prep seq=1 purge_gas=N2 purge_flow_sccm=200 duration_s=60",
+            "datetime=2026-04-13T10:03:02Z tool=ALD_05 event=RECIPE_STEP recipe=ALD_HfO2_V3 step_name=ALD_Cycle seq=2 precursor_A=HfCl4 pulse_A_ms=200 purge_A_ms=5000 precursor_B=H2O pulse_B_ms=200 purge_B_ms=5000 repeat=200",
+            "datetime=2026-04-13T10:03:03Z tool=ALD_05 event=RECIPE_STEP recipe=ALD_HfO2_V3 step_name=Post_Anneal seq=3 anneal_temp_C=400 anneal_gas=N2 duration_s=1800",
+            "datetime=2026-04-13T10:04:00Z tool=ALD_05 event=LOT_START lot=LOT_0330 wafer_qty=5 recipe=ALD_HfO2_V3 op=OPR_121",
+            "datetime=2026-04-13T10:04:01Z tool=ALD_05 event=EQUIP_STATE prev_state=IDLE curr_state=PROCESSING lot=LOT_0330",
+            "datetime=2026-04-13T10:04:10Z tool=ALD_05 event=WAFER_LOAD lot=LOT_0330 wafer=WFR_0330 slot=1",
+            "datetime=2026-04-13T10:04:15Z tool=ALD_05 event=STEP_START lot=LOT_0330 wafer=WFR_0330 step=Surface_Prep seq=1",
+            "datetime=2026-04-13T10:04:15Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=Surface_Prep reactor_temp_C=300.1 chamber_press_Pa=0.00665 n2_flow_sccm=200.0",
+            "datetime=2026-04-13T10:04:45Z tool=ALD_05 event=SENSOR wafer=WFR_0330 step=Surface_Prep reactor_temp_C=300.2 chamber_press_Pa=0.00664 n2_flow_sccm=200.1"
+        ],
+        "llm_requested": true,
+        "llm_raw_spec": {
+            "family": "line-oriented key=value equipment event logs",
+            "record_boundary": "per_line",
+            "timestamp_styles": [
+                "iso8601"
+            ],
+            "header_layout_candidates": [
+                "tool_token_message"
+            ],
+            "event_extraction_candidates": [
+                "none"
+            ],
+            "payload_candidates": [
+                "space_kv"
+            ],
+            "classification_hints": {
+                "primary_keys": [
+                    "datetime",
+                    "tool",
+                    "event"
+                ],
+                "common_structure": "Each record is a single line of space-delimited key=value pairs. Timestamp appears as datetime=<ISO8601>. Tool identifier appears as tool=<id>. Event type appears as event=<token>. Remaining fields are event-specific attributes.",
+                "record_type_rules": {
+                    "equipment_state": {
+                        "match_when": {
+                            "event_in": [
+                                "EQUIP_STATE"
+                            ],
+                            "fields_any": [
+                                "prev_state",
+                                "curr_state",
+                                "state",
+                                "reason"
+                            ]
+                        }
+                    },
+                    "process_parameter_recipe": {
+                        "match_when": {
+                            "event_in": [
+                                "RECIPE_DEFINE",
+                                "RECIPE_STEP"
+                            ],
+                            "fields_any": [
+                                "recipe",
+                                "rev",
+                                "cycles",
+                                "step_name",
+                                "seq",
+                                "duration_s",
+                                "target_thickness_A"
+                            ]
+                        }
+                    },
+                    "sensor_reading": {
+                        "match_when": {
+                            "event_in": [
+                                "SENSOR"
+                            ],
+                            "fields_any": [
+                                "reactor_temp_C",
+                                "chamber_press_Pa",
+                                "n2_flow_sccm"
+                            ]
+                        }
+                    },
+                    "fault_event": {
+                        "match_when": {
+                            "event_prefix_any": [
+                                "ALARM",
+                                "FAULT",
+                                "ERR",
+                                "ERROR",
+                                "WARN"
+                            ],
+                            "fields_any": [
+                                "reason",
+                                "fault_code",
+                                "alarm_code",
+                                "error_code",
+                                "code"
+                            ]
+                        }
+                    },
+                    "wafer_processing_sequence": {
+                        "match_when": {
+                            "event_in": [
+                                "LOT_START",
+                                "WAFER_LOAD",
+                                "STEP_START"
+                            ],
+                            "fields_any": [
+                                "lot",
+                                "wafer",
+                                "slot",
+                                "step",
+                                "seq"
+                            ]
+                        }
+                    },
+                    "generic_text_record": {
+                        "match_when": {
+                            "fallback": true
+                        }
+                    }
+                }
+            },
+            "notes": [
+                "Do not treat this as free text; it is structured key=value content with stable field names.",
+                "Although event is present in the line, it is not a separate non-payload header segment; parse the whole line as space_kv and then read event from the resulting map.",
+                "Observed timestamps use UTC ISO8601 with trailing Z.",
+                "Values appear unquoted and contain no spaces in the sample; underscore is used where multi-word content is needed.",
+                "Numeric values may be integers or decimals and units are encoded in field names, e.g. *_C, *_Pa, *_sccm, *_ms, *_A.",
+                "Useful reusable anchors: datetime, tool, event, lot, wafer, recipe, step/step_name, seq."
+            ]
+        },
+        "validation": {
+            "accepted": true,
+            "coverage": 1.0,
+            "timestamp_ratio": 1.0,
+            "structure_ratio": 1.0,
+            "parse_hits": 12,
+            "sample_size": 12
+        }
+    }
+}

@@ -1,3 +1,7 @@
+# PVD_SPUTTER_10 System Log | FW: SputtOS-3.4.1 | FAB2 Bay D2
+# Format: YYYY/MM/DD HH:MM:SS.mmm [TOOLNAME] LEVEL : CATEGORY > message {k=v ...}
+# Severity: DBG / INF / WRN / ERR / CRT
+
 2026/04/13 08:00:00.000 [PVD_10] INF : STARTUP > System boot complete {fw=SputtOS-3.4.1, hw_sn=SN_PVD_010, fab=FAB2, bay=D2}
 2026/04/13 08:00:05.000 [PVD_10] INF : EQUIP_STATE > Transition {from=OFFLINE, to=STANDBY, by=SYSTEM}
 2026/04/13 08:02:00.000 [PVD_10] INF : EQUIP_STATE > Transition {from=STANDBY, to=IDLE, by=OPR_101, reason=self_check_ok}

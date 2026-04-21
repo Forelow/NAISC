@@ -1,0 +1,654 @@
+{
+    "ingested": {
+        "file_id": "39895783-b263-4fb8-a413-832b446ba35e",
+        "filename": "vendorC.syslog",
+        "extension": ".syslog",
+        "size_bytes": 5349,
+        "raw_path": "data\\raw\\39895783-b263-4fb8-a413-832b446ba35e_vendorC.syslog",
+        "ingestion_time": "2026-04-21T13:01:04.059430",
+        "sha256": "59e624a3760421f84f32990dfd2efebddc334331611c27499e9787658e0005c5"
+    },
+    "detection": {
+        "format_guess": "key_value_text",
+        "content_class": "semi_structured_text",
+        "confidence": 0.86,
+        "notes": "Repeated key=value pattern detected",
+        "extension_hint": ".syslog",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "key_value_text",
+        "is_supported": true,
+        "parser_family": "semi_structured_parser",
+        "support_status": "supported",
+        "notes": "key_value_text is handled by semi_structured_parser"
+    },
+    "routing": {
+        "next_route": "semi_structured_parser",
+        "processing_mode": "regex_or_rule_parse",
+        "should_attempt_parse": true,
+        "notes": "Known semi-structured text pattern"
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 112,
+        "family_info": {
+            "family": "semi_structured_text",
+            "confidence": 0.86,
+            "notes": "Unified semi-structured lane from key_value_text"
+        }
+    },
+    "structure_config": {
+        "family": "semi_structured_text",
+        "parser_strategy": "llm_spec_with_deterministic_validation",
+        "record_boundary": {
+            "type": "blank_line_blocks"
+        },
+        "timestamp_styles": [
+            "none"
+        ],
+        "header_layout_candidates": [
+            "tool_token_message"
+        ],
+        "event_extraction_candidates": [
+            "none"
+        ],
+        "payload_candidates": [
+            "space_kv",
+            "label_value_lines"
+        ],
+        "classification_hints": {
+            "equipment_state": {
+                "event_codes": [
+                    "STATE",
+                    "EQUIP_STATE",
+                    "SYS_BOOT",
+                    "STARTUP",
+                    "SHUTDOWN"
+                ],
+                "required_any_fields": [
+                    "prev",
+                    "curr",
+                    "state",
+                    "from",
+                    "to",
+                    "from_state",
+                    "to_state",
+                    "trigger"
+                ]
+            },
+            "process_parameter_recipe": {
+                "event_codes": [
+                    "RCP_LOAD",
+                    "RCP_PARAM",
+                    "RECIPE",
+                    "RECIPE_STEP",
+                    "LOT_OPEN"
+                ],
+                "required_any_fields": [
+                    "recipe",
+                    "recipe_id",
+                    "name",
+                    "rev",
+                    "parameter",
+                    "setpoint",
+                    "target_temp_C",
+                    "duration_s",
+                    "version"
+                ]
+            },
+            "sensor_reading": {
+                "event_codes": [
+                    "SENSOR",
+                    "TRACE",
+                    "READING",
+                    "MEASURE"
+                ],
+                "required_any_fields": [
+                    "sensor",
+                    "sensor_id",
+                    "value",
+                    "reading",
+                    "temp_C",
+                    "pressure_mTorr",
+                    "base_pres_Pa",
+                    "proc_pres_Pa",
+                    "dep_rate_A_s",
+                    "zone"
+                ]
+            },
+            "fault_event": {
+                "event_codes": [
+                    "WARN",
+                    "WARNING",
+                    "ALARM",
+                    "FAULT",
+                    "FAULT_CLEAR",
+                    "ALARM_CLR",
+                    "ERROR",
+                    "ERR",
+                    "CRITICAL",
+                    "INTERLOCK"
+                ],
+                "required_any_fields": [
+                    "fault",
+                    "fault_code",
+                    "alarm_code",
+                    "code",
+                    "error_code",
+                    "reason"
+                ]
+            },
+            "wafer_processing_sequence": {
+                "event_codes": [
+                    "WAFER",
+                    "STEP",
+                    "STEP_START",
+                    "STEP_END",
+                    "STEP_ABORT",
+                    "WFR_SEQ",
+                    "WF_MOVE",
+                    "ACTION",
+                    "LOAD_COMPLETE",
+                    "UNLOAD_COMPLETE",
+                    "LOT_IN",
+                    "LOT_OUT",
+                    "LOT_RESUME",
+                    "MAINT"
+                ],
+                "required_any_fields": [
+                    "wafer",
+                    "wafer_id",
+                    "wfr",
+                    "step",
+                    "step_name",
+                    "seq",
+                    "action",
+                    "slot",
+                    "lot"
+                ]
+            },
+            "generic_text_record": {
+                "event_codes": [],
+                "required_any_fields": []
+            }
+        },
+        "notes": "Unified semi-structured fallback spec inferred deterministically from sampled records."
+    },
+    "parsed_result": {
+        "schema_family": "semi_structured_log",
+        "records": [
+            {
+                "record_type": "generic_text_record",
+                "source_reference": "block:1",
+                "data": {
+                    "tool_id": ";",
+                    "event_type": "EUV_SCANNER_02",
+                    "message": "Operational Log | Site: FAB2 | LogClass: COMBINED ; Format: ISO-timestamp MACHINE (Rel:VER,SUBSYS) LEVEL [CODE] Free-text ; Note: Some events span multiple lines (continuation marked with >>)"
+                }
+            },
+            {
+                "record_type": "generic_text_record",
+                "source_reference": "block:2",
+                "data": {
+                    "tool_id": "2026-04-13T09:00:00.0000",
+                    "header_token": "Machine:EUV02",
+                    "message": "(Rel:VER0002, SYS [dc], SysInit.c, ?.?, 100) SYSTEM EVENT: ER-0000 STARTUP System software version VER0002 loaded successfully. Self-diagnostics passed."
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "block:3",
+                "data": {
+                    "tool_id": "2026-04-13T09:00:10.1200",
+                    "header_token": "Machine:EUV02",
+                    "trigger": "SELF_TEST_COMPLETE",
+                    "to": "STANDBY",
+                    "from": "OFFLINE",
+                    "message": "(Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200) SYSTEM EVENT: ER-1000 STATE_CHANGE >>"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "block:4",
+                "data": {
+                    "tool_id": "2026-04-13T09:02:00.0000",
+                    "header_token": "Machine:EUV02",
+                    "bake_temp_C": 110,
+                    "duration_s": 45,
+                    "focus_offset_nm": 0,
+                    "scan_spd_mms": 750,
+                    "dose_mJcm2": 20.0,
+                    "align_tol_um": 0.015,
+                    "loaded_by": "OPR_111",
+                    "version": 2.1,
+                    "recipe_id": "EUV_RCP_0055",
+                    "message": "(Rel:VER0002, RCPLOAD [dc], RecipeMgr.c, ?.?, 210) SYSTEM INFO: ER-2010 RECIPE_LOADED >> >> step[1]=PreAlign >> step[2]=Exposure >> step[3]=PostBake"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "block:5",
+                "data": {
+                    "tool_id": "2026-04-13T09:05:00.0000",
+                    "header_token": "Machine:EUV02",
+                    "op": "OPR_111",
+                    "recipe": "EUV_RCP_0055",
+                    "wafer_count": 25,
+                    "lot_id": "LOT_0320",
+                    "message": "(Rel:VER0002, LOTMGR [dc], LotCtrl.c, ?.?, 220) SYSTEM INFO: ER-3000 LOT_START >>"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "block:6",
+                "data": {
+                    "tool_id": "2026-04-13T09:05:05.0000",
+                    "header_token": "Machine:EUV02",
+                    "lot": "LOT_0320",
+                    "to": "PROCESSING",
+                    "from": "STANDBY",
+                    "message": "(Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200) SYSTEM EVENT: ER-1001 STATE_CHANGE >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:7",
+                "data": {
+                    "tool_id": "2026-04-13T09:05:10.0000",
+                    "header_token": "Machine:EUV02",
+                    "slot": 1,
+                    "wafer": "WFR_0320",
+                    "lot": "LOT_0320",
+                    "message": "(Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 310) SYSTEM INFO: ER-4000 WAFER_LOADED >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:8",
+                "data": {
+                    "tool_id": "2026-04-13T09:05:15.0000",
+                    "header_token": "Machine:EUV02",
+                    "lot": "LOT_0320",
+                    "wafer": "WFR_0320",
+                    "seq": 1,
+                    "step": "PreAlign",
+                    "message": "(Rel:VER0002, ALIGN [dc], Align_rq.c, ?.?, 400) SYSTEM INFO: ER-5010 STEP_START >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:9",
+                "data": {
+                    "tool_id": "2026-04-13T09:05:55.0000",
+                    "header_token": "Machine:EUV02",
+                    "align_offset_y_um": -0.004,
+                    "align_offset_x_um": 0.008,
+                    "dur_s": 40,
+                    "result": "PASS",
+                    "wafer": "WFR_0320",
+                    "seq": 1,
+                    "step": "PreAlign",
+                    "message": "(Rel:VER0002, ALIGN [dc], Align_rq.c, ?.?, 401) SYSTEM INFO: ER-5011 STEP_END >> >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:10",
+                "data": {
+                    "tool_id": "2026-04-13T09:05:56.0000",
+                    "header_token": "Machine:EUV02",
+                    "lot": "LOT_0320",
+                    "wafer": "WFR_0320",
+                    "seq": 2,
+                    "step": "Exposure",
+                    "message": "(Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 410) SYSTEM INFO: ER-5010 STEP_START >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:11",
+                "data": {
+                    "tool_id": "2026-04-13T09:06:01.0000",
+                    "header_token": "Machine:EUV02",
+                    "scan_pos_mm": 0,
+                    "dose_actual_mJcm2": 2.5,
+                    "vac_Pa": 1.1e-05,
+                    "src_pwr_W": 250.2,
+                    "step": "Exposure",
+                    "wafer": "WFR_0320",
+                    "message": "(Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500) SENSOR DATA: ER-6000 PERIODIC >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:12",
+                "data": {
+                    "tool_id": "2026-04-13T09:06:21.0000",
+                    "header_token": "Machine:EUV02",
+                    "scan_pos_mm": 25,
+                    "dose_actual_mJcm2": 7.5,
+                    "vac_Pa": 1.1e-05,
+                    "src_pwr_W": 250.4,
+                    "step": "Exposure",
+                    "wafer": "WFR_0320",
+                    "message": "(Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500) SENSOR DATA: ER-6000 PERIODIC >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:13",
+                "data": {
+                    "tool_id": "2026-04-13T09:06:41.0000",
+                    "header_token": "Machine:EUV02",
+                    "scan_pos_mm": 50,
+                    "dose_actual_mJcm2": 12.5,
+                    "vac_Pa": 1.2e-05,
+                    "src_pwr_W": 250.1,
+                    "step": "Exposure",
+                    "wafer": "WFR_0320",
+                    "message": "(Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500) SENSOR DATA: ER-6000 PERIODIC >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:14",
+                "data": {
+                    "tool_id": "2026-04-13T09:07:01.0000",
+                    "header_token": "Machine:EUV02",
+                    "scan_pos_mm": 75,
+                    "dose_actual_mJcm2": 17.5,
+                    "vac_Pa": 1.1e-05,
+                    "src_pwr_W": 250.3,
+                    "step": "Exposure",
+                    "wafer": "WFR_0320",
+                    "message": "(Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500) SENSOR DATA: ER-6000 PERIODIC >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:15",
+                "data": {
+                    "tool_id": "2026-04-13T09:07:41.0000",
+                    "header_token": "Machine:EUV02",
+                    "dose_error_pct": 0.1,
+                    "dose_actual_mJcm2": 19.98,
+                    "dose_target_mJcm2": 20.0,
+                    "dur_s": 105,
+                    "result": "PASS",
+                    "wafer": "WFR_0320",
+                    "seq": 2,
+                    "step": "Exposure",
+                    "message": "(Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 411) SYSTEM INFO: ER-5011 STEP_END >> >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:16",
+                "data": {
+                    "tool_id": "2026-04-13T09:07:42.0000",
+                    "header_token": "Machine:EUV02",
+                    "bake_temp_C": 110,
+                    "lot": "LOT_0320",
+                    "wafer": "WFR_0320",
+                    "seq": 3,
+                    "step": "PostBake",
+                    "message": "(Rel:VER0002, PBAKE [dc], PostBake_rq.c, ?.?, 420) SYSTEM INFO: ER-5010 STEP_START >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:17",
+                "data": {
+                    "tool_id": "2026-04-13T09:08:42.0000",
+                    "header_token": "Machine:EUV02",
+                    "dur_s": 60,
+                    "result": "PASS",
+                    "wafer": "WFR_0320",
+                    "seq": 3,
+                    "step": "PostBake",
+                    "message": "(Rel:VER0002, PBAKE [dc], PostBake_rq.c, ?.?, 421) SYSTEM INFO: ER-5011 STEP_END >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:18",
+                "data": {
+                    "tool_id": "2026-04-13T09:08:43.0000",
+                    "header_token": "Machine:EUV02",
+                    "result": "PASS",
+                    "slot": 1,
+                    "wafer": "WFR_0320",
+                    "lot": "LOT_0320",
+                    "message": "(Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 311) SYSTEM INFO: ER-4001 WAFER_UNLOADED >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:19",
+                "data": {
+                    "tool_id": "2026-04-13T09:08:50.0000",
+                    "header_token": "Machine:EUV02",
+                    "slot": 2,
+                    "wafer": "WFR_0321",
+                    "lot": "LOT_0320",
+                    "message": "(Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 310) SYSTEM INFO: ER-4000 WAFER_LOADED >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:20",
+                "data": {
+                    "tool_id": "2026-04-13T09:10:00.0000",
+                    "header_token": "Machine:EUV02",
+                    "lot": "LOT_0320",
+                    "wafer": "WFR_0321",
+                    "seq": 2,
+                    "step": "Exposure",
+                    "message": "(Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 410) SYSTEM INFO: ER-5010 STEP_START >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:21",
+                "data": {
+                    "tool_id": "2026-04-13T09:10:55.0000",
+                    "header_token": "Machine:EUV02",
+                    "scan_pos_mm": 40,
+                    "dose_actual_mJcm2": 9.8,
+                    "vac_Pa": 1.2e-05,
+                    "src_pwr_W": 248.1,
+                    "step": "Exposure",
+                    "wafer": "WFR_0321",
+                    "message": "(Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500) SENSOR DATA: ER-6000 PERIODIC >>"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "block:22",
+                "data": {
+                    "tool_id": "2026-04-13T09:11:10.0000",
+                    "header_token": "Machine:EUV02",
+                    "msg": "EUV source power dropped below operating threshold",
+                    "threshold_W": 245.0,
+                    "src_pwr_W": 235.0,
+                    "step": "Exposure",
+                    "wafer": "WFR_0321",
+                    "DEACTIVATE": "SCAN_STAGE",
+                    "message": "(Rel:VER0002, SRCMON [dc], SrcMonitor.c, ?.?, 600) SYSTEM WARNING: ER-0FFF SRC_PWR_DROOP >>"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "block:23",
+                "data": {
+                    "tool_id": "2026-04-13T09:11:12.0000",
+                    "header_token": "Machine:EUV02",
+                    "fault": "SRC_PWR_DROOP",
+                    "wafer": "WFR_0321",
+                    "lot": "LOT_0320",
+                    "to": "FAULTED",
+                    "from": "PROCESSING",
+                    "message": "(Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200) SYSTEM EVENT: ER-1002 STATE_CHANGE >>"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "block:24",
+                "data": {
+                    "tool_id": "2026-04-13T09:11:13.0000",
+                    "header_token": "Machine:EUV02",
+                    "partial_dose_mJcm2": 9.8,
+                    "reason": "SRC_PWR_DROOP",
+                    "elapsed_s": 73,
+                    "wafer": "WFR_0321",
+                    "seq": 2,
+                    "step": "Exposure",
+                    "message": "(Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 412) SYSTEM ERROR: ER-5099 STEP_ABORT >>"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "block:25",
+                "data": {
+                    "tool_id": "2026-04-13T09:25:00.0000",
+                    "header_token": "Machine:EUV02",
+                    "src_pwr_W": 250.5,
+                    "action": "SOURCE_RECONDITIONED",
+                    "cleared_by": "ENG_071",
+                    "fault": "SRC_PWR_DROOP",
+                    "message": "(Rel:VER0002, SRCMON [dc], SrcMonitor.c, ?.?, 601) SYSTEM INFO: ER-0FFE ALARM_CLEARED >>"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "block:26",
+                "data": {
+                    "tool_id": "2026-04-13T09:25:01.0000",
+                    "header_token": "Machine:EUV02",
+                    "by": "ENG_071",
+                    "to": "STANDBY",
+                    "from": "FAULTED",
+                    "message": "(Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200) SYSTEM EVENT: ER-1000 STATE_CHANGE >>"
+                }
+            }
+        ],
+        "record_count": 26
+    },
+    "agent_debug": {
+        "final_source": "deterministic_fallback_spec",
+        "sample_lines": [
+            "; EUV_SCANNER_02 Operational Log | Site: FAB2 | LogClass: COMBINED\n; Format: ISO-timestamp MACHINE (Rel:VER,SUBSYS) LEVEL [CODE] Free-text\n; Note: Some events span multiple lines (continuation marked with >>)",
+            "2026-04-13T09:00:00.0000 Machine:EUV02 (Rel:VER0002, SYS [dc], SysInit.c, ?.?, 100)\nSYSTEM EVENT: ER-0000 STARTUP\nSystem software version VER0002 loaded successfully. Self-diagnostics passed.",
+            "2026-04-13T09:00:10.1200 Machine:EUV02 (Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200)\nSYSTEM EVENT: ER-1000 STATE_CHANGE\n>> from=OFFLINE to=STANDBY trigger=SELF_TEST_COMPLETE",
+            "2026-04-13T09:02:00.0000 Machine:EUV02 (Rel:VER0002, RCPLOAD [dc], RecipeMgr.c, ?.?, 210)\nSYSTEM INFO: ER-2010 RECIPE_LOADED\n>> recipe_id=EUV_RCP_0055 version=2.1 loaded_by=OPR_111\n>> step[1]=PreAlign duration_s=45 align_tol_um=0.015\n>> step[2]=Exposure duration_s=105 dose_mJcm2=20.0 scan_spd_mms=750 focus_offset_nm=0\n>> step[3]=PostBake duration_s=60 bake_temp_C=110",
+            "2026-04-13T09:05:00.0000 Machine:EUV02 (Rel:VER0002, LOTMGR [dc], LotCtrl.c, ?.?, 220)\nSYSTEM INFO: ER-3000 LOT_START\n>> lot_id=LOT_0320 wafer_count=25 recipe=EUV_RCP_0055 op=OPR_111",
+            "2026-04-13T09:05:05.0000 Machine:EUV02 (Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200)\nSYSTEM EVENT: ER-1001 STATE_CHANGE\n>> from=STANDBY to=PROCESSING lot=LOT_0320",
+            "2026-04-13T09:05:10.0000 Machine:EUV02 (Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 310)\nSYSTEM INFO: ER-4000 WAFER_LOADED\n>> lot=LOT_0320 wafer=WFR_0320 slot=1",
+            "2026-04-13T09:05:15.0000 Machine:EUV02 (Rel:VER0002, ALIGN [dc], Align_rq.c, ?.?, 400)\nSYSTEM INFO: ER-5010 STEP_START\n>> step=PreAlign seq=1 wafer=WFR_0320 lot=LOT_0320",
+            "2026-04-13T09:05:55.0000 Machine:EUV02 (Rel:VER0002, ALIGN [dc], Align_rq.c, ?.?, 401)\nSYSTEM INFO: ER-5011 STEP_END\n>> step=PreAlign seq=1 wafer=WFR_0320 result=PASS dur_s=40\n>> align_offset_x_um=0.008 align_offset_y_um=-0.004",
+            "2026-04-13T09:05:56.0000 Machine:EUV02 (Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 410)\nSYSTEM INFO: ER-5010 STEP_START\n>> step=Exposure seq=2 wafer=WFR_0320 lot=LOT_0320",
+            "2026-04-13T09:06:01.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)\nSENSOR DATA: ER-6000 PERIODIC\n>> wafer=WFR_0320 step=Exposure src_pwr_W=250.2 vac_Pa=1.1e-5 dose_actual_mJcm2=2.5 scan_pos_mm=0",
+            "2026-04-13T09:06:21.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)\nSENSOR DATA: ER-6000 PERIODIC\n>> wafer=WFR_0320 step=Exposure src_pwr_W=250.4 vac_Pa=1.1e-5 dose_actual_mJcm2=7.5 scan_pos_mm=25"
+        ],
+        "llm_requested": true,
+        "llm_raw_spec": {
+            "family": "multi-line equipment operational/event log with ISO timestamp header line followed by event line and optional continuation payload lines prefixed by >>; leading semicolon lines act as file metadata/comments",
+            "record_boundary": "blank_line_blocks",
+            "timestamp_styles": [
+                "iso8601"
+            ],
+            "header_layout_candidates": [
+                "none",
+                "tool_token_message"
+            ],
+            "event_extraction_candidates": [
+                "leading_upper_token"
+            ],
+            "payload_candidates": [
+                "space_kv",
+                "label_value_lines"
+            ],
+            "classification_hints": {
+                "equipment_state": {
+                    "positive_signals": [
+                        "event line contains STATE_CHANGE or STARTUP",
+                        "continuation payload contains from=... to=...",
+                        "event code pattern like ER-1000/ER-1001 with SYSTEM EVENT prefix"
+                    ],
+                    "negative_signals": [
+                        "sensor prefix SENSOR DATA",
+                        "step lifecycle markers STEP_START/STEP_END"
+                    ]
+                },
+                "process_parameter_recipe": {
+                    "positive_signals": [
+                        "event line contains RECIPE_LOADED",
+                        "payload contains recipe_id=, version=, step[n]=, duration_s=",
+                        "LOT_START may also qualify when recipe= is present"
+                    ],
+                    "negative_signals": [
+                        "pure state change without recipe fields",
+                        "sensor periodic readings"
+                    ]
+                },
+                "sensor_reading": {
+                    "positive_signals": [
+                        "event line starts with SENSOR DATA:",
+                        "event name PERIODIC",
+                        "payload contains measured numeric fields such as src_pwr_W=, vac_Pa=, dose_actual_mJcm2=, scan_pos_mm="
+                    ],
+                    "negative_signals": [
+                        "recipe step definitions",
+                        "state transitions"
+                    ]
+                },
+                "fault_event": {
+                    "positive_signals": [
+                        "would likely use upper tokens such as ERROR/WARN/ALARM/FAULT in event line",
+                        "presence of reason/code-like fields in payload"
+                    ],
+                    "negative_signals": [
+                        "no fault-like samples present in provided records"
+                    ]
+                },
+                "wafer_processing_sequence": {
+                    "positive_signals": [
+                        "event names WAFER_LOADED, STEP_START, STEP_END, LOT_START",
+                        "payload contains wafer=, lot=, slot=, step=, seq=",
+                        "SYSTEM INFO lines with execution progress semantics"
+                    ],
+                    "negative_signals": [
+                        "startup/state-only records without wafer/lot/step context",
+                        "sensor periodic measurements"
+                    ]
+                },
+                "generic_text_record": {
+                    "positive_signals": [
+                        "semicolon-prefixed metadata/comment lines",
+                        "free-text descriptive line after event line when no parseable key/value payload is present"
+                    ]
+                }
+            },
+            "notes": [
+                "Do not treat each line as a record; sample indicates one logical event spans multiple lines.",
+                "Practical boundary rule: a new record begins at a line starting with ISO8601 timestamp; subsequent non-timestamp lines belong to that record until next timestamp or blank separator.",
+                "Semicolon-prefixed lines at file start are comments/header metadata, not normal event records.",
+                "The first line of each event record is a source/context header: timestamp + machine token + parenthesized subsystem/source tuple.",
+                "The second line is the semantic event line, commonly shaped as '<CATEGORY WORD> <CATEGORY WORD>: ER-#### EVENT_NAME'.",
+                "Best event extraction is the trailing uppercase token on the event line, e.g. STARTUP, STATE_CHANGE, RECIPE_LOADED, LOT_START, WAFER_LOADED, STEP_START, STEP_END, PERIODIC.",
+                "Payload commonly appears on continuation lines beginning with '>> ' and consists of space-delimited key=value pairs.",
+                "Some continuation lines may start with a label-like token such as 'step[1]=...' followed by additional key=value pairs; keep as space_kv-capable payload rather than fixed schema.",
+                "Header layout candidate is not a perfect match to the allowed enums; use none/tool_token_message as nearest reusable approximation because the real structure is two-tiered: context header line plus separate event line."
+            ]
+        },
+        "validation": {
+            "accepted": true,
+            "coverage": 1.0,
+            "timestamp_ratio": 0.0,
+            "structure_ratio": 1.0,
+            "parse_hits": 12,
+            "sample_size": 12
+        }
+    }
+}

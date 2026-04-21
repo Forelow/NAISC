@@ -5,10 +5,12 @@ from typing import Any
 
 
 TIMESTAMP_PREFIX_RE = re.compile(
-    r"^\s*(\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?)"
+    r"^\s*(?:\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?|[A-Z][a-z]{2}\s+\d{1,2}\s\d{2}:\d{2}:\d{2})"
 )
 
 KV_TOKEN_RE = re.compile(r"\b[\w.-]+=([^\s]+)")
+FACILITY_LEVEL_RE = re.compile(r"\b[A-Za-z0-9_.-]+\.(?:debug|info|notice|warn|warning|error|critical|alert|emerg|fatal):", re.IGNORECASE)
+LEADING_TAG_RE = re.compile(r"\[[^\]]+\]")
 
 
 def detect_semi_structured_family(text_payload: dict[str, Any]) -> dict[str, Any]:
@@ -26,16 +28,18 @@ def detect_semi_structured_family(text_payload: dict[str, Any]) -> dict[str, Any
     syslog_score = _score_syslog_like(non_empty_lines[:20])
     labeled_block_score = _score_labeled_blocks(non_empty_lines[:20])
 
-    best = max(
-        [
-            ("kv_line_log", kv_score, "Many key=value pairs per line"),
-            ("syslog_like_log", syslog_score, "Timestamp/message style line log"),
-            ("labeled_text_block", labeled_block_score, "Repeated label:value style blocks"),
-        ],
-        key=lambda x: x[1],
-    )
-
-    family, confidence, notes = best
+    if syslog_score >= 0.6 and syslog_score >= kv_score:
+        family, confidence, notes = ("syslog_like_log", syslog_score, "Timestamp/message style line log")
+    else:
+        best = max(
+            [
+                ("kv_line_log", kv_score, "Many key=value pairs per line"),
+                ("syslog_like_log", syslog_score, "Timestamp/message style line log"),
+                ("labeled_text_block", labeled_block_score, "Repeated label:value style blocks"),
+            ],
+            key=lambda x: x[1],
+        )
+        family, confidence, notes = best
 
     if confidence < 0.4:
         return {
@@ -72,7 +76,9 @@ def _score_syslog_like(lines: list[str]) -> float:
     for line in lines:
         has_ts = bool(TIMESTAMP_PREFIX_RE.search(line))
         has_level = any(token in line for token in ["INFO", "WARN", "WARNING", "ERROR", "CRITICAL"])
-        if has_ts or (has_level and len(line.split()) >= 4):
+        has_facility = bool(FACILITY_LEVEL_RE.search(line))
+        has_tag = bool(LEADING_TAG_RE.search(line))
+        if (has_ts and (has_facility or has_tag)) or (has_ts and has_level) or (has_level and len(line.split()) >= 4):
             strong += 1
 
     return strong / len(lines)

@@ -1,74 +1,48 @@
 from __future__ import annotations
 
-import re
 from typing import Any
-import re
 
-
-KV_PAIR_RE = re.compile(r'([\w.-]+)=(".*?"|[^\s]+)')
-
-SYSLOG_LINE_RE = re.compile(
-    r"""
-    ^\s*
-    (?P<ts>\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?)
-    \s+
-    (?P<tool_id>[A-Za-z0-9_.-]+)
-    \s+
-    (?P<third>[A-Za-z0-9_.-]+)
-    (?P<rest>.*)
-    $
-    """,
-    re.VERBOSE,
-)
-
-UPPER_TOKEN_RE = re.compile(r"^[A-Z][A-Z0-9_.-]*$")
+from semi_structured.spec_builder import preview_parse_record
 
 
 def parse_semi_structured(
     text_payload: dict[str, Any],
     family_info: dict[str, Any],
+    parse_spec: dict[str, Any],
 ) -> dict[str, Any]:
-    family = family_info.get("family")
-
-    if family == "kv_line_log":
-        return _parse_kv_line_log(text_payload)
-
-    if family == "syslog_like_log":
-        return _parse_syslog_like_log(text_payload)
-
-    return {
-        "schema_family": "semi_structured_log",
-        "records": [],
-        "record_count": 0,
-        "status": f"family_not_implemented:{family}",
-    }
-
-
-def _parse_kv_line_log(text_payload: dict[str, Any]) -> dict[str, Any]:
     records = []
 
-    for line in text_payload.get("lines", []):
-        raw = line["text"].strip()
-        if not raw:
-            continue
+    boundary_type = (parse_spec.get("record_boundary") or {}).get("type", "per_line")
 
-        matches = KV_PAIR_RE.findall(raw)
-        if not matches:
-            continue
-
-        parsed = {}
-        for key, value in matches:
-            parsed[key] = _coerce_value(value)
-
-        record_type = _classify_record_type(parsed)
-
-        records.append(
-            {
-                "record_type": record_type,
-                "source_reference": f"line:{line['line_no']}",
-                "data": parsed,
-            }
-        )
+    if boundary_type == "blank_line_blocks":
+        for block_no, block_text in _iter_blank_line_blocks(text_payload):
+            data = preview_parse_record(block_text, parse_spec)
+            if not data:
+                continue
+            record_type = _classify_record_type(data, parse_spec)
+            records.append(
+                {
+                    "record_type": record_type,
+                    "source_reference": f"block:{block_no}",
+                    "data": data,
+                }
+            )
+    else:
+        for item in text_payload.get("lines", []):
+            raw = item.get("text", "").strip()
+            if not raw:
+                continue
+            data = preview_parse_record(raw, parse_spec)
+            if not data:
+                continue
+            record_type = _classify_record_type(data, parse_spec)
+            records.append(
+                {
+                    "record_type": record_type,
+                    "source_reference": f"line:{item['line_no']}",
+                    "data": data,
+                }
+            )
 
     return {
         "schema_family": "semi_structured_log",
@@ -77,137 +51,90 @@ def _parse_kv_line_log(text_payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _classify_record_type(data: dict[str, Any]) -> str:
+def _iter_blank_line_blocks(text_payload: dict[str, Any]):
+    block_no = 0
+    current: list[str] = []
+    for item in text_payload.get("lines", []):
+        text = item.get("text", "")
+        if text.strip():
+            current.append(text.rstrip())
+        elif current:
+            block_no += 1
+            yield block_no, "\n".join(current).strip()
+            current = []
+    if current:
+        block_no += 1
+        yield block_no, "\n".join(current).strip()
+
+
+def _classify_record_type(data: dict[str, Any], parse_spec: dict[str, Any]) -> str:
     keys = set(data.keys())
+    event_code = str(data.get("event_code", "")).upper()
+    event_type = str(data.get("event_type", "")).upper()
+    severity = str(data.get("severity", "")).upper()
 
-    if {"from_state", "to_state"} & keys or "state" in keys:
-        return "equipment_state"
+    classification_hints = parse_spec.get("classification_hints") or {}
 
-    if {"sensor", "sensor_id", "value"} & keys and ("unit" in keys or "timestamp" in keys or "ts" in keys):
-        return "sensor_reading"
-
-    if {"fault", "fault_code", "alarm_code", "severity"} & keys:
-        return "fault_event"
-
-    if {"recipe", "recipe_id", "parameter", "setpoint"} & keys:
-        return "process_parameter_recipe"
-
-    if {"wafer_id", "step", "step_name", "seq", "action"} & keys:
-        return "wafer_processing_sequence"
-
-    return "generic_text_record"
-
-
-def _coerce_value(value: str) -> Any:
-    value = value.strip()
-
-    if len(value) >= 2 and value[0] == '"' and value[-1] == '"':
-        value = value[1:-1]
-
-    if value == "":
-        return None
-
-    lowered = value.lower()
-    if lowered == "true":
-        return True
-    if lowered == "false":
-        return False
-
-    try:
-        if "." in value or "e" in lowered:
-            return float(value)
-        return int(value)
-    except ValueError:
-        return value
-    
-def _parse_syslog_like_log(text_payload: dict[str, Any]) -> dict[str, Any]:
-    records = []
-
-    for line in text_payload.get("lines", []):
-        raw = line["text"].strip()
-        if not raw:
+    event_code_matches: list[str] = []
+    for record_type, hint in classification_hints.items():
+        if not isinstance(hint, dict):
             continue
+        hint_codes = {str(x).upper() for x in hint.get("event_codes", []) if x}
+        if event_code and event_code in hint_codes:
+            event_code_matches.append(record_type)
+        elif event_type and event_type in hint_codes:
+            event_code_matches.append(record_type)
 
-        match = SYSLOG_LINE_RE.match(raw)
-        if not match:
+    priority = [
+        "fault_event",
+        "equipment_state",
+        "process_parameter_recipe",
+        "sensor_reading",
+        "wafer_processing_sequence",
+        "generic_text_record",
+    ]
+    for preferred in priority:
+        if preferred in event_code_matches:
+            return preferred
+
+    field_matches: list[str] = []
+    for record_type, hint in classification_hints.items():
+        if not isinstance(hint, dict):
             continue
-
-        ts = match.group("ts")
-        tool_id = match.group("tool_id")
-        third = match.group("third")
-        rest = (match.group("rest") or "").strip()
-
-        data: dict[str, Any] = {
-            "ts": ts,
-            "tool_id": tool_id,
+        required_any_fields = {
+            field
+            for field in hint.get("required_any_fields", [])
+            if field not in {"severity", "message", "ts", "tool_id", "channel"}
         }
+        if required_any_fields and (required_any_fields & keys):
+            field_matches.append(record_type)
 
-        rest_kv = dict((k, _coerce_value(v)) for k, v in KV_PAIR_RE.findall(rest))
-        rest_without_kv = KV_PAIR_RE.sub("", rest).strip()
-        upper_rest_tokens = rest_without_kv.split()
+    for preferred in priority:
+        if preferred in field_matches:
+            return preferred
 
-        if third in {"INFO", "WARN", "WARNING", "ERROR", "CRITICAL"}:
-            data["severity"] = third
-
-            if upper_rest_tokens and UPPER_TOKEN_RE.match(upper_rest_tokens[0]):
-                data["fault_code"] = upper_rest_tokens[0]
-                message = " ".join(upper_rest_tokens[1:]).strip()
-            else:
-                message = rest_without_kv
-
-            if message:
-                data["message"] = message
-
-        elif third in {"STATE", "STEP", "SENSOR", "ALARM", "EVENT"}:
-            data["event_type"] = third
-            if rest_without_kv:
-                data["message"] = rest_without_kv
-
-        else:
-            data["event_type"] = third
-            if rest_without_kv:
-                data["message"] = rest_without_kv
-
-        data.update(rest_kv)
-
-        record_type = _classify_syslog_record_type(data)
-
-        records.append(
-            {
-                "record_type": record_type,
-                "source_reference": f"line:{line['line_no']}",
-                "data": data,
-            }
-        )
-
-    return {
-        "schema_family": "semi_structured_log",
-        "records": records,
-        "record_count": len(records),
-    }
-
-def _classify_syslog_record_type(data: dict[str, Any]) -> str:
-    keys = set(data.keys())
-
-    if "severity" in keys or "fault_code" in keys or data.get("event_type") == "ALARM":
+    if event_code in {"ALARM", "FAULT", "ALARM_CLR", "FAULT_CLEAR", "INTERLOCK"}:
+        return "fault_event"
+    if severity in {"ERROR", "ERR", "CRITICAL", "ALERT", "EMERG", "FATAL"} and ({"fault", "code", "reason"} & keys):
         return "fault_event"
 
-    if {"from_state", "to_state"} & keys or data.get("event_type") == "STATE" or "state" in keys:
+    if event_code in {"STATE", "EQUIP_STATE", "SYS_BOOT", "STARTUP", "SHUTDOWN"} or {"from", "to", "prev", "curr", "state", "from_state", "to_state"} & keys:
         return "equipment_state"
 
-    if (
-        {"sensor", "sensor_id", "value"} & keys
-        and ("unit" in keys or "ts" in keys)
-    ) or data.get("event_type") == "SENSOR":
+    if event_code in {"RECIPE", "RECIPE_DEFINE", "RECIPE_STEP", "RCP_LOAD", "RCP_PARAM"} or {"recipe", "recipe_id", "name", "rev", "parameter", "setpoint", "target_temp_C"} & keys:
+        return "process_parameter_recipe"
+
+    if event_code in {"SENSOR", "TRACE", "READING", "MEASURE"} or {"sensor", "sensor_id", "value", "reading", "temp_C", "pressure_mTorr", "base_pres_Pa", "proc_pres_Pa", "dep_rate_A_s"} & keys:
         return "sensor_reading"
 
-    if (
-        {"wafer_id", "step", "step_name", "seq", "action"} & keys
-        or data.get("event_type") == "STEP"
-    ):
+    if event_code in {
+        "WAFER", "WAFER_LOAD", "WAFER_RESULT",
+        "STEP", "STEP_START", "STEP_END", "STEP_ABORT",
+        "WFR_SEQ", "WF_MOVE", "ACTION",
+        "LOAD_COMPLETE", "UNLOAD_COMPLETE",
+        "LOT_IN", "LOT_OUT", "LOT_RESUME", "LOT_START",
+        "MAINT"
+    } or {"wafer", "wafer_id", "wfr", "step", "step_name", "seq", "action", "slot", "lot"} & keys:
         return "wafer_processing_sequence"
-
-    if {"recipe", "recipe_id", "parameter", "setpoint"} & keys:
-        return "process_parameter_recipe"
 
     return "generic_text_record"

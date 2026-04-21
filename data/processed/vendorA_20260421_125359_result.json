@@ -1,0 +1,1152 @@
+{
+    "ingested": {
+        "file_id": "025afbb4-2fdf-467d-8771-11486acc7d91",
+        "filename": "vendorA.syslog",
+        "extension": ".syslog",
+        "size_bytes": 6558,
+        "raw_path": "data\\raw\\025afbb4-2fdf-467d-8771-11486acc7d91_vendorA.syslog",
+        "ingestion_time": "2026-04-21T12:53:44.318367",
+        "sha256": "8a867464492ded5eb7b391b074494904e89e8ca46fe3e0d42716a9a0bbb829f8"
+    },
+    "detection": {
+        "format_guess": "syslog_like_text",
+        "content_class": "semi_structured_text",
+        "confidence": 0.88,
+        "notes": "Repeated timestamp/syslog-like pattern detected",
+        "extension_hint": ".syslog",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "syslog_like_text",
+        "is_supported": true,
+        "parser_family": "semi_structured_parser",
+        "support_status": "supported",
+        "notes": "syslog_like_text is handled by semi_structured_parser"
+    },
+    "routing": {
+        "next_route": "semi_structured_parser",
+        "processing_mode": "regex_or_rule_parse",
+        "should_attempt_parse": true,
+        "notes": "Known semi-structured text pattern"
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 51,
+        "family_info": {
+            "family": "semi_structured_text",
+            "confidence": 0.88,
+            "notes": "Unified semi-structured lane from syslog_like_text"
+        }
+    },
+    "structure_config": {
+        "family": "semi_structured_text",
+        "parser_strategy": "llm_spec_with_deterministic_validation",
+        "record_boundary": {
+            "type": "per_line"
+        },
+        "timestamp_styles": [
+            "syslog_mmm_dd_hh_mm_ss"
+        ],
+        "header_layout_candidates": [
+            "syslog_host_facility_level"
+        ],
+        "event_extraction_candidates": [
+            "leading_bracket_token"
+        ],
+        "payload_candidates": [
+            "space_kv"
+        ],
+        "classification_hints": {
+            "equipment_state": {
+                "event_codes": [
+                    "STATE",
+                    "EQUIP_STATE",
+                    "SYS_BOOT",
+                    "STARTUP",
+                    "SHUTDOWN"
+                ],
+                "required_any_fields": [
+                    "prev",
+                    "curr",
+                    "state",
+                    "from",
+                    "to",
+                    "from_state",
+                    "to_state",
+                    "trigger"
+                ]
+            },
+            "process_parameter_recipe": {
+                "event_codes": [
+                    "RCP_LOAD",
+                    "RCP_PARAM",
+                    "RECIPE",
+                    "RECIPE_STEP",
+                    "LOT_OPEN"
+                ],
+                "required_any_fields": [
+                    "recipe",
+                    "recipe_id",
+                    "name",
+                    "rev",
+                    "parameter",
+                    "setpoint",
+                    "target_temp_C",
+                    "duration_s",
+                    "version"
+                ]
+            },
+            "sensor_reading": {
+                "event_codes": [
+                    "SENSOR",
+                    "TRACE",
+                    "READING",
+                    "MEASURE"
+                ],
+                "required_any_fields": [
+                    "sensor",
+                    "sensor_id",
+                    "value",
+                    "reading",
+                    "temp_C",
+                    "pressure_mTorr",
+                    "base_pres_Pa",
+                    "proc_pres_Pa",
+                    "dep_rate_A_s",
+                    "zone"
+                ]
+            },
+            "fault_event": {
+                "event_codes": [
+                    "WARN",
+                    "WARNING",
+                    "ALARM",
+                    "FAULT",
+                    "FAULT_CLEAR",
+                    "ALARM_CLR",
+                    "ERROR",
+                    "ERR",
+                    "CRITICAL",
+                    "INTERLOCK"
+                ],
+                "required_any_fields": [
+                    "fault",
+                    "fault_code",
+                    "alarm_code",
+                    "code",
+                    "error_code",
+                    "reason"
+                ]
+            },
+            "wafer_processing_sequence": {
+                "event_codes": [
+                    "WAFER",
+                    "STEP",
+                    "STEP_START",
+                    "STEP_END",
+                    "STEP_ABORT",
+                    "WFR_SEQ",
+                    "WF_MOVE",
+                    "ACTION",
+                    "LOAD_COMPLETE",
+                    "UNLOAD_COMPLETE",
+                    "LOT_IN",
+                    "LOT_OUT",
+                    "LOT_RESUME",
+                    "MAINT"
+                ],
+                "required_any_fields": [
+                    "wafer",
+                    "wafer_id",
+                    "wfr",
+                    "step",
+                    "step_name",
+                    "seq",
+                    "action",
+                    "slot",
+                    "lot"
+                ]
+            },
+            "generic_text_record": {
+                "event_codes": [],
+                "required_any_fields": []
+            }
+        },
+        "notes": [
+            "Observed deterministic structure: '<syslog timestamp> <host/tool_id> <facility.level>: [EVENT] <space-delimited key=value pairs>'.",
+            "Host/tool identifier appears between timestamp and facility.level and is parseable as a single token.",
+            "Facility and severity are combined as a dotted token such as kernel.info, local0.notice, local0.info, local0.debug.",
+            "Event code is consistently the first token after the colon and is enclosed in square brackets.",
+            "Payload is flat, inline, space-delimited key=value pairs; values are unquoted single tokens in sample.",
+            "No multiline continuation or block payload behavior is evidenced in sample."
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "semi_structured_log",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:2",
+                "data": {
+                    "ts": "Apr 13 06:00:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "kernel",
+                    "severity": "INFO",
+                    "event_code": "SYS_BOOT",
+                    "event_type": "SYS_BOOT",
+                    "uptime_s": 0,
+                    "hw_rev": "B",
+                    "sw_ver": "5.1.2",
+                    "message": "System initialised"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:3",
+                "data": {
+                    "ts": "Apr 13 06:00:05",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "STATE",
+                    "event_type": "STATE",
+                    "trigger": "SYSTEM_BOOT",
+                    "curr": "STANDBY",
+                    "prev": "OFFLINE"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:4",
+                "data": {
+                    "ts": "Apr 13 06:02:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "STATE",
+                    "event_type": "STATE",
+                    "op": "OPR_091",
+                    "trigger": "SELF_CHECK_PASS",
+                    "curr": "IDLE",
+                    "prev": "STANDBY"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:5",
+                "data": {
+                    "ts": "Apr 13 06:05:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "RCP_LOAD",
+                    "event_type": "RCP_LOAD",
+                    "checksum": "0xA3F1",
+                    "loaded_by": "OPR_091",
+                    "version": 3.2,
+                    "recipe": "CVD_SiO2_HQ_01"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:6",
+                "data": {
+                    "ts": "Apr 13 06:05:01",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "RCP_PARAM",
+                    "event_type": "RCP_PARAM",
+                    "duration_s": 600,
+                    "n2_flow_sccm": 10,
+                    "target_temp_C": 400,
+                    "step": "Preheat",
+                    "recipe": "CVD_SiO2_HQ_01"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:7",
+                "data": {
+                    "ts": "Apr 13 06:05:02",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "RCP_PARAM",
+                    "event_type": "RCP_PARAM",
+                    "duration_s": 1800,
+                    "pressure_mTorr": 300,
+                    "n2o_sccm": 100,
+                    "sih4_sccm": 60,
+                    "target_temp_C": 400,
+                    "step": "Deposit",
+                    "recipe": "CVD_SiO2_HQ_01"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "line:8",
+                "data": {
+                    "ts": "Apr 13 06:05:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "RCP_PARAM",
+                    "event_type": "RCP_PARAM",
+                    "duration_s": 600,
+                    "n2_flow_sccm": 10,
+                    "target_temp_C": 100,
+                    "step": "Cooldown",
+                    "recipe": "CVD_SiO2_HQ_01"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:9",
+                "data": {
+                    "ts": "Apr 13 06:06:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "LOT_IN",
+                    "event_type": "LOT_IN",
+                    "op": "OPR_091",
+                    "recipe": "CVD_SiO2_HQ_01",
+                    "wafer_count": 25,
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:10",
+                "data": {
+                    "ts": "Apr 13 06:06:01",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "STATE",
+                    "event_type": "STATE",
+                    "trigger": "LOT_START",
+                    "lot": "LOT_0300",
+                    "curr": "PROCESSING",
+                    "prev": "IDLE"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:11",
+                "data": {
+                    "ts": "Apr 13 06:06:02",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "WFR_SEQ",
+                    "event_type": "WFR_SEQ",
+                    "action": "LOAD_COMPLETE",
+                    "slot": 1,
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:12",
+                "data": {
+                    "ts": "Apr 13 06:06:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "recipe": "CVD_SiO2_HQ_01",
+                    "seq": 1,
+                    "step": "Preheat",
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:13",
+                "data": {
+                    "ts": "Apr 13 06:06:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 760000,
+                    "temp_C": 22.0,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:14",
+                "data": {
+                    "ts": "Apr 13 06:07:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 500,
+                    "temp_C": 85.4,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:15",
+                "data": {
+                    "ts": "Apr 13 06:08:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 310,
+                    "temp_C": 182.1,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:16",
+                "data": {
+                    "ts": "Apr 13 06:09:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 305,
+                    "temp_C": 278.8,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:17",
+                "data": {
+                    "ts": "Apr 13 06:10:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 302,
+                    "temp_C": 360.5,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:18",
+                "data": {
+                    "ts": "Apr 13 06:11:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 300,
+                    "temp_C": 399.8,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:19",
+                "data": {
+                    "ts": "Apr 13 06:16:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "result": "PASS",
+                    "dur_s": 600,
+                    "seq": 1,
+                    "step": "Preheat",
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:20",
+                "data": {
+                    "ts": "Apr 13 06:16:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "recipe": "CVD_SiO2_HQ_01",
+                    "seq": 2,
+                    "step": "Deposit",
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:21",
+                "data": {
+                    "ts": "Apr 13 06:16:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 100.0,
+                    "sih4_sccm": 60.0,
+                    "pressure_mTorr": 300,
+                    "temp_C": 400.1,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:22",
+                "data": {
+                    "ts": "Apr 13 06:21:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 100.0,
+                    "sih4_sccm": 60.1,
+                    "pressure_mTorr": 299,
+                    "temp_C": 400.3,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:23",
+                "data": {
+                    "ts": "Apr 13 06:26:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 99.8,
+                    "sih4_sccm": 59.9,
+                    "pressure_mTorr": 301,
+                    "temp_C": 401.0,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0300"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:24",
+                "data": {
+                    "ts": "Apr 13 06:28:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "WARNING",
+                    "event_code": "ALARM",
+                    "event_type": "ALARM",
+                    "msg": "SiH4 flow deviation exceeds threshold",
+                    "threshold_pct": 10.0,
+                    "deviation_pct": 19.7,
+                    "setpoint_sccm": 60.0,
+                    "actual_sccm": 48.2,
+                    "component": "SiH4_MFC",
+                    "step": "Deposit",
+                    "wafer": "WFR_0300",
+                    "code": "CVD_GAS_001"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:25",
+                "data": {
+                    "ts": "Apr 13 06:28:05",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "WARNING",
+                    "event_code": "ALARM",
+                    "event_type": "ALARM",
+                    "msg": "SiH4 flow deviation persisting",
+                    "threshold_pct": 10.0,
+                    "deviation_pct": 24.8,
+                    "setpoint_sccm": 60.0,
+                    "actual_sccm": 45.1,
+                    "component": "SiH4_MFC",
+                    "step": "Deposit",
+                    "wafer": "WFR_0300",
+                    "code": "CVD_GAS_001"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:26",
+                "data": {
+                    "ts": "Apr 13 06:28:10",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "ERR",
+                    "event_code": "ALARM",
+                    "event_type": "ALARM",
+                    "msg": "SiH4 MFC critical failure — deposit step aborted",
+                    "setpoint_sccm": 60.0,
+                    "actual_sccm": 42.0,
+                    "component": "SiH4_MFC",
+                    "step": "Deposit",
+                    "wafer": "WFR_0300",
+                    "code": "CVD_GAS_002"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:27",
+                "data": {
+                    "ts": "Apr 13 06:28:11",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "ERR",
+                    "event_code": "STEP_ABORT",
+                    "event_type": "STEP_ABORT",
+                    "elapsed_s": 724,
+                    "reason": "GAS_FLOW_CRITICAL",
+                    "seq": 2,
+                    "step": "Deposit",
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:28",
+                "data": {
+                    "ts": "Apr 13 06:28:12",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "ERR",
+                    "event_code": "STATE",
+                    "event_type": "STATE",
+                    "fault": "CVD_GAS_002",
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300",
+                    "curr": "FAULTED",
+                    "prev": "PROCESSING"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:29",
+                "data": {
+                    "ts": "Apr 13 06:28:13",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "ERR",
+                    "event_code": "WFR_SEQ",
+                    "event_type": "WFR_SEQ",
+                    "disposition": "HOLD",
+                    "action": "ABORT",
+                    "slot": 1,
+                    "wafer": "WFR_0300",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:30",
+                "data": {
+                    "ts": "Apr 13 06:35:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "MAINT",
+                    "event_type": "MAINT",
+                    "finding": "MFC body leak detected — replacing unit",
+                    "tech": "TECH_031",
+                    "component": "SiH4_MFC",
+                    "action": "MFC_INSPECT"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:31",
+                "data": {
+                    "ts": "Apr 13 06:50:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "MAINT",
+                    "event_type": "MAINT",
+                    "new_serial": "MFC_SIH4_0044",
+                    "tech": "TECH_031",
+                    "component": "SiH4_MFC",
+                    "action": "MFC_REPLACE"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "line:32",
+                "data": {
+                    "ts": "Apr 13 06:55:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "ALARM_CLR",
+                    "event_type": "ALARM_CLR",
+                    "action": "MFC_REPLACED",
+                    "cleared_by": "ENG_051",
+                    "code": "CVD_GAS_002"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:33",
+                "data": {
+                    "ts": "Apr 13 06:55:01",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "STATE",
+                    "event_type": "STATE",
+                    "op": "ENG_051",
+                    "trigger": "FAULT_CLEARED",
+                    "curr": "IDLE",
+                    "prev": "FAULTED"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:34",
+                "data": {
+                    "ts": "Apr 13 07:00:00",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "LOT_RESUME",
+                    "event_type": "LOT_RESUME",
+                    "eng_disp": "WFR_0300 quarantined, resume from slot 2",
+                    "slot": 2,
+                    "starting_wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "line:35",
+                "data": {
+                    "ts": "Apr 13 07:00:01",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "NOTICE",
+                    "event_code": "STATE",
+                    "event_type": "STATE",
+                    "lot": "LOT_0300",
+                    "curr": "PROCESSING",
+                    "prev": "IDLE"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:36",
+                "data": {
+                    "ts": "Apr 13 07:00:02",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "WFR_SEQ",
+                    "event_type": "WFR_SEQ",
+                    "action": "LOAD_COMPLETE",
+                    "slot": 2,
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:37",
+                "data": {
+                    "ts": "Apr 13 07:00:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "recipe": "CVD_SiO2_HQ_01",
+                    "seq": 1,
+                    "step": "Preheat",
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:38",
+                "data": {
+                    "ts": "Apr 13 07:00:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 760000,
+                    "temp_C": 25.0,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:39",
+                "data": {
+                    "ts": "Apr 13 07:01:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.1,
+                    "pressure_mTorr": 490,
+                    "temp_C": 88.2,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:40",
+                "data": {
+                    "ts": "Apr 13 07:06:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2_sccm": 10.0,
+                    "pressure_mTorr": 300,
+                    "temp_C": 399.9,
+                    "zone": "Z1",
+                    "step": "Preheat",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:41",
+                "data": {
+                    "ts": "Apr 13 07:10:03",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "result": "PASS",
+                    "dur_s": 600,
+                    "seq": 1,
+                    "step": "Preheat",
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:42",
+                "data": {
+                    "ts": "Apr 13 07:10:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "recipe": "CVD_SiO2_HQ_01",
+                    "seq": 2,
+                    "step": "Deposit",
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:43",
+                "data": {
+                    "ts": "Apr 13 07:10:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 100.0,
+                    "sih4_sccm": 60.0,
+                    "pressure_mTorr": 300,
+                    "temp_C": 400.0,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:44",
+                "data": {
+                    "ts": "Apr 13 07:20:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 100.1,
+                    "sih4_sccm": 60.0,
+                    "pressure_mTorr": 299,
+                    "temp_C": 400.2,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:45",
+                "data": {
+                    "ts": "Apr 13 07:30:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 99.9,
+                    "sih4_sccm": 60.1,
+                    "pressure_mTorr": 300,
+                    "temp_C": 400.1,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "line:46",
+                "data": {
+                    "ts": "Apr 13 07:40:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "DEBUG",
+                    "event_code": "SENSOR",
+                    "event_type": "SENSOR",
+                    "n2o_sccm": 100.0,
+                    "sih4_sccm": 59.9,
+                    "pressure_mTorr": 301,
+                    "temp_C": 400.3,
+                    "zone": "Z1",
+                    "step": "Deposit",
+                    "wafer": "WFR_0301"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:47",
+                "data": {
+                    "ts": "Apr 13 07:40:04",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "measured_A": 2010,
+                    "result": "PASS",
+                    "dur_s": 1800,
+                    "seq": 2,
+                    "step": "Deposit",
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:48",
+                "data": {
+                    "ts": "Apr 13 07:40:05",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_START",
+                    "event_type": "STEP_START",
+                    "recipe": "CVD_SiO2_HQ_01",
+                    "seq": 3,
+                    "step": "Cooldown",
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:49",
+                "data": {
+                    "ts": "Apr 13 07:50:05",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "STEP_END",
+                    "event_type": "STEP_END",
+                    "result": "PASS",
+                    "dur_s": 600,
+                    "seq": 3,
+                    "step": "Cooldown",
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "line:50",
+                "data": {
+                    "ts": "Apr 13 07:50:06",
+                    "tool_id": "TOOL_CVD_20",
+                    "channel": "local0",
+                    "severity": "INFO",
+                    "event_code": "WFR_SEQ",
+                    "event_type": "WFR_SEQ",
+                    "result": "PASS",
+                    "action": "UNLOAD_COMPLETE",
+                    "slot": 2,
+                    "wafer": "WFR_0301",
+                    "lot": "LOT_0300"
+                }
+            }
+        ],
+        "record_count": 49
+    },
+    "agent_debug": {
+        "final_source": "llm_semi_structured_spec",
+        "sample_lines": [
+            "Apr 13 06:00:00 TOOL_CVD_20 kernel.info: [SYS_BOOT] System initialised sw_ver=5.1.2 hw_rev=B uptime_s=0",
+            "Apr 13 06:00:05 TOOL_CVD_20 local0.notice: [STATE] prev=OFFLINE curr=STANDBY trigger=SYSTEM_BOOT",
+            "Apr 13 06:02:00 TOOL_CVD_20 local0.notice: [STATE] prev=STANDBY curr=IDLE trigger=SELF_CHECK_PASS op=OPR_091",
+            "Apr 13 06:05:00 TOOL_CVD_20 local0.info: [RCP_LOAD] recipe=CVD_SiO2_HQ_01 version=3.2 loaded_by=OPR_091 checksum=0xA3F1",
+            "Apr 13 06:05:01 TOOL_CVD_20 local0.info: [RCP_PARAM] recipe=CVD_SiO2_HQ_01 step=Preheat target_temp_C=400 n2_flow_sccm=10 duration_s=600",
+            "Apr 13 06:05:02 TOOL_CVD_20 local0.info: [RCP_PARAM] recipe=CVD_SiO2_HQ_01 step=Deposit target_temp_C=400 sih4_sccm=60 n2o_sccm=100 pressure_mTorr=300 duration_s=1800",
+            "Apr 13 06:05:03 TOOL_CVD_20 local0.info: [RCP_PARAM] recipe=CVD_SiO2_HQ_01 step=Cooldown target_temp_C=100 n2_flow_sccm=10 duration_s=600",
+            "Apr 13 06:06:00 TOOL_CVD_20 local0.notice: [LOT_IN] lot=LOT_0300 wafer_count=25 recipe=CVD_SiO2_HQ_01 op=OPR_091",
+            "Apr 13 06:06:01 TOOL_CVD_20 local0.notice: [STATE] prev=IDLE curr=PROCESSING lot=LOT_0300 trigger=LOT_START",
+            "Apr 13 06:06:02 TOOL_CVD_20 local0.info: [WFR_SEQ] lot=LOT_0300 wafer=WFR_0300 slot=1 action=LOAD_COMPLETE",
+            "Apr 13 06:06:03 TOOL_CVD_20 local0.info: [STEP_START] lot=LOT_0300 wafer=WFR_0300 step=Preheat seq=1 recipe=CVD_SiO2_HQ_01",
+            "Apr 13 06:06:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=22.0 pressure_mTorr=760000 n2_sccm=10.0"
+        ],
+        "llm_requested": true,
+        "llm_raw_spec": {
+            "family": "syslog-style equipment event records with bracketed event token and trailing key-value payload",
+            "record_boundary": "per_line",
+            "timestamp_styles": [
+                "syslog_mmm_dd_hh_mm_ss"
+            ],
+            "header_layout_candidates": [
+                "syslog_host_facility_level"
+            ],
+            "event_extraction_candidates": [
+                "leading_bracket_token"
+            ],
+            "payload_candidates": [
+                "space_kv"
+            ],
+            "classification_hints": {
+                "equipment_state": {
+                    "strong_signals": [
+                        "event token in [STATE], [SYS_BOOT]",
+                        "fields such as prev, curr, trigger, uptime_s"
+                    ],
+                    "sample_matches": [
+                        "[SYS_BOOT]",
+                        "[STATE]"
+                    ]
+                },
+                "process_parameter_recipe": {
+                    "strong_signals": [
+                        "event token in [RCP_LOAD], [RCP_PARAM]",
+                        "fields such as recipe, version, step, target_temp_C, duration_s, checksum"
+                    ],
+                    "sample_matches": [
+                        "[RCP_LOAD]",
+                        "[RCP_PARAM]"
+                    ]
+                },
+                "sensor_reading": {
+                    "strong_signals": [
+                        "event token [SENSOR]",
+                        "measurement fields such as temp_C, pressure_mTorr, flow values, zone"
+                    ],
+                    "sample_matches": [
+                        "[SENSOR]"
+                    ]
+                },
+                "fault_event": {
+                    "strong_signals": [
+                        "not observed in sample",
+                        "would likely appear as bracketed uppercase event token with same syslog header and space-delimited key=value payload"
+                    ],
+                    "sample_matches": []
+                },
+                "wafer_processing_sequence": {
+                    "strong_signals": [
+                        "event token in [LOT_IN], [WFR_SEQ], [STEP_START]",
+                        "fields such as lot, wafer, slot, action, step, seq"
+                    ],
+                    "sample_matches": [
+                        "[LOT_IN]",
+                        "[WFR_SEQ]",
+                        "[STEP_START]"
+                    ]
+                },
+                "generic_text_record": {
+                    "strong_signals": [
+                        "fallback when bracketed event token exists but payload lacks recognizable domain fields"
+                    ],
+                    "sample_matches": []
+                }
+            },
+            "notes": [
+                "Observed deterministic structure: '<syslog timestamp> <host/tool_id> <facility.level>: [EVENT] <space-delimited key=value pairs>'.",
+                "Host/tool identifier appears between timestamp and facility.level and is parseable as a single token.",
+                "Facility and severity are combined as a dotted token such as kernel.info, local0.notice, local0.info, local0.debug.",
+                "Event code is consistently the first token after the colon and is enclosed in square brackets.",
+                "Payload is flat, inline, space-delimited key=value pairs; values are unquoted single tokens in sample.",
+                "No multiline continuation or block payload behavior is evidenced in sample."
+            ]
+        },
+        "validation": {
+            "accepted": true,
+            "coverage": 1.0,
+            "timestamp_ratio": 1.0,
+            "structure_ratio": 1.0,
+            "parse_hits": 12,
+            "sample_size": 12
+        }
+    }
+}
