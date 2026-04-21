@@ -167,6 +167,14 @@ def preview_parse_record(record_text: str, spec: dict[str, Any]) -> dict[str, An
     raw = record_text.strip()
     if not raw:
         return None
+        # Skip pure metadata/comment blocks entirely
+    lines = [line.strip() for line in raw.splitlines() if line.strip()]
+    if lines and all(line.startswith(";") for line in lines):
+        return None
+    
+    vc_block = _parse_timestamp_started_block(raw)
+    if vc_block is not None:
+        return vc_block
 
     data: dict[str, Any] = {}
     ts, remainder = _extract_timestamp(raw, spec.get("timestamp_styles", []))
@@ -211,18 +219,95 @@ def preview_parse_record(record_text: str, spec: dict[str, Any]) -> dict[str, An
 
     return data
 
+def _parse_timestamp_started_block(raw: str) -> dict[str, Any] | None:
+    lines = [line.strip() for line in raw.splitlines() if line.strip()]
+    if not lines:
+        return None
+        # Skip file-level metadata/comment blocks
+    if lines[0].startswith(";"):
+        return None
+
+    # Pure file metadata/comments are not real records
+    if all(line.startswith(";") for line in lines):
+        return None
+
+    header_match = VC_CONTEXT_HEADER_RE.match(lines[0])
+    if not header_match:
+        return None
+
+    data: dict[str, Any] = {
+        "ts": header_match.group("ts"),
+        "tool_id": header_match.group("tool_id"),
+        "context": header_match.group("context"),
+    }
+
+    if len(lines) >= 2:
+        event_match = VC_EVENT_LINE_RE.match(lines[1])
+        if event_match:
+            data["event_prefix"] = event_match.group("event_prefix")
+            data["event_ref"] = event_match.group("event_ref")
+            data["event_code"] = event_match.group("event_code")
+            data["event_type"] = event_match.group("event_code")
+        else:
+            data["message"] = lines[1]
+
+    continuation_payload_lines: list[str] = []
+    free_text_lines: list[str] = []
+
+    for line in lines[2:]:
+        if line.startswith(">>"):
+            continuation_payload_lines.append(line[2:].strip())
+        else:
+            free_text_lines.append(line)
+
+    payload_text = " ".join(continuation_payload_lines).strip()
+    _, payload_data = _extract_payload(payload_text, ["space_kv", "label_value_lines"])
+    data.update(payload_data)
+
+    if free_text_lines:
+        extra_text = " ".join(free_text_lines).strip()
+        if extra_text:
+            data["message"] = extra_text
+
+    return data
 
 def _sample_records(text_payload: dict[str, Any], limit: int = 12) -> list[str]:
     lines = [item.get("text", "") for item in text_payload.get("lines", [])]
-    non_empty = [line.strip() for line in lines if line.strip()]
+    non_empty = [line.rstrip() for line in lines if line.strip()]
     if not non_empty:
         return []
 
-    # Try blank-line blocks only if they produce multiple meaningful blocks
+    # Prefer timestamp-started multiline blocks if they exist
+    ts_blocks: list[str] = []
+    current: list[str] = []
+
+    for line in lines:
+        stripped = line.strip()
+
+        # Ignore leading file metadata comments when not inside a record
+        if stripped.startswith(";") and not current:
+            continue
+
+        starts_new = bool(ISO_TS_RE.match(stripped))
+        if starts_new:
+            if current:
+                ts_blocks.append("\n".join(current).strip())
+            current = [line.rstrip()]
+        else:
+            if current:
+                current.append(line.rstrip())
+
+    if current:
+        ts_blocks.append("\n".join(current).strip())
+
+    if len(ts_blocks) >= 2:
+        return ts_blocks[:limit]
+
+    # Fallback: blank-line blocks
     blank_count = sum(1 for line in lines if not line.strip())
     if blank_count >= 2:
         blocks: list[str] = []
-        current: list[str] = []
+        current = []
         for line in lines:
             if line.strip():
                 current.append(line.rstrip())
@@ -231,12 +316,9 @@ def _sample_records(text_payload: dict[str, Any], limit: int = 12) -> list[str]:
                 current = []
         if current:
             blocks.append("\n".join(current).strip())
-
-        # Only use block mode if it actually creates multiple blocks
         if len(blocks) >= 2:
             return blocks[:limit]
 
-    # Otherwise default to normal per-line sampling
     return non_empty[:limit]
 
 
@@ -309,9 +391,9 @@ def _merge_specs(base_spec: dict[str, Any], llm_spec: dict[str, Any]) -> dict[st
     merged = dict(base_spec)
 
     rb = llm_spec.get("record_boundary")
-    if isinstance(rb, dict) and rb.get("type") in {"per_line", "blank_line_blocks"}:
+    if isinstance(rb, dict) and rb.get("type") in {"per_line", "blank_line_blocks", "timestamp_started_blocks"}:
         merged["record_boundary"] = {"type": rb["type"]}
-    elif isinstance(rb, str) and rb in {"per_line", "blank_line_blocks"}:
+    elif isinstance(rb, str) and rb in {"per_line", "blank_line_blocks", "timestamp_started_blocks"}:
         merged["record_boundary"] = {"type": rb}
 
     if isinstance(llm_spec.get("timestamp_styles"), list):
@@ -390,7 +472,24 @@ def _merge_specs(base_spec: dict[str, Any], llm_spec: dict[str, Any]) -> dict[st
 
 
 def _detect_record_boundary(sample_records: list[str]) -> str:
-    return "blank_line_blocks" if any("\n" in record for record in sample_records) else "per_line"
+    if not sample_records:
+        return "per_line"
+
+    multiline_count = sum(1 for r in sample_records if "\n" in r)
+    timestamp_started_count = 0
+
+    for r in sample_records:
+        first_line = r.splitlines()[0].strip()
+        if ISO_TS_RE.match(first_line):
+            timestamp_started_count += 1
+
+    if multiline_count >= 2 and timestamp_started_count >= max(1, len(sample_records) // 2):
+        return "timestamp_started_blocks"
+
+    if multiline_count >= 2:
+        return "blank_line_blocks"
+
+    return "per_line"
 
 
 def _detect_timestamp_styles(sample_records: list[str]) -> list[str]:
