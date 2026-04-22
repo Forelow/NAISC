@@ -24,6 +24,8 @@ from semi_structured.family_detector import detect_semi_structured_family
 from semi_structured.parser import parse_semi_structured
 from semi_structured.spec_builder import build_semi_structured_parse_spec
 from semi_structured.family_detector import detect_semi_structured_family
+from free_form.reader import load_text_document
+from free_form.parser import parse_free_form_text
 
 
 OUTPUT_DIR = Path("data/processed")
@@ -39,6 +41,18 @@ def save_result_to_file(file_info: dict, result_payload: dict) -> str:
         json.dump(result_payload, f, indent=4, ensure_ascii=False)
 
     return str(output_path)
+
+def _should_fallback_to_free_form(parsed_result: dict, agent_debug: dict | None) -> bool:
+    record_count = parsed_result.get("record_count", 0)
+
+    if record_count == 0:
+        return True
+
+    validation = (agent_debug or {}).get("validation", {})
+    if isinstance(validation, dict) and validation.get("accepted") is False:
+        return True
+
+    return False
 
 
 def run_pipeline(file_path: str) -> str:
@@ -123,6 +137,59 @@ def run_pipeline(file_path: str) -> str:
         result_payload["structure_config"] = parse_spec
         result_payload["parsed_result"] = parsed_result
         result_payload["agent_debug"] = agent_debug
+         # Fallback to free-form only if semi-structured clearly failed
+        if _should_fallback_to_free_form(parsed_result, agent_debug):
+            doc_payload = load_text_document(file_info["raw_path"])
+            free_form_result = parse_free_form_text(doc_payload)
+
+            if free_form_result.get("record_count", 0) > 0:
+                result_payload["structure_summary"] = {
+                    "format": "text",
+                    "line_count": doc_payload["line_count"],
+                    "char_count": doc_payload["char_count"],
+                    "family_info": {
+                        "family": "free_form_text",
+                        "confidence": detection.confidence,
+                        "notes": "Fallback from semi-structured lane to free-form text lane",
+                    },
+                }
+                result_payload["structure_config"] = {
+                    "family": "free_form_text",
+                    "parser_strategy": "chunk_then_llm_extract",
+                    "chunk_count": free_form_result.get("chunk_count", 0),
+                }
+                result_payload["parsed_result"] = free_form_result
+                result_payload["agent_debug"] = {
+                    "final_source": "free_form_fallback",
+                    "semi_structured_attempt": {
+                        "record_count": parsed_result.get("record_count", 0),
+                        "validation": (agent_debug or {}).get("validation"),
+                    },
+                }
+    elif detection.is_text:
+        # For text files not claimed by the semi-structured route, use free-form directly
+        doc_payload = load_text_document(file_info["raw_path"])
+        parsed_result = parse_free_form_text(doc_payload)
+
+        result_payload["structure_summary"] = {
+            "format": "text",
+            "line_count": doc_payload["line_count"],
+            "char_count": doc_payload["char_count"],
+            "family_info": {
+                "family": "free_form_text",
+                "confidence": detection.confidence,
+                "notes": f"Direct free-form text lane from {detection.format_guess}",
+            },
+        }
+        result_payload["structure_config"] = {
+            "family": "free_form_text",
+            "parser_strategy": "chunk_then_llm_extract",
+            "chunk_count": parsed_result.get("chunk_count", 0),
+        }
+        result_payload["parsed_result"] = parsed_result
+        result_payload["agent_debug"] = {
+            "final_source": "free_form_direct",
+        }            
     else:
         result_payload["parsed_result"] = {
             "status": "not_implemented_for_this_format_yet"
@@ -134,4 +201,4 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/vendorC.syslog")
+    run_pipeline("data/synthetic_logs/ion_implanter_freeform.txt")

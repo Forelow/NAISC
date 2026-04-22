@@ -1,0 +1,130 @@
+{
+    "input_file": "data\\free_form_samples\\maintenance_note_1.txt",
+    "parsed_result": {
+        "schema_family": "free_form_text",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:1",
+                "confidence": 0.94,
+                "evidence_text": "The investigation found nodule formation on the Ti target",
+                "data": {
+                    "equipment": "deposition chamber",
+                    "component": "Ti target",
+                    "curr_state": "nodule formation"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:1",
+                "confidence": 0.97,
+                "evidence_text": "the target assembly was replaced. The old target serial was TGT_Ti_0033 and the new target serial was TGT_Ti_0044",
+                "data": {
+                    "component": "target assembly",
+                    "curr_state": "replaced",
+                    "old_serial": "TGT_Ti_0033",
+                    "new_serial": "TGT_Ti_0044"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:2",
+                "confidence": 0.95,
+                "evidence_text": "wafer WFR_0311 in lot LOT_0310 had been aborted during the Deposit_TiN step because the arc threshold had been reached",
+                "data": {
+                    "wafer_id": "WFR_0311",
+                    "lot_id": "LOT_0310",
+                    "process_step": "Deposit_TiN",
+                    "fault_summary": "aborted",
+                    "cause": "arc threshold reached"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:2",
+                "confidence": 0.94,
+                "evidence_text": "engineering cleared the alarm and returned the tool to IDLE",
+                "data": {
+                    "alarm_status": "cleared",
+                    "curr_state": "IDLE"
+                }
+            }
+        ],
+        "record_count": 4,
+        "chunk_count": 2,
+        "chunk_debug": [
+            {
+                "chunk_id": 1,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.96,
+                                "evidence_text": "after repeated arc-related interruptions",
+                                "data": {
+                                    "fault_description": "repeated arc-related interruptions"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.94,
+                                "evidence_text": "The investigation found nodule formation on the Ti target",
+                                "data": {
+                                    "equipment": "deposition chamber",
+                                    "component": "Ti target",
+                                    "state": "nodule formation"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.97,
+                                "evidence_text": "the target assembly was replaced. The old target serial was TGT_Ti_0033 and the new target serial was TGT_Ti_0044",
+                                "data": {
+                                    "component": "target assembly",
+                                    "state": "replaced",
+                                    "old_serial": "TGT_Ti_0033",
+                                    "new_serial": "TGT_Ti_0044"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 2,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.95,
+                                "evidence_text": "wafer WFR_0311 in lot LOT_0310 had been aborted during the Deposit_TiN step because the arc threshold had been reached",
+                                "data": {
+                                    "wafer_id": "WFR_0311",
+                                    "lot_id": "LOT_0310",
+                                    "process_step": "Deposit_TiN",
+                                    "event": "aborted",
+                                    "cause": "arc threshold reached"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.94,
+                                "evidence_text": "engineering cleared the alarm and returned the tool to IDLE",
+                                "data": {
+                                    "alarm_status": "cleared",
+                                    "state": "IDLE"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            }
+        ]
+    }
+}

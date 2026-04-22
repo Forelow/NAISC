@@ -1,0 +1,3 @@
+Technician TECH_041 inspected the deposition chamber after repeated arc-related interruptions. The investigation found nodule formation on the Ti target, and the target assembly was replaced. The old target serial was TGT_Ti_0033 and the new target serial was TGT_Ti_0044.
+
+Before replacement, wafer WFR_0311 in lot LOT_0310 had been aborted during the Deposit_TiN step because the arc threshold had been reached. After replacement, engineering cleared the alarm and returned the tool to IDLE.

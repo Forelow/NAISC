@@ -1,0 +1,1665 @@
+{
+    "ingested": {
+        "file_id": "3494d2ec-7e4f-48c5-9923-a882df5e418e",
+        "filename": "pvd_sputter_shift_log.txt",
+        "extension": ".txt",
+        "size_bytes": 2887,
+        "raw_path": "data\\raw\\3494d2ec-7e4f-48c5-9923-a882df5e418e_pvd_sputter_shift_log.txt",
+        "ingestion_time": "2026-04-21T15:47:23.158472",
+        "sha256": "2533bdbc2eb9b8b7d56c1d60a2e07ec92c67ef7dcdbd911d2219f043938e1f15"
+    },
+    "detection": {
+        "format_guess": "free_text_log",
+        "content_class": "unstructured_text",
+        "confidence": 0.7,
+        "notes": "No strong deterministic line structure detected",
+        "extension_hint": ".txt",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "free_text_log",
+        "is_supported": true,
+        "parser_family": "unstructured_parser",
+        "support_status": "supported",
+        "notes": "free_text_log is handled by unstructured_parser"
+    },
+    "routing": {
+        "next_route": "unstructured_parser",
+        "processing_mode": "llm_or_extraction_fallback",
+        "should_attempt_parse": true,
+        "notes": "Text-like content with weak or no deterministic pattern"
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 63,
+        "char_count": 2887,
+        "family_info": {
+            "family": "free_form_text",
+            "confidence": 0.7,
+            "notes": "Direct free-form text lane from free_text_log"
+        }
+    },
+    "structure_config": {
+        "family": "free_form_text",
+        "parser_strategy": "chunk_then_llm_extract",
+        "chunk_count": 23
+    },
+    "parsed_result": {
+        "schema_family": "free_form_text",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:2",
+                "confidence": 0.96,
+                "evidence_text": "PVD_03 handed over from PM shift. Tool in IDLE.",
+                "data": {
+                    "equipment_id": "PVD_03",
+                    "curr_state": "IDLE",
+                    "timestamp": "2200h",
+                    "context": "handed over from PM shift"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:2",
+                "confidence": 0.93,
+                "evidence_text": "Previous shift noted intermittent arc events on TiN target",
+                "data": {
+                    "equipment_id": "PVD_03",
+                    "fault": "intermittent arc events",
+                    "affected_component": "TiN target",
+                    "reported_by": "previous shift"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:2",
+                "confidence": 0.84,
+                "evidence_text": "PM shift cleared arcs, no further action taken.",
+                "data": {
+                    "equipment_id": "PVD_03",
+                    "curr_state": "arcs cleared",
+                    "reported_by": "PM shift",
+                    "follow_up_action": "no further action taken"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:2",
+                "confidence": 0.72,
+                "evidence_text": "target age: 87%",
+                "data": {
+                    "equipment_id": "PVD_03",
+                    "parameter": "target age",
+                    "value": "87%",
+                    "component": "TiN target"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:3",
+                "confidence": 0.97,
+                "evidence_text": "2210h - Loaded lot LOT_0080 (25 wfrs). Recipe: PVD_TiN_BARRIER_V3.",
+                "data": {
+                    "timestamp": "2210h",
+                    "action": "loaded lot",
+                    "lot": "LOT_0080",
+                    "wafer_count": 25,
+                    "recipe": "PVD_TiN_BARRIER_V3"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:3",
+                "confidence": 0.94,
+                "evidence_text": "Eqp status OK before run.",
+                "data": {
+                    "curr_state": "OK",
+                    "timing": "before run"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:3",
+                "confidence": 0.92,
+                "evidence_text": "Recipe: PVD_TiN_BARRIER_V3.",
+                "data": {
+                    "recipe": "PVD_TiN_BARRIER_V3"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:4",
+                "confidence": 0.96,
+                "evidence_text": "2212h - Wafer 1 (W001) loaded. Pre-dep pump-down started.",
+                "data": {
+                    "timestamp": "2212h",
+                    "wafer": "W001",
+                    "wafer_number": "1",
+                    "steps": [
+                        "loaded",
+                        "pre-deposition pump-down started"
+                    ]
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:4",
+                "confidence": 0.94,
+                "evidence_text": "Pump-down start pres: 5.2e-4 Pa",
+                "data": {
+                    "parameter": "pressure",
+                    "context": "pump-down start",
+                    "value": "5.2e-4",
+                    "unit": "Pa"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:4",
+                "confidence": 0.92,
+                "evidence_text": "Target base pressure: < 5.0e-6 Pa",
+                "data": {
+                    "parameter": "base pressure",
+                    "target_condition": "< 5.0e-6 Pa",
+                    "unit": "Pa"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:5",
+                "confidence": 0.97,
+                "evidence_text": "base pressure reached 3.8e-6 Pa",
+                "data": {
+                    "timestamp": "2225h",
+                    "wafer_id": "W001",
+                    "sensor": "base pressure",
+                    "value": 3.8e-06,
+                    "unit": "Pa"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:5",
+                "confidence": 0.9,
+                "evidence_text": "Within spec. Deposition started.",
+                "data": {
+                    "timestamp": "2225h",
+                    "wafer_id": "W001",
+                    "curr_state": "base pressure within spec; deposition started"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:5",
+                "confidence": 0.86,
+                "evidence_text": "W001 base pressure reached 3.8e-6 Pa. Within spec. Deposition started.",
+                "data": {
+                    "timestamp": "2225h",
+                    "wafer": "W001",
+                    "sequence": [
+                        "base pressure reached",
+                        "within spec",
+                        "deposition started"
+                    ]
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:6",
+                "confidence": 0.96,
+                "evidence_text": "2235h - W001 deposition complete.",
+                "data": {
+                    "timestamp": "2235h",
+                    "wafer": "W001",
+                    "step": "deposition",
+                    "status": "complete"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:6",
+                "confidence": 0.95,
+                "evidence_text": "Film thickness (in-situ): 520 A.",
+                "data": {
+                    "measurement": "film thickness",
+                    "context": "in-situ",
+                    "value": 520,
+                    "unit": "A"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:6",
+                "confidence": 0.93,
+                "evidence_text": "Target: 500 A +/- 30 A.",
+                "data": {
+                    "parameter": "film thickness target",
+                    "target_value": 500,
+                    "tolerance_plus_minus": 30,
+                    "unit": "A"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:7",
+                "confidence": 0.96,
+                "evidence_text": "2237h - W002 loaded. Pump-down OK ... Dep started.",
+                "data": {
+                    "timestamp": "2237h",
+                    "wafer": "W002",
+                    "steps": [
+                        {
+                            "action": "loaded"
+                        },
+                        {
+                            "action": "pump-down",
+                            "status": "OK"
+                        },
+                        {
+                            "action": "deposition started"
+                        }
+                    ]
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:7",
+                "confidence": 0.94,
+                "evidence_text": "base 4.1e-6 Pa",
+                "data": {
+                    "measurement": "base pressure",
+                    "value": "4.1e-6",
+                    "unit": "Pa"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:7",
+                "confidence": 0.88,
+                "evidence_text": "Pump-down OK",
+                "data": {
+                    "curr_state": "pump-down OK"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:7",
+                "confidence": 0.85,
+                "evidence_text": "Dep started.",
+                "data": {
+                    "curr_state": "deposition started"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:8",
+                "confidence": 0.98,
+                "evidence_text": "2247h - W002 dep complete.",
+                "data": {
+                    "timestamp": "2247h",
+                    "wafer": "W002",
+                    "step": "deposition",
+                    "status": "complete"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:8",
+                "confidence": 0.96,
+                "evidence_text": "Thickness: 498 A.",
+                "data": {
+                    "measurement": "thickness",
+                    "value": 498,
+                    "unit": "A"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:9",
+                "confidence": 0.96,
+                "evidence_text": "2249h - W003 loaded. Pump-down to 4.0e-6 Pa. Dep started.",
+                "data": {
+                    "timestamp": "2249h",
+                    "wafer": "W003",
+                    "steps": [
+                        {
+                            "action": "loaded"
+                        },
+                        {
+                            "action": "pump-down",
+                            "target_pressure_pa": 4e-06
+                        },
+                        {
+                            "action": "deposition_started"
+                        }
+                    ]
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:10",
+                "confidence": 0.98,
+                "evidence_text": "Arc event detected on TiN target during W003 dep. System auto-suppressed.",
+                "data": {
+                    "fault_summary": "arc event",
+                    "component": "TiN target",
+                    "context": "during W003 deposition",
+                    "response": "system auto-suppressed",
+                    "session_arc_count": 1
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:10",
+                "confidence": 0.93,
+                "evidence_text": "DC power dipped from 3000 W to 2750 W for ~2s then recovered.",
+                "data": {
+                    "parameter": "DC power",
+                    "value_from_W": 3000,
+                    "value_to_W": 2750,
+                    "duration_s_approx": 2,
+                    "trend": "dipped then recovered"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:11",
+                "confidence": 0.96,
+                "evidence_text": "2259h - W003 dep complete.",
+                "data": {
+                    "timestamp": "2259h",
+                    "wafer": "W003",
+                    "step": "deposition",
+                    "status": "complete"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:11",
+                "confidence": 0.94,
+                "evidence_text": "Thickness: 485 A.",
+                "data": {
+                    "measurement_type": "thickness",
+                    "value": 485,
+                    "unit": "A",
+                    "wafer_id": "W003"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:12",
+                "confidence": 0.97,
+                "evidence_text": "2301h - W004 loaded.",
+                "data": {
+                    "timestamp": "2301h",
+                    "wafer": "W004",
+                    "action": "loaded"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:13",
+                "confidence": 0.98,
+                "evidence_text": "2303h - Third arc event. Arc count: 3. Arc frequency threshold (3 arcs in 30 min) reached.",
+                "data": {
+                    "event_time": "2303h",
+                    "fault_summary": "arc event",
+                    "arc_count": 3,
+                    "threshold": "3 arcs in 30 min",
+                    "threshold_reached": true
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:13",
+                "confidence": 0.95,
+                "evidence_text": "Per SOP, deposition halted.",
+                "data": {
+                    "equipment_activity": "deposition",
+                    "curr_state": "halted",
+                    "reason": "arc frequency threshold reached"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:13",
+                "confidence": 0.93,
+                "evidence_text": "Lot LOT_0080 put on hold at W004.",
+                "data": {
+                    "lot": "LOT_0080",
+                    "status": "on hold",
+                    "location": "W004"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:13",
+                "confidence": 0.82,
+                "evidence_text": "Notified on-call engineer (Eng. Priya R.) at 2304h.",
+                "data": {
+                    "fault_summary": "engineer notification",
+                    "notified_person": "Eng. Priya R.",
+                    "event_time": "2304h"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:14",
+                "confidence": 0.92,
+                "evidence_text": "Decision: replace target before resuming.",
+                "data": {
+                    "component": "target",
+                    "curr_state": "replacement required before resuming"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:15",
+                "confidence": 0.95,
+                "evidence_text": "2330h - Target replacement started. Old target removed (serial: TGT_TiN_0044, age: 87%, arc count: 412 lifetime).",
+                "data": {
+                    "timestamp": "2330h",
+                    "curr_state": "target replacement started",
+                    "component": "target",
+                    "action": "old target removed",
+                    "serial": "TGT_TiN_0044",
+                    "age_percent": 87,
+                    "arc_count_lifetime": 412
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:16",
+                "confidence": 0.96,
+                "evidence_text": "0010h - New target installed (serial: TGT_TiN_0051, age: 0%). Break-in procedure started",
+                "data": {
+                    "timestamp": "0010h",
+                    "event": "new target installed",
+                    "component": "target",
+                    "serial": "TGT_TiN_0051",
+                    "age_percent": 0,
+                    "curr_state": "break-in procedure started",
+                    "procedure_id": "PVD-BRK-001"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:17",
+                "confidence": 0.95,
+                "evidence_text": "0110h - Break-in complete.",
+                "data": {
+                    "timestamp": "0110h",
+                    "curr_state": "Break-in complete"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:17",
+                "confidence": 0.97,
+                "evidence_text": "Sputter rate verified: 52 A/min (target: 50 +/- 5 A/min).",
+                "data": {
+                    "parameter": "sputter rate",
+                    "value": 52,
+                    "unit": "A/min",
+                    "status": "verified",
+                    "target_value": 50,
+                    "target_tolerance": "+/- 5 A/min"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:17",
+                "confidence": 0.88,
+                "evidence_text": "target: 50 +/- 5 A/min",
+                "data": {
+                    "parameter": "sputter rate",
+                    "target_value": 50,
+                    "target_tolerance": "+/- 5 A/min",
+                    "unit": "A/min"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:18",
+                "confidence": 0.94,
+                "evidence_text": "0115h - Lot LOT_0080 resumed from W004.",
+                "data": {
+                    "timestamp": "0115h",
+                    "lot": "LOT_0080",
+                    "action": "resumed",
+                    "from_wafer": "W004"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:18",
+                "confidence": 0.98,
+                "evidence_text": "Eqp state: RUNNING.",
+                "data": {
+                    "curr_state": "RUNNING"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:19",
+                "confidence": 0.88,
+                "evidence_text": "0117h - W004 dep started with new target.",
+                "data": {
+                    "time": "0117h",
+                    "wafer": "W004",
+                    "step": "deposition started",
+                    "context": "new target"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:19",
+                "confidence": 0.91,
+                "evidence_text": "No arcs.",
+                "data": {
+                    "curr_state": "no arcs"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:20",
+                "confidence": 0.95,
+                "evidence_text": "0127h - W004 dep complete.",
+                "data": {
+                    "timestamp": "0127h",
+                    "wafer": "W004",
+                    "step": "deposition",
+                    "status": "complete"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:20",
+                "confidence": 0.94,
+                "evidence_text": "Thickness: 503 A.",
+                "data": {
+                    "measurement": "thickness",
+                    "value": 503,
+                    "unit": "A"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:21",
+                "confidence": 0.96,
+                "evidence_text": "Subsequent wafers W005 through W025 processed without incident.",
+                "data": {
+                    "start_time": "0128h",
+                    "wafer_range_start": "W005",
+                    "wafer_range_end": "W025",
+                    "status": "processed without incident"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:21",
+                "confidence": 0.88,
+                "evidence_text": "All thicknesses within 500 +/- 25 A.",
+                "data": {
+                    "measurement": "thickness",
+                    "value_target": 500,
+                    "tolerance": 25,
+                    "unit": "A",
+                    "scope": "all thicknesses"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:21",
+                "confidence": 0.86,
+                "evidence_text": "No arc events on new target.",
+                "data": {
+                    "fault_summary": "arc events",
+                    "occurred": false,
+                    "equipment_part": "new target"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:22",
+                "confidence": 0.93,
+                "evidence_text": "0530h - Lot LOT_0080 complete. Final summary:",
+                "data": {
+                    "timestamp": "0530h",
+                    "lot": "LOT_0080",
+                    "status": "complete"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:22",
+                "confidence": 0.89,
+                "evidence_text": "W001 to W003: PASS (old target, pre-replacement)",
+                "data": {
+                    "lot": "LOT_0080",
+                    "wafer_range_start": "W001",
+                    "wafer_range_end": "W003",
+                    "result": "PASS",
+                    "target_state": "old target",
+                    "sequence_context": "pre-replacement"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:22",
+                "confidence": 0.89,
+                "evidence_text": "W004 to W025: PASS (new target)",
+                "data": {
+                    "lot": "LOT_0080",
+                    "wafer_range_start": "W004",
+                    "wafer_range_end": "W025",
+                    "result": "PASS",
+                    "target_state": "new target"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:22",
+                "confidence": 0.84,
+                "evidence_text": "W003: borderline thickness flagged for review (485 A)",
+                "data": {
+                    "lot_id": "LOT_0080",
+                    "wafer_id": "W003",
+                    "measurement_type": "thickness",
+                    "value": "485 A",
+                    "status": "borderline",
+                    "action": "flagged for review"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:23",
+                "confidence": 0.95,
+                "evidence_text": "0540h - Tool returned to IDLE.",
+                "data": {
+                    "time": "0540h",
+                    "equipment": "Tool",
+                    "curr_state": "IDLE"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:23",
+                "confidence": 0.85,
+                "evidence_text": "LOT_0080 unloaded and staged for next step.",
+                "data": {
+                    "lot": "LOT_0080",
+                    "step": "unloaded and staged for next step",
+                    "time": "0540h"
+                }
+            }
+        ],
+        "record_count": 53,
+        "chunk_count": 23,
+        "chunk_debug": [
+            {
+                "chunk_id": 1,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": []
+                    }
+                },
+                "record_count": 0
+            },
+            {
+                "chunk_id": 2,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.96,
+                                "evidence_text": "PVD_03 handed over from PM shift. Tool in IDLE.",
+                                "data": {
+                                    "equipment_id": "PVD_03",
+                                    "state": "IDLE",
+                                    "timestamp": "2200h",
+                                    "context": "handed over from PM shift"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.93,
+                                "evidence_text": "Previous shift noted intermittent arc events on TiN target",
+                                "data": {
+                                    "equipment_id": "PVD_03",
+                                    "fault": "intermittent arc events",
+                                    "affected_component": "TiN target",
+                                    "reported_by": "previous shift"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.84,
+                                "evidence_text": "PM shift cleared arcs, no further action taken.",
+                                "data": {
+                                    "equipment_id": "PVD_03",
+                                    "state": "arcs cleared",
+                                    "reported_by": "PM shift",
+                                    "follow_up_action": "no further action taken"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.72,
+                                "evidence_text": "target age: 87%",
+                                "data": {
+                                    "equipment_id": "PVD_03",
+                                    "parameter": "target age",
+                                    "value": "87%",
+                                    "component": "TiN target"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 4
+            },
+            {
+                "chunk_id": 3,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.97,
+                                "evidence_text": "2210h - Loaded lot LOT_0080 (25 wfrs). Recipe: PVD_TiN_BARRIER_V3.",
+                                "data": {
+                                    "timestamp": "2210h",
+                                    "action": "loaded lot",
+                                    "lot_id": "LOT_0080",
+                                    "wafer_count": 25,
+                                    "recipe": "PVD_TiN_BARRIER_V3"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.94,
+                                "evidence_text": "Eqp status OK before run.",
+                                "data": {
+                                    "state": "OK",
+                                    "timing": "before run"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.92,
+                                "evidence_text": "Recipe: PVD_TiN_BARRIER_V3.",
+                                "data": {
+                                    "recipe": "PVD_TiN_BARRIER_V3"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 4,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "2212h - Wafer 1 (W001) loaded. Pre-dep pump-down started.",
+                                "data": {
+                                    "timestamp": "2212h",
+                                    "wafer_id": "W001",
+                                    "wafer_number": "1",
+                                    "steps": [
+                                        "loaded",
+                                        "pre-deposition pump-down started"
+                                    ]
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.94,
+                                "evidence_text": "Pump-down start pres: 5.2e-4 Pa",
+                                "data": {
+                                    "parameter": "pressure",
+                                    "context": "pump-down start",
+                                    "value": "5.2e-4",
+                                    "unit": "Pa"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.92,
+                                "evidence_text": "Target base pressure: < 5.0e-6 Pa",
+                                "data": {
+                                    "parameter": "base pressure",
+                                    "target_condition": "< 5.0e-6 Pa",
+                                    "unit": "Pa"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 5,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.97,
+                                "evidence_text": "base pressure reached 3.8e-6 Pa",
+                                "data": {
+                                    "timestamp": "2225h",
+                                    "wafer_id": "W001",
+                                    "sensor": "base pressure",
+                                    "value": 3.8e-06,
+                                    "unit": "Pa"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.9,
+                                "evidence_text": "Within spec. Deposition started.",
+                                "data": {
+                                    "timestamp": "2225h",
+                                    "wafer_id": "W001",
+                                    "state": "base pressure within spec; deposition started"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.98,
+                                "evidence_text": "Dep params: Ar flow = 30 sccm, N2 flow = 10 sccm, DC power = 3000 W, temp = 250 degC",
+                                "data": {
+                                    "wafer_id": "W001",
+                                    "parameters": {
+                                        "Ar flow": {
+                                            "value": 30,
+                                            "unit": "sccm"
+                                        },
+                                        "N2 flow": {
+                                            "value": 10,
+                                            "unit": "sccm"
+                                        },
+                                        "DC power": {
+                                            "value": 3000,
+                                            "unit": "W"
+                                        },
+                                        "temp": {
+                                            "value": 250,
+                                            "unit": "degC"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.86,
+                                "evidence_text": "W001 base pressure reached 3.8e-6 Pa. Within spec. Deposition started.",
+                                "data": {
+                                    "timestamp": "2225h",
+                                    "wafer_id": "W001",
+                                    "sequence": [
+                                        "base pressure reached",
+                                        "within spec",
+                                        "deposition started"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 6,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "2235h - W001 deposition complete.",
+                                "data": {
+                                    "timestamp": "2235h",
+                                    "wafer_id": "W001",
+                                    "process_step": "deposition",
+                                    "status": "complete"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.95,
+                                "evidence_text": "Film thickness (in-situ): 520 A.",
+                                "data": {
+                                    "measurement": "film thickness",
+                                    "context": "in-situ",
+                                    "value": 520,
+                                    "unit": "A"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.93,
+                                "evidence_text": "Target: 500 A +/- 30 A.",
+                                "data": {
+                                    "parameter": "film thickness target",
+                                    "target_value": 500,
+                                    "tolerance_plus_minus": 30,
+                                    "unit": "A"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.88,
+                                "evidence_text": "PASS.",
+                                "data": {
+                                    "result": "PASS"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 7,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "2237h - W002 loaded. Pump-down OK ... Dep started.",
+                                "data": {
+                                    "timestamp": "2237h",
+                                    "wafer_id": "W002",
+                                    "steps": [
+                                        {
+                                            "action": "loaded"
+                                        },
+                                        {
+                                            "action": "pump-down",
+                                            "status": "OK"
+                                        },
+                                        {
+                                            "action": "deposition started"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.94,
+                                "evidence_text": "base 4.1e-6 Pa",
+                                "data": {
+                                    "measurement": "base pressure",
+                                    "value": "4.1e-6",
+                                    "unit": "Pa"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.88,
+                                "evidence_text": "Pump-down OK",
+                                "data": {
+                                    "state": "pump-down OK"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.85,
+                                "evidence_text": "Dep started.",
+                                "data": {
+                                    "state": "deposition started"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 4
+            },
+            {
+                "chunk_id": 8,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.98,
+                                "evidence_text": "2247h - W002 dep complete.",
+                                "data": {
+                                    "timestamp": "2247h",
+                                    "wafer_id": "W002",
+                                    "step": "deposition",
+                                    "status": "complete"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.96,
+                                "evidence_text": "Thickness: 498 A.",
+                                "data": {
+                                    "measurement": "thickness",
+                                    "value": 498,
+                                    "unit": "A"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.87,
+                                "evidence_text": "PASS.",
+                                "data": {
+                                    "status": "PASS"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 9,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "2249h - W003 loaded. Pump-down to 4.0e-6 Pa. Dep started.",
+                                "data": {
+                                    "timestamp": "2249h",
+                                    "wafer_id": "W003",
+                                    "steps": [
+                                        {
+                                            "action": "loaded"
+                                        },
+                                        {
+                                            "action": "pump-down",
+                                            "target_pressure_pa": 4e-06
+                                        },
+                                        {
+                                            "action": "deposition_started"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 10,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.98,
+                                "evidence_text": "Arc event detected on TiN target during W003 dep. System auto-suppressed.",
+                                "data": {
+                                    "event": "arc event",
+                                    "component": "TiN target",
+                                    "context": "during W003 deposition",
+                                    "response": "system auto-suppressed",
+                                    "session_arc_count": 1
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.93,
+                                "evidence_text": "DC power dipped from 3000 W to 2750 W for ~2s then recovered.",
+                                "data": {
+                                    "parameter": "DC power",
+                                    "value_from_W": 3000,
+                                    "value_to_W": 2750,
+                                    "duration_s_approx": 2,
+                                    "trend": "dipped then recovered"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 11,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "2259h - W003 dep complete.",
+                                "data": {
+                                    "timestamp": "2259h",
+                                    "wafer_id": "W003",
+                                    "step": "deposition",
+                                    "status": "complete"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.94,
+                                "evidence_text": "Thickness: 485 A.",
+                                "data": {
+                                    "measurement_type": "thickness",
+                                    "value": 485,
+                                    "unit": "A",
+                                    "wafer_id": "W003"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.9,
+                                "evidence_text": "Marginally low but within tolerance. PASS.",
+                                "data": {
+                                    "status": "PASS",
+                                    "assessment": "marginally low but within tolerance",
+                                    "wafer_id": "W003"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 12,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.97,
+                                "evidence_text": "2301h - W004 loaded.",
+                                "data": {
+                                    "timestamp": "2301h",
+                                    "wafer_id": "W004",
+                                    "action": "loaded"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.96,
+                                "evidence_text": "Second arc event during pump-down phase. Arc count: 2.",
+                                "data": {
+                                    "event_type": "arc event",
+                                    "occurrence_ordinal": "second",
+                                    "process_phase": "pump-down",
+                                    "arc_count": 2
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 13,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.98,
+                                "evidence_text": "2303h - Third arc event. Arc count: 3. Arc frequency threshold (3 arcs in 30 min) reached.",
+                                "data": {
+                                    "event_time": "2303h",
+                                    "event": "arc event",
+                                    "arc_count": 3,
+                                    "threshold": "3 arcs in 30 min",
+                                    "threshold_reached": true
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.95,
+                                "evidence_text": "Per SOP, deposition halted.",
+                                "data": {
+                                    "equipment_activity": "deposition",
+                                    "state": "halted",
+                                    "reason": "arc frequency threshold reached"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.93,
+                                "evidence_text": "Lot LOT_0080 put on hold at W004.",
+                                "data": {
+                                    "lot_id": "LOT_0080",
+                                    "status": "on hold",
+                                    "location": "W004"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.82,
+                                "evidence_text": "Notified on-call engineer (Eng. Priya R.) at 2304h.",
+                                "data": {
+                                    "event": "engineer notification",
+                                    "notified_person": "Eng. Priya R.",
+                                    "event_time": "2304h"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 4
+            },
+            {
+                "chunk_id": 14,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.95,
+                                "evidence_text": "Target surface shows micro-nodule formation consistent with late-life arcing.",
+                                "data": {
+                                    "component": "target",
+                                    "fault_description": "micro-nodule formation consistent with late-life arcing"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.92,
+                                "evidence_text": "Decision: replace target before resuming.",
+                                "data": {
+                                    "component": "target",
+                                    "state": "replacement required before resuming"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 15,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.95,
+                                "evidence_text": "2330h - Target replacement started. Old target removed (serial: TGT_TiN_0044, age: 87%, arc count: 412 lifetime).",
+                                "data": {
+                                    "timestamp": "2330h",
+                                    "state": "target replacement started",
+                                    "component": "target",
+                                    "action": "old target removed",
+                                    "serial": "TGT_TiN_0044",
+                                    "age_percent": 87,
+                                    "arc_count_lifetime": 412
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 16,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.96,
+                                "evidence_text": "0010h - New target installed (serial: TGT_TiN_0051, age: 0%). Break-in procedure started",
+                                "data": {
+                                    "timestamp": "0010h",
+                                    "event": "new target installed",
+                                    "component": "target",
+                                    "serial": "TGT_TiN_0051",
+                                    "age_percent": 0,
+                                    "state": "break-in procedure started",
+                                    "procedure_id": "PVD-BRK-001"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.98,
+                                "evidence_text": "Break-in: 30 min at 30% power, 30 min at 60% power, 10 min at 100% power.",
+                                "data": {
+                                    "recipe_name": "Break-in",
+                                    "steps": [
+                                        {
+                                            "duration_min": 30,
+                                            "power_percent": 30
+                                        },
+                                        {
+                                            "duration_min": 30,
+                                            "power_percent": 60
+                                        },
+                                        {
+                                            "duration_min": 10,
+                                            "power_percent": 100
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 17,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.95,
+                                "evidence_text": "0110h - Break-in complete.",
+                                "data": {
+                                    "timestamp": "0110h",
+                                    "state": "Break-in complete"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.97,
+                                "evidence_text": "Sputter rate verified: 52 A/min (target: 50 +/- 5 A/min).",
+                                "data": {
+                                    "parameter": "sputter rate",
+                                    "value": 52,
+                                    "unit": "A/min",
+                                    "status": "verified",
+                                    "target_value": 50,
+                                    "target_tolerance": "+/- 5 A/min"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.88,
+                                "evidence_text": "target: 50 +/- 5 A/min",
+                                "data": {
+                                    "parameter": "sputter rate",
+                                    "target_value": 50,
+                                    "target_tolerance": "+/- 5 A/min",
+                                    "unit": "A/min"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 18,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.94,
+                                "evidence_text": "0115h - Lot LOT_0080 resumed from W004.",
+                                "data": {
+                                    "timestamp": "0115h",
+                                    "lot_id": "LOT_0080",
+                                    "action": "resumed",
+                                    "from_wafer": "W004"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.98,
+                                "evidence_text": "Eqp state: RUNNING.",
+                                "data": {
+                                    "state": "RUNNING"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 19,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.88,
+                                "evidence_text": "0117h - W004 dep started with new target.",
+                                "data": {
+                                    "time": "0117h",
+                                    "wafer_id": "W004",
+                                    "step": "deposition started",
+                                    "context": "new target"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.91,
+                                "evidence_text": "No arcs.",
+                                "data": {
+                                    "state": "no arcs"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 20,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.95,
+                                "evidence_text": "0127h - W004 dep complete.",
+                                "data": {
+                                    "timestamp": "0127h",
+                                    "wafer_id": "W004",
+                                    "step": "deposition",
+                                    "status": "complete"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.94,
+                                "evidence_text": "Thickness: 503 A.",
+                                "data": {
+                                    "measurement": "thickness",
+                                    "value": 503,
+                                    "unit": "A"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.83,
+                                "evidence_text": "PASS.",
+                                "data": {
+                                    "status": "PASS"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 21,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "Subsequent wafers W005 through W025 processed without incident.",
+                                "data": {
+                                    "start_time": "0128h",
+                                    "wafer_range_start": "W005",
+                                    "wafer_range_end": "W025",
+                                    "status": "processed without incident"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.88,
+                                "evidence_text": "All thicknesses within 500 +/- 25 A.",
+                                "data": {
+                                    "measurement": "thickness",
+                                    "value_target": 500,
+                                    "tolerance": 25,
+                                    "unit": "A",
+                                    "scope": "all thicknesses"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.86,
+                                "evidence_text": "No arc events on new target.",
+                                "data": {
+                                    "event": "arc events",
+                                    "occurred": false,
+                                    "equipment_part": "new target"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 22,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.93,
+                                "evidence_text": "0530h - Lot LOT_0080 complete. Final summary:",
+                                "data": {
+                                    "timestamp": "0530h",
+                                    "lot_id": "LOT_0080",
+                                    "status": "complete"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.89,
+                                "evidence_text": "W001 to W003: PASS (old target, pre-replacement)",
+                                "data": {
+                                    "lot_id": "LOT_0080",
+                                    "wafer_range_start": "W001",
+                                    "wafer_range_end": "W003",
+                                    "result": "PASS",
+                                    "target_state": "old target",
+                                    "sequence_context": "pre-replacement"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.89,
+                                "evidence_text": "W004 to W025: PASS (new target)",
+                                "data": {
+                                    "lot_id": "LOT_0080",
+                                    "wafer_range_start": "W004",
+                                    "wafer_range_end": "W025",
+                                    "result": "PASS",
+                                    "target_state": "new target"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.84,
+                                "evidence_text": "W003: borderline thickness flagged for review (485 A)",
+                                "data": {
+                                    "lot_id": "LOT_0080",
+                                    "wafer_id": "W003",
+                                    "measurement_type": "thickness",
+                                    "value": "485 A",
+                                    "status": "borderline",
+                                    "action": "flagged for review"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.87,
+                                "evidence_text": "Total target arc events this shift: 3 (all on old target)",
+                                "data": {
+                                    "event_type": "target arc",
+                                    "count": 3,
+                                    "time_context": "this shift",
+                                    "target_state": "old target"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 4
+            },
+            {
+                "chunk_id": 23,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.95,
+                                "evidence_text": "0540h - Tool returned to IDLE.",
+                                "data": {
+                                    "time": "0540h",
+                                    "equipment": "Tool",
+                                    "state": "IDLE"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.85,
+                                "evidence_text": "LOT_0080 unloaded and staged for next step.",
+                                "data": {
+                                    "lot_id": "LOT_0080",
+                                    "step": "unloaded and staged for next step",
+                                    "time": "0540h"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            }
+        ]
+    },
+    "agent_debug": {
+        "final_source": "free_form_direct"
+    }
+}

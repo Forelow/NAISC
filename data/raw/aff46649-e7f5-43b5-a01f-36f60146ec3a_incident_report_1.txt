@@ -1,0 +1,5 @@
+During the morning shift on April 13, the tool entered processing normally and the first wafer completed preheat successfully. During exposure on wafer WFR_0321 in lot LOT_0320, the EUV source power began to drop below the operating threshold. Operators observed the source power falling to around 235 W, which was lower than the expected threshold of 245 W.
+
+The exposure step was aborted after approximately 73 seconds. The wafer received only a partial dose of about 9.8 mJ/cm2 before the run was stopped. The machine then transitioned from PROCESSING to FAULTED due to SRC_PWR_DROOP.
+
+Engineering later reconditioned the source and verified that the source power returned to around 250.5 W. After the intervention, the fault was cleared and the equipment returned to STANDBY.

@@ -1,0 +1,3 @@
+Recipe EUV_RCP_0055 version 2.1 was loaded by operator OPR_111 before production started. The lot LOT_0320 contained 25 wafers. The sequence for this run included PreAlign, Exposure, and PostBake. Exposure was configured for a target dose of 20.0 mJ/cm2 with a scan speed of 750 mm/s and focus offset of 0 nm. PostBake was configured for 60 seconds at 110 C.
+
+The equipment moved from STANDBY to PROCESSING once the lot was started.

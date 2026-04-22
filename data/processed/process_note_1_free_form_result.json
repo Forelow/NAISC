@@ -1,0 +1,147 @@
+{
+    "input_file": "data\\free_form_samples\\process_note_1.txt",
+    "parsed_result": {
+        "schema_family": "free_form_text",
+        "records": [
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:1",
+                "confidence": 0.97,
+                "evidence_text": "Recipe EUV_RCP_0055 version 2.1 was loaded",
+                "data": {
+                    "recipe_id": "EUV_RCP_0055",
+                    "recipe_version": "2.1"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "The sequence for this run included PreAlign, Exposure, and PostBake.",
+                "data": {
+                    "lot": "LOT_0320",
+                    "wafer_count": 25,
+                    "sequence_steps": [
+                        "PreAlign",
+                        "Exposure",
+                        "PostBake"
+                    ]
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:1",
+                "confidence": 0.96,
+                "evidence_text": "Exposure was configured for a target dose of 20.0 mJ/cm2 with a scan speed of 750 mm/s and focus offset of 0 nm.",
+                "data": {
+                    "step": "Exposure",
+                    "target_dose_mJ_per_cm2": 20.0,
+                    "scan_speed_mm_per_s": 750,
+                    "focus_offset_nm": 0
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:1",
+                "confidence": 0.96,
+                "evidence_text": "PostBake was configured for 60 seconds at 110 C.",
+                "data": {
+                    "step": "PostBake",
+                    "duration_s": 60,
+                    "temperature_C": 110
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:2",
+                "confidence": 0.98,
+                "evidence_text": "The equipment moved from STANDBY to PROCESSING once the lot was started.",
+                "data": {
+                    "prev_state": "STANDBY",
+                    "curr_state": "PROCESSING",
+                    "trigger": "lot was started"
+                }
+            }
+        ],
+        "record_count": 5,
+        "chunk_count": 2,
+        "chunk_debug": [
+            {
+                "chunk_id": 1,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.97,
+                                "evidence_text": "Recipe EUV_RCP_0055 version 2.1 was loaded",
+                                "data": {
+                                    "recipe_id": "EUV_RCP_0055",
+                                    "recipe_version": "2.1"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.98,
+                                "evidence_text": "The sequence for this run included PreAlign, Exposure, and PostBake.",
+                                "data": {
+                                    "lot_id": "LOT_0320",
+                                    "wafer_count": 25,
+                                    "sequence_steps": [
+                                        "PreAlign",
+                                        "Exposure",
+                                        "PostBake"
+                                    ]
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.96,
+                                "evidence_text": "Exposure was configured for a target dose of 20.0 mJ/cm2 with a scan speed of 750 mm/s and focus offset of 0 nm.",
+                                "data": {
+                                    "process_step": "Exposure",
+                                    "target_dose_mJ_per_cm2": 20.0,
+                                    "scan_speed_mm_per_s": 750,
+                                    "focus_offset_nm": 0
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.96,
+                                "evidence_text": "PostBake was configured for 60 seconds at 110 C.",
+                                "data": {
+                                    "process_step": "PostBake",
+                                    "duration_s": 60,
+                                    "temperature_C": 110
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 4
+            },
+            {
+                "chunk_id": 2,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.98,
+                                "evidence_text": "The equipment moved from STANDBY to PROCESSING once the lot was started.",
+                                "data": {
+                                    "from_state": "STANDBY",
+                                    "to_state": "PROCESSING",
+                                    "trigger": "lot was started"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            }
+        ]
+    }
+}

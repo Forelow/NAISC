@@ -1,0 +1,1296 @@
+{
+    "ingested": {
+        "file_id": "c5b02abc-85b2-46ce-9e00-7f7b67e1602e",
+        "filename": "ion_implanter_freeform.txt",
+        "extension": ".txt",
+        "size_bytes": 2979,
+        "raw_path": "data\\raw\\c5b02abc-85b2-46ce-9e00-7f7b67e1602e_ion_implanter_freeform.txt",
+        "ingestion_time": "2026-04-22T01:16:55.499774",
+        "sha256": "750eeca247ba42e8a5aa278f52b99e2d21277d799a95ebb4ed2336c3cab7df8a"
+    },
+    "detection": {
+        "format_guess": "free_text_log",
+        "content_class": "unstructured_text",
+        "confidence": 0.7,
+        "notes": "No strong deterministic line structure detected",
+        "extension_hint": ".txt",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "free_text_log",
+        "is_supported": true,
+        "parser_family": "unstructured_parser",
+        "support_status": "supported",
+        "notes": "free_text_log is handled by unstructured_parser"
+    },
+    "routing": {
+        "next_route": "unstructured_parser",
+        "processing_mode": "llm_or_extraction_fallback",
+        "should_attempt_parse": true,
+        "notes": "Text-like content with weak or no deterministic pattern"
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 52,
+        "char_count": 2979,
+        "family_info": {
+            "family": "free_form_text",
+            "confidence": 0.7,
+            "notes": "Direct free-form text lane from free_text_log"
+        }
+    },
+    "structure_config": {
+        "family": "free_form_text",
+        "parser_strategy": "chunk_then_llm_extract",
+        "chunk_count": 21
+    },
+    "parsed_result": {
+        "schema_family": "free_form_text",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:2",
+                "confidence": 0.95,
+                "evidence_text": "At approximately 07:45, the ion implanter was brought online following overnight preventive maintenance.",
+                "data": {
+                    "equipment": "ion implanter",
+                    "curr_state": "brought online",
+                    "timestamp": "07:45",
+                    "context": "following overnight preventive maintenance"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:3",
+                "confidence": 0.95,
+                "evidence_text": "Lot LOT_0045 was loaded at 08:10. The lot contains 25 wafers scheduled for phosphorus implantation",
+                "data": {
+                    "lot": "LOT_0045",
+                    "load_time": "08:10",
+                    "wafer_count": 25,
+                    "step": "phosphorus implantation"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:4",
+                "confidence": 0.97,
+                "evidence_text": "08:12 - Wafer 1 (WFR_0001) loaded into beam path. Pre-implant alignment completed within spec.",
+                "data": {
+                    "timestamp": "08:12",
+                    "wafer_label": "Wafer 1",
+                    "wafer": "WFR_0001",
+                    "steps": [
+                        {
+                            "step": "loaded into beam path"
+                        },
+                        {
+                            "step": "pre-implant alignment completed",
+                            "status": "within spec"
+                        }
+                    ]
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:4",
+                "confidence": 0.98,
+                "evidence_text": "Beam current measured at 4.2 mA, within the acceptable range of 3.8 to 4.5 mA.",
+                "data": {
+                    "parameter": "beam current",
+                    "value": 4.2,
+                    "unit": "mA",
+                    "acceptable_range": {
+                        "min": 3.8,
+                        "max": 4.5
+                    },
+                    "status": "within acceptable range"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:5",
+                "confidence": 0.98,
+                "evidence_text": "08:14 - Implant started on WFR_0001.",
+                "data": {
+                    "timestamp": "08:14",
+                    "wafer": "WFR_0001",
+                    "step": "Implant",
+                    "event": "started"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:5",
+                "confidence": 0.9,
+                "evidence_text": "Dose rate stable at approximately 1.8e12 ions/cm2/s.",
+                "data": {
+                    "parameter": "dose rate",
+                    "value": 1800000000000.0,
+                    "unit": "ions/cm2/s",
+                    "stability": "stable",
+                    "approximate": true
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:6",
+                "confidence": 0.97,
+                "evidence_text": "08:17 - Implant on WFR_0001 completed. Actual dose confirmed at 1.02e13 cm-2. Wafer unloaded.",
+                "data": {
+                    "timestamp": "08:17",
+                    "wafer": "WFR_0001",
+                    "step": "implant",
+                    "status": "completed",
+                    "post_process_action": "wafer unloaded"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:6",
+                "confidence": 0.94,
+                "evidence_text": "Actual dose confirmed at 1.02e13 cm-2.",
+                "data": {
+                    "parameter": "dose",
+                    "value": "1.02e13",
+                    "unit": "cm-2",
+                    "context": "implant",
+                    "wafer_id": "WFR_0001"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:7",
+                "confidence": 0.95,
+                "evidence_text": "08:18 - Wafer 2 (WFR_0002) loaded. Pre-implant alignment OK.",
+                "data": {
+                    "timestamp": "08:18",
+                    "wafer_number": 2,
+                    "wafer": "WFR_0002",
+                    "step": "loaded",
+                    "pre_step_check": "Pre-implant alignment OK"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:8",
+                "confidence": 0.88,
+                "evidence_text": "08:20 - Implant started.",
+                "data": {
+                    "timestamp": "08:20",
+                    "step": "Implant started"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:8",
+                "confidence": 0.95,
+                "evidence_text": "Beam current initially at 4.1 mA",
+                "data": {
+                    "timestamp": "08:20",
+                    "sensor": "beam current",
+                    "value": 4.1,
+                    "unit": "mA",
+                    "context": "initially"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:8",
+                "confidence": 0.96,
+                "evidence_text": "dropped to 3.2 mA around 08:21",
+                "data": {
+                    "timestamp": "08:21",
+                    "sensor": "beam current",
+                    "value": 3.2,
+                    "unit": "mA",
+                    "trend": "dropped"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:8",
+                "confidence": 0.94,
+                "evidence_text": "The system issued a beam current instability warning.",
+                "data": {
+                    "fault": "beam current instability warning"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:8",
+                "confidence": 0.8,
+                "evidence_text": "Operator adjusted suppression voltage",
+                "data": {
+                    "parameter": "suppression voltage",
+                    "action": "adjusted"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:8",
+                "confidence": 0.95,
+                "evidence_text": "beam current recovered to 4.0 mA by 08:22",
+                "data": {
+                    "timestamp": "08:22",
+                    "sensor": "beam current",
+                    "value": 4.0,
+                    "unit": "mA",
+                    "trend": "recovered"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:9",
+                "confidence": 0.98,
+                "evidence_text": "08:25 - Implant on WFR_0002 completed.",
+                "data": {
+                    "timestamp": "08:25",
+                    "wafer": "WFR_0002",
+                    "step": "Implant",
+                    "status": "completed"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:9",
+                "confidence": 0.93,
+                "evidence_text": "Final dose: 9.85e12 cm-2.",
+                "data": {
+                    "parameter": "dose",
+                    "value": "9.85e12",
+                    "unit": "cm-2",
+                    "context": "final"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:10",
+                "confidence": 0.96,
+                "evidence_text": "08:26 - Wafer 3 (WFR_0003) loaded.",
+                "data": {
+                    "timestamp": "08:26",
+                    "wafer": "WFR_0003",
+                    "wafer_number": 3,
+                    "step": "loaded"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:10",
+                "confidence": 0.89,
+                "evidence_text": "Pre-implant alignment showed an offset of 0.4 mm in Y-axis",
+                "data": {
+                    "context": "pre-implant alignment",
+                    "parameter": "offset",
+                    "value": 0.4,
+                    "unit": "mm",
+                    "axis": "Y-axis"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:10",
+                "confidence": 0.93,
+                "evidence_text": "offset of 0.4 mm in Y-axis, which is above the 0.3 mm threshold",
+                "data": {
+                    "context": "pre-implant alignment",
+                    "fault": "alignment offset above threshold",
+                    "measured_value": 0.4,
+                    "threshold": 0.3,
+                    "unit": "mm",
+                    "axis": "Y-axis"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:10",
+                "confidence": 0.87,
+                "evidence_text": "Operator re-ran alignment. Second attempt passed.",
+                "data": {
+                    "step": "alignment re-run and pass",
+                    "result": "passed"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:11",
+                "confidence": 0.98,
+                "evidence_text": "08:29 - Implant started on WFR_0003.",
+                "data": {
+                    "timestamp": "08:29",
+                    "step": "Implant",
+                    "status": "started",
+                    "wafer": "WFR_0003"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:12",
+                "confidence": 0.98,
+                "evidence_text": "Pressure reading was 3.8e-5 Pa, exceeding the process limit of 2.0e-5 Pa.",
+                "data": {
+                    "sensor": "pressure",
+                    "value": "3.8e-5",
+                    "unit": "Pa",
+                    "limit": "2.0e-5 Pa",
+                    "status": "exceeding process limit"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:12",
+                "confidence": 0.93,
+                "evidence_text": "Implant halted at approximately 40% completion. Estimated partial dose on WFR_0003 is approximately 4.0e12 cm-2.",
+                "data": {
+                    "wafer": "WFR_0003",
+                    "process": "implant",
+                    "completion_percent": "40%",
+                    "status": "halted",
+                    "partial_dose": "4.0e12 cm-2"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:13",
+                "confidence": 0.93,
+                "evidence_text": "Found the gate valve partially obstructed.",
+                "data": {
+                    "component": "gate valve",
+                    "fault": "partially obstructed"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:14",
+                "confidence": 0.97,
+                "evidence_text": "08:40 - Vacuum recovered to 1.4e-5 Pa.",
+                "data": {
+                    "timestamp": "08:40",
+                    "parameter": "vacuum",
+                    "value": 1.4e-05,
+                    "unit": "Pa",
+                    "status": "recovered"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:14",
+                "confidence": 0.96,
+                "evidence_text": "System resumed standby state.",
+                "data": {
+                    "timestamp": "08:40",
+                    "curr_state": "standby",
+                    "status": "resumed"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:15",
+                "confidence": 0.92,
+                "evidence_text": "Wafer will be sent for metrology review.",
+                "data": {
+                    "wafer": "WFR_0003",
+                    "next_step": "metrology review",
+                    "timestamp": "08:42"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:15",
+                "confidence": 0.91,
+                "evidence_text": "Lot LOT_0045 processing paused pending engineering disposition.",
+                "data": {
+                    "lot": "LOT_0045",
+                    "status": "processing paused",
+                    "condition": "pending engineering disposition",
+                    "timestamp": "08:42"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:16",
+                "confidence": 0.94,
+                "evidence_text": "quarantine WFR_0003, continue processing remaining wafers. Processing resumed.",
+                "data": {
+                    "timestamp": "09:00",
+                    "wafer": "WFR_0003",
+                    "action": "quarantine",
+                    "subsequent_action": "continue processing remaining wafers",
+                    "processing_state": "resumed"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:17",
+                "confidence": 0.97,
+                "evidence_text": "09:02 - Wafer 4 (WFR_0004) loaded. All pre-checks passed.",
+                "data": {
+                    "timestamp": "09:02",
+                    "wafer_slot": "4",
+                    "wafer": "WFR_0004",
+                    "step": "loaded",
+                    "pre_checks_status": "passed"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:18",
+                "confidence": 0.93,
+                "evidence_text": "09:04 - Implant started.",
+                "data": {
+                    "timestamp": "09:04",
+                    "step": "Implant",
+                    "status": "started"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "chunk:18",
+                "confidence": 0.95,
+                "evidence_text": "Beam current stable at 4.2 mA throughout run.",
+                "data": {
+                    "parameter": "beam current",
+                    "value": 4.2,
+                    "unit": "mA",
+                    "stability": "stable",
+                    "duration": "throughout run"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "chunk:19",
+                "confidence": 0.98,
+                "evidence_text": "09:08 - Implant on WFR_0004 completed. ... Wafer accepted.",
+                "data": {
+                    "timestamp": "09:08",
+                    "wafer": "WFR_0004",
+                    "step": "Implant",
+                    "status": "completed",
+                    "wafer_disposition": "accepted"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "chunk:19",
+                "confidence": 0.93,
+                "evidence_text": "Dose confirmed at 1.01e13 cm-2.",
+                "data": {
+                    "parameter": "Dose",
+                    "value": 10100000000000.0,
+                    "unit": "cm-2",
+                    "status": "confirmed"
+                }
+            },
+            {
+                "record_type": "equipment_state",
+                "source_reference": "chunk:20",
+                "confidence": 0.9,
+                "evidence_text": "Processing continued normally through WFR_0025.",
+                "data": {
+                    "curr_state": "processing continued normally",
+                    "through_wafer": "WFR_0025"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:20",
+                "confidence": 0.78,
+                "evidence_text": "Wafers quarantined: 1 (WFR_0003, partial dose)",
+                "data": {
+                    "affected_wafer": "WFR_0003",
+                    "fault": "partial dose",
+                    "disposition": "quarantined"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "chunk:20",
+                "confidence": 0.76,
+                "evidence_text": "Wafers rejected: 1 (WFR_0002 marginal, held for review)",
+                "data": {
+                    "affected_wafer": "WFR_0002",
+                    "fault": "marginal",
+                    "disposition": "rejected",
+                    "status": "held for review"
+                }
+            }
+        ],
+        "record_count": 38,
+        "chunk_count": 21,
+        "chunk_debug": [
+            {
+                "chunk_id": 1,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": []
+                    }
+                },
+                "record_count": 0
+            },
+            {
+                "chunk_id": 2,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.95,
+                                "evidence_text": "At approximately 07:45, the ion implanter was brought online following overnight preventive maintenance.",
+                                "data": {
+                                    "equipment": "ion implanter",
+                                    "state": "brought online",
+                                    "timestamp": "07:45",
+                                    "context": "following overnight preventive maintenance"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.9,
+                                "evidence_text": "The operator ran a standard chamber conditioning cycle before loading the first lot.",
+                                "data": {
+                                    "sequence_steps": [
+                                        {
+                                            "order": 1,
+                                            "action": "ran chamber conditioning cycle",
+                                            "qualifier": "standard"
+                                        },
+                                        {
+                                            "order": 2,
+                                            "action": "loaded first lot"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 3,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.95,
+                                "evidence_text": "Lot LOT_0045 was loaded at 08:10. The lot contains 25 wafers scheduled for phosphorus implantation",
+                                "data": {
+                                    "lot_id": "LOT_0045",
+                                    "load_time": "08:10",
+                                    "wafer_count": 25,
+                                    "process_step": "phosphorus implantation"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.98,
+                                "evidence_text": "phosphorus implantation at 40 keV with a dose of 1e13 cm-2. Recipe used is IMP_RCP_PHOS_40K.",
+                                "data": {
+                                    "process": "phosphorus implantation",
+                                    "energy_keV": 40,
+                                    "dose_cm-2": "1e13",
+                                    "recipe_name": "IMP_RCP_PHOS_40K"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 4,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.97,
+                                "evidence_text": "08:12 - Wafer 1 (WFR_0001) loaded into beam path. Pre-implant alignment completed within spec.",
+                                "data": {
+                                    "timestamp": "08:12",
+                                    "wafer_label": "Wafer 1",
+                                    "wafer_id": "WFR_0001",
+                                    "steps": [
+                                        {
+                                            "step": "loaded into beam path"
+                                        },
+                                        {
+                                            "step": "pre-implant alignment completed",
+                                            "status": "within spec"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.98,
+                                "evidence_text": "Beam current measured at 4.2 mA, within the acceptable range of 3.8 to 4.5 mA.",
+                                "data": {
+                                    "parameter": "beam current",
+                                    "value": 4.2,
+                                    "unit": "mA",
+                                    "acceptable_range": {
+                                        "min": 3.8,
+                                        "max": 4.5
+                                    },
+                                    "status": "within acceptable range"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 5,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.98,
+                                "evidence_text": "08:14 - Implant started on WFR_0001.",
+                                "data": {
+                                    "timestamp": "08:14",
+                                    "wafer_id": "WFR_0001",
+                                    "step": "Implant",
+                                    "event": "started"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.9,
+                                "evidence_text": "Dose rate stable at approximately 1.8e12 ions/cm2/s.",
+                                "data": {
+                                    "parameter": "dose rate",
+                                    "value": 1800000000000.0,
+                                    "unit": "ions/cm2/s",
+                                    "stability": "stable",
+                                    "approximate": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 6,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.97,
+                                "evidence_text": "08:17 - Implant on WFR_0001 completed. Actual dose confirmed at 1.02e13 cm-2. Wafer unloaded.",
+                                "data": {
+                                    "timestamp": "08:17",
+                                    "wafer_id": "WFR_0001",
+                                    "process_step": "implant",
+                                    "status": "completed",
+                                    "post_process_action": "wafer unloaded"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.94,
+                                "evidence_text": "Actual dose confirmed at 1.02e13 cm-2.",
+                                "data": {
+                                    "parameter": "dose",
+                                    "value": "1.02e13",
+                                    "unit": "cm-2",
+                                    "context": "implant",
+                                    "wafer_id": "WFR_0001"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 7,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.95,
+                                "evidence_text": "08:18 - Wafer 2 (WFR_0002) loaded. Pre-implant alignment OK.",
+                                "data": {
+                                    "timestamp": "08:18",
+                                    "wafer_number": 2,
+                                    "wafer_id": "WFR_0002",
+                                    "step": "loaded",
+                                    "pre_step_check": "Pre-implant alignment OK"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 8,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.88,
+                                "evidence_text": "08:20 - Implant started.",
+                                "data": {
+                                    "timestamp": "08:20",
+                                    "step": "Implant started"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.95,
+                                "evidence_text": "Beam current initially at 4.1 mA",
+                                "data": {
+                                    "timestamp": "08:20",
+                                    "sensor": "beam current",
+                                    "value": 4.1,
+                                    "unit": "mA",
+                                    "context": "initially"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.96,
+                                "evidence_text": "dropped to 3.2 mA around 08:21",
+                                "data": {
+                                    "timestamp": "08:21",
+                                    "sensor": "beam current",
+                                    "value": 3.2,
+                                    "unit": "mA",
+                                    "trend": "dropped"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.94,
+                                "evidence_text": "The system issued a beam current instability warning.",
+                                "data": {
+                                    "fault": "beam current instability warning"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.8,
+                                "evidence_text": "Operator adjusted suppression voltage",
+                                "data": {
+                                    "parameter": "suppression voltage",
+                                    "action": "adjusted"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.95,
+                                "evidence_text": "beam current recovered to 4.0 mA by 08:22",
+                                "data": {
+                                    "timestamp": "08:22",
+                                    "sensor": "beam current",
+                                    "value": 4.0,
+                                    "unit": "mA",
+                                    "trend": "recovered"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 6
+            },
+            {
+                "chunk_id": 9,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.98,
+                                "evidence_text": "08:25 - Implant on WFR_0002 completed.",
+                                "data": {
+                                    "timestamp": "08:25",
+                                    "wafer_id": "WFR_0002",
+                                    "process_step": "Implant",
+                                    "status": "completed"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.93,
+                                "evidence_text": "Final dose: 9.85e12 cm-2.",
+                                "data": {
+                                    "parameter": "dose",
+                                    "value": "9.85e12",
+                                    "unit": "cm-2",
+                                    "context": "final"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.84,
+                                "evidence_text": "Wafer accepted.",
+                                "data": {
+                                    "wafer_id": "WFR_0002",
+                                    "status": "accepted"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 10,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.96,
+                                "evidence_text": "08:26 - Wafer 3 (WFR_0003) loaded.",
+                                "data": {
+                                    "timestamp": "08:26",
+                                    "wafer_id": "WFR_0003",
+                                    "wafer_number": 3,
+                                    "step": "loaded"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.89,
+                                "evidence_text": "Pre-implant alignment showed an offset of 0.4 mm in Y-axis",
+                                "data": {
+                                    "context": "pre-implant alignment",
+                                    "parameter": "offset",
+                                    "value": 0.4,
+                                    "unit": "mm",
+                                    "axis": "Y-axis"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.93,
+                                "evidence_text": "offset of 0.4 mm in Y-axis, which is above the 0.3 mm threshold",
+                                "data": {
+                                    "context": "pre-implant alignment",
+                                    "fault": "alignment offset above threshold",
+                                    "measured_value": 0.4,
+                                    "threshold": 0.3,
+                                    "unit": "mm",
+                                    "axis": "Y-axis"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.87,
+                                "evidence_text": "Operator re-ran alignment. Second attempt passed.",
+                                "data": {
+                                    "step": "alignment re-run and pass",
+                                    "result": "passed"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 4
+            },
+            {
+                "chunk_id": 11,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.98,
+                                "evidence_text": "08:29 - Implant started on WFR_0003.",
+                                "data": {
+                                    "timestamp": "08:29",
+                                    "step": "Implant",
+                                    "status": "started",
+                                    "wafer_id": "WFR_0003"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 12,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.99,
+                                "evidence_text": "FAULT: High vacuum pressure spike detected in the end-station. Beam was automatically cut off.",
+                                "data": {
+                                    "timestamp": "08:32",
+                                    "fault_description": "High vacuum pressure spike detected in the end-station",
+                                    "affected_equipment": "end-station",
+                                    "automatic_action": "Beam was automatically cut off",
+                                    "process_impact": "Implant halted at approximately 40% completion"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.98,
+                                "evidence_text": "Pressure reading was 3.8e-5 Pa, exceeding the process limit of 2.0e-5 Pa.",
+                                "data": {
+                                    "sensor": "pressure",
+                                    "value": "3.8e-5",
+                                    "unit": "Pa",
+                                    "limit": "2.0e-5 Pa",
+                                    "status": "exceeding process limit"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.93,
+                                "evidence_text": "Implant halted at approximately 40% completion. Estimated partial dose on WFR_0003 is approximately 4.0e12 cm-2.",
+                                "data": {
+                                    "wafer_id": "WFR_0003",
+                                    "process": "implant",
+                                    "completion_percent": "40%",
+                                    "status": "halted",
+                                    "partial_dose": "4.0e12 cm-2"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 13,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.82,
+                                "evidence_text": "08:33 - Operator initiated vacuum recovery procedure. Chamber was isolated and turbo pump speed checked.",
+                                "data": {
+                                    "timestamp": "08:33",
+                                    "sequence_name": "vacuum recovery procedure",
+                                    "steps": [
+                                        "Chamber was isolated",
+                                        "turbo pump speed checked"
+                                    ]
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.93,
+                                "evidence_text": "Found the gate valve partially obstructed.",
+                                "data": {
+                                    "component": "gate valve",
+                                    "fault": "partially obstructed"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.79,
+                                "evidence_text": "Valve was manually cycled.",
+                                "data": {
+                                    "component": "gate valve",
+                                    "state_change": "manually cycled"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 14,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.97,
+                                "evidence_text": "08:40 - Vacuum recovered to 1.4e-5 Pa.",
+                                "data": {
+                                    "timestamp": "08:40",
+                                    "parameter": "vacuum",
+                                    "value": 1.4e-05,
+                                    "unit": "Pa",
+                                    "status": "recovered"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.96,
+                                "evidence_text": "System resumed standby state.",
+                                "data": {
+                                    "timestamp": "08:40",
+                                    "state": "standby",
+                                    "status": "resumed"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 15,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.96,
+                                "evidence_text": "WFR_0003 quarantined for dose non-conformance.",
+                                "data": {
+                                    "wafer_id": "WFR_0003",
+                                    "fault_type": "dose non-conformance",
+                                    "action": "quarantined",
+                                    "timestamp": "08:42"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.92,
+                                "evidence_text": "Wafer will be sent for metrology review.",
+                                "data": {
+                                    "wafer_id": "WFR_0003",
+                                    "next_step": "metrology review",
+                                    "timestamp": "08:42"
+                                }
+                            },
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.91,
+                                "evidence_text": "Lot LOT_0045 processing paused pending engineering disposition.",
+                                "data": {
+                                    "lot_id": "LOT_0045",
+                                    "status": "processing paused",
+                                    "condition": "pending engineering disposition",
+                                    "timestamp": "08:42"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 16,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.94,
+                                "evidence_text": "quarantine WFR_0003, continue processing remaining wafers. Processing resumed.",
+                                "data": {
+                                    "timestamp": "09:00",
+                                    "wafer_id": "WFR_0003",
+                                    "action": "quarantine",
+                                    "subsequent_action": "continue processing remaining wafers",
+                                    "processing_state": "resumed"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 17,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.97,
+                                "evidence_text": "09:02 - Wafer 4 (WFR_0004) loaded. All pre-checks passed.",
+                                "data": {
+                                    "timestamp": "09:02",
+                                    "wafer_slot": "4",
+                                    "wafer_id": "WFR_0004",
+                                    "step": "loaded",
+                                    "pre_checks_status": "passed"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 1
+            },
+            {
+                "chunk_id": 18,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.93,
+                                "evidence_text": "09:04 - Implant started.",
+                                "data": {
+                                    "timestamp": "09:04",
+                                    "step": "Implant",
+                                    "status": "started"
+                                }
+                            },
+                            {
+                                "record_type": "sensor_reading",
+                                "confidence": 0.95,
+                                "evidence_text": "Beam current stable at 4.2 mA throughout run.",
+                                "data": {
+                                    "parameter": "beam current",
+                                    "value": 4.2,
+                                    "unit": "mA",
+                                    "stability": "stable",
+                                    "duration": "throughout run"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 19,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.98,
+                                "evidence_text": "09:08 - Implant on WFR_0004 completed. ... Wafer accepted.",
+                                "data": {
+                                    "timestamp": "09:08",
+                                    "wafer_id": "WFR_0004",
+                                    "process_step": "Implant",
+                                    "status": "completed",
+                                    "wafer_disposition": "accepted"
+                                }
+                            },
+                            {
+                                "record_type": "process_parameter_recipe",
+                                "confidence": 0.93,
+                                "evidence_text": "Dose confirmed at 1.01e13 cm-2.",
+                                "data": {
+                                    "parameter": "Dose",
+                                    "value": 10100000000000.0,
+                                    "unit": "cm-2",
+                                    "status": "confirmed"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            },
+            {
+                "chunk_id": 20,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "record_type": "wafer_processing_sequence",
+                                "confidence": 0.97,
+                                "evidence_text": "Final summary: - Total wafers processed: 25 - Wafers accepted: 23 - Wafers quarantined: 1 (WFR_0003, partial dose) - Wafers rejected: 1 (WFR_0002 marginal, held for review) - Total process time: approx. 4 hours 20 minutes",
+                                "data": {
+                                    "total_wafers_processed": 25,
+                                    "wafers_accepted": 23,
+                                    "wafers_quarantined": 1,
+                                    "quarantined_wafers": [
+                                        "WFR_0003"
+                                    ],
+                                    "wafers_rejected": 1,
+                                    "rejected_wafers": [
+                                        "WFR_0002"
+                                    ],
+                                    "total_process_time": "approx. 4 hours 20 minutes"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.9,
+                                "evidence_text": "Processing continued normally through WFR_0025.",
+                                "data": {
+                                    "state": "processing continued normally",
+                                    "through_wafer": "WFR_0025"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.78,
+                                "evidence_text": "Wafers quarantined: 1 (WFR_0003, partial dose)",
+                                "data": {
+                                    "affected_wafer": "WFR_0003",
+                                    "fault": "partial dose",
+                                    "disposition": "quarantined"
+                                }
+                            },
+                            {
+                                "record_type": "fault_event",
+                                "confidence": 0.76,
+                                "evidence_text": "Wafers rejected: 1 (WFR_0002 marginal, held for review)",
+                                "data": {
+                                    "affected_wafer": "WFR_0002",
+                                    "fault": "marginal",
+                                    "disposition": "rejected",
+                                    "status": "held for review"
+                                }
+                            },
+                            {
+                                "record_type": "equipment_state",
+                                "confidence": 0.83,
+                                "evidence_text": "No additional alarms after 08:40",
+                                "data": {
+                                    "alarm_state": "no additional alarms",
+                                    "after_time": "08:40"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "record_count": 3
+            },
+            {
+                "chunk_id": 21,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": []
+                    }
+                },
+                "record_count": 0
+            }
+        ]
+    },
+    "agent_debug": {
+        "final_source": "free_form_direct"
+    }
+}
