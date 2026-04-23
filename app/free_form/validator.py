@@ -2,61 +2,61 @@ from __future__ import annotations
 
 from typing import Any
 
-
-ALLOWED_RECORD_TYPES = {
-    "equipment_state",
-    "process_parameter_recipe",
-    "sensor_reading",
-    "fault_event",
-    "wafer_processing_sequence",
-}
+from free_form.schema import ALLOWED_COARSE_TYPES, ALLOWED_FINAL_TYPES, COARSE_TO_FINAL
 
 
 def validate_extracted_records(chunk_result: dict[str, Any]) -> dict[str, Any]:
     chunk_id = chunk_result.get("chunk_id")
     raw_records = chunk_result.get("records", [])
-
     validated_records: list[dict[str, Any]] = []
 
     for record in raw_records:
         if not isinstance(record, dict):
             continue
 
-        record_type = record.get("record_type")
+        coarse_type = record.get("coarse_type")
         confidence = record.get("confidence")
         evidence_text = record.get("evidence_text")
         data = record.get("data")
+        extra = record.get("extra", {})
+        uncertain = bool(record.get("uncertain", False))
+        subtype = record.get("subtype")
 
-        if record_type not in ALLOWED_RECORD_TYPES:
+        if coarse_type not in ALLOWED_COARSE_TYPES:
             continue
 
         if not isinstance(confidence, (int, float)):
             continue
-
         confidence = float(confidence)
         if confidence < 0.0 or confidence > 1.0:
             continue
 
         if not isinstance(evidence_text, str) or not evidence_text.strip():
             continue
-
         if not isinstance(data, dict) or not data:
             continue
+        if not isinstance(extra, dict):
+            extra = {}
 
-        normalized = _normalize_record(record_type, data)
-        if not normalized:
-            continue
+        final_type = COARSE_TO_FINAL.get(coarse_type)
+        normalized_data = _normalize_data(data)
 
-        if not _passes_type_minimums(record_type, normalized):
-            continue
+        if final_type is not None and not _passes_minimums(final_type, normalized_data):
+            # downgrade weak mapped records instead of dropping everything
+            final_type = None
+            uncertain = True
 
         validated_records.append(
             {
-                "record_type": record_type,
+                "coarse_type": coarse_type,
+                "final_type": final_type,
+                "subtype": subtype,
                 "source_reference": f"chunk:{chunk_id}",
                 "confidence": round(confidence, 3),
                 "evidence_text": evidence_text.strip(),
-                "data": normalized,
+                "data": normalized_data,
+                "extra": extra,
+                "uncertain": uncertain,
             }
         )
 
@@ -67,147 +67,57 @@ def validate_extracted_records(chunk_result: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _normalize_record(record_type: str, data: dict[str, Any]) -> dict[str, Any]:
-    normalized = dict(data)
+def _normalize_data(data: dict[str, Any]) -> dict[str, Any]:
+    rename_map = {
+        "wafer_id": "wafer",
+        "lot_id": "lot",
+        "process_step": "step",
+        "equipment_id": "equipment",
+        "state": "curr_state",
+        "from_state": "prev_state",
+        "to_state": "curr_state",
+        "equipment_state": "curr_state",
+        "event": "event_name",
+        "measurement": "parameter",
+        "sensor": "parameter",
+    }
 
-    if record_type == "equipment_state":
-        normalized = _rename_keys(
-            normalized,
-            {
-                "state": "curr_state",
-                "equipment_state": "curr_state",
-                "from_state": "prev_state",
-                "to_state": "curr_state",
-                "previous_state": "prev_state",
-                "resulting_state": "curr_state",
-            },
-        )
-
-    elif record_type == "fault_event":
-        normalized = _rename_keys(
-            normalized,
-            {
-                "event": "fault_summary",
-            },
-        )
-
-    elif record_type == "wafer_processing_sequence":
-        normalized = _rename_keys(
-            normalized,
-            {
-                "process_step": "step",
-                "wafer_id": "wafer",
-                "lot_id": "lot",
-            },
-        )
-
-    elif record_type == "sensor_reading":
-        normalized = _rename_keys(
-            normalized,
-            {
-                "observed_value": "value",
-                "parameter_name": "parameter",
-            },
-        )
-
-    elif record_type == "process_parameter_recipe":
-        normalized = _rename_keys(
-            normalized,
-            {
-                "process_step": "step",
-            },
-        )
-
-    # Drop empty/null-like values
-    cleaned: dict[str, Any] = {}
-    for k, v in normalized.items():
-        if v is None:
-            continue
-        if isinstance(v, str) and not v.strip():
-            continue
-        cleaned[k] = v
-
-    return cleaned
-
-
-def _rename_keys(data: dict[str, Any], mapping: dict[str, str]) -> dict[str, Any]:
     out: dict[str, Any] = {}
     for key, value in data.items():
-        new_key = mapping.get(key, key)
+        new_key = rename_map.get(key, key)
         if new_key not in out:
             out[new_key] = value
     return out
 
 
-def _passes_type_minimums(record_type: str, data: dict[str, Any]) -> bool:
+def _passes_minimums(final_type: str, data: dict[str, Any]) -> bool:
     keys = set(data.keys())
 
-    if record_type == "equipment_state":
-        return bool(
-            {"prev_state", "curr_state", "from_state", "to_state", "state"} & keys
-        )
+    if final_type == "equipment_state":
+        return bool({"curr_state", "prev_state"} & keys)
 
-    if record_type == "process_parameter_recipe":
-        strong_recipe_keys = {
-            "recipe",
-            "recipe_id",
-            "step",
-            "step_name",
-            "parameter",
-            "setpoint",
-            "duration_s",
-            "target_temp_C",
-            "version",
-            "rev",
-        }
-        # Require at least one real recipe/config signal, not just one execution number
-        return bool(strong_recipe_keys & keys)
+    if final_type == "process_parameter_recipe":
+        return bool({
+            "recipe", "recipe_id", "recipe_name", "step", "parameter",
+            "target_value", "duration_s", "temperature_C", "energy", "dose"
+        } & keys)
 
-    if record_type == "sensor_reading":
-        measurement_keys = {
-            "parameter",
-            "value",
-            "unit",
-            "observed_value",
-            "temp_C",
-            "pressure_mTorr",
-            "base_pres_Pa",
-            "proc_pres_Pa",
-            "dep_rate_A_s",
-            "src_pwr_W",
-            "vac_Pa",
-            "dose_actual_mJcm2",
-            "scan_pos_mm",
-            "threshold_value",
-        }
-        return bool(measurement_keys & keys)
+    if final_type == "sensor_reading":
+        return bool({
+            "parameter", "value", "unit", "acceptable_range",
+            "target_value", "limit", "threshold"
+        } & keys)
 
-    if record_type == "fault_event":
-        fault_keys = {
-            "fault",
-            "fault_code",
-            "reason",
-            "alarm_code",
-            "error_code",
-            "code",
-            "fault_summary",
-            "event",
-        }
-        return bool(fault_keys & keys)
+    if final_type == "fault_event":
+        return bool({
+            "fault", "fault_code", "fault_summary", "event_name",
+            "cause", "reason", "component"
+        } & keys)
 
-    if record_type == "wafer_processing_sequence":
-        sequence_keys = {
-            "step",
-            "step_name",
-            "wafer",
-            "lot",
-            "slot",
-            "seq",
-            "status",
-            "result",
-            "elapsed_time_seconds_approx",
-            "run_status",
-        }
-        return bool(sequence_keys & keys)
+    if final_type == "wafer_processing_sequence":
+        return bool({
+            "wafer", "lot", "step", "status", "action", "result",
+            "wafer_count", "wafer_range_start"
+        } & keys)
 
     return True

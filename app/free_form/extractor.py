@@ -11,17 +11,9 @@ try:
 except Exception:
     OpenAI = None  # type: ignore
 
+from free_form.schema import ALLOWED_COARSE_TYPES
 
 load_dotenv()
-
-
-ALLOWED_RECORD_TYPES = [
-    "equipment_state",
-    "process_parameter_recipe",
-    "sensor_reading",
-    "fault_event",
-    "wafer_processing_sequence",
-]
 
 
 def extract_records_from_chunk(chunk: dict[str, Any]) -> dict[str, Any]:
@@ -32,9 +24,7 @@ def extract_records_from_chunk(chunk: dict[str, Any]) -> dict[str, Any]:
         return {
             "chunk_id": chunk_id,
             "records": [],
-            "debug": {
-                "status": "empty_chunk",
-            },
+            "debug": {"status": "empty_chunk"},
         }
 
     api_key = os.getenv("OPENAI_API_KEY")
@@ -42,41 +32,41 @@ def extract_records_from_chunk(chunk: dict[str, Any]) -> dict[str, Any]:
         return {
             "chunk_id": chunk_id,
             "records": [],
-            "debug": {
-                "status": "llm_unavailable",
-                "reason": "OPENAI_API_KEY missing",
-            },
+            "debug": {"status": "llm_unavailable", "reason": "OPENAI_API_KEY missing"},
         }
 
     if OpenAI is None:
         return {
             "chunk_id": chunk_id,
             "records": [],
-            "debug": {
-                "status": "llm_unavailable",
-                "reason": "openai package not installed",
-            },
+            "debug": {"status": "llm_unavailable", "reason": "openai package not installed"},
         }
 
     model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 
     system_prompt = (
         "You are an extraction agent for low-structure technical text. "
-        "Your task is to read one chunk of free-form technical text and extract zero or more operational records. "
-        "Only use these record types: equipment_state, process_parameter_recipe, sensor_reading, fault_event, wafer_processing_sequence. "
+        "Read one chunk of free-form technical text and extract zero or more operational observations. "
         "Return JSON only. "
+        "Prefer this exact outer shape: {\"records\": [...]} "
+        "but if needed a top-level JSON array is also acceptable. "
         "Do not invent facts. "
-        "If the chunk does not contain a usable record, return an empty records list. "
-        "Each record must contain: record_type, confidence, evidence_text, data. "
-        "confidence must be a float between 0 and 1. "
-        "evidence_text must be a short excerpt from the chunk supporting the extraction. "
-        "data must be an object with only fields actually supported by the text."
+        "Use these coarse types only: "
+        + ", ".join(ALLOWED_COARSE_TYPES)
+        + ". "
+        "Each record must contain: coarse_type, subtype, confidence, evidence_text, data, extra, uncertain. "
+        "confidence must be between 0 and 1. "
+        "evidence_text must quote or closely paraphrase the supporting text. "
+        "data should contain the most important structured fields. "
+        "extra may contain useful leftover context. "
+        "uncertain must be true if the chunk is ambiguous or the mapping is weak. "
+        "Prefer fewer, richer records over many tiny redundant records."
     )
 
     user_payload = {
         "chunk_id": chunk_id,
         "text": text,
-        "allowed_record_types": ALLOWED_RECORD_TYPES,
+        "allowed_coarse_types": ALLOWED_COARSE_TYPES,
     }
 
     try:
@@ -104,9 +94,11 @@ def extract_records_from_chunk(chunk: dict[str, Any]) -> dict[str, Any]:
             content = response.choices[0].message.content
             parsed = json.loads(content) if content else {"records": []}
 
+        records = _normalize_parsed_records(parsed)
+
         return {
             "chunk_id": chunk_id,
-            "records": parsed.get("records", []),
+            "records": records,
             "debug": {
                 "status": "ok",
                 "raw_response": parsed,
@@ -122,3 +114,21 @@ def extract_records_from_chunk(chunk: dict[str, Any]) -> dict[str, Any]:
                 "error": str(e),
             },
         }
+
+
+def _normalize_parsed_records(parsed: Any) -> list[dict[str, Any]]:
+    if parsed is None:
+        return []
+
+    # Case 1: model returned {"records": [...]}
+    if isinstance(parsed, dict):
+        records = parsed.get("records", [])
+        if isinstance(records, list):
+            return [r for r in records if isinstance(r, dict)]
+        return []
+
+    # Case 2: model returned [...] directly
+    if isinstance(parsed, list):
+        return [r for r in parsed if isinstance(r, dict)]
+
+    return []
