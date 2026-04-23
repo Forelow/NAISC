@@ -26,6 +26,7 @@ from semi_structured.spec_builder import build_semi_structured_parse_spec
 from semi_structured.family_detector import detect_semi_structured_family
 from free_form.reader import load_text_document
 from free_form.parser import parse_free_form_text
+from binary_hex.parser import parse_binary_or_hex_file, is_binary_or_hex_candidate
 
 
 OUTPUT_DIR = Path("data/processed")
@@ -166,6 +167,13 @@ def run_pipeline(file_path: str) -> str:
                         "validation": (agent_debug or {}).get("validation"),
                     },
                 }
+    elif is_binary_or_hex_candidate(file_info["raw_path"], detection):
+        binary_result = parse_binary_or_hex_file(file_info["raw_path"])
+
+        result_payload["structure_summary"] = binary_result["structure_summary"]
+        result_payload["structure_config"] = binary_result["structure_config"]
+        result_payload["parsed_result"] = binary_result["parsed_result"]
+        result_payload["agent_debug"] = binary_result["agent_debug"]            
     elif detection.is_text:
         # For text files not claimed by the semi-structured route, use free-form directly
         doc_payload = load_text_document(file_info["raw_path"])
@@ -201,5 +209,5 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/ion_implanter_freeform.txt")
-    run_pipeline("data/synthetic_logs/pvd_sputter_shift_log.txt")
+    run_pipeline("data/synthetic_logs/demo_tool_log.bin")
+    run_pipeline("data/synthetic_logs/demo_tool_log.hex")
