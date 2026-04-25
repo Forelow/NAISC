@@ -1,0 +1,417 @@
+{
+    "ingested": {
+        "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+        "filename": "mystery_json_like.dat",
+        "extension": ".dat",
+        "size_bytes": 124,
+        "raw_path": "data\\raw\\86e06d74-2e57-4876-af7c-589be15875c3_mystery_json_like.dat",
+        "ingestion_time": "2026-04-25T09:25:08.070122",
+        "sha256": "89200393144ec691bec796f89aca709d09585dcc0cb46848d50599f4f8b9fb45"
+    },
+    "detection": {
+        "format_guess": "json",
+        "content_class": "structured_text",
+        "confidence": 0.98,
+        "extension_hint": ".dat",
+        "is_text": true,
+        "notes": [
+            "Unknown extension, but content looks like JSON."
+        ]
+    },
+    "support": {
+        "format_guess": "json",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "Unknown extension, but content looks like JSON."
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Unknown extension, but content looks like JSON."
+    },
+    "structure_summary": {
+        "format": "json",
+        "top_level_type": "dict",
+        "top_level_keys": [
+            "timestamp",
+            "tool_id",
+            "parameter",
+            "value",
+            "unit"
+        ],
+        "repeated_paths": [],
+        "sample_leaf_paths": [
+            "parameter",
+            "timestamp",
+            "tool_id",
+            "unit",
+            "value"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "generic_json",
+        "record_groups": [
+            {
+                "record_type": "generic_json_object",
+                "path": "$",
+                "context_paths": [],
+                "field_paths": [],
+                "where": null
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "generic_json",
+        "records": [
+            {
+                "record_type": "generic_json_object",
+                "source_reference": "$[1]",
+                "data": {}
+            }
+        ],
+        "record_count": 1
+    },
+    "agent_debug": {
+        "final_source": "fallback_after_invalid_repair",
+        "initial_config_raw": {
+            "schema_family": "json_flat_object",
+            "record_groups": [
+                {
+                    "record_type": "event",
+                    "path": "",
+                    "context_paths": [],
+                    "field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_config_normalized": {
+            "schema_family": "json_flat_object",
+            "record_groups": [
+                {
+                    "record_type": "event",
+                    "path": "",
+                    "context_paths": [],
+                    "field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_validation_report": {
+            "schema_family": "json_flat_object",
+            "group_count_before": 1,
+            "group_count_after": 0,
+            "valid_group_count": 0,
+            "groups": [
+                {
+                    "record_type": "event",
+                    "path": "",
+                    "status": "rejected",
+                    "reason": "group path did not resolve"
+                }
+            ]
+        },
+        "invalid_repair_config_raw": {
+            "schema_family": "json_flat_object",
+            "record_groups": []
+        },
+        "invalid_repair_config_normalized": {
+            "schema_family": "json_flat_object",
+            "record_groups": []
+        },
+        "invalid_repair_validation_report": {
+            "schema_family": "json_flat_object",
+            "group_count_before": 0,
+            "group_count_after": 0,
+            "valid_group_count": 0,
+            "groups": []
+        },
+        "uncovered_leaf_paths_before": [],
+        "coverage_repair_config_raw": null,
+        "coverage_repair_config_normalized": null,
+        "coverage_repair_validation_report": null,
+        "uncovered_leaf_paths_after": []
+    },
+    "pipeline_output": {
+        "schema_fingerprint": "729bde4799f2e902",
+        "adapter_spec_used": {
+            "schema_fingerprint": "729bde4799f2e902",
+            "schema_family": "generic_json",
+            "record_type_mapping": {
+                "process_job": "wafer_processing_sequence",
+                "sensor_measurement": "sensor_reading",
+                "alarm_event": "fault_event",
+                "error_event": "fault_event",
+                "control_state_event": "equipment_state",
+                "process_step": "wafer_processing_sequence",
+                "wafer": "wafer_processing_sequence",
+                "wafer_measurement": "sensor_reading",
+                "recipe_param": "process_parameter_recipe",
+                "setpoint": "process_parameter_recipe",
+                "fault_summary": "fault_event",
+                "equipment_state_transition": "equipment_state"
+            },
+            "dispatch_rules": [],
+            "field_aliases": {
+                "LotID": "lot",
+                "WaferID": "wafer",
+                "SlotID": "slot",
+                "Recipe.RecipeID": "recipe",
+                "RecipeName": "recipe",
+                "RecipeStepName": "step",
+                "DateTime": "timestamp",
+                "Value": "value",
+                "Unit": "unit",
+                "Text": "event_name",
+                "Name": "event_name",
+                "SensorID": "sensor_id",
+                "SensorName": "parameter",
+                "AlarmID": "fault_code",
+                "ErrorID": "fault_code",
+                "Severity": "severity",
+                "ControlJob.EquipmentID": "tool_id",
+                "EquipmentID": "tool_id",
+                "ToState": "to_state",
+                "FromState": "from_state",
+                "@sensor": "parameter",
+                "@timestamp": "timestamp",
+                "@unit": "unit",
+                "@value": "value",
+                "@name": "parameter",
+                "@u": "unit",
+                "@v": "value",
+                "@stepName": "step",
+                "StepOutcome": "status",
+                "FabricationRecord.ProductionOrder.LotID": "lot",
+                "FabricationRecord.Hdr.Lot": "lot",
+                "FabricationRecord.Equipment.EquipmentID": "tool_id",
+                "RcpExecLog.@eqp": "tool_id",
+                "RcpExecLog.Hdr.Lot": "lot",
+                "RcpExecLog.Hdr.Rcp": "recipe",
+                "RcpExecLog.WfrLog.W[].@id": "wafer",
+                "@id": "wafer",
+                "@n": "slot",
+                "@cd": "fault_code",
+                "FaultCode": "fault_code",
+                "Description": "fault_summary",
+                "@msg": "fault_summary",
+                "Timestamp": "timestamp",
+                "@t": "timestamp",
+                "@sev": "severity"
+            },
+            "fallback_rules": [
+                {
+                    "when_record_type": "sensor_reading",
+                    "if_missing": "parameter",
+                    "copy_from": "sensor_id"
+                },
+                {
+                    "when_record_type": "equipment_state",
+                    "if_missing": "curr_state",
+                    "copy_from": "event_name"
+                }
+            ]
+        },
+        "canonical_output": {
+            "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+            "filename": "mystery_json_like.dat",
+            "source_format": "json",
+            "parser_route": "structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 1,
+            "records": [
+                {
+                    "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:25:08.070122",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_json_object",
+                    "source_record_type": "generic_json_object",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {},
+                    "candidate_fields": {},
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "fallback_after_invalid_repair",
+                    "adapter_applied": true
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "729bde4799f2e902",
+                "schema_family": "generic_json"
+            }
+        },
+        "standardized_output": {
+            "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+            "filename": "mystery_json_like.dat",
+            "source_format": "json",
+            "parser_route": "structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 1,
+            "records": [
+                {
+                    "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:25:08.070122",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_json_object",
+                    "source_record_type": "generic_json_object",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {},
+                    "candidate_fields": {},
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "fallback_after_invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {},
+                    "raw_to_standard_map": {}
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "729bde4799f2e902",
+                "schema_family": "generic_json"
+            }
+        },
+        "normalized_output": {
+            "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+            "filename": "mystery_json_like.dat",
+            "source_format": "json",
+            "parser_route": "structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 1,
+            "records": [
+                {
+                    "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:25:08.070122",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_json_object",
+                    "source_record_type": "generic_json_object",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {},
+                    "candidate_fields": {},
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "fallback_after_invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {},
+                    "raw_to_standard_map": {},
+                    "normalized_fields": {}
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "729bde4799f2e902",
+                "schema_family": "generic_json"
+            }
+        },
+        "validated_output": {
+            "accepted_count": 0,
+            "rejected_count": 1,
+            "accepted_records": [],
+            "rejected_records": [
+                {
+                    "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:25:08.070122",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_json_object",
+                    "source_record_type": "generic_json_object",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {},
+                    "candidate_fields": {},
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "fallback_after_invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {},
+                    "raw_to_standard_map": {},
+                    "normalized_fields": {},
+                    "validation_reason": "unknown_record_type"
+                }
+            ]
+        },
+        "routing_output": {
+            "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+            "filename": "mystery_json_like.dat",
+            "accepted_count": 0,
+            "rejected_count": 1,
+            "routed_rows": {
+                "equipment_states": [],
+                "process_parameters_recipes": [],
+                "sensor_readings": [],
+                "fault_events": [],
+                "wafer_processing_sequences": [],
+                "generic_observations_staging": []
+            },
+            "rejected_records": [
+                {
+                    "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:25:08.070122",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_json_object",
+                    "source_record_type": "generic_json_object",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {},
+                    "candidate_fields": {},
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "fallback_after_invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {},
+                    "raw_to_standard_map": {},
+                    "normalized_fields": {},
+                    "validation_reason": "unknown_record_type"
+                }
+            ]
+        }
+    },
+    "db_output": {
+        "database": "semicon_parser",
+        "file_id": "86e06d74-2e57-4876-af7c-589be15875c3",
+        "inserted_counts": {
+            "equipment_states": 0,
+            "process_parameters_recipes": 0,
+            "sensor_readings": 0,
+            "fault_events": 0,
+            "wafer_processing_sequences": 0,
+            "generic_observations_staging": 0,
+            "rejected_records": 1
+        },
+        "status": "ok"
+    }
+}

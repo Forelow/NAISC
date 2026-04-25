@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+  <timestamp>2026-04-30T13:01:00</timestamp>
+  <tool_id>CMP_X2</tool_id>
+  <parameter>pressure</parameter>
+  <value>1.2</value>
+  <unit>kPa</unit>
+</record>

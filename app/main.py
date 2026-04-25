@@ -30,6 +30,7 @@ from free_form.parser import parse_free_form_text
 from binary_hex.parser import parse_binary_or_hex_file, is_binary_or_hex_candidate
 from pipeline.runner import process_result_payload
 from db.writer import write_pipeline_output_to_db
+from pipeline.content_sniffer import detect_unknown_file_route
 
 
 OUTPUT_DIR = Path("data/processed")
@@ -81,18 +82,102 @@ def run_pipeline(file_path: str) -> str:
     support = check_support(detection.format_guess)
     routing = route_file(detection, support)
 
+    sniff = detect_unknown_file_route(file_info["raw_path"])
+
+    # Use the sniffer only for:
+    # 1) unknown / weird extensions that are not your normal text types
+    # 2) parquet-like binary files
+    # but do NOT override your existing .bin / .hex handling
+    use_sniffer = (
+        sniff["format_guess"] == "parquet_like_binary"
+        or (
+            not sniff["is_known_text_extension"]
+            and not is_binary_or_hex_candidate(file_info["raw_path"], detection)
+        )
+    )
+
+    if use_sniffer:
+        detection_view = {
+            "format_guess": sniff["format_guess"],
+            "content_class": sniff["content_class"],
+            "confidence": getattr(detection, "confidence", None),
+            "extension_hint": sniff["extension"],
+            "is_text": sniff["content_class"] in {
+                "structured_text",
+                "semi_structured_text",
+                "unstructured_text",
+                "known_text",
+            },
+            "notes": sniff["notes"],
+        }
+
+        support_view = {
+            "format_guess": sniff["format_guess"],
+            "is_supported": sniff["should_attempt_parse"],
+            "parser_family": sniff["parser_family"],
+            "support_status": sniff["support_status"],
+            "notes": "; ".join(sniff["notes"]),
+        }
+
+        routing_view = {
+            "next_route": sniff["next_route"],
+            "processing_mode": sniff["processing_mode"],
+            "should_attempt_parse": sniff["should_attempt_parse"],
+            "notes": "; ".join(sniff["notes"]),
+        }
+
+        effective_format_guess = sniff["format_guess"]
+        effective_next_route = sniff["next_route"]
+        effective_is_text = detection_view["is_text"]
+        effective_confidence = getattr(detection, "confidence", 0.0) or 0.0
+    else:
+        detection_view = detection.to_dict()
+        support_view = support.to_dict()
+        routing_view = routing.to_dict()
+
+        effective_format_guess = detection.format_guess
+        effective_next_route = routing.next_route
+        effective_is_text = detection.is_text
+        effective_confidence = detection.confidence
+
     result_payload = {
         "ingested": file_info,
-        "detection": detection.to_dict(),
-        "support": support.to_dict(),
-        "routing": routing.to_dict(),
+        "detection": detection_view,
+        "support": support_view,
+        "routing": routing_view,
         "structure_summary": None,
         "structure_config": None,
         "parsed_result": None,
         "agent_debug": None,
     }
+    if effective_next_route == "binary_unknown_handler":
+        result_payload["structure_summary"] = {
+            "format": "binary",
+            "family_info": {
+                "family": "binary_unknown",
+                "confidence": effective_confidence,
+                "notes": "Binary-like unknown or parquet-like file safely isolated.",
+            },
+        }
+        result_payload["structure_config"] = {
+            "family": "binary_unknown",
+            "parser_strategy": "safe_reject_or_metadata_only",
+        }
+        result_payload["parsed_result"] = {
+            "schema_family": "unsupported_binary",
+            "records": [],
+            "record_count": 0,
+        }
+        result_payload["agent_debug"] = {
+            "final_source": "content_sniffer_safe_binary_fallback",
+            "notes": sniff["notes"] if use_sniffer else ["Safe binary fallback used."],
+        }
 
-    if detection.format_guess == "json":
+        output_file = save_result_to_file(file_info, result_payload)
+        print(f"Result written to: {output_file}")
+        return output_file
+
+    if effective_format_guess == "json":
         raw_json = load_json_file(file_info["raw_path"])
         structure_summary = summarize_json_structure(raw_json)
         structure_config, agent_debug = detect_structure_with_agent(structure_summary, raw_json)
@@ -103,7 +188,7 @@ def run_pipeline(file_path: str) -> str:
         result_payload["structure_config"] = structure_config
         result_payload["agent_debug"] = agent_debug
         result_payload["parsed_result"] = parsed_result
-    elif detection.format_guess == "csv":
+    elif effective_format_guess == "csv":
         csv_result = load_csv_with_diagnostics(file_info["raw_path"])
         rows = csv_result.rows
 
@@ -124,7 +209,7 @@ def run_pipeline(file_path: str) -> str:
             "malformed_row_numbers": csv_result.malformed_row_numbers,
         }
         result_payload["parsed_result"] = parsed_result
-    elif detection.format_guess == "xml":
+    elif effective_format_guess == "xml":
         raw_xml = load_xml_file(file_info["raw_path"])
         structure_summary = summarize_json_structure(raw_xml)
         structure_config, agent_debug = detect_structure_with_agent(structure_summary, raw_xml)
@@ -135,12 +220,12 @@ def run_pipeline(file_path: str) -> str:
         result_payload["structure_config"] = structure_config
         result_payload["agent_debug"] = agent_debug
         result_payload["parsed_result"] = parsed_result
-    elif routing.next_route == "semi_structured_parser":
+    elif effective_format_guess == "semi_structured_parser":
         text_payload = load_text_file(file_info["raw_path"])
 
         family_info = {
             "family": "semi_structured_text",
-            "confidence": detection.confidence,
+            "confidence": effective_confidence,
             "notes": f"Unified semi-structured lane from {detection.format_guess}",
         }
 
@@ -191,7 +276,7 @@ def run_pipeline(file_path: str) -> str:
         result_payload["structure_config"] = binary_result["structure_config"]
         result_payload["parsed_result"] = binary_result["parsed_result"]
         result_payload["agent_debug"] = binary_result["agent_debug"]            
-    elif detection.is_text:
+    elif effective_is_text:
         # For text files not claimed by the semi-structured route, use free-form directly
         doc_payload = load_text_document(file_info["raw_path"])
         parsed_result = parse_free_form_text(doc_payload)
@@ -202,7 +287,7 @@ def run_pipeline(file_path: str) -> str:
             "char_count": doc_payload["char_count"],
             "family_info": {
                 "family": "free_form_text",
-                "confidence": detection.confidence,
+                "confidence": effective_confidence,
                 "notes": f"Direct free-form text lane from {detection.format_guess}",
             },
         }
@@ -228,7 +313,8 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/ion_implanter_freeform.txt")
+    run_pipeline("data/unknown/mystery_syslog_like.odd")
+
 
 
 

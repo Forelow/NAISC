@@ -1,0 +1,566 @@
+{
+    "ingested": {
+        "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+        "filename": "mystery_json_like.dat",
+        "extension": ".dat",
+        "size_bytes": 124,
+        "raw_path": "data\\raw\\d2360180-e0a7-496b-92b2-6fb5a919ae62_mystery_json_like.dat",
+        "ingestion_time": "2026-04-25T09:24:31.403399",
+        "sha256": "89200393144ec691bec796f89aca709d09585dcc0cb46848d50599f4f8b9fb45"
+    },
+    "detection": {
+        "format_guess": "json",
+        "content_class": "structured_text",
+        "confidence": 0.98,
+        "extension_hint": ".dat",
+        "is_text": true,
+        "notes": [
+            "Unknown extension, but content looks like JSON."
+        ]
+    },
+    "support": {
+        "format_guess": "json",
+        "is_supported": true,
+        "parser_family": "structured_parser",
+        "support_status": "supported",
+        "notes": "Unknown extension, but content looks like JSON."
+    },
+    "routing": {
+        "next_route": "structured_parser",
+        "processing_mode": "direct_parse",
+        "should_attempt_parse": true,
+        "notes": "Unknown extension, but content looks like JSON."
+    },
+    "structure_summary": {
+        "format": "json",
+        "top_level_type": "dict",
+        "top_level_keys": [
+            "timestamp",
+            "tool_id",
+            "parameter",
+            "value",
+            "unit"
+        ],
+        "repeated_paths": [],
+        "sample_leaf_paths": [
+            "parameter",
+            "timestamp",
+            "tool_id",
+            "unit",
+            "value"
+        ]
+    },
+    "structure_config": {
+        "schema_family": "json_flat_object",
+        "record_groups": [
+            {
+                "record_type": "measurement",
+                "path": "$",
+                "context_paths": [],
+                "field_paths": [
+                    "timestamp",
+                    "tool_id",
+                    "parameter",
+                    "value",
+                    "unit"
+                ],
+                "where": null
+            }
+        ]
+    },
+    "parsed_result": {
+        "schema_family": "json_flat_object",
+        "records": [
+            {
+                "record_type": "measurement",
+                "source_reference": "$[1]",
+                "data": {
+                    "timestamp": "2026-04-30T13:00:00",
+                    "tool_id": "ETCH_X1",
+                    "parameter": "temperature",
+                    "value": 90,
+                    "unit": "F"
+                }
+            }
+        ],
+        "record_count": 1
+    },
+    "agent_debug": {
+        "final_source": "invalid_repair",
+        "initial_config_raw": {
+            "schema_family": "json_flat_object",
+            "record_groups": [
+                {
+                    "record_type": "measurement",
+                    "path": "",
+                    "context_paths": [],
+                    "field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_config_normalized": {
+            "schema_family": "json_flat_object",
+            "record_groups": [
+                {
+                    "record_type": "measurement",
+                    "path": "",
+                    "context_paths": [],
+                    "field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "initial_validation_report": {
+            "schema_family": "json_flat_object",
+            "group_count_before": 1,
+            "group_count_after": 0,
+            "valid_group_count": 0,
+            "groups": [
+                {
+                    "record_type": "measurement",
+                    "path": "",
+                    "status": "rejected",
+                    "reason": "group path did not resolve"
+                }
+            ]
+        },
+        "invalid_repair_config_raw": {
+            "schema_family": "json_flat_object",
+            "record_groups": [
+                {
+                    "record_type": "measurement",
+                    "path": "$",
+                    "context_paths": [],
+                    "field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "invalid_repair_config_normalized": {
+            "schema_family": "json_flat_object",
+            "record_groups": [
+                {
+                    "record_type": "measurement",
+                    "path": "$",
+                    "context_paths": [],
+                    "field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "where": null
+                }
+            ]
+        },
+        "invalid_repair_validation_report": {
+            "schema_family": "json_flat_object",
+            "group_count_before": 1,
+            "group_count_after": 1,
+            "valid_group_count": 1,
+            "groups": [
+                {
+                    "record_type": "measurement",
+                    "path": "$",
+                    "status": "accepted",
+                    "valid_field_paths": [
+                        "timestamp",
+                        "tool_id",
+                        "parameter",
+                        "value",
+                        "unit"
+                    ],
+                    "valid_context_paths": []
+                }
+            ]
+        },
+        "uncovered_leaf_paths_before": [],
+        "coverage_repair_config_raw": null,
+        "coverage_repair_config_normalized": null,
+        "coverage_repair_validation_report": null,
+        "uncovered_leaf_paths_after": []
+    },
+    "pipeline_output": {
+        "schema_fingerprint": "63b840231708ccec",
+        "adapter_spec_used": {
+            "schema_fingerprint": "63b840231708ccec",
+            "schema_family": "json_flat_object",
+            "record_type_mapping": {
+                "measurement": "sensor_reading",
+                "process_job": "wafer_processing_sequence",
+                "sensor_measurement": "sensor_reading",
+                "alarm_event": "fault_event",
+                "error_event": "fault_event",
+                "control_state_event": "equipment_state",
+                "process_step": "wafer_processing_sequence",
+                "wafer": "wafer_processing_sequence",
+                "wafer_measurement": "sensor_reading",
+                "recipe_param": "process_parameter_recipe",
+                "setpoint": "process_parameter_recipe",
+                "fault_summary": "fault_event",
+                "equipment_state_transition": "equipment_state"
+            },
+            "dispatch_rules": [],
+            "field_aliases": {
+                "LotID": "lot",
+                "WaferID": "wafer",
+                "SlotID": "slot",
+                "Recipe.RecipeID": "recipe",
+                "RecipeName": "recipe",
+                "RecipeStepName": "step",
+                "DateTime": "timestamp",
+                "Value": "value",
+                "Unit": "unit",
+                "Text": "event_name",
+                "Name": "event_name",
+                "SensorID": "sensor_id",
+                "SensorName": "parameter",
+                "AlarmID": "fault_code",
+                "ErrorID": "fault_code",
+                "Severity": "severity",
+                "ControlJob.EquipmentID": "tool_id",
+                "EquipmentID": "tool_id",
+                "ToState": "to_state",
+                "FromState": "from_state",
+                "@sensor": "parameter",
+                "@timestamp": "timestamp",
+                "@unit": "unit",
+                "@value": "value",
+                "@name": "parameter",
+                "@u": "unit",
+                "@v": "value",
+                "@stepName": "step",
+                "StepOutcome": "status",
+                "FabricationRecord.ProductionOrder.LotID": "lot",
+                "FabricationRecord.Hdr.Lot": "lot",
+                "FabricationRecord.Equipment.EquipmentID": "tool_id",
+                "RcpExecLog.@eqp": "tool_id",
+                "RcpExecLog.Hdr.Lot": "lot",
+                "RcpExecLog.Hdr.Rcp": "recipe",
+                "RcpExecLog.WfrLog.W[].@id": "wafer",
+                "@id": "wafer",
+                "@n": "slot",
+                "@cd": "fault_code",
+                "FaultCode": "fault_code",
+                "Description": "fault_summary",
+                "@msg": "fault_summary",
+                "Timestamp": "timestamp",
+                "@t": "timestamp",
+                "@sev": "severity"
+            },
+            "fallback_rules": [
+                {
+                    "when_record_type": "sensor_reading",
+                    "if_missing": "parameter",
+                    "copy_from": "sensor_id"
+                },
+                {
+                    "when_record_type": "equipment_state",
+                    "if_missing": "curr_state",
+                    "copy_from": "event_name"
+                }
+            ]
+        },
+        "canonical_output": {
+            "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+            "filename": "mystery_json_like.dat",
+            "source_format": "json",
+            "parser_route": "structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 1,
+            "records": [
+                {
+                    "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:24:31.403399",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "invalid_repair",
+                    "adapter_applied": true
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "63b840231708ccec",
+                "schema_family": "json_flat_object"
+            }
+        },
+        "standardized_output": {
+            "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+            "filename": "mystery_json_like.dat",
+            "source_format": "json",
+            "parser_route": "structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 1,
+            "records": [
+                {
+                    "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:24:31.403399",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "ETCH_X1",
+                        "timestamp": "2026-04-30T13:00:00",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "parameter": "parameter",
+                        "value": "value",
+                        "unit": "unit"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "63b840231708ccec",
+                "schema_family": "json_flat_object"
+            }
+        },
+        "normalized_output": {
+            "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+            "filename": "mystery_json_like.dat",
+            "source_format": "json",
+            "parser_route": "structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 1,
+            "records": [
+                {
+                    "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:24:31.403399",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "ETCH_X1",
+                        "timestamp": "2026-04-30T13:00:00",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "parameter": "parameter",
+                        "value": "value",
+                        "unit": "unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "ETCH_X1",
+                        "timestamp": "2026-04-30T13:00:00",
+                        "parameter": "temperature",
+                        "value": 32.22222222222222,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "63b840231708ccec",
+                "schema_family": "json_flat_object"
+            }
+        },
+        "validated_output": {
+            "accepted_count": 1,
+            "rejected_count": 0,
+            "accepted_records": [
+                {
+                    "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+                    "filename": "mystery_json_like.dat",
+                    "ingestion_time": "2026-04-25T09:24:31.403399",
+                    "source_format": "json",
+                    "parser_route": "structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement",
+                    "source_reference": "$[1]",
+                    "confidence": 1.0,
+                    "evidence_text": "",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:00:00",
+                        "tool_id": "ETCH_X1",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "invalid_repair",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "ETCH_X1",
+                        "timestamp": "2026-04-30T13:00:00",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "F"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "parameter": "parameter",
+                        "value": "value",
+                        "unit": "unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "ETCH_X1",
+                        "timestamp": "2026-04-30T13:00:00",
+                        "parameter": "temperature",
+                        "value": 32.22222222222222,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    },
+                    "validation_reason": "ok"
+                }
+            ],
+            "rejected_records": []
+        },
+        "routing_output": {
+            "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+            "filename": "mystery_json_like.dat",
+            "accepted_count": 1,
+            "rejected_count": 0,
+            "routed_rows": {
+                "equipment_states": [],
+                "process_parameters_recipes": [],
+                "sensor_readings": [
+                    {
+                        "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+                        "filename": "mystery_json_like.dat",
+                        "parser_route": "structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement",
+                        "source_reference": "$[1]",
+                        "parser_confidence": 1.0,
+                        "evidence_text": "",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:00:00\", \"tool_id\": \"ETCH_X1\", \"parameter\": \"temperature\", \"value\": 90, \"unit\": \"F\"}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"parameter\": \"parameter\", \"value\": \"value\", \"unit\": \"unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "ETCH_X1",
+                        "timestamp": "2026-04-30T13:00:00",
+                        "parameter": "temperature",
+                        "value": 32.22222222222222,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    }
+                ],
+                "fault_events": [],
+                "wafer_processing_sequences": [],
+                "generic_observations_staging": []
+            },
+            "rejected_records": []
+        }
+    },
+    "db_output": {
+        "database": "semicon_parser",
+        "file_id": "d2360180-e0a7-496b-92b2-6fb5a919ae62",
+        "inserted_counts": {
+            "equipment_states": 0,
+            "process_parameters_recipes": 0,
+            "sensor_readings": 1,
+            "fault_events": 0,
+            "wafer_processing_sequences": 0,
+            "generic_observations_staging": 0,
+            "rejected_records": 0
+        },
+        "status": "ok"
+    }
+}

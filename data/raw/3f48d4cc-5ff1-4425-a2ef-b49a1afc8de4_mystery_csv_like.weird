@@ -1,0 +1,3 @@
+timestamp,tool_id,parameter,value,unit
+2026-04-30T13:02:00,FURNACE_X3,duration,2,min
+2026-04-30T13:02:01,FURNACE_X3,power,1.2,kW

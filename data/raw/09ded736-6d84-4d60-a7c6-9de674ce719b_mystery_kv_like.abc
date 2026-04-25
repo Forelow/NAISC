@@ -1,0 +1,2 @@
+timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2
+timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8

@@ -1,0 +1,57 @@
+{
+    "ingested": {
+        "file_id": "b9bace3f-0e3f-4f09-b418-68425db6e0c0",
+        "filename": "vendorC.parquet",
+        "extension": ".parquet",
+        "size_bytes": 9498,
+        "raw_path": "data\\raw\\b9bace3f-0e3f-4f09-b418-68425db6e0c0_vendorC.parquet",
+        "ingestion_time": "2026-04-25T09:16:06.233128",
+        "sha256": "1fa91993ee065c7e2ab63a24c5db4d55bb63b6f6e01ce19d477341426d7bc13e"
+    },
+    "detection": {
+        "format_guess": "parquet_like_binary",
+        "content_class": "structured_binary",
+        "confidence": 0.95,
+        "extension_hint": ".parquet",
+        "is_text": false,
+        "notes": [
+            "Known binary-like extension: .parquet"
+        ]
+    },
+    "support": {
+        "format_guess": "parquet_like_binary",
+        "is_supported": false,
+        "parser_family": "binary_fallback",
+        "support_status": "limited",
+        "notes": "Known binary-like extension: .parquet"
+    },
+    "routing": {
+        "next_route": "binary_unknown_handler",
+        "processing_mode": "safe_reject_or_metadata_only",
+        "should_attempt_parse": false,
+        "notes": "Known binary-like extension: .parquet"
+    },
+    "structure_summary": {
+        "format": "binary",
+        "family_info": {
+            "family": "binary_unknown",
+            "confidence": 0.95,
+            "notes": "Binary-like unknown or parquet-like file safely isolated."
+        }
+    },
+    "structure_config": {
+        "family": "binary_unknown",
+        "parser_strategy": "safe_reject_or_metadata_only"
+    },
+    "parsed_result": {
+        "schema_family": "unsupported_binary",
+        "records": [],
+        "record_count": 0
+    },
+    "agent_debug": {
+        "final_source": "content_sniffer_safe_binary_fallback",
+        "notes": [
+            "Known binary-like extension: .parquet"
+        ]
+    }
+}

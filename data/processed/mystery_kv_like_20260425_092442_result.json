@@ -1,0 +1,1481 @@
+{
+    "ingested": {
+        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+        "filename": "mystery_kv_like.abc",
+        "extension": ".abc",
+        "size_bytes": 190,
+        "raw_path": "data\\raw\\0f45ec78-7726-4904-84dd-308f7b1b5eb3_mystery_kv_like.abc",
+        "ingestion_time": "2026-04-25T09:24:39.120396",
+        "sha256": "3bdb858f1bc4f97bfd80dc2e73c6aa01be9f2c0ed2eda26f63b5991213447615"
+    },
+    "detection": {
+        "format_guess": "key_value_text",
+        "content_class": "semi_structured_text",
+        "confidence": 0.7,
+        "extension_hint": ".abc",
+        "is_text": true,
+        "notes": [
+            "Unknown extension, but content looks like key=value text."
+        ]
+    },
+    "support": {
+        "format_guess": "key_value_text",
+        "is_supported": true,
+        "parser_family": "semi_structured_parser",
+        "support_status": "supported",
+        "notes": "Unknown extension, but content looks like key=value text."
+    },
+    "routing": {
+        "next_route": "semi_structured_parser",
+        "processing_mode": "regex_or_rule_parse",
+        "should_attempt_parse": true,
+        "notes": "Unknown extension, but content looks like key=value text."
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 2,
+        "char_count": 190,
+        "family_info": {
+            "family": "free_form_text",
+            "confidence": 0.7,
+            "notes": "Direct free-form text lane from free_text_log"
+        }
+    },
+    "structure_config": {
+        "family": "free_form_text",
+        "parser_strategy": "chunk_then_llm_extract",
+        "chunk_count": 1
+    },
+    "parsed_result": {
+        "schema_family": "free_form_text",
+        "records": [
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "tool_telemetry_snapshot",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                "data": {
+                    "timestamp": "2026-04-30T13:03:00",
+                    "tool_id": "IMPLANT_X4",
+                    "temp_F": 90,
+                    "pressure_mTorr": 750,
+                    "power_kW": 1.2
+                },
+                "extra": {},
+                "uncertain": true
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "tool_telemetry_snapshot",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                "data": {
+                    "timestamp": "2026-04-30T13:03:01",
+                    "tool_id": "IMPLANT_X4",
+                    "chamber_temp_K": 300,
+                    "dwell_ms": 1500,
+                    "gas_flow_slm": 0.8
+                },
+                "extra": {},
+                "uncertain": true
+            }
+        ],
+        "record_count": 2,
+        "condensed_records": [
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "tool_telemetry_snapshot",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                "data": {
+                    "timestamp": "2026-04-30T13:03:00",
+                    "tool_id": "IMPLANT_X4",
+                    "temp_F": 90,
+                    "pressure_mTorr": 750,
+                    "power_kW": 1.2
+                },
+                "extra": {},
+                "uncertain": true
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "tool_telemetry_snapshot",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                "data": {
+                    "timestamp": "2026-04-30T13:03:01",
+                    "tool_id": "IMPLANT_X4",
+                    "chamber_temp_K": 300,
+                    "dwell_ms": 1500,
+                    "gas_flow_slm": 0.8
+                },
+                "extra": {},
+                "uncertain": true
+            }
+        ],
+        "condensed_record_count": 2,
+        "detailed_records": [
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "tool_telemetry_snapshot",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                "data": {
+                    "timestamp": "2026-04-30T13:03:00",
+                    "tool_id": "IMPLANT_X4",
+                    "temp_F": 90,
+                    "pressure_mTorr": 750,
+                    "power_kW": 1.2
+                },
+                "extra": {},
+                "uncertain": true
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "tool_telemetry_snapshot",
+                "source_reference": "chunk:1",
+                "confidence": 0.98,
+                "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                "data": {
+                    "timestamp": "2026-04-30T13:03:01",
+                    "tool_id": "IMPLANT_X4",
+                    "chamber_temp_K": 300,
+                    "dwell_ms": 1500,
+                    "gas_flow_slm": 0.8
+                },
+                "extra": {},
+                "uncertain": true
+            }
+        ],
+        "detailed_record_count": 2,
+        "chunk_count": 1,
+        "chunk_debug": [
+            {
+                "chunk_id": 1,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "coarse_type": "measurement_observation",
+                                "subtype": "tool_telemetry_snapshot",
+                                "confidence": 0.98,
+                                "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                                "data": {
+                                    "timestamp": "2026-04-30T13:03:00",
+                                    "tool_id": "IMPLANT_X4",
+                                    "temp_F": 90,
+                                    "pressure_mTorr": 750,
+                                    "power_kW": 1.2
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "measurement_observation",
+                                "subtype": "tool_telemetry_snapshot",
+                                "confidence": 0.98,
+                                "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                                "data": {
+                                    "timestamp": "2026-04-30T13:03:01",
+                                    "tool_id": "IMPLANT_X4",
+                                    "chamber_temp_K": 300,
+                                    "dwell_ms": 1500,
+                                    "gas_flow_slm": 0.8
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            }
+                        ]
+                    }
+                },
+                "record_count": 2
+            }
+        ]
+    },
+    "agent_debug": {
+        "final_source": "free_form_direct"
+    },
+    "pipeline_output": {
+        "schema_fingerprint": "b626592607943e84",
+        "adapter_spec_used": {
+            "schema_fingerprint": "b626592607943e84",
+            "schema_family": "",
+            "record_type_mapping": {
+                "equipment_state": "equipment_state",
+                "process_parameter_recipe": "process_parameter_recipe",
+                "wafer_processing_sequence": "wafer_processing_sequence",
+                "sensor_reading": "sensor_reading",
+                "fault_event": "fault_event",
+                "process_job": "wafer_processing_sequence",
+                "sensor_measurement": "sensor_reading",
+                "alarm_event": "fault_event",
+                "error_event": "fault_event",
+                "control_state_event": "equipment_state",
+                "process_step": "wafer_processing_sequence",
+                "wafer": "wafer_processing_sequence",
+                "wafer_measurement": "sensor_reading",
+                "recipe_param": "process_parameter_recipe",
+                "setpoint": "process_parameter_recipe",
+                "fault_summary": "fault_event",
+                "equipment_state_transition": "equipment_state"
+            },
+            "dispatch_rules": [],
+            "field_aliases": {
+                "LotID": "lot",
+                "WaferID": "wafer",
+                "SlotID": "slot",
+                "Recipe.RecipeID": "recipe",
+                "RecipeName": "recipe",
+                "RecipeStepName": "step",
+                "DateTime": "timestamp",
+                "Value": "value",
+                "Unit": "unit",
+                "Text": "event_name",
+                "Name": "event_name",
+                "SensorID": "sensor_id",
+                "SensorName": "parameter",
+                "AlarmID": "fault_code",
+                "ErrorID": "fault_code",
+                "Severity": "severity",
+                "ControlJob.EquipmentID": "tool_id",
+                "EquipmentID": "tool_id",
+                "ToState": "to_state",
+                "FromState": "from_state",
+                "@sensor": "parameter",
+                "@timestamp": "timestamp",
+                "@unit": "unit",
+                "@value": "value",
+                "@name": "parameter",
+                "@u": "unit",
+                "@v": "value",
+                "@stepName": "step",
+                "StepOutcome": "status",
+                "FabricationRecord.ProductionOrder.LotID": "lot",
+                "FabricationRecord.Hdr.Lot": "lot",
+                "FabricationRecord.Equipment.EquipmentID": "tool_id",
+                "RcpExecLog.@eqp": "tool_id",
+                "RcpExecLog.Hdr.Lot": "lot",
+                "RcpExecLog.Hdr.Rcp": "recipe",
+                "RcpExecLog.WfrLog.W[].@id": "wafer",
+                "@id": "wafer",
+                "@n": "slot",
+                "@cd": "fault_code",
+                "FaultCode": "fault_code",
+                "Description": "fault_summary",
+                "@msg": "fault_summary",
+                "Timestamp": "timestamp",
+                "@t": "timestamp",
+                "@sev": "severity"
+            },
+            "fallback_rules": [
+                {
+                    "when_record_type": "sensor_reading",
+                    "if_missing": "parameter",
+                    "copy_from": "sensor_id"
+                },
+                {
+                    "when_record_type": "equipment_state",
+                    "if_missing": "curr_state",
+                    "copy_from": "event_name"
+                }
+            ]
+        },
+        "canonical_output": {
+            "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+            "filename": "mystery_kv_like.abc",
+            "source_format": "key_value_text",
+            "parser_route": "semi_structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 2,
+            "records": [
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "b626592607943e84",
+                "schema_family": ""
+            }
+        },
+        "standardized_output": {
+            "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+            "filename": "mystery_kv_like.abc",
+            "source_format": "key_value_text",
+            "parser_route": "semi_structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 6,
+            "records": [
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "degF"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "temp_F": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "temp_F": 90,
+                        "power_kW": 1.2
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "pressure",
+                        "value": 750,
+                        "unit": "mTorr"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "pressure_mTorr": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "temp_F": 90,
+                        "pressure_mTorr": 750
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "power",
+                        "value": 1.2,
+                        "unit": "kW"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "power_kW": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "chamber_temperature",
+                        "value": 300,
+                        "unit": "K"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "chamber_temp_K": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "chamber_temp_K": 300,
+                        "gas_flow_slm": 0.8
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "dwell",
+                        "value": 1500,
+                        "unit": "ms"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "dwell_ms": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "gas_flow",
+                        "value": 0.8,
+                        "unit": "slm"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "gas_flow_slm": "parameter/value/unit"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "b626592607943e84",
+                "schema_family": ""
+            }
+        },
+        "normalized_output": {
+            "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+            "filename": "mystery_kv_like.abc",
+            "source_format": "key_value_text",
+            "parser_route": "semi_structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 6,
+            "records": [
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "degF"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "temp_F": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "temperature",
+                        "value": 32.22222222222222,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "temp_F": 90,
+                        "power_kW": 1.2
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "pressure",
+                        "value": 750,
+                        "unit": "mTorr"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "pressure_mTorr": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "pressure",
+                        "value": 99.99177631578948,
+                        "unit": "Pa",
+                        "measurement_family": "pressure"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "temp_F": 90,
+                        "pressure_mTorr": 750
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "power",
+                        "value": 1.2,
+                        "unit": "kW"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "power_kW": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "power",
+                        "value": 1200.0,
+                        "unit": "W",
+                        "measurement_family": "power"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "chamber_temperature",
+                        "value": 300,
+                        "unit": "K"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "chamber_temp_K": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "chamber_temperature",
+                        "value": 26.850000000000023,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "chamber_temp_K": 300,
+                        "gas_flow_slm": 0.8
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "dwell",
+                        "value": 1500,
+                        "unit": "ms"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "dwell_ms": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "dwell",
+                        "value": 1.5,
+                        "unit": "s",
+                        "measurement_family": "time"
+                    }
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "gas_flow",
+                        "value": 0.8,
+                        "unit": "slm"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "gas_flow_slm": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "gas_flow",
+                        "value": 800.0,
+                        "unit": "sccm",
+                        "measurement_family": "gas_flow"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "b626592607943e84",
+                "schema_family": ""
+            }
+        },
+        "validated_output": {
+            "accepted_count": 6,
+            "rejected_count": 0,
+            "accepted_records": [
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "temperature",
+                        "value": 90,
+                        "unit": "degF"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "temp_F": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "temperature",
+                        "value": 32.22222222222222,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "temp_F": 90,
+                        "power_kW": 1.2
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "pressure",
+                        "value": 750,
+                        "unit": "mTorr"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "pressure_mTorr": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "pressure",
+                        "value": 99.99177631578948,
+                        "unit": "Pa",
+                        "measurement_family": "pressure"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:00",
+                        "tool_id": "IMPLANT_X4",
+                        "temp_F": 90,
+                        "pressure_mTorr": 750,
+                        "power_kW": 1.2
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "temp_F": 90,
+                        "pressure_mTorr": 750
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "power",
+                        "value": 1.2,
+                        "unit": "kW"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "power_kW": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "power",
+                        "value": 1200.0,
+                        "unit": "W",
+                        "measurement_family": "power"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "chamber_temperature",
+                        "value": 300,
+                        "unit": "K"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "chamber_temp_K": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "chamber_temperature",
+                        "value": 26.850000000000023,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "chamber_temp_K": 300,
+                        "gas_flow_slm": 0.8
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "dwell",
+                        "value": 1500,
+                        "unit": "ms"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "dwell_ms": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "dwell",
+                        "value": 1.5,
+                        "unit": "s",
+                        "measurement_family": "time"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                    "filename": "mystery_kv_like.abc",
+                    "ingestion_time": "2026-04-25T09:24:39.120396",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "measurement_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.98,
+                    "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                    "raw_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "candidate_fields": {
+                        "timestamp": "2026-04-30T13:03:01",
+                        "tool_id": "IMPLANT_X4",
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500,
+                        "gas_flow_slm": 0.8
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "chamber_temp_K": 300,
+                        "dwell_ms": 1500
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "gas_flow",
+                        "value": 0.8,
+                        "unit": "slm"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_id": "tool_id",
+                        "timestamp": "timestamp",
+                        "gas_flow_slm": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "gas_flow",
+                        "value": 800.0,
+                        "unit": "sccm",
+                        "measurement_family": "gas_flow"
+                    },
+                    "validation_reason": "ok"
+                }
+            ],
+            "rejected_records": []
+        },
+        "routing_output": {
+            "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+            "filename": "mystery_kv_like.abc",
+            "accepted_count": 6,
+            "rejected_count": 0,
+            "routed_rows": {
+                "equipment_states": [],
+                "process_parameters_recipes": [],
+                "sensor_readings": [
+                    {
+                        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                        "filename": "mystery_kv_like.abc",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.98,
+                        "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:00\", \"tool_id\": \"IMPLANT_X4\", \"temp_F\": 90, \"pressure_mTorr\": 750, \"power_kW\": 1.2}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"temp_F\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "temperature",
+                        "value": 32.22222222222222,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    },
+                    {
+                        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                        "filename": "mystery_kv_like.abc",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.98,
+                        "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:00\", \"tool_id\": \"IMPLANT_X4\", \"temp_F\": 90, \"pressure_mTorr\": 750, \"power_kW\": 1.2}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"pressure_mTorr\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "pressure",
+                        "value": 99.99177631578948,
+                        "unit": "Pa",
+                        "measurement_family": "pressure"
+                    },
+                    {
+                        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                        "filename": "mystery_kv_like.abc",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.98,
+                        "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:00\", \"tool_id\": \"IMPLANT_X4\", \"temp_F\": 90, \"pressure_mTorr\": 750, \"power_kW\": 1.2}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"power_kW\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:00",
+                        "parameter": "power",
+                        "value": 1200.0,
+                        "unit": "W",
+                        "measurement_family": "power"
+                    },
+                    {
+                        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                        "filename": "mystery_kv_like.abc",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.98,
+                        "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:01\", \"tool_id\": \"IMPLANT_X4\", \"chamber_temp_K\": 300, \"dwell_ms\": 1500, \"gas_flow_slm\": 0.8}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"chamber_temp_K\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "chamber_temperature",
+                        "value": 26.850000000000023,
+                        "unit": "degC",
+                        "measurement_family": "temperature"
+                    },
+                    {
+                        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                        "filename": "mystery_kv_like.abc",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.98,
+                        "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:01\", \"tool_id\": \"IMPLANT_X4\", \"chamber_temp_K\": 300, \"dwell_ms\": 1500, \"gas_flow_slm\": 0.8}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"dwell_ms\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "dwell",
+                        "value": 1.5,
+                        "unit": "s",
+                        "measurement_family": "time"
+                    },
+                    {
+                        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+                        "filename": "mystery_kv_like.abc",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "measurement_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.98,
+                        "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
+                        "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:01\", \"tool_id\": \"IMPLANT_X4\", \"chamber_temp_K\": 300, \"dwell_ms\": 1500, \"gas_flow_slm\": 0.8}",
+                        "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"gas_flow_slm\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "IMPLANT_X4",
+                        "timestamp": "2026-04-30T13:03:01",
+                        "parameter": "gas_flow",
+                        "value": 800.0,
+                        "unit": "sccm",
+                        "measurement_family": "gas_flow"
+                    }
+                ],
+                "fault_events": [],
+                "wafer_processing_sequences": [],
+                "generic_observations_staging": []
+            },
+            "rejected_records": []
+        }
+    },
+    "db_output": {
+        "database": "semicon_parser",
+        "file_id": "0f45ec78-7726-4904-84dd-308f7b1b5eb3",
+        "inserted_counts": {
+            "equipment_states": 0,
+            "process_parameters_recipes": 0,
+            "sensor_readings": 6,
+            "fault_events": 0,
+            "wafer_processing_sequences": 0,
+            "generic_observations_staging": 0,
+            "rejected_records": 0
+        },
+        "status": "ok"
+    }
+}
