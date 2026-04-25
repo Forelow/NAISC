@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semiconductor Parser Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --card: #ffffff;
+            --border: #d8dde3;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #0f766e;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+        }
+        .topbar {
+            background: #111827;
+            color: white;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .topbar .sub {
+            color: #d1d5db;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+        }
+        .left-col, .right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 0;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .card h2, .card h3 {
+            margin-top: 0;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .metric {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .metric .label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        .metric .value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .charts {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .chart-wrap {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-title {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .chart-canvas-wrap {
+            flex: 1;
+            min-height: 260px;
+            position: relative;
+        }
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .insight-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .insight-card .label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        .insight-card .value {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.25;
+        }
+        .insight-card .sub {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .toolbar select, .toolbar input {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            min-width: 150px;
+            background: white;
+        }
+        .toolbar button {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            background: var(--primary);
+            color: white;
+        }
+        .toolbar button:hover {
+            background: var(--primary-dark);
+        }
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .tab {
+            border: none;
+            background: #e5e7eb;
+            color: #111827;
+            padding: 9px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        .table-wrap {
+            overflow: auto;
+            max-height: 75vh;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        th, td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 8px 10px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background: #eff6ff;
+            cursor: pointer;
+            z-index: 1;
+        }
+        th:hover {
+            background: #dbeafe;
+        }
+        .ai-box {
+            min-height: 160px;
+            line-height: 1.5;
+            color: #111827;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            white-space: pre-wrap;
+        }
+        .recent-files {
+            overflow: auto;
+            max-height: 220px;
+        }
+        .muted { color: var(--muted); }
+        .pill {
+            display: inline-block;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #3730a3;
+        }
+        @media (max-width: 1100px) {
+            .container { grid-template-columns: 1fr; }
+            .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .charts { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div>
+            <h1>Semiconductor Parser Dashboard</h1>
+            <div class="sub">Live MySQL dashboard for the parser output tables</div>
+        </div>
+        <div class="pill">Read-only mode</div>
+    </div>
+
+    <div class="container">
+        <div class="left-col">
+            <div class="card">
+                <h2>Database Summary</h2>
+                <div class="metrics">
+                    <div class="metric"><div class="label">Files</div><div class="value"><%= summary.files %></div></div>
+                    <div class="metric"><div class="label">Equipment States</div><div class="value"><%= summary.equipment_states %></div></div>
+                    <div class="metric"><div class="label">Process Params</div><div class="value"><%= summary.process_parameters_recipes %></div></div>
+                    <div class="metric"><div class="label">Sensor Readings</div><div class="value"><%= summary.sensor_readings %></div></div>
+                    <div class="metric"><div class="label">Fault Events</div><div class="value"><%= summary.fault_events %></div></div>
+                    <div class="metric"><div class="label">Wafer Sequences</div><div class="value"><%= summary.wafer_processing_sequences %></div></div>
+                    <div class="metric"><div class="label">Rejected Records</div><div class="value"><%= summary.rejected_records %></div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Charts</h2>
+                <div class="insight-grid" id="insightGrid"></div>
+                <div class="charts">
+                    <div class="chart-wrap">
+                        <div class="chart-title" id="chartOneTitle"></div>
+                        <div class="chart-canvas-wrap"><canvas id="chartOne"></canvas></div>
+                    </div>
+                    <div class="chart-wrap">
+                        <div class="chart-title" id="chartTwoTitle"></div>
+                        <div class="chart-canvas-wrap"><canvas id="chartTwo"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="toolbar" style="justify-content: space-between; margin-bottom: 10px;">
+                    <h2 style="margin: 0;">AI Analysis</h2>
+                    <button id="aiButton" onclick="analyzeData()">Analyze Current Tab</button>
+                </div>
+                <div id="aiFeedback" class="ai-box">Analysis will appear here.</div>
+            </div>
+
+            <div class="card">
+                <h2>Recent Parsed Files</h2>
+                <div class="recent-files">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>filename</th>
+                                <th>format</th>
+                                <th>accepted</th>
+                                <th>rejected</th>
+                                <th>ingestion_time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% recentFiles.forEach(file => { %>
+                            <tr>
+                                <td><%= file.filename %></td>
+                                <td><%= file.source_format %></td>
+                                <td><%= file.accepted_count %></td>
+                                <td><%= file.rejected_count %></td>
+                                <td><%= file.ingestion_time %></td>
+                            </tr>
+                        <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="card">
+                <h2>Table Explorer</h2>
+                <div class="tabs">
+                    <button class="tab active" data-tab="equipment" onclick="openTab('equipment', this)">Equipment States</button>
+                    <button class="tab" data-tab="processes" onclick="openTab('processes', this)">Process Parameters</button>
+                    <button class="tab" data-tab="sensors" onclick="openTab('sensors', this)">Sensor Readings</button>
+                    <button class="tab" data-tab="faults" onclick="openTab('faults', this)">Fault Events</button>
+                    <button class="tab" data-tab="wafer" onclick="openTab('wafer', this)">Wafer Sequences</button>
+                </div>
+
+                <div class="toolbar" id="filtersBar" style="margin-bottom: 14px;"></div>
+                <div class="table-wrap" id="tableContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dbData = {
+            equipment: <%- JSON.stringify(equipment) %>,
+            processes: <%- JSON.stringify(processes) %>,
+            sensors: <%- JSON.stringify(sensors) %>,
+            faults: <%- JSON.stringify(faults) %>,
+            wafer: <%- JSON.stringify(wafer) %>
+        };
+
+        const schemas = {
+            equipment: {
+                title: 'Equipment States',
+                columns: ['id', 'filename', 'tool_id', 'event_ts', 'prev_state', 'curr_state', 'lot', 'wafer', 'recipe', 'step', 'severity', 'event_name']
+            },
+            processes: {
+                title: 'Process Parameters',
+                columns: ['id', 'filename', 'tool_id', 'event_ts', 'recipe', 'step', 'parameter', 'value', 'unit', 'status', 'lot', 'wafer']
+            },
+            sensors: {
+                title: 'Sensor Readings',
+                columns: ['id', 'filename', 'tool_id', 'event_ts', 'parameter', 'value', 'unit', 'lot', 'wafer', 'recipe', 'step', 'severity']
+            },
+            faults: {
+                title: 'Fault Events',
+                columns: ['id', 'filename', 'tool_id', 'event_ts', 'fault_code', 'fault_summary', 'severity', 'lot', 'wafer', 'recipe', 'step', 'status']
+            },
+            wafer: {
+                title: 'Wafer Processing Sequences',
+                columns: ['id', 'filename', 'tool_id', 'event_ts', 'lot', 'wafer', 'slot', 'recipe', 'step', 'status', 'action', 'event_name', 'duration_s', 'wafer_count']
+            }
+        };
+
+        let currentTab = 'equipment';
+        let sortCol = null;
+        let sortAsc = true;
+        let chartOne = null;
+        let chartTwo = null;
+        let activeFilters = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            openTab('equipment', document.querySelector('.tab.active'));
+        });
+
+        function uniqueValues(items, field) {
+            return [...new Set(items.map(item => item[field]).filter(v => v !== null && v !== undefined && v !== ''))].sort();
+        }
+
+        function openTab(tabId, buttonEl) {
+            currentTab = tabId;
+            sortCol = null;
+            sortAsc = true;
+            activeFilters = {};
+
+            document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+            if (buttonEl) buttonEl.classList.add('active');
+
+            buildFilters();
+            renderAll();
+        }
+
+        function buildFilters() {
+            const data = dbData[currentTab] || [];
+            const bar = document.getElementById('filtersBar');
+            bar.innerHTML = '';
+
+            const filterFields = ['filename', 'tool_id', 'lot', 'wafer', 'step', 'severity', 'status', 'parameter', 'fault_code'];
+
+            filterFields.forEach(field => {
+                const vals = uniqueValues(data, field);
+                if (!vals.length) return;
+
+                const select = document.createElement('select');
+                select.innerHTML = `<option value="">All ${field}</option>` + vals.map(v => `<option value="${escapeHtml(String(v))}">${escapeHtml(String(v))}</option>`).join('');
+                select.onchange = e => {
+                    activeFilters[field] = e.target.value;
+                    renderAll();
+                };
+                bar.appendChild(select);
+            });
+        }
+
+        function getFilteredData() {
+            let rows = [...(dbData[currentTab] || [])];
+
+            Object.entries(activeFilters).forEach(([field, value]) => {
+                if (!value) return;
+                rows = rows.filter(row => String(row[field] ?? '') === value);
+            });
+
+            if (sortCol) {
+                rows.sort((a, b) => {
+                    const aVal = a[sortCol] ?? '';
+                    const bVal = b[sortCol] ?? '';
+                    const aNum = Number(aVal);
+                    const bNum = Number(bVal);
+                    let result;
+
+                    if (!Number.isNaN(aNum) && !Number.isNaN(bNum) && aVal !== '' && bVal !== '') {
+                        result = aNum - bNum;
+                    } else {
+                        result = String(aVal).localeCompare(String(bVal));
+                    }
+
+                    return sortAsc ? result : -result;
+                });
+            }
+
+            return rows;
+        }
+
+        function renderAll() {
+            const rows = getFilteredData();
+            renderTable(rows);
+            renderInsights(rows);
+            renderCharts(rows);
+        }
+
+        function handleSort(field) {
+            if (sortCol === field) {
+                sortAsc = !sortAsc;
+            } else {
+                sortCol = field;
+                sortAsc = true;
+            }
+            renderAll();
+        }
+
+        function renderTable(rows) {
+            const schema = schemas[currentTab];
+            const container = document.getElementById('tableContainer');
+            let html = '<table><thead><tr>';
+
+            schema.columns.forEach(col => {
+                let marker = '';
+                if (sortCol === col) marker = sortAsc ? ' ▲' : ' ▼';
+                html += `<th onclick="handleSort('${col}')">${col}${marker}</th>`;
+            });
+
+            html += '</tr></thead><tbody>';
+
+            rows.slice(0, 300).forEach(row => {
+                html += '<tr>';
+                schema.columns.forEach(col => {
+                    html += `<td>${escapeHtml(formatValue(row[col]))}</td>`;
+                });
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function countBy(rows, field) {
+            return rows.reduce((acc, row) => {
+                const key = row[field] || 'Unknown';
+                acc[key] = (acc[key] || 0) + 1;
+                return acc;
+            }, {});
+        }
+
+        function topEntries(obj, limit = 10) {
+            return Object.entries(obj)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, limit);
+        }
+
+
+        function averageBy(rows, groupField, valueField, limit = 10) {
+            const bucket = {};
+            rows.forEach(row => {
+                const key = row[groupField] || 'Unknown';
+                const val = Number(row[valueField]);
+                if (!Number.isFinite(val)) return;
+                if (!bucket[key]) bucket[key] = { sum: 0, count: 0 };
+                bucket[key].sum += val;
+                bucket[key].count += 1;
+            });
+            return Object.entries(bucket)
+                .map(([key, info]) => [key, info.count ? info.sum / info.count : 0, info.count])
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, limit);
+        }
+
+        function latestRowsByParameter(rows, parameter, limit = 20) {
+            return rows
+                .filter(r => String(r.parameter || '') === String(parameter) && Number.isFinite(Number(r.value)))
+                .slice()
+                .sort((a, b) => String(a.event_ts || '').localeCompare(String(b.event_ts || '')))
+                .slice(-limit);
+        }
+
+        function countTimeline(rows, timeField) {
+            const bucket = {};
+            rows.forEach(row => {
+                const ts = String(row[timeField] || '');
+                const key = ts ? ts.slice(0, 16) : 'Unknown';
+                bucket[key] = (bucket[key] || 0) + 1;
+            });
+            return Object.entries(bucket).sort((a, b) => a[0].localeCompare(b[0])).slice(-20);
+        }
+
+        function sumBy(rows, field) {
+            return rows.reduce((sum, row) => {
+                const val = Number(row[field]);
+                return Number.isFinite(val) ? sum + val : sum;
+            }, 0);
+        }
+
+        function getTopPair(rows, field) {
+            const top = topEntries(countBy(rows, field), 1)[0];
+            return top || ['N/A', 0];
+        }
+
+        function setChartTitle(id, title) {
+            document.getElementById(id).textContent = title;
+        }
+
+        function renderInsights(rows) {
+            const grid = document.getElementById('insightGrid');
+            let cards = [];
+
+            if (currentTab === 'equipment') {
+                const topTool = getTopPair(rows, 'tool_id');
+                const topTransition = topEntries(countBy(rows.map(r => ({ transition: `${r.prev_state || 'N/A'} → ${r.curr_state || 'N/A'}` })), 'transition'), 1)[0] || ['N/A', 0];
+                const currentState = getTopPair(rows, 'curr_state');
+                const severe = rows.filter(r => ['WARN', 'ERROR', 'CRITICAL', 'ALARM'].includes(String(r.severity || '').toUpperCase())).length;
+                cards = [
+                    { label: 'Top Tool', value: topTool[0], sub: `${topTool[1]} records` },
+                    { label: 'Most Common Transition', value: topTransition[0], sub: `${topTransition[1]} events` },
+                    { label: 'Dominant Current State', value: currentState[0], sub: `${currentState[1]} events` },
+                    { label: 'Warn/Error Events', value: severe, sub: `${rows.length} total equipment rows` }
+                ];
+            } else if (currentTab === 'processes') {
+                const topRecipe = getTopPair(rows, 'recipe');
+                const topParam = getTopPair(rows, 'parameter');
+                const avgVals = rows.filter(r => Number.isFinite(Number(r.value))).map(r => Number(r.value));
+                const avgValue = avgVals.length ? (avgVals.reduce((a,b)=>a+b,0) / avgVals.length).toFixed(2) : 'N/A';
+                const uniqueSteps = new Set(rows.map(r => r.step).filter(Boolean)).size;
+                cards = [
+                    { label: 'Top Recipe', value: topRecipe[0], sub: `${topRecipe[1]} rows` },
+                    { label: 'Most Frequent Parameter', value: topParam[0], sub: `${topParam[1]} rows` },
+                    { label: 'Avg Numeric Value', value: avgValue, sub: 'all numeric process values' },
+                    { label: 'Unique Steps', value: uniqueSteps, sub: `${rows.length} process rows` }
+                ];
+            } else if (currentTab === 'sensors') {
+                const topParam = getTopPair(rows, 'parameter');
+                const topStep = getTopPair(rows, 'step');
+                const avgVals = rows.filter(r => Number.isFinite(Number(r.value))).map(r => Number(r.value));
+                const avgValue = avgVals.length ? (avgVals.reduce((a,b)=>a+b,0) / avgVals.length).toFixed(2) : 'N/A';
+                const topTool = getTopPair(rows, 'tool_id');
+                cards = [
+                    { label: 'Dominant Sensor Parameter', value: topParam[0], sub: `${topParam[1]} readings` },
+                    { label: 'Busiest Step', value: topStep[0], sub: `${topStep[1]} readings` },
+                    { label: 'Avg Sensor Value', value: avgValue, sub: 'all numeric readings' },
+                    { label: 'Top Tool', value: topTool[0], sub: `${topTool[1]} readings` }
+                ];
+            } else if (currentTab === 'faults') {
+                const topCode = getTopPair(rows, 'fault_code');
+                const severity = getTopPair(rows, 'severity');
+                const topStep = getTopPair(rows, 'step');
+                const topTool = getTopPair(rows, 'tool_id');
+                cards = [
+                    { label: 'Top Fault Code', value: topCode[0], sub: `${topCode[1]} events` },
+                    { label: 'Dominant Severity', value: severity[0], sub: `${severity[1]} events` },
+                    { label: 'Most Affected Step', value: topStep[0], sub: `${topStep[1]} fault rows` },
+                    { label: 'Most Affected Tool', value: topTool[0], sub: `${topTool[1]} fault rows` }
+                ];
+            } else if (currentTab === 'wafer') {
+                const topStep = getTopPair(rows, 'step');
+                const status = getTopPair(rows, 'status');
+                const avgDurationRows = rows.filter(r => Number.isFinite(Number(r.duration_s))).map(r => Number(r.duration_s));
+                const avgDuration = avgDurationRows.length ? (avgDurationRows.reduce((a,b)=>a+b,0) / avgDurationRows.length).toFixed(1) : 'N/A';
+                const waferMoved = new Set(rows.map(r => r.wafer).filter(Boolean)).size;
+                cards = [
+                    { label: 'Most Active Step', value: topStep[0], sub: `${topStep[1]} records` },
+                    { label: 'Dominant Status', value: status[0], sub: `${status[1]} records` },
+                    { label: 'Avg Step Duration (s)', value: avgDuration, sub: 'numeric duration rows only' },
+                    { label: 'Unique Wafers Seen', value: waferMoved, sub: `${rows.length} wafer sequence rows` }
+                ];
+            }
+
+            grid.innerHTML = cards.map(card => `
+                <div class="insight-card">
+                    <div class="label">${escapeHtml(String(card.label))}</div>
+                    <div class="value">${escapeHtml(String(card.value))}</div>
+                    <div class="sub">${escapeHtml(String(card.sub || ''))}</div>
+                </div>
+            `).join('');
+        }
+
+        function resetChart(instance) {
+            if (instance) instance.destroy();
+        }
+
+        function renderCharts(rows) {
+            resetChart(chartOne);
+            resetChart(chartTwo);
+
+            const chartOneCtx = document.getElementById('chartOne');
+            const chartTwoCtx = document.getElementById('chartTwo');
+
+            if (currentTab === 'equipment') {
+                const transitions = topEntries(countBy(rows.map(r => ({ transition: `${r.prev_state || 'N/A'} → ${r.curr_state || 'N/A'}` })), 'transition'));
+                const currentStates = topEntries(countBy(rows, 'curr_state'));
+                setChartTitle('chartOneTitle', 'Most common state transitions');
+                setChartTitle('chartTwoTitle', 'Current state distribution');
+                chartOne = new Chart(chartOneCtx, {
+                    type: 'bar',
+                    data: { labels: transitions.map(x => x[0]), datasets: [{ label: 'Transition events', data: transitions.map(x => x[1]) }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true } } }
+                });
+                chartTwo = new Chart(chartTwoCtx, {
+                    type: 'doughnut',
+                    data: { labels: currentStates.map(x => x[0]), datasets: [{ data: currentStates.map(x => x[1]) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
+
+            if (currentTab === 'processes') {
+                const avgByParam = averageBy(rows, 'parameter', 'value');
+                const recipeCounts = topEntries(countBy(rows, 'recipe'));
+                setChartTitle('chartOneTitle', 'Average numeric process value by parameter');
+                setChartTitle('chartTwoTitle', 'Process row volume by recipe');
+                chartOne = new Chart(chartOneCtx, {
+                    type: 'bar',
+                    data: { labels: avgByParam.map(x => x[0]), datasets: [{ label: 'Average value', data: avgByParam.map(x => Number(x[1].toFixed(2))) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                chartTwo = new Chart(chartTwoCtx, {
+                    type: 'bar',
+                    data: { labels: recipeCounts.map(x => x[0]), datasets: [{ label: 'Rows', data: recipeCounts.map(x => x[1]) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
+
+            if (currentTab === 'sensors') {
+                const topParam = getTopPair(rows, 'parameter')[0];
+                const seriesRows = latestRowsByParameter(rows, topParam, 20);
+                const avgByStep = averageBy(rows.filter(r => String(r.parameter || '') === String(topParam)), 'step', 'value');
+                setChartTitle('chartOneTitle', `Recent trend for dominant parameter: ${topParam}`);
+                setChartTitle('chartTwoTitle', `Average ${topParam} by step`);
+                chartOne = new Chart(chartOneCtx, {
+                    type: 'line',
+                    data: {
+                        labels: seriesRows.map(r => String(r.event_ts || '').slice(5, 16)),
+                        datasets: [{ label: topParam || 'Sensor value', data: seriesRows.map(r => r.value) }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                chartTwo = new Chart(chartTwoCtx, {
+                    type: 'bar',
+                    data: { labels: avgByStep.map(x => x[0]), datasets: [{ label: 'Average value', data: avgByStep.map(x => Number(x[1].toFixed(2))) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
+
+            if (currentTab === 'faults') {
+                const codes = topEntries(countBy(rows, 'fault_code'));
+                const timeline = countTimeline(rows, 'event_ts');
+                setChartTitle('chartOneTitle', 'Top fault codes');
+                setChartTitle('chartTwoTitle', 'Fault events over time');
+                chartOne = new Chart(chartOneCtx, {
+                    type: 'bar',
+                    data: { labels: codes.map(x => x[0]), datasets: [{ label: 'Fault count', data: codes.map(x => x[1]) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                chartTwo = new Chart(chartTwoCtx, {
+                    type: 'line',
+                    data: { labels: timeline.map(x => x[0]), datasets: [{ label: 'Faults', data: timeline.map(x => x[1]) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
+
+            if (currentTab === 'wafer') {
+                const avgDurationByStep = averageBy(rows, 'step', 'duration_s');
+                const statusCounts = topEntries(countBy(rows, 'status'));
+                setChartTitle('chartOneTitle', 'Average wafer step duration by step');
+                setChartTitle('chartTwoTitle', 'Wafer sequence status distribution');
+                chartOne = new Chart(chartOneCtx, {
+                    type: 'bar',
+                    data: { labels: avgDurationByStep.map(x => x[0]), datasets: [{ label: 'Avg duration (s)', data: avgDurationByStep.map(x => Number(x[1].toFixed(2))) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                chartTwo = new Chart(chartTwoCtx, {
+                    type: 'doughnut',
+                    data: { labels: statusCounts.map(x => x[0]), datasets: [{ data: statusCounts.map(x => x[1]) }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+        }
+
+        async function analyzeData() {
+            const feedback = document.getElementById('aiFeedback');
+            const button = document.getElementById('aiButton');
+            button.disabled = true;
+            feedback.textContent = 'Analyzing current tab...';
+
+            try {
+                const res = await fetch('/analyze-data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        targetTab: currentTab,
+                        data: getFilteredData().slice(0, 50)
+                    })
+                });
+                const result = await res.json();
+                feedback.textContent = result.analysis || result.error || 'No analysis returned.';
+            } catch (error) {
+                feedback.textContent = 'Analysis request failed.';
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        function formatValue(value) {
+            if (value === null || value === undefined) return '';
+            if (typeof value === 'number') return String(value);
+            return String(value);
+        }
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+    </script>
+</body>
+</html>
