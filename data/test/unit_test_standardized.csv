@@ -1,0 +1,10 @@
+timestamp,tool_id,parameter,value,unit
+2026-04-30T10:00:00,ETCH_01,temperature,212,F
+2026-04-30T10:00:01,ETCH_01,pressure,14.7,psi
+2026-04-30T10:00:02,ETCH_01,duration,0.5,h
+2026-04-30T10:00:03,ETCH_01,carrier_spd,3,rps
+2026-04-30T10:00:04,ETCH_01,down_force,0.25,kN
+2026-04-30T10:00:05,ETCH_01,gas_flow,250,sccm
+2026-04-30T10:00:06,ETCH_01,slurry_flow,3,mL/s
+2026-04-30T10:00:07,ETCH_01,power,850,mW
+2026-04-30T10:00:08,ETCH_01,thickness,0.8,um

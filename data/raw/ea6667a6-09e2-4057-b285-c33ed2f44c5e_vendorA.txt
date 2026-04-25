@@ -1,0 +1,97 @@
+ETCH TOOL DAILY LOG
+===================
+Tool: EQP_ETCH_20 (Dry Etch — Oxide)
+Date: 13 April 2026
+Shift: Day (0600–1400)
+Logged by: Hafiz bin Osman (Process Engineer)
+Reviewed by: Dr. Ng Siew Ling (Shift Lead)
+===================
+
+STARTUP & QUALIFICATION
+-----------------------
+06:00 — Tool handed over from night shift. No outstanding alarms. Last PM was 11 April, tool has been running cleanly since.
+
+06:05 — Loaded recipe ETCH_OX_DEEP_V4 (revision 4.1). Confirmed recipe checksum matches golden copy. Key parameters:
+  - Step 1 (Breakthrough): CHF3 = 20 sccm, CF4 = 5 sccm, O2 = 2 sccm, Power = 100 W, Pressure = 50 mTorr, Time = 10 s
+  - Step 2 (Main Etch): CHF3 = 50 sccm, CF4 = 15 sccm, Ar = 100 sccm, Power = 500 W, Pressure = 40 mTorr, Time = 120 s
+  - Step 3 (Overetch): CHF3 = 50 sccm, CF4 = 15 sccm, Ar = 100 sccm, Power = 400 W, Pressure = 40 mTorr, Time = 30 s
+  - Step 4 (He Backside Cool): He = 10 sccm, Time = 60 s
+
+06:10 — Ran qualification wafer (QC_WFR_001). All steps passed. Etch depth: 4520 Å (target 4500 ± 200 Å). CD loss: 18 nm (spec < 25 nm). Tool released for production.
+
+PRODUCTION — LOT LOT_0350
+--------------------------
+06:20 — LOT_0350 loaded. 25 wafers, product type P-type shallow trench. Recipe ETCH_OX_DEEP_V4.
+
+06:21 — WFR_0350 (Slot 1) loaded into chamber.
+  06:22 — Breakthrough step: completed normally in 10 s. End-point signal clean.
+  06:24 — Main etch: started. Pressure 40.2 mTorr, RF power 501 W, CHF3 50.1 sccm, CF4 14.9 sccm, Ar 100 sccm.
+  06:26 — Main etch: completed in 120 s. In-situ etch depth reading: 4480 Å.
+  06:26 — Overetch: completed in 30 s.
+  06:27 — WFR_0350 complete. Result: PASS. Etch depth 4505 Å, within spec.
+
+06:28 — WFR_0351 (Slot 2) loaded.
+  06:28 — Breakthrough: PASS (10 s).
+  06:30 — Main etch: started. Pressure 40.1 mTorr, RF 500 W. All gas flows nominal.
+  06:32 — Main etch: PASS (120 s). In-situ depth: 4490 Å.
+  06:32 — Overetch: PASS.
+  06:33 — WFR_0351 complete. PASS.
+
+06:34 — WFR_0352 (Slot 3) loaded.
+  06:35 — Breakthrough: PASS (10 s).
+  06:37 — Main etch: started.
+  06:38 — ALARM: RF power instability detected. Forward power dropped from 500 W to 380 W for approximately 3 seconds. Power recovered automatically. No process abort.
+  06:39 — Main etch completed (120 s). Partial power drop may have affected etch depth — in-situ reading: 4310 Å, slightly below target. Engineer flagged for metrology review.
+  06:40 — Overetch: PASS.
+  06:40 — WFR_0352 flagged for metrology hold. Provisional result: HOLD.
+
+06:41 — RF power instability investigated. Checked RF match network — no obvious fault. Power stable on subsequent wafers. Believed to be a transient event. Continuing with lot.
+
+06:41 — WFR_0353 (Slot 4) loaded.
+  06:42 — All steps (Breakthrough, Main Etch, Overetch, Cool) completed without incident.
+  06:47 — WFR_0353 complete. PASS. Etch depth: 4498 Å.
+
+[Wafers 5–20 processed normally, 06:48–09:30. All depths within 4450–4530 Å range. No alarms. Results: PASS for all.]
+
+INCIDENT — WFR_0370 (Slot 21)
+------------------------------
+09:32 — WFR_0370 (Slot 21) loaded.
+  09:33 — Breakthrough: PASS.
+  09:35 — Main etch started.
+  09:36 — CRITICAL ALARM: Chamber pressure spike detected. Pressure jumped from 40 mTorr to 820 mTorr in under 1 second. RF power automatically cut. Etch halted mid-step.
+  09:36 — Tool entered FAULT state. Remaining lot (WFR_0370 to WFR_0374) placed on hold.
+  09:36 — Notification sent to on-call engineer (Eng. Zainudin, ENG_091).
+
+09:40 — Eng. Zainudin on-site. Inspection of gas lines and chamber. Found N2 purge valve stuck open — causing sudden pressure surge. Valve manually cycled and confirmed closed.
+
+09:55 — Pump-down re-established. Chamber pressure returned to base level of 2.1e-3 mTorr.
+
+10:00 — Engineering disposition:
+  - WFR_0370: SCRAP (partial etch, contamination risk from pressure spike)
+  - WFR_0371 to WFR_0374: Resume processing
+
+10:05 — Tool fault cleared. Tool returned to IDLE.
+
+10:10 — WFR_0371 (Slot 22) loaded and processed. PASS. Etch depth: 4510 Å.
+10:20 — WFR_0372 (Slot 23). PASS. Depth: 4495 Å.
+10:30 — WFR_0373 (Slot 24). PASS. Depth: 4502 Å.
+10:40 — WFR_0374 (Slot 25). PASS. Depth: 4488 Å.
+
+CLOSE OF LOT LOT_0350
+----------------------
+10:41 — LOT_0350 complete.
+  Total wafers: 25
+  PASS: 22 (WFR_0350–0353, WFR_0354–0369, WFR_0371–0374)
+  HOLD: 1 (WFR_0352 — RF instability, flagged for metrology)
+  SCRAP: 1 (WFR_0370 — pressure spike, partial etch)
+  HOLD pending disposition: 1 (WFR_0352 — metrology review in progress)
+
+AFTERNOON SESSION
+-----------------
+11:00 — LOT_0351 (10 wafers) loaded. Same recipe. Processing began normally.
+13:45 — LOT_0351 complete. All 10 wafers PASS. No incidents.
+
+SHIFT HANDOVER
+--------------
+14:00 — Tool in IDLE. No outstanding alarms. WFR_0352 metrology result still pending.
+Handover to PM shift engineer: Siti Rahayu. Briefed on WFR_0352 hold and closed LOT_0350 summary.

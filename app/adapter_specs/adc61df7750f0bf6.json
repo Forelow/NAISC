@@ -1,0 +1,48 @@
+{
+  "schema_fingerprint": "adc61df7750f0bf6",
+  "schema_family": "json",
+  "record_type_mapping": {
+    "process_job": "process_parameter_recipe",
+    "module_process_report": "wafer_processing_sequence",
+    "control_state_event": "equipment_state",
+    "sensor_measurement": "sensor_reading"
+  },
+  "dispatch_rules": [],
+  "field_aliases": {
+    "ControlJob.ControlJobID": "control_job_id",
+    "ControlJob.EquipmentID": "equipment_id",
+    "PRJobID": "process_job_id",
+    "LotID": "lot_id",
+    "SlotID": "slot_id",
+    "WaferID": "wafer_id",
+    "Recipe.RecipeID": "recipe_id",
+    "Recipe.Type": "recipe_type",
+    "Keys.ModuleID": "module_id",
+    "Keys.RecipeStepID": "recipe_step_id",
+    "Keys.WaferID": "wafer_id",
+    "Attributes.LPID": "lpid",
+    "Attributes.PoolID": "pool_id",
+    "Attributes.SlotID": "slot_id",
+    "DateTime": "timestamp",
+    "Name": "state",
+    "ControlJob.ProcessJobs[].PRJobID": "process_job_id",
+    "ControlJob.ProcessJobs[].LotID": "lot_id",
+    "ControlJob.ProcessJobs[].WaferID": "wafer_id",
+    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.ModuleID": "module_id",
+    "ControlJob.ProcessJobs[].ModuleProcessReports[].Keys.RecipeStepID": "recipe_step_id",
+    "ControlJob.ProcessJobs[].ModuleProcessReports[].SensorData[].Keys.SensorID": "sensor_id",
+    "Value": "value"
+  },
+  "fallback_rules": [
+    {
+      "when_record_type": "wafer_processing_sequence",
+      "if_missing": "wafer_id",
+      "copy_from": "wafer_id"
+    },
+    {
+      "when_record_type": "wafer_processing_sequence",
+      "if_missing": "slot_id",
+      "copy_from": "slot_id"
+    }
+  ]
+}

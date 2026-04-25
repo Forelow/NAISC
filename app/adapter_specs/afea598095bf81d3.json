@@ -1,0 +1,53 @@
+{
+  "schema_fingerprint": "afea598095bf81d3",
+  "schema_family": "machine_log",
+  "record_type_mapping": {
+    "wafer": "wafer_processing_sequence",
+    "wafer_event": "fault_event",
+    "wafer_measurement": "sensor_reading",
+    "recipe_param": "process_parameter_recipe",
+    "fault_summary": "fault_event"
+  },
+  "dispatch_rules": [],
+  "field_aliases": {
+    "@id": "event_id",
+    "@cd": "fault_code",
+    "@cnt": "count",
+    "@first_t": "start_time",
+    "@last_t": "end_time",
+    "@sev": "severity",
+    "@t": "timestamp",
+    "@dur_s": "duration_s",
+    "@msg": "message",
+    "@n": "parameter",
+    "@u": "unit",
+    "@v": "value",
+    "@en": "end_time",
+    "@st": "start_time",
+    "@res": "result",
+    "RcpExecLog.@eqp": "equipment_id",
+    "RcpExecLog.@site": "site",
+    "RcpExecLog.@sn": "serial_number",
+    "RcpExecLog.@ver": "software_version",
+    "RcpExecLog.Hdr.Lot": "lot_id",
+    "RcpExecLog.Hdr.Op": "operation",
+    "RcpExecLog.Hdr.Rcp": "recipe",
+    "RcpExecLog.Hdr.Tech": "technology",
+    "RcpExecLog.Hdr.TStart": "start_time",
+    "RcpExecLog.Hdr.TEnd": "end_time",
+    "RcpExecLog.WfrLog.W[].@id": "wafer_id",
+    "RcpExecLog.WfrLog.W[].@n": "wafer_number"
+  },
+  "fallback_rules": [
+    {
+      "when_record_type": "sensor_reading",
+      "if_missing": "sensor_id",
+      "copy_from": "parameter"
+    },
+    {
+      "when_record_type": "process_parameter_recipe",
+      "if_missing": "parameter_name",
+      "copy_from": "parameter"
+    }
+  ]
+}

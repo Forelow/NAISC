@@ -1,0 +1,49 @@
+Apr 13 06:00:00 TOOL_CVD_20 kernel.info: [SYS_BOOT] System initialised sw_ver=5.1.2 hw_rev=B uptime_s=0
+Apr 13 06:00:05 TOOL_CVD_20 local0.notice: [STATE] prev=OFFLINE curr=STANDBY trigger=SYSTEM_BOOT
+Apr 13 06:02:00 TOOL_CVD_20 local0.notice: [STATE] prev=STANDBY curr=IDLE trigger=SELF_CHECK_PASS op=OPR_091
+Apr 13 06:05:00 TOOL_CVD_20 local0.info: [RCP_LOAD] recipe=CVD_SiO2_HQ_01 version=3.2 loaded_by=OPR_091 checksum=0xA3F1
+Apr 13 06:05:01 TOOL_CVD_20 local0.info: [RCP_PARAM] recipe=CVD_SiO2_HQ_01 step=Preheat target_temp_C=400 n2_flow_sccm=10 duration_s=600
+Apr 13 06:05:02 TOOL_CVD_20 local0.info: [RCP_PARAM] recipe=CVD_SiO2_HQ_01 step=Deposit target_temp_C=400 sih4_sccm=60 n2o_sccm=100 pressure_mTorr=300 duration_s=1800
+Apr 13 06:05:03 TOOL_CVD_20 local0.info: [RCP_PARAM] recipe=CVD_SiO2_HQ_01 step=Cooldown target_temp_C=100 n2_flow_sccm=10 duration_s=600
+Apr 13 06:06:00 TOOL_CVD_20 local0.notice: [LOT_IN] lot=LOT_0300 wafer_count=25 recipe=CVD_SiO2_HQ_01 op=OPR_091
+Apr 13 06:06:01 TOOL_CVD_20 local0.notice: [STATE] prev=IDLE curr=PROCESSING lot=LOT_0300 trigger=LOT_START
+Apr 13 06:06:02 TOOL_CVD_20 local0.info: [WFR_SEQ] lot=LOT_0300 wafer=WFR_0300 slot=1 action=LOAD_COMPLETE
+Apr 13 06:06:03 TOOL_CVD_20 local0.info: [STEP_START] lot=LOT_0300 wafer=WFR_0300 step=Preheat seq=1 recipe=CVD_SiO2_HQ_01
+Apr 13 06:06:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=22.0 pressure_mTorr=760000 n2_sccm=10.0
+Apr 13 06:07:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=85.4 pressure_mTorr=500 n2_sccm=10.0
+Apr 13 06:08:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=182.1 pressure_mTorr=310 n2_sccm=10.0
+Apr 13 06:09:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=278.8 pressure_mTorr=305 n2_sccm=10.0
+Apr 13 06:10:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=360.5 pressure_mTorr=302 n2_sccm=10.0
+Apr 13 06:11:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Preheat zone=Z1 temp_C=399.8 pressure_mTorr=300 n2_sccm=10.0
+Apr 13 06:16:03 TOOL_CVD_20 local0.info: [STEP_END] lot=LOT_0300 wafer=WFR_0300 step=Preheat seq=1 dur_s=600 result=PASS
+Apr 13 06:16:04 TOOL_CVD_20 local0.info: [STEP_START] lot=LOT_0300 wafer=WFR_0300 step=Deposit seq=2 recipe=CVD_SiO2_HQ_01
+Apr 13 06:16:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Deposit zone=Z1 temp_C=400.1 pressure_mTorr=300 sih4_sccm=60.0 n2o_sccm=100.0
+Apr 13 06:21:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Deposit zone=Z1 temp_C=400.3 pressure_mTorr=299 sih4_sccm=60.1 n2o_sccm=100.0
+Apr 13 06:26:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0300 step=Deposit zone=Z1 temp_C=401.0 pressure_mTorr=301 sih4_sccm=59.9 n2o_sccm=99.8
+Apr 13 06:28:04 TOOL_CVD_20 local0.warning: [ALARM] code=CVD_GAS_001 wafer=WFR_0300 step=Deposit component=SiH4_MFC actual_sccm=48.2 setpoint_sccm=60.0 deviation_pct=19.7 threshold_pct=10.0 msg="SiH4 flow deviation exceeds threshold"
+Apr 13 06:28:05 TOOL_CVD_20 local0.warning: [ALARM] code=CVD_GAS_001 wafer=WFR_0300 step=Deposit component=SiH4_MFC actual_sccm=45.1 setpoint_sccm=60.0 deviation_pct=24.8 threshold_pct=10.0 msg="SiH4 flow deviation persisting"
+Apr 13 06:28:10 TOOL_CVD_20 local0.err: [ALARM] code=CVD_GAS_002 wafer=WFR_0300 step=Deposit component=SiH4_MFC actual_sccm=42.0 setpoint_sccm=60.0 msg="SiH4 MFC critical failure — deposit step aborted"
+Apr 13 06:28:11 TOOL_CVD_20 local0.err: [STEP_ABORT] lot=LOT_0300 wafer=WFR_0300 step=Deposit seq=2 reason=GAS_FLOW_CRITICAL elapsed_s=724
+Apr 13 06:28:12 TOOL_CVD_20 local0.err: [STATE] prev=PROCESSING curr=FAULTED lot=LOT_0300 wafer=WFR_0300 fault=CVD_GAS_002
+Apr 13 06:28:13 TOOL_CVD_20 local0.err: [WFR_SEQ] lot=LOT_0300 wafer=WFR_0300 slot=1 action=ABORT disposition=HOLD
+Apr 13 06:35:00 TOOL_CVD_20 local0.info: [MAINT] action=MFC_INSPECT component=SiH4_MFC tech=TECH_031 finding="MFC body leak detected — replacing unit"
+Apr 13 06:50:00 TOOL_CVD_20 local0.info: [MAINT] action=MFC_REPLACE component=SiH4_MFC tech=TECH_031 new_serial=MFC_SIH4_0044
+Apr 13 06:55:00 TOOL_CVD_20 local0.info: [ALARM_CLR] code=CVD_GAS_002 cleared_by=ENG_051 action=MFC_REPLACED
+Apr 13 06:55:01 TOOL_CVD_20 local0.notice: [STATE] prev=FAULTED curr=IDLE trigger=FAULT_CLEARED op=ENG_051
+Apr 13 07:00:00 TOOL_CVD_20 local0.notice: [LOT_RESUME] lot=LOT_0300 starting_wafer=WFR_0301 slot=2 eng_disp="WFR_0300 quarantined, resume from slot 2"
+Apr 13 07:00:01 TOOL_CVD_20 local0.notice: [STATE] prev=IDLE curr=PROCESSING lot=LOT_0300
+Apr 13 07:00:02 TOOL_CVD_20 local0.info: [WFR_SEQ] lot=LOT_0300 wafer=WFR_0301 slot=2 action=LOAD_COMPLETE
+Apr 13 07:00:03 TOOL_CVD_20 local0.info: [STEP_START] lot=LOT_0300 wafer=WFR_0301 step=Preheat seq=1 recipe=CVD_SiO2_HQ_01
+Apr 13 07:00:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Preheat zone=Z1 temp_C=25.0 pressure_mTorr=760000 n2_sccm=10.0
+Apr 13 07:01:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Preheat zone=Z1 temp_C=88.2 pressure_mTorr=490 n2_sccm=10.1
+Apr 13 07:06:03 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Preheat zone=Z1 temp_C=399.9 pressure_mTorr=300 n2_sccm=10.0
+Apr 13 07:10:03 TOOL_CVD_20 local0.info: [STEP_END] lot=LOT_0300 wafer=WFR_0301 step=Preheat seq=1 dur_s=600 result=PASS
+Apr 13 07:10:04 TOOL_CVD_20 local0.info: [STEP_START] lot=LOT_0300 wafer=WFR_0301 step=Deposit seq=2 recipe=CVD_SiO2_HQ_01
+Apr 13 07:10:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Deposit zone=Z1 temp_C=400.0 pressure_mTorr=300 sih4_sccm=60.0 n2o_sccm=100.0
+Apr 13 07:20:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Deposit zone=Z1 temp_C=400.2 pressure_mTorr=299 sih4_sccm=60.0 n2o_sccm=100.1
+Apr 13 07:30:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Deposit zone=Z1 temp_C=400.1 pressure_mTorr=300 sih4_sccm=60.1 n2o_sccm=99.9
+Apr 13 07:40:04 TOOL_CVD_20 local0.debug: [SENSOR] wafer=WFR_0301 step=Deposit zone=Z1 temp_C=400.3 pressure_mTorr=301 sih4_sccm=59.9 n2o_sccm=100.0
+Apr 13 07:40:04 TOOL_CVD_20 local0.info: [STEP_END] lot=LOT_0300 wafer=WFR_0301 step=Deposit seq=2 dur_s=1800 result=PASS measured_A=2010
+Apr 13 07:40:05 TOOL_CVD_20 local0.info: [STEP_START] lot=LOT_0300 wafer=WFR_0301 step=Cooldown seq=3 recipe=CVD_SiO2_HQ_01
+Apr 13 07:50:05 TOOL_CVD_20 local0.info: [STEP_END] lot=LOT_0300 wafer=WFR_0301 step=Cooldown seq=3 dur_s=600 result=PASS
+Apr 13 07:50:06 TOOL_CVD_20 local0.info: [WFR_SEQ] lot=LOT_0300 wafer=WFR_0301 slot=2 action=UNLOAD_COMPLETE result=PASS

@@ -1,0 +1,17 @@
+{
+  "schema_fingerprint": "1ddb021c5ef7be8b",
+  "schema_family": "free_form_text",
+  "record_type_mapping": {
+    "generic_operational_observation": "generic_operational_observation"
+  },
+  "dispatch_rules": [],
+  "field_aliases": {
+    "asset_id": "asset_id",
+    "generated_date": "generated_date",
+    "log_format": "log_format",
+    "system": "system",
+    "timestamp_timezone": "timestamp_timezone",
+    "units": "units"
+  },
+  "fallback_rules": []
+}

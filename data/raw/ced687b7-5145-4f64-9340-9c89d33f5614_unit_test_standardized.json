@@ -1,0 +1,72 @@
+[
+  {
+    "parameter": "temperature",
+    "value": 90,
+    "unit": "F"
+  },
+  {
+    "parameter": "temperature",
+    "value": 300,
+    "unit": "K"
+  },
+  {
+    "parameter": "pressure",
+    "value": 1.2,
+    "unit": "kPa"
+  },
+  {
+    "parameter": "pressure",
+    "value": 750,
+    "unit": "mTorr"
+  },
+  {
+    "parameter": "duration",
+    "value": 2,
+    "unit": "min"
+  },
+  {
+    "parameter": "duration",
+    "value": 1500,
+    "unit": "ms"
+  },
+  {
+    "parameter": "carrier_spd",
+    "value": 2,
+    "unit": "rps"
+  },
+  {
+    "parameter": "platen_spd",
+    "value": 31.4159265359,
+    "unit": "rad/s"
+  },
+  {
+    "parameter": "down_force",
+    "value": 10,
+    "unit": "lbf"
+  },
+  {
+    "parameter": "gas_flow",
+    "value": 1.5,
+    "unit": "slm"
+  },
+  {
+    "parameter": "slurry_flow",
+    "value": 2,
+    "unit": "L/h"
+  },
+  {
+    "parameter": "power",
+    "value": 1.2,
+    "unit": "kW"
+  },
+  {
+    "parameter": "thickness",
+    "value": 2500,
+    "unit": "A"
+  },
+  {
+    "parameter": "humidity",
+    "value": 0.47,
+    "unit": "fraction"
+  }
+]

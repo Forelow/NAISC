@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from datetime import datetime
+import re
 
 from ingestion.receiver import ingest_file
 from ingestion.detector import detect_file
@@ -27,11 +28,27 @@ from semi_structured.family_detector import detect_semi_structured_family
 from free_form.reader import load_text_document
 from free_form.parser import parse_free_form_text
 from binary_hex.parser import parse_binary_or_hex_file, is_binary_or_hex_candidate
+from pipeline.runner import process_result_payload
+from db.writer import write_pipeline_output_to_db
 
 
 OUTPUT_DIR = Path("data/processed")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+KV_REGEX = re.compile(r"\b[a-zA-Z_][a-zA-Z0-9_]*\s*=\s*[^,\s]+")
 
+
+def _looks_like_kv_lines(lines: list[str]) -> bool:
+    non_empty = [line.strip() for line in lines if line.strip()]
+    if not non_empty:
+        return False
+
+    kv_hits = sum(1 for line in non_empty if KV_REGEX.search(line))
+    return kv_hits >= max(3, len(non_empty) // 4)
+
+def _force_kv_to_semi_structured(raw_path: str, detection: object) -> bool:
+    ext = Path(raw_path).suffix.lower()
+    format_guess = str(getattr(detection, "format_guess", "") or "")
+    return format_guess in {"key_value_text", "key_value_log"} or (ext == ".kv" and format_guess == "free_text_log")
 
 def save_result_to_file(file_info: dict, result_payload: dict) -> str:
     original_name = Path(file_info["filename"]).stem
@@ -202,12 +219,16 @@ def run_pipeline(file_path: str) -> str:
         result_payload["parsed_result"] = {
             "status": "not_implemented_for_this_format_yet"
         }
-
+    if isinstance(result_payload.get("parsed_result"), dict):
+        result_payload["pipeline_output"] = process_result_payload(result_payload)
+        result_payload["db_output"] = write_pipeline_output_to_db(result_payload)
     output_file = save_result_to_file(file_info, result_payload)
     print(f"Result written to: {output_file}")
     return output_file
 
 
 if __name__ == "__main__":
-    run_pipeline("data/synthetic_logs/demo_tool_log.bin")
-    run_pipeline("data/synthetic_logs/demo_tool_log.hex")
+    run_pipeline("data/synthetic_logs/ion_implanter_freeform.txt")
+
+
+

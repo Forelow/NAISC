@@ -1,0 +1,34 @@
+{
+  "schema_fingerprint": "3df1aa3a55fbbc91",
+  "schema_family": "csv_rows",
+  "record_type_mapping": {
+    "csv_row": "wafer_processing_sequence"
+  },
+  "dispatch_rules": [],
+  "field_aliases": {
+    "record_id": "record_id",
+    "log_date": "log_date",
+    "log_time": "log_time",
+    "tool_id": "tool_id",
+    "lot_id": "lot_id",
+    "wafer_id": "wafer_id",
+    "slot_no": "slot_no",
+    "recipe_name": "recipe_name",
+    "step_name": "step_name",
+    "step_seq": "step_seq",
+    "step_status": "step_status",
+    "duration_s": "duration_s",
+    "chamber": "chamber",
+    "pressure_Pa": "pressure_Pa",
+    "temperature_C": "temperature_C",
+    "rf_power_W": "rf_power_W",
+    "gas1_flow_sccm": "gas1_flow_sccm",
+    "gas2_flow_sccm": "gas2_flow_sccm",
+    "removal_rate": "removal_rate",
+    "thickness_A": "thickness_A",
+    "uniformity_pct": "uniformity_pct",
+    "operator_id": "operator_id",
+    "notes": "notes"
+  },
+  "fallback_rules": []
+}

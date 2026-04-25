@@ -1,0 +1,47 @@
+{
+  "schema_fingerprint": "7778552c8e2a28f0",
+  "schema_family": "",
+  "record_type_mapping": {
+    "equipment_state": "equipment_state",
+    "process_parameter_recipe": "process_parameter_recipe",
+    "sensor_reading": "sensor_reading",
+    "fault_event": "fault_event",
+    "wafer_processing_sequence": "wafer_processing_sequence"
+  },
+  "dispatch_rules": [],
+  "field_aliases": {
+    "ts": "ts",
+    "tool": "tool",
+    "state": "state",
+    "curr_state": "curr_state",
+    "recipe": "recipe",
+    "step": "step",
+    "gas": "gas",
+    "parameter": "parameter",
+    "value": "value",
+    "unit": "unit",
+    "fault_code": "fault_code",
+    "fault_summary": "fault_summary",
+    "wafer": "wafer",
+    "slot": "slot",
+    "event": "event",
+    "event_name": "event_name"
+  },
+  "fallback_rules": [
+    {
+      "when_record_type": "equipment_state",
+      "if_missing": "curr_state",
+      "copy_from": "state"
+    },
+    {
+      "when_record_type": "equipment_state",
+      "if_missing": "state",
+      "copy_from": "curr_state"
+    },
+    {
+      "when_record_type": "wafer_processing_sequence",
+      "if_missing": "event_name",
+      "copy_from": "event"
+    }
+  ]
+}

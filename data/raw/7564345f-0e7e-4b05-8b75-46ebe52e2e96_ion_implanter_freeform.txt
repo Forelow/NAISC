@@ -1,0 +1,52 @@
+===== TOOL EVENT LOG =====
+Equipment: EQP_IMP_01 (Ion Implanter)
+Date: 13 April 2026
+Shift: Morning (0600-1400)
+Engineer on duty: Tan Wei Liang
+===========================
+
+At approximately 07:45, the ion implanter was brought online following overnight preventive maintenance. The operator ran a standard chamber conditioning cycle before loading the first lot.
+
+Lot LOT_0045 was loaded at 08:10. The lot contains 25 wafers scheduled for phosphorus implantation at 40 keV with a dose of 1e13 cm-2. Recipe used is IMP_RCP_PHOS_40K.
+
+08:12 - Wafer 1 (WFR_0001) loaded into beam path. Pre-implant alignment completed within spec. Beam current measured at 4.2 mA, within the acceptable range of 3.8 to 4.5 mA.
+
+08:14 - Implant started on WFR_0001. Dose rate stable at approximately 1.8e12 ions/cm2/s.
+
+08:17 - Implant on WFR_0001 completed. Actual dose confirmed at 1.02e13 cm-2. Wafer unloaded.
+
+08:18 - Wafer 2 (WFR_0002) loaded. Pre-implant alignment OK.
+
+08:20 - Implant started. Beam current initially at 4.1 mA but dropped to 3.2 mA around 08:21. The system issued a beam current instability warning. Operator adjusted suppression voltage and beam current recovered to 4.0 mA by 08:22.
+
+08:25 - Implant on WFR_0002 completed. Final dose: 9.85e12 cm-2. Slightly below target but within 5% tolerance band. Wafer accepted.
+
+08:26 - Wafer 3 (WFR_0003) loaded. Pre-implant alignment showed an offset of 0.4 mm in Y-axis, which is above the 0.3 mm threshold. Operator re-ran alignment. Second attempt passed.
+
+08:29 - Implant started on WFR_0003.
+
+08:32 - FAULT: High vacuum pressure spike detected in the end-station. Beam was automatically cut off. Pressure reading was 3.8e-5 Pa, exceeding the process limit of 2.0e-5 Pa. Implant halted at approximately 40% completion. Estimated partial dose on WFR_0003 is approximately 4.0e12 cm-2.
+
+08:33 - Operator initiated vacuum recovery procedure. Chamber was isolated and turbo pump speed checked. Found the gate valve partially obstructed. Valve was manually cycled.
+
+08:40 - Vacuum recovered to 1.4e-5 Pa. System resumed standby state.
+
+08:42 - Engineering decision: WFR_0003 quarantined for dose non-conformance. Wafer will be sent for metrology review. Lot LOT_0045 processing paused pending engineering disposition.
+
+09:00 - Engineering disposition received: quarantine WFR_0003, continue processing remaining wafers. Processing resumed.
+
+09:02 - Wafer 4 (WFR_0004) loaded. All pre-checks passed.
+
+09:04 - Implant started. Beam current stable at 4.2 mA throughout run.
+
+09:08 - Implant on WFR_0004 completed. Dose confirmed at 1.01e13 cm-2. Wafer accepted.
+
+Processing continued normally through WFR_0025. Final summary:
+- Total wafers processed: 25
+- Wafers accepted: 23
+- Wafers quarantined: 1 (WFR_0003, partial dose)
+- Wafers rejected: 1 (WFR_0002 marginal, held for review)
+- Total process time: approx. 4 hours 20 minutes
+- No additional alarms after 08:40
+
+Shift handover completed at 13:50 to PM shift engineer Ravi Kumar.

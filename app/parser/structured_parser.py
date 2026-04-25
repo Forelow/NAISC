@@ -6,7 +6,7 @@ import json
 import xml.etree.ElementTree as ET
 from typing import Any
 
-from transform.canonicalizer import (
+from app.transform.canonicalizer import (
     CanonicalParseResult,
     build_canonical_record,
 )

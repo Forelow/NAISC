@@ -1,0 +1,5 @@
+<134>2026-04-30T12:00:00 TOOL=FURNACE_03 sensor=temperature value=451 unit=F
+<134>2026-04-30T12:00:01 TOOL=FURNACE_03 sensor=pressure value=760 unit=mmHg
+<134>2026-04-30T12:00:02 TOOL=FURNACE_03 sensor=duration value=120000 unit=ms
+<134>2026-04-30T12:00:03 TOOL=FURNACE_03 sensor=gas_flow value=0.8 unit=slm
+<134>2026-04-30T12:00:04 TOOL=FURNACE_03 sensor=power value=2.0 unit=kW

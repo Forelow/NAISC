@@ -1,0 +1,33 @@
+{
+  "schema_fingerprint": "65a86bb650a333dc",
+  "schema_family": "csv_rows",
+  "record_type_mapping": {},
+  "dispatch_rules": [
+    {
+      "source_record_type": "csv_row",
+      "field": "EventCategory",
+      "map": {
+        "ALARM": "fault_event"
+      }
+    }
+  ],
+  "field_aliases": {
+    "EventDateTime": "timestamp",
+    "EquipmentName": "equipment_name",
+    "EventCategory": "category",
+    "AlarmCode": "fault_code",
+    "AlarmLevel": "severity",
+    "AlarmDescription": "description",
+    "AffectedComponent": "component",
+    "MeasuredValue": "measured_value",
+    "ExpectedValue": "expected_value",
+    "MeasureUnit": "unit",
+    "LotNumber": "lot_number",
+    "WaferNumber": "wafer_number",
+    "AutoResponse": "response_action",
+    "ClearedDateTime": "cleared_timestamp",
+    "ClearedBy": "cleared_by",
+    "DowntimeMinutes": "downtime_minutes"
+  },
+  "fallback_rules": []
+}
