@@ -1,0 +1,111 @@
+; EUV_SCANNER_02 Operational Log | Site: FAB2 | LogClass: COMBINED
+; Format: ISO-timestamp MACHINE (Rel:VER,SUBSYS) LEVEL [CODE] Free-text
+; Note: Some events span multiple lines (continuation marked with >>)
+
+2026-04-13T09:00:00.0000 Machine:EUV02 (Rel:VER0002, SYS [dc], SysInit.c, ?.?, 100)
+SYSTEM EVENT: ER-0000 STARTUP
+System software version VER0002 loaded successfully. Self-diagnostics passed.
+
+2026-04-13T09:00:10.1200 Machine:EUV02 (Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200)
+SYSTEM EVENT: ER-1000 STATE_CHANGE
+>> from=OFFLINE to=STANDBY trigger=SELF_TEST_COMPLETE
+
+2026-04-13T09:02:00.0000 Machine:EUV02 (Rel:VER0002, RCPLOAD [dc], RecipeMgr.c, ?.?, 210)
+SYSTEM INFO: ER-2010 RECIPE_LOADED
+>> recipe_id=EUV_RCP_0055 version=2.1 loaded_by=OPR_111
+>> step[1]=PreAlign duration_s=45 align_tol_um=0.015
+>> step[2]=Exposure duration_s=105 dose_mJcm2=20.0 scan_spd_mms=750 focus_offset_nm=0
+>> step[3]=PostBake duration_s=60 bake_temp_C=110
+
+2026-04-13T09:05:00.0000 Machine:EUV02 (Rel:VER0002, LOTMGR [dc], LotCtrl.c, ?.?, 220)
+SYSTEM INFO: ER-3000 LOT_START
+>> lot_id=LOT_0320 wafer_count=25 recipe=EUV_RCP_0055 op=OPR_111
+
+2026-04-13T09:05:05.0000 Machine:EUV02 (Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200)
+SYSTEM EVENT: ER-1001 STATE_CHANGE
+>> from=STANDBY to=PROCESSING lot=LOT_0320
+
+2026-04-13T09:05:10.0000 Machine:EUV02 (Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 310)
+SYSTEM INFO: ER-4000 WAFER_LOADED
+>> lot=LOT_0320 wafer=WFR_0320 slot=1
+
+2026-04-13T09:05:15.0000 Machine:EUV02 (Rel:VER0002, ALIGN [dc], Align_rq.c, ?.?, 400)
+SYSTEM INFO: ER-5010 STEP_START
+>> step=PreAlign seq=1 wafer=WFR_0320 lot=LOT_0320
+
+2026-04-13T09:05:55.0000 Machine:EUV02 (Rel:VER0002, ALIGN [dc], Align_rq.c, ?.?, 401)
+SYSTEM INFO: ER-5011 STEP_END
+>> step=PreAlign seq=1 wafer=WFR_0320 result=PASS dur_s=40
+>> align_offset_x_um=0.008 align_offset_y_um=-0.004
+
+2026-04-13T09:05:56.0000 Machine:EUV02 (Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 410)
+SYSTEM INFO: ER-5010 STEP_START
+>> step=Exposure seq=2 wafer=WFR_0320 lot=LOT_0320
+
+2026-04-13T09:06:01.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)
+SENSOR DATA: ER-6000 PERIODIC
+>> wafer=WFR_0320 step=Exposure src_pwr_W=250.2 vac_Pa=1.1e-5 dose_actual_mJcm2=2.5 scan_pos_mm=0
+
+2026-04-13T09:06:21.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)
+SENSOR DATA: ER-6000 PERIODIC
+>> wafer=WFR_0320 step=Exposure src_pwr_W=250.4 vac_Pa=1.1e-5 dose_actual_mJcm2=7.5 scan_pos_mm=25
+
+2026-04-13T09:06:41.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)
+SENSOR DATA: ER-6000 PERIODIC
+>> wafer=WFR_0320 step=Exposure src_pwr_W=250.1 vac_Pa=1.2e-5 dose_actual_mJcm2=12.5 scan_pos_mm=50
+
+2026-04-13T09:07:01.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)
+SENSOR DATA: ER-6000 PERIODIC
+>> wafer=WFR_0320 step=Exposure src_pwr_W=250.3 vac_Pa=1.1e-5 dose_actual_mJcm2=17.5 scan_pos_mm=75
+
+2026-04-13T09:07:41.0000 Machine:EUV02 (Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 411)
+SYSTEM INFO: ER-5011 STEP_END
+>> step=Exposure seq=2 wafer=WFR_0320 result=PASS dur_s=105
+>> dose_target_mJcm2=20.0 dose_actual_mJcm2=19.98 dose_error_pct=0.1
+
+2026-04-13T09:07:42.0000 Machine:EUV02 (Rel:VER0002, PBAKE [dc], PostBake_rq.c, ?.?, 420)
+SYSTEM INFO: ER-5010 STEP_START
+>> step=PostBake seq=3 wafer=WFR_0320 lot=LOT_0320 bake_temp_C=110
+
+2026-04-13T09:08:42.0000 Machine:EUV02 (Rel:VER0002, PBAKE [dc], PostBake_rq.c, ?.?, 421)
+SYSTEM INFO: ER-5011 STEP_END
+>> step=PostBake seq=3 wafer=WFR_0320 result=PASS dur_s=60
+
+2026-04-13T09:08:43.0000 Machine:EUV02 (Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 311)
+SYSTEM INFO: ER-4001 WAFER_UNLOADED
+>> lot=LOT_0320 wafer=WFR_0320 slot=1 result=PASS
+
+2026-04-13T09:08:50.0000 Machine:EUV02 (Rel:VER0002, WFRH [dc], WaferHandler.c, ?.?, 310)
+SYSTEM INFO: ER-4000 WAFER_LOADED
+>> lot=LOT_0320 wafer=WFR_0321 slot=2
+
+2026-04-13T09:10:00.0000 Machine:EUV02 (Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 410)
+SYSTEM INFO: ER-5010 STEP_START
+>> step=Exposure seq=2 wafer=WFR_0321 lot=LOT_0320
+
+2026-04-13T09:10:55.0000 Machine:EUV02 (Rel:VER0002, SENS [dc], SensorHub.c, ?.?, 500)
+SENSOR DATA: ER-6000 PERIODIC
+>> wafer=WFR_0321 step=Exposure src_pwr_W=248.1 vac_Pa=1.2e-5 dose_actual_mJcm2=9.8 scan_pos_mm=40
+
+2026-04-13T09:11:10.0000 Machine:EUV02 (Rel:VER0002, SRCMON [dc], SrcMonitor.c, ?.?, 600)
+SYSTEM WARNING: ER-0FFF SRC_PWR_DROOP
+>> wafer=WFR_0321 step=Exposure src_pwr_W=235.0 threshold_W=245.0 msg="EUV source power dropped below operating threshold"
+DEACTIVATE: EUV_SOURCE
+DEACTIVATE: SCAN_STAGE
+
+2026-04-13T09:11:12.0000 Machine:EUV02 (Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200)
+SYSTEM EVENT: ER-1002 STATE_CHANGE
+>> from=PROCESSING to=FAULTED lot=LOT_0320 wafer=WFR_0321 fault=SRC_PWR_DROOP
+
+2026-04-13T09:11:13.0000 Machine:EUV02 (Rel:VER0002, EXPO [dc], Expose_rq.c, ?.?, 412)
+SYSTEM ERROR: ER-5099 STEP_ABORT
+>> step=Exposure seq=2 wafer=WFR_0321 elapsed_s=73 reason=SRC_PWR_DROOP partial_dose_mJcm2=9.8
+
+2026-04-13T09:25:00.0000 Machine:EUV02 (Rel:VER0002, SRCMON [dc], SrcMonitor.c, ?.?, 601)
+SYSTEM INFO: ER-0FFE ALARM_CLEARED
+>> fault=SRC_PWR_DROOP cleared_by=ENG_071 action=SOURCE_RECONDITIONED src_pwr_W=250.5
+
+2026-04-13T09:25:01.0000 Machine:EUV02 (Rel:VER0002, DWIO [dc], StateCtrl_rq.c, ?.?, 200)
+SYSTEM EVENT: ER-1000 STATE_CHANGE
+>> from=FAULTED to=STANDBY by=ENG_071
+

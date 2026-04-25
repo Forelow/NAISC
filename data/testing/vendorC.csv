@@ -1,0 +1,14 @@
+EventDateTime;EquipmentName;EventCategory;AlarmCode;AlarmLevel;AlarmDescription;AffectedComponent;MeasuredValue;ExpectedValue;MeasureUnit;LotNumber;WaferNumber;AutoResponse;ClearedDateTime;ClearedBy;DowntimeMinutes
+2026-04-13T06:05:12Z;TOOL_IMP_07;ALARM;IMP_BEAM_001;WARNING;Beam current below 95% of setpoint;Beam_Column;4.62;5.00;mA;LOT_0220;W001;DOSE_COMPENSATE;2026-04-13T06:07:00Z;AUTO;0
+2026-04-13T06:18:44Z;TOOL_IMP_07;ALARM;IMP_BEAM_001;WARNING;Beam current below 95% of setpoint;Beam_Column;4.71;5.00;mA;LOT_0220;W003;DOSE_COMPENSATE;2026-04-13T06:19:30Z;AUTO;0
+2026-04-13T06:31:02Z;TOOL_IMP_07;ALARM;IMP_VAC_010;ERROR;End-station vacuum exceeded process limit;End_Station_Pump;3.8E-5;2.0E-5;Pa;LOT_0220;W005;BEAM_OFF;2026-04-13T06:45:00Z;OPR_055;14
+2026-04-13T06:45:01Z;TOOL_IMP_07;EVENT;IMP_LOT_HOLD;INFO;Lot placed on engineering hold due to vacuum fault;End_Station;;;; LOT_0220;;HOLD_LOT;2026-04-13T07:10:00Z;ENG_041;0
+2026-04-13T07:10:05Z;TOOL_IMP_07;EVENT;IMP_LOT_RESUME;INFO;Lot resumed after engineering disposition;End_Station;;;;LOT_0220;;RESUME;;ENG_041;0
+2026-04-13T08:00:22Z;TOOL_IMP_07;ALARM;IMP_DOSE_005;WARNING;Wafer dose uniformity outside 3% specification;Scanner;3.8;3.0;pct;LOT_0220;W012;HOLD_WAFER;2026-04-13T08:05:00Z;ENG_041;0
+2026-04-13T09:15:33Z;TOOL_IMP_07;ALARM;IMP_BEAM_002;ERROR;Beam extractor arc detected;Extractor;;;; LOT_0221;W001;BEAM_OFF_SUPPRESS;;OPR_055;
+2026-04-13T09:15:35Z;TOOL_IMP_07;ALARM;IMP_BEAM_002;ERROR;Beam extractor arc detected;Extractor;;;;;LOT_0221;W001;BEAM_OFF_SUPPRESS;;OPR_055;
+2026-04-13T09:15:38Z;TOOL_IMP_07;ALARM;IMP_BEAM_003;CRITICAL;Repeated arc events exceed threshold — process abort;Extractor;3;;count;LOT_0221;W001;ABORT_PROCESS;2026-04-13T09:45:00Z;TECH_019;30
+2026-04-13T09:45:01Z;TOOL_IMP_07;EVENT;IMP_MAINT;INFO;Scheduled maintenance: extractor cleaning;Extractor;;;;LOT_0221;;MAINT_MODE;2026-04-13T10:15:00Z;TECH_019;30
+2026-04-13T10:15:01Z;TOOL_IMP_07;EVENT;IMP_RESUME;INFO;Tool resumed normal operation after maintenance;Extractor;;;;LOT_0221;;READY;;TECH_019;0
+2026-04-13T11:00:00Z;TOOL_IMP_07;ALARM;IMP_TEMP_001;WARNING;Source temperature drift detected;Ion_Source;312.5;300.0;degC;LOT_0222;W003;ADJUST_SETPOINT;2026-04-13T11:02:00Z;AUTO;0
+2026-04-13T12:30:15Z;TOOL_IMP_07;EVENT;IMP_SHIFT_END;INFO;End of shift — tool handed over;Tool;;;;LOT_0222;;IDLE;;OPR_055;0

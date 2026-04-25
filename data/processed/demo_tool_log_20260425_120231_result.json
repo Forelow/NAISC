@@ -1,0 +1,1302 @@
+{
+    "ingested": {
+        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+        "filename": "demo_tool_log.hex",
+        "extension": ".hex",
+        "size_bytes": 941,
+        "raw_path": "data\\raw\\3a333e74-692e-41f4-a8d5-dd87a329f27c_demo_tool_log.hex",
+        "ingestion_time": "2026-04-25T12:02:31.158816",
+        "sha256": "7f2611a8b739134c8559a5877280c8b30f2bca29d4502fa92917bea32e165773"
+    },
+    "detection": {
+        "format_guess": "hex_dump_text",
+        "content_class": "unstructured_text",
+        "confidence": 0.78,
+        "notes": "Text resembles hexadecimal dump",
+        "extension_hint": ".hex",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "hex_dump_text",
+        "is_supported": true,
+        "parser_family": "unstructured_parser",
+        "support_status": "supported",
+        "notes": "hex_dump_text is handled by unstructured_parser"
+    },
+    "routing": {
+        "next_route": "unstructured_parser",
+        "processing_mode": "llm_or_extraction_fallback",
+        "should_attempt_parse": true,
+        "notes": "Text-like content with weak or no deterministic pattern"
+    },
+    "structure_summary": {
+        "format": "binary_hex",
+        "input_mode": "plain_hex_text",
+        "byte_count": 314,
+        "magic_ascii": "SLOG",
+        "known_container": true
+    },
+    "structure_config": {
+        "family": "binary_hex",
+        "parser_strategy": "magic_header_then_tlv_kv",
+        "container_type": "SLOG",
+        "version": 1
+    },
+    "parsed_result": {
+        "schema_family": "binary_hex_mvp",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "source_reference": "record:1",
+                "confidence": 1.0,
+                "evidence_text": "ts=1712821200;tool=ETCH01;state=IDLE",
+                "data": {
+                    "ts": 1712821200,
+                    "tool": "ETCH01",
+                    "state": "IDLE",
+                    "curr_state": "IDLE"
+                }
+            },
+            {
+                "record_type": "process_parameter_recipe",
+                "source_reference": "record:2",
+                "confidence": 1.0,
+                "evidence_text": "ts=1712821260;tool=ETCH01;recipe=RCP_A1;step=PreClean;gas=Ar",
+                "data": {
+                    "ts": 1712821260,
+                    "tool": "ETCH01",
+                    "recipe": "RCP_A1",
+                    "step": "PreClean",
+                    "gas": "Ar"
+                }
+            },
+            {
+                "record_type": "sensor_reading",
+                "source_reference": "record:3",
+                "confidence": 1.0,
+                "evidence_text": "ts=1712821320;tool=ETCH01;parameter=pressure;value=4.2;unit=mTorr",
+                "data": {
+                    "ts": 1712821320,
+                    "tool": "ETCH01",
+                    "parameter": "pressure",
+                    "value": 4.2,
+                    "unit": "mTorr"
+                }
+            },
+            {
+                "record_type": "fault_event",
+                "source_reference": "record:4",
+                "confidence": 1.0,
+                "evidence_text": "ts=1712821380;tool=ETCH01;fault_code=ARC_17;fault_summary=Arc detected",
+                "data": {
+                    "ts": 1712821380,
+                    "tool": "ETCH01",
+                    "fault_code": "ARC_17",
+                    "fault_summary": "Arc detected"
+                }
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "source_reference": "record:5",
+                "confidence": 1.0,
+                "evidence_text": "ts=1712821440;tool=ETCH01;wafer=WFR_0001;event=loaded;slot=1",
+                "data": {
+                    "ts": 1712821440,
+                    "tool": "ETCH01",
+                    "wafer": "WFR_0001",
+                    "event": "loaded",
+                    "slot": 1,
+                    "event_name": "loaded"
+                }
+            }
+        ],
+        "record_count": 5,
+        "status": "ok",
+        "container_header": {
+            "magic_ascii": "SLOG",
+            "version": 1,
+            "flags": 0,
+            "declared_record_count": 5,
+            "parsed_record_count": 5
+        }
+    },
+    "agent_debug": {
+        "final_source": "deterministic_binary_parser",
+        "input_mode": "plain_hex_text",
+        "head_hex": "53 4c 4f 47 01 00 05 00 01 24 00 74 73 3d 31 37 31 32 38 32 31 32 30 30 3b 74 6f 6f 6c 3d 45 54 43 48 30 31 3b 73 74 61 74 65 3d 49 44 4c 45 02 3c 00 74 73 3d 31 37 31 32 38 32 31 32 36 30 3b",
+        "head_ascii": "SLOG.....$.ts=1712821200;tool=ETCH01;state=IDLE.<.ts=1712821260;"
+    },
+    "pipeline_output": {
+        "schema_fingerprint": "7778552c8e2a28f0",
+        "adapter_spec_used": {
+            "schema_fingerprint": "7778552c8e2a28f0",
+            "schema_family": "",
+            "record_type_mapping": {
+                "equipment_state": "equipment_state",
+                "process_parameter_recipe": "process_parameter_recipe",
+                "sensor_reading": "sensor_reading",
+                "fault_event": "fault_event",
+                "wafer_processing_sequence": "wafer_processing_sequence",
+                "process_job": "wafer_processing_sequence",
+                "sensor_measurement": "sensor_reading",
+                "alarm_event": "fault_event",
+                "error_event": "fault_event",
+                "control_state_event": "equipment_state",
+                "process_step": "wafer_processing_sequence",
+                "wafer": "wafer_processing_sequence",
+                "wafer_measurement": "sensor_reading",
+                "recipe_param": "process_parameter_recipe",
+                "setpoint": "process_parameter_recipe",
+                "fault_summary": "fault_event",
+                "equipment_state_transition": "equipment_state"
+            },
+            "dispatch_rules": [],
+            "field_aliases": {
+                "curr_state": "curr_state",
+                "recipe": "recipe",
+                "step": "step",
+                "parameter": "parameter",
+                "value": "value",
+                "unit": "unit",
+                "fault_code": "fault_code",
+                "fault_summary": "fault_summary",
+                "wafer": "wafer",
+                "slot": "slot",
+                "event_name": "event_name",
+                "LotID": "lot",
+                "WaferID": "wafer",
+                "SlotID": "slot",
+                "Recipe.RecipeID": "recipe",
+                "RecipeName": "recipe",
+                "RecipeStepName": "step",
+                "DateTime": "timestamp",
+                "Value": "value",
+                "Unit": "unit",
+                "Text": "event_name",
+                "Name": "event_name",
+                "SensorID": "sensor_id",
+                "SensorName": "parameter",
+                "AlarmID": "fault_code",
+                "ErrorID": "fault_code",
+                "Severity": "severity",
+                "ControlJob.EquipmentID": "tool_id",
+                "EquipmentID": "tool_id",
+                "ToState": "to_state",
+                "FromState": "from_state",
+                "@sensor": "parameter",
+                "@timestamp": "timestamp",
+                "@unit": "unit",
+                "@value": "value",
+                "@name": "parameter",
+                "@u": "unit",
+                "@v": "value",
+                "@stepName": "step",
+                "StepOutcome": "status",
+                "FabricationRecord.ProductionOrder.LotID": "lot",
+                "FabricationRecord.Hdr.Lot": "lot",
+                "FabricationRecord.Equipment.EquipmentID": "tool_id",
+                "RcpExecLog.@eqp": "tool_id",
+                "RcpExecLog.Hdr.Lot": "lot",
+                "RcpExecLog.Hdr.Rcp": "recipe",
+                "RcpExecLog.WfrLog.W[].@id": "wafer",
+                "@id": "wafer",
+                "@n": "slot",
+                "@cd": "fault_code",
+                "FaultCode": "fault_code",
+                "Description": "fault_summary",
+                "@msg": "fault_summary",
+                "Timestamp": "timestamp",
+                "@t": "timestamp",
+                "@sev": "severity"
+            },
+            "fallback_rules": [
+                {
+                    "when_record_type": "sensor_reading",
+                    "if_missing": "parameter",
+                    "copy_from": "sensor_id"
+                },
+                {
+                    "when_record_type": "equipment_state",
+                    "if_missing": "curr_state",
+                    "copy_from": "event_name"
+                }
+            ]
+        },
+        "canonical_output": {
+            "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+            "filename": "demo_tool_log.hex",
+            "source_format": "hex_dump_text",
+            "parser_route": "unstructured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 5,
+            "records": [
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "equipment_state",
+                    "source_reference": "record:1",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821200;tool=ETCH01;state=IDLE",
+                    "raw_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "process_parameter_recipe",
+                    "source_record_type": "process_parameter_recipe",
+                    "source_reference": "record:2",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821260;tool=ETCH01;recipe=RCP_A1;step=PreClean;gas=Ar",
+                    "raw_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "sensor_reading",
+                    "source_reference": "record:3",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821320;tool=ETCH01;parameter=pressure;value=4.2;unit=mTorr",
+                    "raw_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "fault_event",
+                    "source_record_type": "fault_event",
+                    "source_reference": "record:4",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821380;tool=ETCH01;fault_code=ARC_17;fault_summary=Arc detected",
+                    "raw_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "wafer_processing_sequence",
+                    "source_reference": "record:5",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821440;tool=ETCH01;wafer=WFR_0001;event=loaded;slot=1",
+                    "raw_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "7778552c8e2a28f0",
+                "schema_family": ""
+            }
+        },
+        "standardized_output": {
+            "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+            "filename": "demo_tool_log.hex",
+            "source_format": "hex_dump_text",
+            "parser_route": "unstructured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 5,
+            "records": [
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "equipment_state",
+                    "source_reference": "record:1",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821200;tool=ETCH01;state=IDLE",
+                    "raw_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "state": "IDLE"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "curr_state": "IDLE",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821200,
+                        "state": "IDLE"
+                    },
+                    "raw_to_standard_map": {
+                        "curr_state": "curr_state",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "process_parameter_recipe",
+                    "source_record_type": "process_parameter_recipe",
+                    "source_reference": "record:2",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821260;tool=ETCH01;recipe=RCP_A1;step=PreClean;gas=Ar",
+                    "raw_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "gas": "Ar"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "step": "PreClean",
+                        "recipe": "RCP_A1",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821260,
+                        "gas": "Ar"
+                    },
+                    "raw_to_standard_map": {
+                        "step": "step",
+                        "recipe": "recipe",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "sensor_reading",
+                    "source_reference": "record:3",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821320;tool=ETCH01;parameter=pressure;value=4.2;unit=mTorr",
+                    "raw_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821320
+                    },
+                    "raw_to_standard_map": {
+                        "parameter": "parameter",
+                        "value": "value",
+                        "unit": "unit",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "fault_event",
+                    "source_record_type": "fault_event",
+                    "source_reference": "record:4",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821380;tool=ETCH01;fault_code=ARC_17;fault_summary=Arc detected",
+                    "raw_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821380
+                    },
+                    "raw_to_standard_map": {
+                        "fault_code": "fault_code",
+                        "fault_summary": "fault_summary",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "wafer_processing_sequence",
+                    "source_reference": "record:5",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821440;tool=ETCH01;wafer=WFR_0001;event=loaded;slot=1",
+                    "raw_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "event": "loaded"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0001",
+                        "event_name": "loaded",
+                        "slot": 1,
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821440,
+                        "event": "loaded"
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "event_name": "event_name",
+                        "slot": "slot",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "7778552c8e2a28f0",
+                "schema_family": ""
+            }
+        },
+        "normalized_output": {
+            "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+            "filename": "demo_tool_log.hex",
+            "source_format": "hex_dump_text",
+            "parser_route": "unstructured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 5,
+            "records": [
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "equipment_state",
+                    "source_reference": "record:1",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821200;tool=ETCH01;state=IDLE",
+                    "raw_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "state": "IDLE"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "curr_state": "IDLE",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821200,
+                        "state": "IDLE"
+                    },
+                    "raw_to_standard_map": {
+                        "curr_state": "curr_state",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "curr_state": "IDLE",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821200,
+                        "state": "IDLE"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "process_parameter_recipe",
+                    "source_record_type": "process_parameter_recipe",
+                    "source_reference": "record:2",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821260;tool=ETCH01;recipe=RCP_A1;step=PreClean;gas=Ar",
+                    "raw_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "gas": "Ar"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "step": "PreClean",
+                        "recipe": "RCP_A1",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821260,
+                        "gas": "Ar"
+                    },
+                    "raw_to_standard_map": {
+                        "step": "step",
+                        "recipe": "recipe",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "step": "PreClean",
+                        "recipe": "RCP_A1",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821260,
+                        "gas": "Ar"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "sensor_reading",
+                    "source_reference": "record:3",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821320;tool=ETCH01;parameter=pressure;value=4.2;unit=mTorr",
+                    "raw_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821320
+                    },
+                    "raw_to_standard_map": {
+                        "parameter": "parameter",
+                        "value": "value",
+                        "unit": "unit",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "parameter": "pressure",
+                        "value": 0.5599539473684211,
+                        "unit": "Pa",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821320,
+                        "measurement_family": "pressure"
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "fault_event",
+                    "source_record_type": "fault_event",
+                    "source_reference": "record:4",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821380;tool=ETCH01;fault_code=ARC_17;fault_summary=Arc detected",
+                    "raw_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821380
+                    },
+                    "raw_to_standard_map": {
+                        "fault_code": "fault_code",
+                        "fault_summary": "fault_summary",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821380
+                    }
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "wafer_processing_sequence",
+                    "source_reference": "record:5",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821440;tool=ETCH01;wafer=WFR_0001;event=loaded;slot=1",
+                    "raw_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "event": "loaded"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0001",
+                        "event_name": "loaded",
+                        "slot": 1,
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821440,
+                        "event": "loaded"
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "event_name": "event_name",
+                        "slot": "slot",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "wafer": "WFR_0001",
+                        "event_name": "loaded",
+                        "slot": 1,
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821440,
+                        "event": "loaded",
+                        "curr_state": "loaded"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "7778552c8e2a28f0",
+                "schema_family": ""
+            }
+        },
+        "validated_output": {
+            "accepted_count": 5,
+            "rejected_count": 0,
+            "accepted_records": [
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "equipment_state",
+                    "source_reference": "record:1",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821200;tool=ETCH01;state=IDLE",
+                    "raw_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821200,
+                        "tool": "ETCH01",
+                        "state": "IDLE",
+                        "curr_state": "IDLE"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "state": "IDLE"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "curr_state": "IDLE",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821200,
+                        "state": "IDLE"
+                    },
+                    "raw_to_standard_map": {
+                        "curr_state": "curr_state",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "curr_state": "IDLE",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821200,
+                        "state": "IDLE"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "process_parameter_recipe",
+                    "source_record_type": "process_parameter_recipe",
+                    "source_reference": "record:2",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821260;tool=ETCH01;recipe=RCP_A1;step=PreClean;gas=Ar",
+                    "raw_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821260,
+                        "tool": "ETCH01",
+                        "recipe": "RCP_A1",
+                        "step": "PreClean",
+                        "gas": "Ar"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "gas": "Ar"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "step": "PreClean",
+                        "recipe": "RCP_A1",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821260,
+                        "gas": "Ar"
+                    },
+                    "raw_to_standard_map": {
+                        "step": "step",
+                        "recipe": "recipe",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "step": "PreClean",
+                        "recipe": "RCP_A1",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821260,
+                        "gas": "Ar"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "sensor_reading",
+                    "source_reference": "record:3",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821320;tool=ETCH01;parameter=pressure;value=4.2;unit=mTorr",
+                    "raw_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821320,
+                        "tool": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "parameter": "pressure",
+                        "value": 4.2,
+                        "unit": "mTorr",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821320
+                    },
+                    "raw_to_standard_map": {
+                        "parameter": "parameter",
+                        "value": "value",
+                        "unit": "unit",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "parameter": "pressure",
+                        "value": 0.5599539473684211,
+                        "unit": "Pa",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821320,
+                        "measurement_family": "pressure"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "fault_event",
+                    "source_record_type": "fault_event",
+                    "source_reference": "record:4",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821380;tool=ETCH01;fault_code=ARC_17;fault_summary=Arc detected",
+                    "raw_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821380,
+                        "tool": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821380
+                    },
+                    "raw_to_standard_map": {
+                        "fault_code": "fault_code",
+                        "fault_summary": "fault_summary",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected",
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821380
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                    "filename": "demo_tool_log.hex",
+                    "ingestion_time": "2026-04-25T12:02:31.158816",
+                    "source_format": "hex_dump_text",
+                    "parser_route": "unstructured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "wafer_processing_sequence",
+                    "source_reference": "record:5",
+                    "confidence": 1.0,
+                    "evidence_text": "ts=1712821440;tool=ETCH01;wafer=WFR_0001;event=loaded;slot=1",
+                    "raw_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "candidate_fields": {
+                        "ts": 1712821440,
+                        "tool": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event": "loaded",
+                        "slot": 1,
+                        "event_name": "loaded"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "event": "loaded"
+                    },
+                    "agent_debug_hint": "deterministic_binary_parser",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0001",
+                        "event_name": "loaded",
+                        "slot": 1,
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821440,
+                        "event": "loaded"
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "event_name": "event_name",
+                        "slot": "slot",
+                        "tool": "tool_id",
+                        "ts": "timestamp"
+                    },
+                    "normalized_fields": {
+                        "wafer": "WFR_0001",
+                        "event_name": "loaded",
+                        "slot": 1,
+                        "tool_id": "ETCH01",
+                        "timestamp": 1712821440,
+                        "event": "loaded",
+                        "curr_state": "loaded"
+                    },
+                    "validation_reason": "ok"
+                }
+            ],
+            "rejected_records": []
+        },
+        "routing_output": {
+            "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+            "filename": "demo_tool_log.hex",
+            "accepted_count": 5,
+            "rejected_count": 0,
+            "routed_rows": {
+                "equipment_states": [
+                    {
+                        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                        "filename": "demo_tool_log.hex",
+                        "parser_route": "unstructured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "equipment_state",
+                        "source_reference": "record:1",
+                        "parser_confidence": 1.0,
+                        "evidence_text": "ts=1712821200;tool=ETCH01;state=IDLE",
+                        "raw_field_map": "{\"ts\": 1712821200, \"tool\": \"ETCH01\", \"state\": \"IDLE\", \"curr_state\": \"IDLE\"}",
+                        "raw_to_standard_map": "{\"curr_state\": \"curr_state\", \"tool\": \"tool_id\", \"ts\": \"timestamp\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "ETCH01",
+                        "curr_state": "IDLE",
+                        "timestamp": 1712821200,
+                        "state": "IDLE"
+                    }
+                ],
+                "process_parameters_recipes": [
+                    {
+                        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                        "filename": "demo_tool_log.hex",
+                        "parser_route": "unstructured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "process_parameter_recipe",
+                        "source_reference": "record:2",
+                        "parser_confidence": 1.0,
+                        "evidence_text": "ts=1712821260;tool=ETCH01;recipe=RCP_A1;step=PreClean;gas=Ar",
+                        "raw_field_map": "{\"ts\": 1712821260, \"tool\": \"ETCH01\", \"recipe\": \"RCP_A1\", \"step\": \"PreClean\", \"gas\": \"Ar\"}",
+                        "raw_to_standard_map": "{\"step\": \"step\", \"recipe\": \"recipe\", \"tool\": \"tool_id\", \"ts\": \"timestamp\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "ETCH01",
+                        "step": "PreClean",
+                        "recipe": "RCP_A1",
+                        "timestamp": 1712821260,
+                        "gas": "Ar"
+                    }
+                ],
+                "sensor_readings": [
+                    {
+                        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                        "filename": "demo_tool_log.hex",
+                        "parser_route": "unstructured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "sensor_reading",
+                        "source_reference": "record:3",
+                        "parser_confidence": 1.0,
+                        "evidence_text": "ts=1712821320;tool=ETCH01;parameter=pressure;value=4.2;unit=mTorr",
+                        "raw_field_map": "{\"ts\": 1712821320, \"tool\": \"ETCH01\", \"parameter\": \"pressure\", \"value\": 4.2, \"unit\": \"mTorr\"}",
+                        "raw_to_standard_map": "{\"parameter\": \"parameter\", \"value\": \"value\", \"unit\": \"unit\", \"tool\": \"tool_id\", \"ts\": \"timestamp\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "ETCH01",
+                        "parameter": "pressure",
+                        "value": 0.5599539473684211,
+                        "unit": "Pa",
+                        "timestamp": 1712821320,
+                        "measurement_family": "pressure"
+                    }
+                ],
+                "fault_events": [
+                    {
+                        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                        "filename": "demo_tool_log.hex",
+                        "parser_route": "unstructured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "fault_event",
+                        "source_reference": "record:4",
+                        "parser_confidence": 1.0,
+                        "evidence_text": "ts=1712821380;tool=ETCH01;fault_code=ARC_17;fault_summary=Arc detected",
+                        "raw_field_map": "{\"ts\": 1712821380, \"tool\": \"ETCH01\", \"fault_code\": \"ARC_17\", \"fault_summary\": \"Arc detected\"}",
+                        "raw_to_standard_map": "{\"fault_code\": \"fault_code\", \"fault_summary\": \"fault_summary\", \"tool\": \"tool_id\", \"ts\": \"timestamp\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "ETCH01",
+                        "fault_code": "ARC_17",
+                        "fault_summary": "Arc detected",
+                        "timestamp": 1712821380
+                    }
+                ],
+                "wafer_processing_sequences": [
+                    {
+                        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+                        "filename": "demo_tool_log.hex",
+                        "parser_route": "unstructured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "wafer_processing_sequence",
+                        "source_reference": "record:5",
+                        "parser_confidence": 1.0,
+                        "evidence_text": "ts=1712821440;tool=ETCH01;wafer=WFR_0001;event=loaded;slot=1",
+                        "raw_field_map": "{\"ts\": 1712821440, \"tool\": \"ETCH01\", \"wafer\": \"WFR_0001\", \"event\": \"loaded\", \"slot\": 1, \"event_name\": \"loaded\"}",
+                        "raw_to_standard_map": "{\"wafer\": \"wafer\", \"event_name\": \"event_name\", \"slot\": \"slot\", \"tool\": \"tool_id\", \"ts\": \"timestamp\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "ETCH01",
+                        "wafer": "WFR_0001",
+                        "event_name": "loaded",
+                        "slot": 1,
+                        "timestamp": 1712821440,
+                        "event": "loaded",
+                        "curr_state": "loaded"
+                    }
+                ],
+                "generic_observations_staging": []
+            },
+            "rejected_records": []
+        }
+    },
+    "db_output": {
+        "database": "semicon_parser",
+        "file_id": "3a333e74-692e-41f4-a8d5-dd87a329f27c",
+        "inserted_counts": {
+            "equipment_states": 1,
+            "process_parameters_recipes": 1,
+            "sensor_readings": 1,
+            "fault_events": 1,
+            "wafer_processing_sequences": 1,
+            "generic_observations_staging": 0,
+            "rejected_records": 0
+        },
+        "status": "ok"
+    }
+}

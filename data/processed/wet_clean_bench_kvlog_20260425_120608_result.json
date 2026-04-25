@@ -1,0 +1,3550 @@
+{
+    "ingested": {
+        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+        "filename": "wet_clean_bench_kvlog.log",
+        "extension": ".log",
+        "size_bytes": 4346,
+        "raw_path": "data\\raw\\6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51_wet_clean_bench_kvlog.log",
+        "ingestion_time": "2026-04-25T12:05:44.273592",
+        "sha256": "acf9c406c75ad5b9358306b549856670ea509809e1adf1bf7cbb89555fe26a33"
+    },
+    "detection": {
+        "format_guess": "key_value_text",
+        "content_class": "semi_structured_text",
+        "confidence": 0.86,
+        "notes": "Repeated key=value pattern detected",
+        "extension_hint": ".log",
+        "is_text": true
+    },
+    "support": {
+        "format_guess": "key_value_text",
+        "is_supported": true,
+        "parser_family": "semi_structured_parser",
+        "support_status": "supported",
+        "notes": "key_value_text is handled by semi_structured_parser"
+    },
+    "routing": {
+        "next_route": "semi_structured_parser",
+        "processing_mode": "regex_or_rule_parse",
+        "should_attempt_parse": true,
+        "notes": "Known semi-structured text pattern"
+    },
+    "structure_summary": {
+        "format": "text",
+        "line_count": 29,
+        "char_count": 4346,
+        "family_info": {
+            "family": "free_form_text",
+            "confidence": 0.86,
+            "notes": "Direct free-form text lane from key_value_text"
+        }
+    },
+    "structure_config": {
+        "family": "free_form_text",
+        "parser_strategy": "chunk_then_llm_extract",
+        "chunk_count": 1
+    },
+    "parsed_result": {
+        "schema_family": "free_form_text",
+        "records": [
+            {
+                "record_type": "equipment_state",
+                "coarse_type": "state_change",
+                "subtype": "tool_state_transition",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                "data": {
+                    "time_utc": "2026-04-13T06:02:00Z",
+                    "tool_name": "WET_01",
+                    "prev_state": "IDLE",
+                    "curr_state": "READY",
+                    "op_id": "OPR_003"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "coarse_type": "logistics_or_disposition",
+                "subtype": "lot_loaded",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                "data": {
+                    "time_utc": "2026-04-13T06:05:00Z",
+                    "tool_name": "WET_01",
+                    "lot": "LOT_0090",
+                    "wafer_qty": 25,
+                    "recipe_name": "WET_CLEAN_STD_01",
+                    "op_id": "OPR_003",
+                    "wafer": "WFR_0090",
+                    "result": "PASS_WITH_WARNING",
+                    "warnings": [
+                        "HF_CONC_LOW"
+                    ],
+                    "tank": "HF_DIL",
+                    "added_vol_ml": 500,
+                    "new_conc_pct": 0.51,
+                    "trigger": "automatic"
+                },
+                "extra": {
+                    "supporting_observations": [
+                        {
+                            "coarse_type": "maintenance_action",
+                            "subtype": "automatic_chemical_replenishment",
+                            "confidence": 0.99,
+                            "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                            "data": {
+                                "time_utc": "2026-04-13T06:10:37Z",
+                                "tool_name": "WET_01",
+                                "tank": "HF_DIL",
+                                "added_vol_ml": 500,
+                                "new_conc_pct": 0.51,
+                                "trigger": "automatic"
+                            },
+                            "uncertain": true
+                        }
+                    ]
+                },
+                "uncertain": false
+            },
+            {
+                "record_type": "equipment_state",
+                "coarse_type": "state_change",
+                "subtype": "tool_state_transition",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                "data": {
+                    "time_utc": "2026-04-13T06:05:30Z",
+                    "tool_name": "WET_01",
+                    "prev_state": "READY",
+                    "curr_state": "PROCESSING",
+                    "lot": "LOT_0090"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "coarse_type": "process_step_event",
+                "subtype": "wafer_recipe_execution",
+                "source_reference": "chunk:1",
+                "confidence": 0.97,
+                "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                "data": {
+                    "tool_name": "WET_01",
+                    "lot": "LOT_0090",
+                    "wafer": "WFR_0090",
+                    "steps": [
+                        {
+                            "step_seq": 1,
+                            "step_nm": "SC1_Clean",
+                            "start_time_utc": "2026-04-13T06:05:31Z",
+                            "end_time_utc": "2026-04-13T06:07:31Z",
+                            "dur_s": 120,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 2,
+                            "step_nm": "DI_Rinse_1",
+                            "start_time_utc": "2026-04-13T06:07:32Z",
+                            "end_time_utc": "2026-04-13T06:08:32Z",
+                            "dur_s": 60,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 3,
+                            "step_nm": "HF_Dip",
+                            "start_time_utc": "2026-04-13T06:08:33Z",
+                            "end_time_utc": "2026-04-13T06:09:33Z",
+                            "dur_s": 60,
+                            "outcome": "MARGINAL"
+                        },
+                        {
+                            "step_seq": 4,
+                            "step_nm": "DI_Rinse_2",
+                            "start_time_utc": "2026-04-13T06:09:34Z",
+                            "end_time_utc": "2026-04-13T06:10:04Z",
+                            "dur_s": 60,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 5,
+                            "step_nm": "Spin_Dry",
+                            "start_time_utc": "2026-04-13T06:10:05Z",
+                            "end_time_utc": "2026-04-13T06:10:35Z",
+                            "dur_s": 30,
+                            "outcome": "OK"
+                        }
+                    ]
+                },
+                "extra": {
+                    "recipe_name": "WET_CLEAN_STD_01"
+                },
+                "uncertain": false
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "generic_operational_observation",
+                "subtype": "startup_complete",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                "data": {
+                    "time_utc": "2026-04-13T06:00:00Z",
+                    "tool_name": "WET_01",
+                    "event_type": "STARTUP",
+                    "status": "complete",
+                    "sw_ver": "2.8.3"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "fault_or_warning",
+                "subtype": "chemical_concentration_low_warning",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                "data": {
+                    "time_utc": "2026-04-13T06:09:03Z",
+                    "tool_name": "WET_01",
+                    "alarm_code": "HF_CONC_LOW",
+                    "alarm_text": "HF concentration below minimum threshold",
+                    "tank": "HF_DIL",
+                    "measured_conc_pct": 0.48,
+                    "min_conc_pct": 0.49,
+                    "severity": "WARN"
+                },
+                "extra": {
+                    "related_step": "HF_Dip"
+                },
+                "uncertain": true
+            }
+        ],
+        "record_count": 6,
+        "condensed_records": [
+            {
+                "record_type": "equipment_state",
+                "coarse_type": "state_change",
+                "subtype": "tool_state_transition",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                "data": {
+                    "time_utc": "2026-04-13T06:02:00Z",
+                    "tool_name": "WET_01",
+                    "prev_state": "IDLE",
+                    "curr_state": "READY",
+                    "op_id": "OPR_003"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "coarse_type": "logistics_or_disposition",
+                "subtype": "lot_loaded",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                "data": {
+                    "time_utc": "2026-04-13T06:05:00Z",
+                    "tool_name": "WET_01",
+                    "lot": "LOT_0090",
+                    "wafer_qty": 25,
+                    "recipe_name": "WET_CLEAN_STD_01",
+                    "op_id": "OPR_003",
+                    "wafer": "WFR_0090",
+                    "result": "PASS_WITH_WARNING",
+                    "warnings": [
+                        "HF_CONC_LOW"
+                    ],
+                    "tank": "HF_DIL",
+                    "added_vol_ml": 500,
+                    "new_conc_pct": 0.51,
+                    "trigger": "automatic"
+                },
+                "extra": {
+                    "supporting_observations": [
+                        {
+                            "coarse_type": "maintenance_action",
+                            "subtype": "automatic_chemical_replenishment",
+                            "confidence": 0.99,
+                            "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                            "data": {
+                                "time_utc": "2026-04-13T06:10:37Z",
+                                "tool_name": "WET_01",
+                                "tank": "HF_DIL",
+                                "added_vol_ml": 500,
+                                "new_conc_pct": 0.51,
+                                "trigger": "automatic"
+                            },
+                            "uncertain": true
+                        }
+                    ]
+                },
+                "uncertain": false
+            },
+            {
+                "record_type": "equipment_state",
+                "coarse_type": "state_change",
+                "subtype": "tool_state_transition",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                "data": {
+                    "time_utc": "2026-04-13T06:05:30Z",
+                    "tool_name": "WET_01",
+                    "prev_state": "READY",
+                    "curr_state": "PROCESSING",
+                    "lot": "LOT_0090"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "coarse_type": "process_step_event",
+                "subtype": "wafer_recipe_execution",
+                "source_reference": "chunk:1",
+                "confidence": 0.97,
+                "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                "data": {
+                    "tool_name": "WET_01",
+                    "lot": "LOT_0090",
+                    "wafer": "WFR_0090",
+                    "steps": [
+                        {
+                            "step_seq": 1,
+                            "step_nm": "SC1_Clean",
+                            "start_time_utc": "2026-04-13T06:05:31Z",
+                            "end_time_utc": "2026-04-13T06:07:31Z",
+                            "dur_s": 120,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 2,
+                            "step_nm": "DI_Rinse_1",
+                            "start_time_utc": "2026-04-13T06:07:32Z",
+                            "end_time_utc": "2026-04-13T06:08:32Z",
+                            "dur_s": 60,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 3,
+                            "step_nm": "HF_Dip",
+                            "start_time_utc": "2026-04-13T06:08:33Z",
+                            "end_time_utc": "2026-04-13T06:09:33Z",
+                            "dur_s": 60,
+                            "outcome": "MARGINAL"
+                        },
+                        {
+                            "step_seq": 4,
+                            "step_nm": "DI_Rinse_2",
+                            "start_time_utc": "2026-04-13T06:09:34Z",
+                            "end_time_utc": "2026-04-13T06:10:04Z",
+                            "dur_s": 60,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 5,
+                            "step_nm": "Spin_Dry",
+                            "start_time_utc": "2026-04-13T06:10:05Z",
+                            "end_time_utc": "2026-04-13T06:10:35Z",
+                            "dur_s": 30,
+                            "outcome": "OK"
+                        }
+                    ]
+                },
+                "extra": {
+                    "recipe_name": "WET_CLEAN_STD_01"
+                },
+                "uncertain": false
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "generic_operational_observation",
+                "subtype": "startup_complete",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                "data": {
+                    "time_utc": "2026-04-13T06:00:00Z",
+                    "tool_name": "WET_01",
+                    "event_type": "STARTUP",
+                    "status": "complete",
+                    "sw_ver": "2.8.3"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "fault_or_warning",
+                "subtype": "chemical_concentration_low_warning",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                "data": {
+                    "time_utc": "2026-04-13T06:09:03Z",
+                    "tool_name": "WET_01",
+                    "alarm_code": "HF_CONC_LOW",
+                    "alarm_text": "HF concentration below minimum threshold",
+                    "tank": "HF_DIL",
+                    "measured_conc_pct": 0.48,
+                    "min_conc_pct": 0.49,
+                    "severity": "WARN"
+                },
+                "extra": {
+                    "related_step": "HF_Dip"
+                },
+                "uncertain": true
+            }
+        ],
+        "condensed_record_count": 6,
+        "detailed_records": [
+            {
+                "record_type": "equipment_state",
+                "coarse_type": "state_change",
+                "subtype": "tool_state_transition",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                "data": {
+                    "time_utc": "2026-04-13T06:02:00Z",
+                    "tool_name": "WET_01",
+                    "prev_state": "IDLE",
+                    "curr_state": "READY",
+                    "op_id": "OPR_003"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "coarse_type": "logistics_or_disposition",
+                "subtype": "lot_loaded",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW",
+                "data": {
+                    "time_utc": "2026-04-13T06:05:00Z",
+                    "tool_name": "WET_01",
+                    "lot": "LOT_0090",
+                    "wafer_qty": 25,
+                    "recipe_name": "WET_CLEAN_STD_01",
+                    "op_id": "OPR_003",
+                    "wafer": "WFR_0090",
+                    "result": "PASS_WITH_WARNING",
+                    "warnings": [
+                        "HF_CONC_LOW"
+                    ]
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "equipment_state",
+                "coarse_type": "state_change",
+                "subtype": "tool_state_transition",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                "data": {
+                    "time_utc": "2026-04-13T06:05:30Z",
+                    "tool_name": "WET_01",
+                    "prev_state": "READY",
+                    "curr_state": "PROCESSING",
+                    "lot": "LOT_0090"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "wafer_processing_sequence",
+                "coarse_type": "process_step_event",
+                "subtype": "wafer_recipe_execution",
+                "source_reference": "chunk:1",
+                "confidence": 0.97,
+                "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                "data": {
+                    "tool_name": "WET_01",
+                    "lot": "LOT_0090",
+                    "wafer": "WFR_0090",
+                    "steps": [
+                        {
+                            "step_seq": 1,
+                            "step_nm": "SC1_Clean",
+                            "start_time_utc": "2026-04-13T06:05:31Z",
+                            "end_time_utc": "2026-04-13T06:07:31Z",
+                            "dur_s": 120,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 2,
+                            "step_nm": "DI_Rinse_1",
+                            "start_time_utc": "2026-04-13T06:07:32Z",
+                            "end_time_utc": "2026-04-13T06:08:32Z",
+                            "dur_s": 60,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 3,
+                            "step_nm": "HF_Dip",
+                            "start_time_utc": "2026-04-13T06:08:33Z",
+                            "end_time_utc": "2026-04-13T06:09:33Z",
+                            "dur_s": 60,
+                            "outcome": "MARGINAL"
+                        },
+                        {
+                            "step_seq": 4,
+                            "step_nm": "DI_Rinse_2",
+                            "start_time_utc": "2026-04-13T06:09:34Z",
+                            "end_time_utc": "2026-04-13T06:10:04Z",
+                            "dur_s": 60,
+                            "outcome": "OK"
+                        },
+                        {
+                            "step_seq": 5,
+                            "step_nm": "Spin_Dry",
+                            "start_time_utc": "2026-04-13T06:10:05Z",
+                            "end_time_utc": "2026-04-13T06:10:35Z",
+                            "dur_s": 30,
+                            "outcome": "OK"
+                        }
+                    ]
+                },
+                "extra": {
+                    "recipe_name": "WET_CLEAN_STD_01"
+                },
+                "uncertain": false
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "generic_operational_observation",
+                "subtype": "startup_complete",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                "data": {
+                    "time_utc": "2026-04-13T06:00:00Z",
+                    "tool_name": "WET_01",
+                    "event_type": "STARTUP",
+                    "status": "complete",
+                    "sw_ver": "2.8.3"
+                },
+                "extra": {},
+                "uncertain": false
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "chemical_status_check",
+                "source_reference": "chunk:1",
+                "confidence": 0.96,
+                "evidence_text": "Chemical level check ... tank=SC1 | conc_pct=3.2 | temp_C=70.0 | vol_L=18.5 | status=OK; tank=SC2 | conc_pct=4.1 | temp_C=25.0 | vol_L=20.0 | status=OK; tank=HF_DIL | conc_pct=0.49 | temp_C=22.0 | vol_L=15.0 | status=OK",
+                "data": {
+                    "time_utc_start": "2026-04-13T06:01:00Z",
+                    "tool_name": "WET_01",
+                    "checks": [
+                        {
+                            "time_utc": "2026-04-13T06:01:00Z",
+                            "tank": "SC1",
+                            "conc_pct": 3.2,
+                            "temp_C": 70.0,
+                            "vol_L": 18.5,
+                            "status": "OK"
+                        },
+                        {
+                            "time_utc": "2026-04-13T06:01:05Z",
+                            "tank": "SC2",
+                            "conc_pct": 4.1,
+                            "temp_C": 25.0,
+                            "vol_L": 20.0,
+                            "status": "OK"
+                        },
+                        {
+                            "time_utc": "2026-04-13T06:01:10Z",
+                            "tank": "HF_DIL",
+                            "conc_pct": 0.49,
+                            "temp_C": 22.0,
+                            "vol_L": 15.0,
+                            "status": "OK"
+                        }
+                    ]
+                },
+                "extra": {},
+                "uncertain": true
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "measurement_observation",
+                "subtype": "in_process_sensor_readings",
+                "source_reference": "chunk:1",
+                "confidence": 0.91,
+                "evidence_text": "SENS_RD readings during SC1_Clean, DI_Rinse_1, HF_Dip, and Spin_Dry: SC1 temp about 70.0-70.3C, conc 3.1-3.2%, flow 2.0 lpm; DI_RINSE temp 23.0-23.1C, flow 5.0 lpm, resistivity 18.1-18.2 Mohm; HF_DIL temp 22.0-22.1C, conc 0.48-0.49%, flow 0.5 lpm; DRYER spin 2500 rpm, temp 45.0C, N2 flow 10.0 lpm",
+                "data": {
+                    "tool_name": "WET_01",
+                    "wafer": "WFR_0090",
+                    "readings_by_tank": [
+                        {
+                            "tank": "SC1",
+                            "time_range_utc": [
+                                "2026-04-13T06:05:31Z",
+                                "2026-04-13T06:07:00Z"
+                            ],
+                            "temp_C": {
+                                "min": 70.0,
+                                "max": 70.3
+                            },
+                            "conc_pct": {
+                                "min": 3.1,
+                                "max": 3.2
+                            },
+                            "flow_lpm": {
+                                "min": 2.0,
+                                "max": 2.0
+                            }
+                        },
+                        {
+                            "tank": "DI_RINSE",
+                            "time_range_utc": [
+                                "2026-04-13T06:07:32Z",
+                                "2026-04-13T06:08:02Z"
+                            ],
+                            "temp_C": {
+                                "min": 23.0,
+                                "max": 23.1
+                            },
+                            "flow_lpm": {
+                                "min": 5.0,
+                                "max": 5.0
+                            },
+                            "resistivity_Mohm": {
+                                "min": 18.1,
+                                "max": 18.2
+                            }
+                        },
+                        {
+                            "tank": "HF_DIL",
+                            "time_range_utc": [
+                                "2026-04-13T06:08:33Z",
+                                "2026-04-13T06:09:00Z"
+                            ],
+                            "temp_C": {
+                                "min": 22.0,
+                                "max": 22.1
+                            },
+                            "conc_pct": {
+                                "min": 0.48,
+                                "max": 0.49
+                            },
+                            "flow_lpm": {
+                                "min": 0.5,
+                                "max": 0.5
+                            }
+                        },
+                        {
+                            "tank": "DRYER",
+                            "time_utc": "2026-04-13T06:10:05Z",
+                            "spin_rpm": 2500,
+                            "temp_C": 45.0,
+                            "n2_flow_lpm": 10.0
+                        }
+                    ]
+                },
+                "extra": {},
+                "uncertain": true
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "fault_or_warning",
+                "subtype": "chemical_concentration_low_warning",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                "data": {
+                    "time_utc": "2026-04-13T06:09:03Z",
+                    "tool_name": "WET_01",
+                    "alarm_code": "HF_CONC_LOW",
+                    "alarm_text": "HF concentration below minimum threshold",
+                    "tank": "HF_DIL",
+                    "measured_conc_pct": 0.48,
+                    "min_conc_pct": 0.49,
+                    "severity": "WARN"
+                },
+                "extra": {
+                    "related_step": "HF_Dip"
+                },
+                "uncertain": true
+            },
+            {
+                "record_type": "generic_operational_observation",
+                "coarse_type": "maintenance_action",
+                "subtype": "automatic_chemical_replenishment",
+                "source_reference": "chunk:1",
+                "confidence": 0.99,
+                "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                "data": {
+                    "time_utc": "2026-04-13T06:10:37Z",
+                    "tool_name": "WET_01",
+                    "tank": "HF_DIL",
+                    "added_vol_ml": 500,
+                    "new_conc_pct": 0.51,
+                    "trigger": "automatic"
+                },
+                "extra": {
+                    "likely_following_warning": "HF_CONC_LOW"
+                },
+                "uncertain": true
+            }
+        ],
+        "detailed_record_count": 9,
+        "chunk_count": 1,
+        "chunk_debug": [
+            {
+                "chunk_id": 1,
+                "debug": {
+                    "status": "ok",
+                    "raw_response": {
+                        "records": [
+                            {
+                                "coarse_type": "generic_operational_observation",
+                                "subtype": "startup_complete",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:00:00Z",
+                                    "tool_name": "WET_01",
+                                    "event_type": "STARTUP",
+                                    "status": "complete",
+                                    "sw_ver": "2.8.3"
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "measurement_observation",
+                                "subtype": "chemical_status_check",
+                                "confidence": 0.96,
+                                "evidence_text": "Chemical level check ... tank=SC1 | conc_pct=3.2 | temp_C=70.0 | vol_L=18.5 | status=OK; tank=SC2 | conc_pct=4.1 | temp_C=25.0 | vol_L=20.0 | status=OK; tank=HF_DIL | conc_pct=0.49 | temp_C=22.0 | vol_L=15.0 | status=OK",
+                                "data": {
+                                    "time_utc_start": "2026-04-13T06:01:00Z",
+                                    "tool_name": "WET_01",
+                                    "checks": [
+                                        {
+                                            "time_utc": "2026-04-13T06:01:00Z",
+                                            "tank": "SC1",
+                                            "conc_pct": 3.2,
+                                            "temp_C": 70.0,
+                                            "vol_L": 18.5,
+                                            "status": "OK"
+                                        },
+                                        {
+                                            "time_utc": "2026-04-13T06:01:05Z",
+                                            "tank": "SC2",
+                                            "conc_pct": 4.1,
+                                            "temp_C": 25.0,
+                                            "vol_L": 20.0,
+                                            "status": "OK"
+                                        },
+                                        {
+                                            "time_utc": "2026-04-13T06:01:10Z",
+                                            "tank": "HF_DIL",
+                                            "conc_pct": 0.49,
+                                            "temp_C": 22.0,
+                                            "vol_L": 15.0,
+                                            "status": "OK"
+                                        }
+                                    ]
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "state_change",
+                                "subtype": "tool_state_transition",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:02:00Z",
+                                    "tool_name": "WET_01",
+                                    "prev_state": "IDLE",
+                                    "curr_state": "READY",
+                                    "op_id": "OPR_003"
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "logistics_or_disposition",
+                                "subtype": "lot_loaded",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:05:00Z",
+                                    "tool_name": "WET_01",
+                                    "lot_id": "LOT_0090",
+                                    "wafer_qty": 25,
+                                    "recipe_name": "WET_CLEAN_STD_01",
+                                    "op_id": "OPR_003"
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "state_change",
+                                "subtype": "tool_state_transition",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:05:30Z",
+                                    "tool_name": "WET_01",
+                                    "prev_state": "READY",
+                                    "curr_state": "PROCESSING",
+                                    "lot_id": "LOT_0090"
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "process_step_event",
+                                "subtype": "wafer_recipe_execution",
+                                "confidence": 0.97,
+                                "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                                "data": {
+                                    "tool_name": "WET_01",
+                                    "lot_id": "LOT_0090",
+                                    "wafer_id": "WFR_0090",
+                                    "steps": [
+                                        {
+                                            "step_seq": 1,
+                                            "step_nm": "SC1_Clean",
+                                            "start_time_utc": "2026-04-13T06:05:31Z",
+                                            "end_time_utc": "2026-04-13T06:07:31Z",
+                                            "dur_s": 120,
+                                            "outcome": "OK"
+                                        },
+                                        {
+                                            "step_seq": 2,
+                                            "step_nm": "DI_Rinse_1",
+                                            "start_time_utc": "2026-04-13T06:07:32Z",
+                                            "end_time_utc": "2026-04-13T06:08:32Z",
+                                            "dur_s": 60,
+                                            "outcome": "OK"
+                                        },
+                                        {
+                                            "step_seq": 3,
+                                            "step_nm": "HF_Dip",
+                                            "start_time_utc": "2026-04-13T06:08:33Z",
+                                            "end_time_utc": "2026-04-13T06:09:33Z",
+                                            "dur_s": 60,
+                                            "outcome": "MARGINAL"
+                                        },
+                                        {
+                                            "step_seq": 4,
+                                            "step_nm": "DI_Rinse_2",
+                                            "start_time_utc": "2026-04-13T06:09:34Z",
+                                            "end_time_utc": "2026-04-13T06:10:04Z",
+                                            "dur_s": 60,
+                                            "outcome": "OK"
+                                        },
+                                        {
+                                            "step_seq": 5,
+                                            "step_nm": "Spin_Dry",
+                                            "start_time_utc": "2026-04-13T06:10:05Z",
+                                            "end_time_utc": "2026-04-13T06:10:35Z",
+                                            "dur_s": 30,
+                                            "outcome": "OK"
+                                        }
+                                    ]
+                                },
+                                "extra": {
+                                    "recipe_name": "WET_CLEAN_STD_01"
+                                },
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "measurement_observation",
+                                "subtype": "in_process_sensor_readings",
+                                "confidence": 0.91,
+                                "evidence_text": "SENS_RD readings during SC1_Clean, DI_Rinse_1, HF_Dip, and Spin_Dry: SC1 temp about 70.0-70.3C, conc 3.1-3.2%, flow 2.0 lpm; DI_RINSE temp 23.0-23.1C, flow 5.0 lpm, resistivity 18.1-18.2 Mohm; HF_DIL temp 22.0-22.1C, conc 0.48-0.49%, flow 0.5 lpm; DRYER spin 2500 rpm, temp 45.0C, N2 flow 10.0 lpm",
+                                "data": {
+                                    "tool_name": "WET_01",
+                                    "wafer_id": "WFR_0090",
+                                    "readings_by_tank": [
+                                        {
+                                            "tank": "SC1",
+                                            "time_range_utc": [
+                                                "2026-04-13T06:05:31Z",
+                                                "2026-04-13T06:07:00Z"
+                                            ],
+                                            "temp_C": {
+                                                "min": 70.0,
+                                                "max": 70.3
+                                            },
+                                            "conc_pct": {
+                                                "min": 3.1,
+                                                "max": 3.2
+                                            },
+                                            "flow_lpm": {
+                                                "min": 2.0,
+                                                "max": 2.0
+                                            }
+                                        },
+                                        {
+                                            "tank": "DI_RINSE",
+                                            "time_range_utc": [
+                                                "2026-04-13T06:07:32Z",
+                                                "2026-04-13T06:08:02Z"
+                                            ],
+                                            "temp_C": {
+                                                "min": 23.0,
+                                                "max": 23.1
+                                            },
+                                            "flow_lpm": {
+                                                "min": 5.0,
+                                                "max": 5.0
+                                            },
+                                            "resistivity_Mohm": {
+                                                "min": 18.1,
+                                                "max": 18.2
+                                            }
+                                        },
+                                        {
+                                            "tank": "HF_DIL",
+                                            "time_range_utc": [
+                                                "2026-04-13T06:08:33Z",
+                                                "2026-04-13T06:09:00Z"
+                                            ],
+                                            "temp_C": {
+                                                "min": 22.0,
+                                                "max": 22.1
+                                            },
+                                            "conc_pct": {
+                                                "min": 0.48,
+                                                "max": 0.49
+                                            },
+                                            "flow_lpm": {
+                                                "min": 0.5,
+                                                "max": 0.5
+                                            }
+                                        },
+                                        {
+                                            "tank": "DRYER",
+                                            "time_utc": "2026-04-13T06:10:05Z",
+                                            "spin_rpm": 2500,
+                                            "temp_C": 45.0,
+                                            "n2_flow_lpm": 10.0
+                                        }
+                                    ]
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "fault_or_warning",
+                                "subtype": "chemical_concentration_low_warning",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:09:03Z",
+                                    "tool_name": "WET_01",
+                                    "alarm_code": "HF_CONC_LOW",
+                                    "alarm_text": "HF concentration below minimum threshold",
+                                    "tank": "HF_DIL",
+                                    "measured_conc_pct": 0.48,
+                                    "min_conc_pct": 0.49,
+                                    "severity": "WARN"
+                                },
+                                "extra": {
+                                    "related_step": "HF_Dip"
+                                },
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "logistics_or_disposition",
+                                "subtype": "wafer_complete_with_warning",
+                                "confidence": 0.98,
+                                "evidence_text": "event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:10:36Z",
+                                    "tool_name": "WET_01",
+                                    "wafer_id": "WFR_0090",
+                                    "lot_id": "LOT_0090",
+                                    "result": "PASS_WITH_WARNING",
+                                    "warnings": [
+                                        "HF_CONC_LOW"
+                                    ]
+                                },
+                                "extra": {},
+                                "uncertain": false
+                            },
+                            {
+                                "coarse_type": "maintenance_action",
+                                "subtype": "automatic_chemical_replenishment",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:10:37Z",
+                                    "tool_name": "WET_01",
+                                    "tank": "HF_DIL",
+                                    "added_vol_ml": 500,
+                                    "new_conc_pct": 0.51,
+                                    "trigger": "automatic"
+                                },
+                                "extra": {
+                                    "likely_following_warning": "HF_CONC_LOW"
+                                },
+                                "uncertain": false
+                            }
+                        ]
+                    }
+                },
+                "record_count": 10
+            }
+        ]
+    },
+    "agent_debug": {
+        "final_source": "free_form_direct"
+    },
+    "pipeline_output": {
+        "schema_fingerprint": "b626592607943e84",
+        "adapter_spec_used": {
+            "schema_fingerprint": "b626592607943e84",
+            "schema_family": "",
+            "record_type_mapping": {
+                "equipment_state": "equipment_state",
+                "process_parameter_recipe": "process_parameter_recipe",
+                "wafer_processing_sequence": "wafer_processing_sequence",
+                "sensor_reading": "sensor_reading",
+                "fault_event": "fault_event",
+                "process_job": "wafer_processing_sequence",
+                "sensor_measurement": "sensor_reading",
+                "alarm_event": "fault_event",
+                "error_event": "fault_event",
+                "control_state_event": "equipment_state",
+                "process_step": "wafer_processing_sequence",
+                "wafer": "wafer_processing_sequence",
+                "wafer_measurement": "sensor_reading",
+                "recipe_param": "process_parameter_recipe",
+                "setpoint": "process_parameter_recipe",
+                "fault_summary": "fault_event",
+                "equipment_state_transition": "equipment_state"
+            },
+            "dispatch_rules": [],
+            "field_aliases": {
+                "LotID": "lot",
+                "WaferID": "wafer",
+                "SlotID": "slot",
+                "Recipe.RecipeID": "recipe",
+                "RecipeName": "recipe",
+                "RecipeStepName": "step",
+                "DateTime": "timestamp",
+                "Value": "value",
+                "Unit": "unit",
+                "Text": "event_name",
+                "Name": "event_name",
+                "SensorID": "sensor_id",
+                "SensorName": "parameter",
+                "AlarmID": "fault_code",
+                "ErrorID": "fault_code",
+                "Severity": "severity",
+                "ControlJob.EquipmentID": "tool_id",
+                "EquipmentID": "tool_id",
+                "ToState": "to_state",
+                "FromState": "from_state",
+                "@sensor": "parameter",
+                "@timestamp": "timestamp",
+                "@unit": "unit",
+                "@value": "value",
+                "@name": "parameter",
+                "@u": "unit",
+                "@v": "value",
+                "@stepName": "step",
+                "StepOutcome": "status",
+                "FabricationRecord.ProductionOrder.LotID": "lot",
+                "FabricationRecord.Hdr.Lot": "lot",
+                "FabricationRecord.Equipment.EquipmentID": "tool_id",
+                "RcpExecLog.@eqp": "tool_id",
+                "RcpExecLog.Hdr.Lot": "lot",
+                "RcpExecLog.Hdr.Rcp": "recipe",
+                "RcpExecLog.WfrLog.W[].@id": "wafer",
+                "@id": "wafer",
+                "@n": "slot",
+                "@cd": "fault_code",
+                "FaultCode": "fault_code",
+                "Description": "fault_summary",
+                "@msg": "fault_summary",
+                "Timestamp": "timestamp",
+                "@t": "timestamp",
+                "@sev": "severity"
+            },
+            "fallback_rules": [
+                {
+                    "when_record_type": "sensor_reading",
+                    "if_missing": "parameter",
+                    "copy_from": "sensor_id"
+                },
+                {
+                    "when_record_type": "equipment_state",
+                    "if_missing": "curr_state",
+                    "copy_from": "event_name"
+                }
+            ]
+        },
+        "canonical_output": {
+            "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+            "filename": "wet_clean_bench_kvlog.log",
+            "source_format": "key_value_text",
+            "parser_route": "semi_structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 6,
+            "records": [
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "logistics_or_disposition",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic",
+                        "recipe": "WET_CLEAN_STD_01"
+                    },
+                    "extra": {
+                        "supporting_observations": [
+                            {
+                                "coarse_type": "maintenance_action",
+                                "subtype": "automatic_chemical_replenishment",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:10:37Z",
+                                    "tool_name": "WET_01",
+                                    "tank": "HF_DIL",
+                                    "added_vol_ml": 500,
+                                    "new_conc_pct": 0.51,
+                                    "trigger": "automatic"
+                                },
+                                "uncertain": true
+                            }
+                        ]
+                    },
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "process_step_event",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.97,
+                    "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                    "raw_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "candidate_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "extra": {
+                        "recipe_name": "WET_CLEAN_STD_01"
+                    },
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "generic_operational_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {},
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "b626592607943e84",
+                "schema_family": ""
+            }
+        },
+        "standardized_output": {
+            "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+            "filename": "wet_clean_bench_kvlog.log",
+            "source_format": "key_value_text",
+            "parser_route": "semi_structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 7,
+            "records": [
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "curr_state": "READY",
+                        "prev_state": "IDLE",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "raw_to_standard_map": {
+                        "curr_state": "curr_state",
+                        "prev_state": "prev_state",
+                        "tool_name": "tool_id"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "logistics_or_disposition",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic",
+                        "recipe": "WET_CLEAN_STD_01"
+                    },
+                    "extra": {
+                        "supporting_observations": [
+                            {
+                                "coarse_type": "maintenance_action",
+                                "subtype": "automatic_chemical_replenishment",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:10:37Z",
+                                    "tool_name": "WET_01",
+                                    "tank": "HF_DIL",
+                                    "added_vol_ml": 500,
+                                    "new_conc_pct": 0.51,
+                                    "trigger": "automatic"
+                                },
+                                "uncertain": true
+                            }
+                        ]
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "trigger": "automatic"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "recipe": "WET_CLEAN_STD_01",
+                        "tool_id": "WET_01",
+                        "parameter": "new_conc",
+                        "value": 0.51,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "lot": "lot",
+                        "recipe": "recipe",
+                        "tool_name": "tool_id",
+                        "new_conc_pct": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "lot": "LOT_0090",
+                        "curr_state": "PROCESSING",
+                        "prev_state": "READY",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "raw_to_standard_map": {
+                        "lot": "lot",
+                        "curr_state": "curr_state",
+                        "prev_state": "prev_state",
+                        "tool_name": "tool_id"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "process_step_event",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.97,
+                    "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                    "raw_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "candidate_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "extra": {
+                        "recipe_name": "WET_CLEAN_STD_01"
+                    },
+                    "unmapped_fields": {
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "tool_id": "WET_01",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "lot": "lot",
+                        "tool_name": "tool_id"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "generic_operational_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "WET_01",
+                        "curr_state": "complete",
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_name": "tool_id",
+                        "status": "curr_state"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "min_conc_pct": 0.49
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "measured_conc",
+                        "value": 0.48,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "severity": "severity",
+                        "tool_name": "tool_id",
+                        "alarm_code": "fault_code",
+                        "measured_conc_pct": "parameter/value/unit"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "min_conc",
+                        "value": 0.49,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "severity": "severity",
+                        "tool_name": "tool_id",
+                        "alarm_code": "fault_code",
+                        "min_conc_pct": "parameter/value/unit"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "b626592607943e84",
+                "schema_family": ""
+            }
+        },
+        "normalized_output": {
+            "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+            "filename": "wet_clean_bench_kvlog.log",
+            "source_format": "key_value_text",
+            "parser_route": "semi_structured_parser",
+            "parser_version": "mvp_v1",
+            "record_count": 7,
+            "records": [
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "curr_state": "READY",
+                        "prev_state": "IDLE",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "raw_to_standard_map": {
+                        "curr_state": "curr_state",
+                        "prev_state": "prev_state",
+                        "tool_name": "tool_id"
+                    },
+                    "normalized_fields": {
+                        "curr_state": "READY",
+                        "prev_state": "IDLE",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "logistics_or_disposition",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic",
+                        "recipe": "WET_CLEAN_STD_01"
+                    },
+                    "extra": {
+                        "supporting_observations": [
+                            {
+                                "coarse_type": "maintenance_action",
+                                "subtype": "automatic_chemical_replenishment",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:10:37Z",
+                                    "tool_name": "WET_01",
+                                    "tank": "HF_DIL",
+                                    "added_vol_ml": 500,
+                                    "new_conc_pct": 0.51,
+                                    "trigger": "automatic"
+                                },
+                                "uncertain": true
+                            }
+                        ]
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "trigger": "automatic"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "recipe": "WET_CLEAN_STD_01",
+                        "tool_id": "WET_01",
+                        "parameter": "new_conc",
+                        "value": 0.51,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "lot": "lot",
+                        "recipe": "recipe",
+                        "tool_name": "tool_id",
+                        "new_conc_pct": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "recipe": "WET_CLEAN_STD_01",
+                        "tool_id": "WET_01",
+                        "parameter": "new_conc",
+                        "value": 0.51,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "lot": "LOT_0090",
+                        "curr_state": "PROCESSING",
+                        "prev_state": "READY",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "raw_to_standard_map": {
+                        "lot": "lot",
+                        "curr_state": "curr_state",
+                        "prev_state": "prev_state",
+                        "tool_name": "tool_id"
+                    },
+                    "normalized_fields": {
+                        "lot": "LOT_0090",
+                        "curr_state": "PROCESSING",
+                        "prev_state": "READY",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "process_step_event",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.97,
+                    "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                    "raw_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "candidate_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "extra": {
+                        "recipe_name": "WET_CLEAN_STD_01"
+                    },
+                    "unmapped_fields": {
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "tool_id": "WET_01",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "lot": "lot",
+                        "tool_name": "tool_id"
+                    },
+                    "normalized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "tool_id": "WET_01",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "generic_operational_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "WET_01",
+                        "curr_state": "complete",
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_name": "tool_id",
+                        "status": "curr_state"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "WET_01",
+                        "curr_state": "complete",
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "min_conc_pct": 0.49
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "measured_conc",
+                        "value": 0.48,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "severity": "severity",
+                        "tool_name": "tool_id",
+                        "alarm_code": "fault_code",
+                        "measured_conc_pct": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "measured_conc",
+                        "value": 0.48,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    }
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "min_conc",
+                        "value": 0.49,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "severity": "severity",
+                        "tool_name": "tool_id",
+                        "alarm_code": "fault_code",
+                        "min_conc_pct": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "min_conc",
+                        "value": 0.49,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    }
+                }
+            ],
+            "adapter_spec": {
+                "schema_fingerprint": "b626592607943e84",
+                "schema_family": ""
+            }
+        },
+        "validated_output": {
+            "accepted_count": 7,
+            "rejected_count": 0,
+            "accepted_records": [
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "IDLE",
+                        "curr_state": "READY",
+                        "op_id": "OPR_003"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "curr_state": "READY",
+                        "prev_state": "IDLE",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "raw_to_standard_map": {
+                        "curr_state": "curr_state",
+                        "prev_state": "prev_state",
+                        "tool_name": "tool_id"
+                    },
+                    "normalized_fields": {
+                        "curr_state": "READY",
+                        "prev_state": "IDLE",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "logistics_or_disposition",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "wafer": "WFR_0090",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "new_conc_pct": 0.51,
+                        "trigger": "automatic",
+                        "recipe": "WET_CLEAN_STD_01"
+                    },
+                    "extra": {
+                        "supporting_observations": [
+                            {
+                                "coarse_type": "maintenance_action",
+                                "subtype": "automatic_chemical_replenishment",
+                                "confidence": 0.99,
+                                "evidence_text": "event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                                "data": {
+                                    "time_utc": "2026-04-13T06:10:37Z",
+                                    "tool_name": "WET_01",
+                                    "tank": "HF_DIL",
+                                    "added_vol_ml": 500,
+                                    "new_conc_pct": 0.51,
+                                    "trigger": "automatic"
+                                },
+                                "uncertain": true
+                            }
+                        ]
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:05:00Z",
+                        "wafer_qty": 25,
+                        "recipe_name": "WET_CLEAN_STD_01",
+                        "op_id": "OPR_003",
+                        "result": "PASS_WITH_WARNING",
+                        "warnings": [
+                            "HF_CONC_LOW"
+                        ],
+                        "tank": "HF_DIL",
+                        "added_vol_ml": 500,
+                        "trigger": "automatic"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "recipe": "WET_CLEAN_STD_01",
+                        "tool_id": "WET_01",
+                        "parameter": "new_conc",
+                        "value": 0.51,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "lot": "lot",
+                        "recipe": "recipe",
+                        "tool_name": "tool_id",
+                        "new_conc_pct": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "recipe": "WET_CLEAN_STD_01",
+                        "tool_id": "WET_01",
+                        "parameter": "new_conc",
+                        "value": 0.51,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "equipment_state",
+                    "source_record_type": "state_change",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z",
+                        "tool_name": "WET_01",
+                        "prev_state": "READY",
+                        "curr_state": "PROCESSING",
+                        "lot": "LOT_0090"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "lot": "LOT_0090",
+                        "curr_state": "PROCESSING",
+                        "prev_state": "READY",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "raw_to_standard_map": {
+                        "lot": "lot",
+                        "curr_state": "curr_state",
+                        "prev_state": "prev_state",
+                        "tool_name": "tool_id"
+                    },
+                    "normalized_fields": {
+                        "lot": "LOT_0090",
+                        "curr_state": "PROCESSING",
+                        "prev_state": "READY",
+                        "tool_id": "WET_01",
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "wafer_processing_sequence",
+                    "source_record_type": "process_step_event",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.97,
+                    "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                    "raw_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "candidate_fields": {
+                        "tool_name": "WET_01",
+                        "lot": "LOT_0090",
+                        "wafer": "WFR_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "extra": {
+                        "recipe_name": "WET_CLEAN_STD_01"
+                    },
+                    "unmapped_fields": {
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "tool_id": "WET_01",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "raw_to_standard_map": {
+                        "wafer": "wafer",
+                        "lot": "lot",
+                        "tool_name": "tool_id"
+                    },
+                    "normalized_fields": {
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "tool_id": "WET_01",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "generic_operational_observation",
+                    "source_record_type": "generic_operational_observation",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "tool_name": "WET_01",
+                        "event_type": "STARTUP",
+                        "status": "complete",
+                        "sw_ver": "2.8.3"
+                    },
+                    "extra": {},
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "tool_id": "WET_01",
+                        "curr_state": "complete",
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "raw_to_standard_map": {
+                        "tool_name": "tool_id",
+                        "status": "curr_state"
+                    },
+                    "normalized_fields": {
+                        "tool_id": "WET_01",
+                        "curr_state": "complete",
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    },
+                    "validation_reason": "ok_generic"
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "min_conc_pct": 0.49
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "measured_conc",
+                        "value": 0.48,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "severity": "severity",
+                        "tool_name": "tool_id",
+                        "alarm_code": "fault_code",
+                        "measured_conc_pct": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "measured_conc",
+                        "value": 0.48,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    },
+                    "validation_reason": "ok"
+                },
+                {
+                    "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                    "filename": "wet_clean_bench_kvlog.log",
+                    "ingestion_time": "2026-04-25T12:05:44.273592",
+                    "source_format": "key_value_text",
+                    "parser_route": "semi_structured_parser",
+                    "parser_version": "mvp_v1",
+                    "record_type": "sensor_reading",
+                    "source_record_type": "fault_or_warning",
+                    "source_reference": "chunk:1",
+                    "confidence": 0.99,
+                    "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                    "raw_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "candidate_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "tool_name": "WET_01",
+                        "alarm_code": "HF_CONC_LOW",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48,
+                        "min_conc_pct": 0.49,
+                        "severity": "WARN"
+                    },
+                    "extra": {
+                        "related_step": "HF_Dip"
+                    },
+                    "unmapped_fields": {
+                        "time_utc": "2026-04-13T06:09:03Z",
+                        "alarm_text": "HF concentration below minimum threshold",
+                        "tank": "HF_DIL",
+                        "measured_conc_pct": 0.48
+                    },
+                    "agent_debug_hint": "free_form_direct",
+                    "adapter_applied": true,
+                    "standardized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "min_conc",
+                        "value": 0.49,
+                        "unit": "%"
+                    },
+                    "raw_to_standard_map": {
+                        "severity": "severity",
+                        "tool_name": "tool_id",
+                        "alarm_code": "fault_code",
+                        "min_conc_pct": "parameter/value/unit"
+                    },
+                    "normalized_fields": {
+                        "severity": "WARN",
+                        "tool_id": "WET_01",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "min_conc",
+                        "value": 0.49,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    },
+                    "validation_reason": "ok"
+                }
+            ],
+            "rejected_records": []
+        },
+        "routing_output": {
+            "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+            "filename": "wet_clean_bench_kvlog.log",
+            "accepted_count": 7,
+            "rejected_count": 0,
+            "routed_rows": {
+                "equipment_states": [
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "state_change",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.99,
+                        "evidence_text": "event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003",
+                        "raw_field_map": "{\"time_utc\": \"2026-04-13T06:02:00Z\", \"tool_name\": \"WET_01\", \"prev_state\": \"IDLE\", \"curr_state\": \"READY\", \"op_id\": \"OPR_003\"}",
+                        "raw_to_standard_map": "{\"curr_state\": \"curr_state\", \"prev_state\": \"prev_state\", \"tool_name\": \"tool_id\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "WET_01",
+                        "curr_state": "READY",
+                        "prev_state": "IDLE",
+                        "time_utc": "2026-04-13T06:02:00Z",
+                        "op_id": "OPR_003"
+                    },
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "state_change",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.99,
+                        "evidence_text": "event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090",
+                        "raw_field_map": "{\"time_utc\": \"2026-04-13T06:05:30Z\", \"tool_name\": \"WET_01\", \"prev_state\": \"READY\", \"curr_state\": \"PROCESSING\", \"lot\": \"LOT_0090\"}",
+                        "raw_to_standard_map": "{\"lot\": \"lot\", \"curr_state\": \"curr_state\", \"prev_state\": \"prev_state\", \"tool_name\": \"tool_id\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "WET_01",
+                        "lot": "LOT_0090",
+                        "curr_state": "PROCESSING",
+                        "prev_state": "READY",
+                        "time_utc": "2026-04-13T06:05:30Z"
+                    }
+                ],
+                "process_parameters_recipes": [],
+                "sensor_readings": [
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "logistics_or_disposition",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.99,
+                        "evidence_text": "event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51",
+                        "raw_field_map": "{\"time_utc\": \"2026-04-13T06:05:00Z\", \"tool_name\": \"WET_01\", \"lot\": \"LOT_0090\", \"wafer_qty\": 25, \"recipe_name\": \"WET_CLEAN_STD_01\", \"op_id\": \"OPR_003\", \"wafer\": \"WFR_0090\", \"result\": \"PASS_WITH_WARNING\", \"warnings\": [\"HF_CONC_LOW\"], \"tank\": \"HF_DIL\", \"added_vol_ml\": 500, \"new_conc_pct\": 0.51, \"trigger\": \"automatic\"}",
+                        "raw_to_standard_map": "{\"wafer\": \"wafer\", \"lot\": \"lot\", \"recipe\": \"recipe\", \"tool_name\": \"tool_id\", \"new_conc_pct\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "WET_01",
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "recipe": "WET_CLEAN_STD_01",
+                        "parameter": "new_conc",
+                        "value": 0.51,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    },
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "fault_or_warning",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.99,
+                        "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                        "raw_field_map": "{\"time_utc\": \"2026-04-13T06:09:03Z\", \"tool_name\": \"WET_01\", \"alarm_code\": \"HF_CONC_LOW\", \"alarm_text\": \"HF concentration below minimum threshold\", \"tank\": \"HF_DIL\", \"measured_conc_pct\": 0.48, \"min_conc_pct\": 0.49, \"severity\": \"WARN\"}",
+                        "raw_to_standard_map": "{\"severity\": \"severity\", \"tool_name\": \"tool_id\", \"alarm_code\": \"fault_code\", \"measured_conc_pct\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "WET_01",
+                        "severity": "WARN",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "measured_conc",
+                        "value": 0.48,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    },
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "fault_or_warning",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.99,
+                        "evidence_text": "event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN",
+                        "raw_field_map": "{\"time_utc\": \"2026-04-13T06:09:03Z\", \"tool_name\": \"WET_01\", \"alarm_code\": \"HF_CONC_LOW\", \"alarm_text\": \"HF concentration below minimum threshold\", \"tank\": \"HF_DIL\", \"measured_conc_pct\": 0.48, \"min_conc_pct\": 0.49, \"severity\": \"WARN\"}",
+                        "raw_to_standard_map": "{\"severity\": \"severity\", \"tool_name\": \"tool_id\", \"alarm_code\": \"fault_code\", \"min_conc_pct\": \"parameter/value/unit\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "WET_01",
+                        "severity": "WARN",
+                        "fault_code": "HF_CONC_LOW",
+                        "parameter": "min_conc",
+                        "value": 0.49,
+                        "unit": "%",
+                        "measurement_family": "percentage"
+                    }
+                ],
+                "fault_events": [],
+                "wafer_processing_sequences": [
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "process_step_event",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.97,
+                        "evidence_text": "Step started/ended for SC1_Clean, DI_Rinse_1, HF_Dip, DI_Rinse_2, Spin_Dry on wafer WFR_0090; HF_Dip ended with outcome=MARGINAL while others ended outcome=OK",
+                        "raw_field_map": "{\"tool_name\": \"WET_01\", \"lot\": \"LOT_0090\", \"wafer\": \"WFR_0090\", \"steps\": [{\"step_seq\": 1, \"step_nm\": \"SC1_Clean\", \"start_time_utc\": \"2026-04-13T06:05:31Z\", \"end_time_utc\": \"2026-04-13T06:07:31Z\", \"dur_s\": 120, \"outcome\": \"OK\"}, {\"step_seq\": 2, \"step_nm\": \"DI_Rinse_1\", \"start_time_utc\": \"2026-04-13T06:07:32Z\", \"end_time_utc\": \"2026-04-13T06:08:32Z\", \"dur_s\": 60, \"outcome\": \"OK\"}, {\"step_seq\": 3, \"step_nm\": \"HF_Dip\", \"start_time_utc\": \"2026-04-13T06:08:33Z\", \"end_time_utc\": \"2026-04-13T06:09:33Z\", \"dur_s\": 60, \"outcome\": \"MARGINAL\"}, {\"step_seq\": 4, \"step_nm\": \"DI_Rinse_2\", \"start_time_utc\": \"2026-04-13T06:09:34Z\", \"end_time_utc\": \"2026-04-13T06:10:04Z\", \"dur_s\": 60, \"outcome\": \"OK\"}, {\"step_seq\": 5, \"step_nm\": \"Spin_Dry\", \"start_time_utc\": \"2026-04-13T06:10:05Z\", \"end_time_utc\": \"2026-04-13T06:10:35Z\", \"dur_s\": 30, \"outcome\": \"OK\"}]}",
+                        "raw_to_standard_map": "{\"wafer\": \"wafer\", \"lot\": \"lot\", \"tool_name\": \"tool_id\"}",
+                        "validation_reason": "ok",
+                        "tool_id": "WET_01",
+                        "wafer": "WFR_0090",
+                        "lot": "LOT_0090",
+                        "steps": [
+                            {
+                                "step_seq": 1,
+                                "step_nm": "SC1_Clean",
+                                "start_time_utc": "2026-04-13T06:05:31Z",
+                                "end_time_utc": "2026-04-13T06:07:31Z",
+                                "dur_s": 120,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 2,
+                                "step_nm": "DI_Rinse_1",
+                                "start_time_utc": "2026-04-13T06:07:32Z",
+                                "end_time_utc": "2026-04-13T06:08:32Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 3,
+                                "step_nm": "HF_Dip",
+                                "start_time_utc": "2026-04-13T06:08:33Z",
+                                "end_time_utc": "2026-04-13T06:09:33Z",
+                                "dur_s": 60,
+                                "outcome": "MARGINAL"
+                            },
+                            {
+                                "step_seq": 4,
+                                "step_nm": "DI_Rinse_2",
+                                "start_time_utc": "2026-04-13T06:09:34Z",
+                                "end_time_utc": "2026-04-13T06:10:04Z",
+                                "dur_s": 60,
+                                "outcome": "OK"
+                            },
+                            {
+                                "step_seq": 5,
+                                "step_nm": "Spin_Dry",
+                                "start_time_utc": "2026-04-13T06:10:05Z",
+                                "end_time_utc": "2026-04-13T06:10:35Z",
+                                "dur_s": 30,
+                                "outcome": "OK"
+                            }
+                        ]
+                    }
+                ],
+                "generic_observations_staging": [
+                    {
+                        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+                        "filename": "wet_clean_bench_kvlog.log",
+                        "parser_route": "semi_structured_parser",
+                        "parser_version": "mvp_v1",
+                        "source_record_type": "generic_operational_observation",
+                        "source_reference": "chunk:1",
+                        "parser_confidence": 0.99,
+                        "evidence_text": "event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3",
+                        "raw_field_map": "{\"time_utc\": \"2026-04-13T06:00:00Z\", \"tool_name\": \"WET_01\", \"event_type\": \"STARTUP\", \"status\": \"complete\", \"sw_ver\": \"2.8.3\"}",
+                        "raw_to_standard_map": "{\"tool_name\": \"tool_id\", \"status\": \"curr_state\"}",
+                        "validation_reason": "ok_generic",
+                        "tool_id": "WET_01",
+                        "curr_state": "complete",
+                        "time_utc": "2026-04-13T06:00:00Z",
+                        "event_type": "STARTUP",
+                        "sw_ver": "2.8.3"
+                    }
+                ]
+            },
+            "rejected_records": []
+        }
+    },
+    "db_output": {
+        "database": "semicon_parser",
+        "file_id": "6d97cb8a-3a55-4ebd-ad2d-7349a4fa6c51",
+        "inserted_counts": {
+            "equipment_states": 2,
+            "process_parameters_recipes": 0,
+            "sensor_readings": 3,
+            "fault_events": 0,
+            "wafer_processing_sequences": 1,
+            "generic_observations_staging": 1,
+            "rejected_records": 0
+        },
+        "status": "ok"
+    }
+}

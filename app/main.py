@@ -313,7 +313,29 @@ def run_pipeline(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    run_pipeline("data/unknown/mystery_syslog_like.odd")
+    run_pipeline("data/testing/vendorA.json")
+    run_pipeline("data/testing/vendorF.json")   
+
+    run_pipeline("data/testing/vendorC.csv")
+    run_pipeline("data/testing/vendorD.csv")
+
+    run_pipeline("data/testing/vendorB.xml")
+    run_pipeline("data/testing/vendorC.xml")
+
+    run_pipeline("data/testing/vendorC.syslog")
+    run_pipeline("data/testing/etch_tool_syslog.log")
+
+    run_pipeline("data/testing/wet_clean_bench_kvlog.log")
+    run_pipeline("data/testing/vendorA.kv")
+
+    run_pipeline("data/testing/ion_implanter_freeform.txt")
+    run_pipeline("data/testing/pvd_sputter_shift_log.txt")
+
+    run_pipeline("data/testing/demo_tool_log.bin")
+    run_pipeline("data/testing/demo_tool_log.hex")
+
+    run_pipeline("data/testing/mystery_kv_like.abc")
+    run_pipeline("data/testing/mystery_syslog_like.odd")
 
 
 

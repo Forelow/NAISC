@@ -1,0 +1,251 @@
+{
+  "GEM_MessageLog": {
+    "EquipID": "EQP_FURNACE_03",
+    "HostID": "MES_HOST_01",
+    "LogPeriodStart": "2026-04-13T08:00:00.000Z",
+    "LogPeriodEnd": "2026-04-13T10:30:00.000Z",
+    "MessageCount": 28,
+    "Messages": [
+      {
+        "MsgID": 1,
+        "MsgType": "S1F3",
+        "Direction": "H->E",
+        "Timestamp": "2026-04-13T08:00:00.000Z",
+        "Description": "Selected equipment status request",
+        "Body": { "SVID": [1001, 1002, 1003] }
+      },
+      {
+        "MsgID": 2,
+        "MsgType": "S1F4",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:00:00.050Z",
+        "Description": "Selected equipment status data",
+        "Body": {
+          "SV": [
+            { "SVID": 1001, "SVName": "ControlState", "Value": "REMOTE", "Unit": null },
+            { "SVID": 1002, "SVName": "ProcessState", "Value": "IDLE", "Unit": null },
+            { "SVID": 1003, "SVName": "ChamberTemp", "Value": 200.5, "Unit": "degC" }
+          ]
+        }
+      },
+      {
+        "MsgID": 3,
+        "MsgType": "S3F17",
+        "Direction": "H->E",
+        "Timestamp": "2026-04-13T08:01:00.000Z",
+        "Description": "Send process job command",
+        "Body": {
+          "PRJOBID": "PRJOB_0200",
+          "MF": 1,
+          "PRRECIPEMETHOD": 1,
+          "RCPSPEC": "FURNACE_ANNEAL_N2_850C",
+          "PRPAUSEEVENT": [],
+          "PRMPSET": [
+            { "MID": "LOT_0130", "WaferCount": 25 }
+          ]
+        }
+      },
+      {
+        "MsgID": 4,
+        "MsgType": "S3F18",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:01:00.200Z",
+        "Description": "Process job command ack",
+        "Body": { "PRJOBID": "PRJOB_0200", "ACKA": 0 }
+      },
+      {
+        "MsgID": 5,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:01:30.000Z",
+        "Description": "Event report - process job created",
+        "Body": {
+          "DATAID": 5001,
+          "CEID": 3001,
+          "CEIDName": "PJCreated",
+          "RPT": [
+            { "RPTID": 101, "V": [{ "SVID": 1002, "Value": "SETTING_UP" }] }
+          ]
+        }
+      },
+      {
+        "MsgID": 6,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:05:00.000Z",
+        "Description": "Event report - process started",
+        "Body": {
+          "DATAID": 5002,
+          "CEID": 3010,
+          "CEIDName": "ProcessStarted",
+          "RPT": [
+            { "RPTID": 102, "V": [
+              { "SVID": 1002, "Value": "PROCESSING" },
+              { "SVID": 1003, "Value": 200.8, "Unit": "degC" },
+              { "SVID": 1004, "SVName": "ChamberPressure", "Value": 760.0, "Unit": "Torr" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 7,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:15:00.000Z",
+        "Description": "Event report - periodic data",
+        "Body": {
+          "DATAID": 5003,
+          "CEID": 4001,
+          "CEIDName": "PeriodicData",
+          "RPT": [
+            { "RPTID": 103, "V": [
+              { "SVID": 1003, "SVName": "ChamberTemp", "Value": 420.5, "Unit": "degC" },
+              { "SVID": 1004, "SVName": "ChamberPressure", "Value": 0.08, "Unit": "Torr" },
+              { "SVID": 1005, "SVName": "N2Flow", "Value": 10.0, "Unit": "slm" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 8,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:30:00.000Z",
+        "Description": "Event report - periodic data",
+        "Body": {
+          "DATAID": 5004,
+          "CEID": 4001,
+          "CEIDName": "PeriodicData",
+          "RPT": [
+            { "RPTID": 103, "V": [
+              { "SVID": 1003, "SVName": "ChamberTemp", "Value": 620.2, "Unit": "degC" },
+              { "SVID": 1004, "SVName": "ChamberPressure", "Value": 0.05, "Unit": "Torr" },
+              { "SVID": 1005, "SVName": "N2Flow", "Value": 10.0, "Unit": "slm" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 9,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T08:45:00.000Z",
+        "Description": "Event report - periodic data",
+        "Body": {
+          "DATAID": 5005,
+          "CEID": 4001,
+          "CEIDName": "PeriodicData",
+          "RPT": [
+            { "RPTID": 103, "V": [
+              { "SVID": 1003, "SVName": "ChamberTemp", "Value": 849.9, "Unit": "degC" },
+              { "SVID": 1004, "SVName": "ChamberPressure", "Value": 0.05, "Unit": "Torr" },
+              { "SVID": 1005, "SVName": "N2Flow", "Value": 10.0, "Unit": "slm" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 10,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T09:00:00.000Z",
+        "Description": "Event report - periodic data",
+        "Body": {
+          "DATAID": 5006,
+          "CEID": 4001,
+          "CEIDName": "PeriodicData",
+          "RPT": [
+            { "RPTID": 103, "V": [
+              { "SVID": 1003, "SVName": "ChamberTemp", "Value": 850.1, "Unit": "degC" },
+              { "SVID": 1004, "SVName": "ChamberPressure", "Value": 0.05, "Unit": "Torr" },
+              { "SVID": 1005, "SVName": "N2Flow", "Value": 10.0, "Unit": "slm" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 11,
+        "MsgType": "S5F1",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T09:10:00.000Z",
+        "Description": "Alarm report - temperature drift",
+        "Body": {
+          "ALCD": 129,
+          "ALID": 2001,
+          "ALIDName": "TEMP_HIGH_WARN",
+          "ALTX": "Chamber temperature above upper warning limit",
+          "AlarmData": {
+            "SVID": 1003,
+            "CurrentValue": 862.3,
+            "Limit": 860.0,
+            "Unit": "degC"
+          }
+        }
+      },
+      {
+        "MsgID": 12,
+        "MsgType": "S5F2",
+        "Direction": "H->E",
+        "Timestamp": "2026-04-13T09:10:00.100Z",
+        "Description": "Alarm report ack",
+        "Body": { "ACKC5": 0 }
+      },
+      {
+        "MsgID": 13,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T09:15:00.000Z",
+        "Description": "Event report - periodic data",
+        "Body": {
+          "DATAID": 5007,
+          "CEID": 4001,
+          "CEIDName": "PeriodicData",
+          "RPT": [
+            { "RPTID": 103, "V": [
+              { "SVID": 1003, "SVName": "ChamberTemp", "Value": 850.5, "Unit": "degC" },
+              { "SVID": 1004, "SVName": "ChamberPressure", "Value": 0.05, "Unit": "Torr" },
+              { "SVID": 1005, "SVName": "N2Flow", "Value": 10.0, "Unit": "slm" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 14,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T10:15:00.000Z",
+        "Description": "Event report - process job completed",
+        "Body": {
+          "DATAID": 5008,
+          "CEID": 3020,
+          "CEIDName": "ProcessCompleted",
+          "RPT": [
+            { "RPTID": 104, "V": [
+              { "SVID": 1002, "Value": "IDLE" },
+              { "SVID": 1003, "Value": 620.0, "Unit": "degC" }
+            ]}
+          ]
+        }
+      },
+      {
+        "MsgID": 15,
+        "MsgType": "S6F11",
+        "Direction": "E->H",
+        "Timestamp": "2026-04-13T10:30:00.000Z",
+        "Description": "Event report - lot complete",
+        "Body": {
+          "DATAID": 5009,
+          "CEID": 5001,
+          "CEIDName": "LotComplete",
+          "RPT": [
+            { "RPTID": 105, "V": [
+              { "SVID": 2001, "SVName": "LotID", "Value": "LOT_0130" },
+              { "SVID": 2002, "SVName": "WafersProcessed", "Value": 25 },
+              { "SVID": 2003, "SVName": "WafersFailed", "Value": 0 }
+            ]}
+          ]
+        }
+      }
+    ]
+  }
+}

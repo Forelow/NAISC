@@ -1,11 +1,11 @@
 {
     "ingested": {
-        "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+        "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
         "filename": "mystery_syslog_like.odd",
         "extension": ".odd",
         "size_bytes": 148,
-        "raw_path": "data\\raw\\863a14ee-d5cc-4ca3-8712-e87c99710ca5_mystery_syslog_like.odd",
-        "ingestion_time": "2026-04-25T09:26:32.016622",
+        "raw_path": "data\\raw\\60364871-7ae4-4369-a952-e3f9b7bb1bf5_mystery_syslog_like.odd",
+        "ingestion_time": "2026-04-25T12:02:35.031952",
         "sha256": "487aa7daff88e1c4ee12c342ad888f325040e415868bc82d7c83272217a70e50"
     },
     "detection": {
@@ -252,7 +252,7 @@
             ]
         },
         "canonical_output": {
-            "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+            "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
             "filename": "mystery_syslog_like.odd",
             "source_format": "key_value_text",
             "parser_route": "semi_structured_parser",
@@ -260,9 +260,9 @@
             "record_count": 1,
             "records": [
                 {
-                    "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+                    "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
                     "filename": "mystery_syslog_like.odd",
-                    "ingestion_time": "2026-04-25T09:26:32.016622",
+                    "ingestion_time": "2026-04-25T12:02:35.031952",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
@@ -299,7 +299,7 @@
             }
         },
         "standardized_output": {
-            "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+            "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
             "filename": "mystery_syslog_like.odd",
             "source_format": "key_value_text",
             "parser_route": "semi_structured_parser",
@@ -307,9 +307,9 @@
             "record_count": 1,
             "records": [
                 {
-                    "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+                    "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
                     "filename": "mystery_syslog_like.odd",
-                    "ingestion_time": "2026-04-25T09:26:32.016622",
+                    "ingestion_time": "2026-04-25T12:02:35.031952",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
@@ -360,7 +360,7 @@
             }
         },
         "normalized_output": {
-            "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+            "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
             "filename": "mystery_syslog_like.odd",
             "source_format": "key_value_text",
             "parser_route": "semi_structured_parser",
@@ -368,9 +368,9 @@
             "record_count": 1,
             "records": [
                 {
-                    "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+                    "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
                     "filename": "mystery_syslog_like.odd",
-                    "ingestion_time": "2026-04-25T09:26:32.016622",
+                    "ingestion_time": "2026-04-25T12:02:35.031952",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
@@ -433,9 +433,9 @@
             "rejected_count": 0,
             "accepted_records": [
                 {
-                    "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+                    "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
                     "filename": "mystery_syslog_like.odd",
-                    "ingestion_time": "2026-04-25T09:26:32.016622",
+                    "ingestion_time": "2026-04-25T12:02:35.031952",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
@@ -492,7 +492,7 @@
             "rejected_records": []
         },
         "routing_output": {
-            "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+            "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
             "filename": "mystery_syslog_like.odd",
             "accepted_count": 1,
             "rejected_count": 0,
@@ -501,7 +501,7 @@
                 "process_parameters_recipes": [],
                 "sensor_readings": [
                     {
-                        "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+                        "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
                         "filename": "mystery_syslog_like.odd",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
@@ -529,7 +529,7 @@
     },
     "db_output": {
         "database": "semicon_parser",
-        "file_id": "863a14ee-d5cc-4ca3-8712-e87c99710ca5",
+        "file_id": "60364871-7ae4-4369-a952-e3f9b7bb1bf5",
         "inserted_counts": {
             "equipment_states": 0,
             "process_parameters_recipes": 0,

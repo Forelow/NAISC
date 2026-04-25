@@ -1,8 +1,3 @@
-; WET_CLEAN_BENCH_01 - Process & Event Log
-; Vendor: CleanSys Corp | FW: 2.8.3
-; Site: FAB2 | Tool: WET_01 | Date: 2026-04-13
-; Key=Value format | Delimiter: pipe (|)
-
 time_utc=2026-04-13T06:00:00Z | tool_name=WET_01 | event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3
 time_utc=2026-04-13T06:01:00Z | tool_name=WET_01 | event_type=CHEM_CHECK | msg=Chemical level check | tank=SC1 | conc_pct=3.2 | temp_C=70.0 | vol_L=18.5 | status=OK
 time_utc=2026-04-13T06:01:05Z | tool_name=WET_01 | event_type=CHEM_CHECK | msg=Chemical level check | tank=SC2 | conc_pct=4.1 | temp_C=25.0 | vol_L=20.0 | status=OK

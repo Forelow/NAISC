@@ -1,11 +1,11 @@
 {
     "ingested": {
-        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
         "filename": "mystery_kv_like.abc",
         "extension": ".abc",
         "size_bytes": 190,
-        "raw_path": "data\\raw\\09ded736-6d84-4d60-a7c6-9de674ce719b_mystery_kv_like.abc",
-        "ingestion_time": "2026-04-25T09:25:16.459081",
+        "raw_path": "data\\raw\\d0d10820-51a2-44d9-a96e-0f9c6eb6c14d_mystery_kv_like.abc",
+        "ingestion_time": "2026-04-25T12:02:31.239639",
         "sha256": "3bdb858f1bc4f97bfd80dc2e73c6aa01be9f2c0ed2eda26f63b5991213447615"
     },
     "detection": {
@@ -52,9 +52,9 @@
             {
                 "record_type": "generic_operational_observation",
                 "coarse_type": "measurement_observation",
-                "subtype": "tool_parameter_readings",
+                "subtype": "tool_telemetry_snapshot",
                 "source_reference": "chunk:1",
-                "confidence": 0.99,
+                "confidence": 0.98,
                 "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                 "data": {
                     "timestamp": "2026-04-30T13:03:00",
@@ -69,9 +69,9 @@
             {
                 "record_type": "generic_operational_observation",
                 "coarse_type": "measurement_observation",
-                "subtype": "tool_parameter_readings",
+                "subtype": "tool_telemetry_snapshot",
                 "source_reference": "chunk:1",
-                "confidence": 0.99,
+                "confidence": 0.98,
                 "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                 "data": {
                     "timestamp": "2026-04-30T13:03:01",
@@ -89,9 +89,9 @@
             {
                 "record_type": "generic_operational_observation",
                 "coarse_type": "measurement_observation",
-                "subtype": "tool_parameter_readings",
+                "subtype": "tool_telemetry_snapshot",
                 "source_reference": "chunk:1",
-                "confidence": 0.99,
+                "confidence": 0.98,
                 "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                 "data": {
                     "timestamp": "2026-04-30T13:03:00",
@@ -106,9 +106,9 @@
             {
                 "record_type": "generic_operational_observation",
                 "coarse_type": "measurement_observation",
-                "subtype": "tool_parameter_readings",
+                "subtype": "tool_telemetry_snapshot",
                 "source_reference": "chunk:1",
-                "confidence": 0.99,
+                "confidence": 0.98,
                 "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                 "data": {
                     "timestamp": "2026-04-30T13:03:01",
@@ -126,9 +126,9 @@
             {
                 "record_type": "generic_operational_observation",
                 "coarse_type": "measurement_observation",
-                "subtype": "tool_parameter_readings",
+                "subtype": "tool_telemetry_snapshot",
                 "source_reference": "chunk:1",
-                "confidence": 0.99,
+                "confidence": 0.98,
                 "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                 "data": {
                     "timestamp": "2026-04-30T13:03:00",
@@ -143,9 +143,9 @@
             {
                 "record_type": "generic_operational_observation",
                 "coarse_type": "measurement_observation",
-                "subtype": "tool_parameter_readings",
+                "subtype": "tool_telemetry_snapshot",
                 "source_reference": "chunk:1",
-                "confidence": 0.99,
+                "confidence": 0.98,
                 "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                 "data": {
                     "timestamp": "2026-04-30T13:03:01",
@@ -169,8 +169,8 @@
                         "records": [
                             {
                                 "coarse_type": "measurement_observation",
-                                "subtype": "tool_parameter_readings",
-                                "confidence": 0.99,
+                                "subtype": "tool_telemetry_snapshot",
+                                "confidence": 0.98,
                                 "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                                 "data": {
                                     "timestamp": "2026-04-30T13:03:00",
@@ -184,8 +184,8 @@
                             },
                             {
                                 "coarse_type": "measurement_observation",
-                                "subtype": "tool_parameter_readings",
-                                "confidence": 0.99,
+                                "subtype": "tool_telemetry_snapshot",
+                                "confidence": 0.98,
                                 "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                                 "data": {
                                     "timestamp": "2026-04-30T13:03:01",
@@ -293,7 +293,7 @@
             ]
         },
         "canonical_output": {
-            "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+            "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
             "filename": "mystery_kv_like.abc",
             "source_format": "key_value_text",
             "parser_route": "semi_structured_parser",
@@ -301,16 +301,16 @@
             "record_count": 2,
             "records": [
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "generic_operational_observation",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -332,16 +332,16 @@
                     "adapter_applied": true
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "generic_operational_observation",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -369,7 +369,7 @@
             }
         },
         "standardized_output": {
-            "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+            "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
             "filename": "mystery_kv_like.abc",
             "source_format": "key_value_text",
             "parser_route": "semi_structured_parser",
@@ -377,16 +377,16 @@
             "record_count": 6,
             "records": [
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -423,16 +423,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -469,16 +469,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -515,16 +515,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -561,16 +561,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -607,16 +607,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -659,7 +659,7 @@
             }
         },
         "normalized_output": {
-            "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+            "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
             "filename": "mystery_kv_like.abc",
             "source_format": "key_value_text",
             "parser_route": "semi_structured_parser",
@@ -667,16 +667,16 @@
             "record_count": 6,
             "records": [
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -721,16 +721,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -775,16 +775,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -829,16 +829,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -883,16 +883,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -937,16 +937,16 @@
                     }
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -1001,16 +1001,16 @@
             "rejected_count": 0,
             "accepted_records": [
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -1056,16 +1056,16 @@
                     "validation_reason": "ok"
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -1111,16 +1111,16 @@
                     "validation_reason": "ok"
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:00",
@@ -1166,16 +1166,16 @@
                     "validation_reason": "ok"
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -1221,16 +1221,16 @@
                     "validation_reason": "ok"
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -1276,16 +1276,16 @@
                     "validation_reason": "ok"
                 },
                 {
-                    "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                    "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                     "filename": "mystery_kv_like.abc",
-                    "ingestion_time": "2026-04-25T09:25:16.459081",
+                    "ingestion_time": "2026-04-25T12:02:31.239639",
                     "source_format": "key_value_text",
                     "parser_route": "semi_structured_parser",
                     "parser_version": "mvp_v1",
                     "record_type": "sensor_reading",
                     "source_record_type": "measurement_observation",
                     "source_reference": "chunk:1",
-                    "confidence": 0.99,
+                    "confidence": 0.98,
                     "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                     "raw_fields": {
                         "timestamp": "2026-04-30T13:03:01",
@@ -1334,7 +1334,7 @@
             "rejected_records": []
         },
         "routing_output": {
-            "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+            "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
             "filename": "mystery_kv_like.abc",
             "accepted_count": 6,
             "rejected_count": 0,
@@ -1343,13 +1343,13 @@
                 "process_parameters_recipes": [],
                 "sensor_readings": [
                     {
-                        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                         "filename": "mystery_kv_like.abc",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
                         "source_record_type": "measurement_observation",
                         "source_reference": "chunk:1",
-                        "parser_confidence": 0.99,
+                        "parser_confidence": 0.98,
                         "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                         "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:00\", \"tool_id\": \"IMPLANT_X4\", \"temp_F\": 90, \"pressure_mTorr\": 750, \"power_kW\": 1.2}",
                         "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"temp_F\": \"parameter/value/unit\"}",
@@ -1362,13 +1362,13 @@
                         "measurement_family": "temperature"
                     },
                     {
-                        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                         "filename": "mystery_kv_like.abc",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
                         "source_record_type": "measurement_observation",
                         "source_reference": "chunk:1",
-                        "parser_confidence": 0.99,
+                        "parser_confidence": 0.98,
                         "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                         "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:00\", \"tool_id\": \"IMPLANT_X4\", \"temp_F\": 90, \"pressure_mTorr\": 750, \"power_kW\": 1.2}",
                         "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"pressure_mTorr\": \"parameter/value/unit\"}",
@@ -1381,13 +1381,13 @@
                         "measurement_family": "pressure"
                     },
                     {
-                        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                         "filename": "mystery_kv_like.abc",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
                         "source_record_type": "measurement_observation",
                         "source_reference": "chunk:1",
-                        "parser_confidence": 0.99,
+                        "parser_confidence": 0.98,
                         "evidence_text": "timestamp=2026-04-30T13:03:00 tool_id=IMPLANT_X4 temp_F=90 pressure_mTorr=750 power_kW=1.2",
                         "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:00\", \"tool_id\": \"IMPLANT_X4\", \"temp_F\": 90, \"pressure_mTorr\": 750, \"power_kW\": 1.2}",
                         "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"power_kW\": \"parameter/value/unit\"}",
@@ -1400,13 +1400,13 @@
                         "measurement_family": "power"
                     },
                     {
-                        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                         "filename": "mystery_kv_like.abc",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
                         "source_record_type": "measurement_observation",
                         "source_reference": "chunk:1",
-                        "parser_confidence": 0.99,
+                        "parser_confidence": 0.98,
                         "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                         "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:01\", \"tool_id\": \"IMPLANT_X4\", \"chamber_temp_K\": 300, \"dwell_ms\": 1500, \"gas_flow_slm\": 0.8}",
                         "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"chamber_temp_K\": \"parameter/value/unit\"}",
@@ -1419,13 +1419,13 @@
                         "measurement_family": "temperature"
                     },
                     {
-                        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                         "filename": "mystery_kv_like.abc",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
                         "source_record_type": "measurement_observation",
                         "source_reference": "chunk:1",
-                        "parser_confidence": 0.99,
+                        "parser_confidence": 0.98,
                         "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                         "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:01\", \"tool_id\": \"IMPLANT_X4\", \"chamber_temp_K\": 300, \"dwell_ms\": 1500, \"gas_flow_slm\": 0.8}",
                         "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"dwell_ms\": \"parameter/value/unit\"}",
@@ -1438,13 +1438,13 @@
                         "measurement_family": "time"
                     },
                     {
-                        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+                        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
                         "filename": "mystery_kv_like.abc",
                         "parser_route": "semi_structured_parser",
                         "parser_version": "mvp_v1",
                         "source_record_type": "measurement_observation",
                         "source_reference": "chunk:1",
-                        "parser_confidence": 0.99,
+                        "parser_confidence": 0.98,
                         "evidence_text": "timestamp=2026-04-30T13:03:01 tool_id=IMPLANT_X4 chamber_temp_K=300 dwell_ms=1500 gas_flow_slm=0.8",
                         "raw_field_map": "{\"timestamp\": \"2026-04-30T13:03:01\", \"tool_id\": \"IMPLANT_X4\", \"chamber_temp_K\": 300, \"dwell_ms\": 1500, \"gas_flow_slm\": 0.8}",
                         "raw_to_standard_map": "{\"tool_id\": \"tool_id\", \"timestamp\": \"timestamp\", \"gas_flow_slm\": \"parameter/value/unit\"}",
@@ -1466,7 +1466,7 @@
     },
     "db_output": {
         "database": "semicon_parser",
-        "file_id": "09ded736-6d84-4d60-a7c6-9de674ce719b",
+        "file_id": "d0d10820-51a2-44d9-a96e-0f9c6eb6c14d",
         "inserted_counts": {
             "equipment_states": 0,
             "process_parameters_recipes": 0,

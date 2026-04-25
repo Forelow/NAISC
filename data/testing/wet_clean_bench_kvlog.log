@@ -1,0 +1,29 @@
+time_utc=2026-04-13T06:00:00Z | tool_name=WET_01 | event_type=STARTUP | msg=System startup complete | sw_ver=2.8.3
+time_utc=2026-04-13T06:01:00Z | tool_name=WET_01 | event_type=CHEM_CHECK | msg=Chemical level check | tank=SC1 | conc_pct=3.2 | temp_C=70.0 | vol_L=18.5 | status=OK
+time_utc=2026-04-13T06:01:05Z | tool_name=WET_01 | event_type=CHEM_CHECK | msg=Chemical level check | tank=SC2 | conc_pct=4.1 | temp_C=25.0 | vol_L=20.0 | status=OK
+time_utc=2026-04-13T06:01:10Z | tool_name=WET_01 | event_type=CHEM_CHECK | msg=Chemical level check | tank=HF_DIL | conc_pct=0.49 | temp_C=22.0 | vol_L=15.0 | status=OK
+time_utc=2026-04-13T06:02:00Z | tool_name=WET_01 | event_type=STATE_CHG | msg=State change | prev=IDLE | curr=READY | op_id=OPR_003
+time_utc=2026-04-13T06:05:00Z | tool_name=WET_01 | event_type=LOT_IN | msg=Lot loaded | lot_id=LOT_0090 | wfr_qty=25 | recipe_name=WET_CLEAN_STD_01 | op_id=OPR_003
+time_utc=2026-04-13T06:05:30Z | tool_name=WET_01 | event_type=STATE_CHG | msg=State change | prev=READY | curr=PROCESSING | lot_id=LOT_0090
+time_utc=2026-04-13T06:05:31Z | tool_name=WET_01 | event_type=STEP_ST | msg=Step started | step_seq=1 | step_nm=SC1_Clean | wafer_id=WFR_0090 | lot_id=LOT_0090
+time_utc=2026-04-13T06:05:31Z | tool_name=WET_01 | event_type=SENS_RD | tank=SC1 | temp_C=70.1 | conc_pct=3.2 | flow_lpm=2.0
+time_utc=2026-04-13T06:06:00Z | tool_name=WET_01 | event_type=SENS_RD | tank=SC1 | temp_C=70.3 | conc_pct=3.2 | flow_lpm=2.0
+time_utc=2026-04-13T06:06:30Z | tool_name=WET_01 | event_type=SENS_RD | tank=SC1 | temp_C=70.2 | conc_pct=3.1 | flow_lpm=2.0
+time_utc=2026-04-13T06:07:00Z | tool_name=WET_01 | event_type=SENS_RD | tank=SC1 | temp_C=70.0 | conc_pct=3.1 | flow_lpm=2.0
+time_utc=2026-04-13T06:07:31Z | tool_name=WET_01 | event_type=STEP_END | msg=Step ended | step_seq=1 | step_nm=SC1_Clean | wafer_id=WFR_0090 | dur_s=120 | outcome=OK
+time_utc=2026-04-13T06:07:32Z | tool_name=WET_01 | event_type=STEP_ST | msg=Step started | step_seq=2 | step_nm=DI_Rinse_1 | wafer_id=WFR_0090
+time_utc=2026-04-13T06:07:32Z | tool_name=WET_01 | event_type=SENS_RD | tank=DI_RINSE | temp_C=23.0 | flow_lpm=5.0 | resistivity_Mohm=18.1
+time_utc=2026-04-13T06:08:02Z | tool_name=WET_01 | event_type=SENS_RD | tank=DI_RINSE | temp_C=23.1 | flow_lpm=5.0 | resistivity_Mohm=18.2
+time_utc=2026-04-13T06:08:32Z | tool_name=WET_01 | event_type=STEP_END | msg=Step ended | step_seq=2 | step_nm=DI_Rinse_1 | wafer_id=WFR_0090 | dur_s=60 | outcome=OK
+time_utc=2026-04-13T06:08:33Z | tool_name=WET_01 | event_type=STEP_ST | msg=Step started | step_seq=3 | step_nm=HF_Dip | wafer_id=WFR_0090
+time_utc=2026-04-13T06:08:33Z | tool_name=WET_01 | event_type=SENS_RD | tank=HF_DIL | temp_C=22.0 | conc_pct=0.49 | flow_lpm=0.5
+time_utc=2026-04-13T06:09:00Z | tool_name=WET_01 | event_type=SENS_RD | tank=HF_DIL | temp_C=22.1 | conc_pct=0.48 | flow_lpm=0.5
+time_utc=2026-04-13T06:09:03Z | tool_name=WET_01 | event_type=ALARM | alarm_code=HF_CONC_LOW | alarm_text=HF concentration below minimum threshold | tank=HF_DIL | conc_pct=0.48 | min_conc_pct=0.49 | severity=WARN
+time_utc=2026-04-13T06:09:33Z | tool_name=WET_01 | event_type=STEP_END | msg=Step ended | step_seq=3 | step_nm=HF_Dip | wafer_id=WFR_0090 | dur_s=60 | outcome=MARGINAL
+time_utc=2026-04-13T06:09:34Z | tool_name=WET_01 | event_type=STEP_ST | msg=Step started | step_seq=4 | step_nm=DI_Rinse_2 | wafer_id=WFR_0090
+time_utc=2026-04-13T06:10:04Z | tool_name=WET_01 | event_type=STEP_END | msg=Step ended | step_seq=4 | step_nm=DI_Rinse_2 | wafer_id=WFR_0090 | dur_s=60 | outcome=OK
+time_utc=2026-04-13T06:10:05Z | tool_name=WET_01 | event_type=STEP_ST | msg=Step started | step_seq=5 | step_nm=Spin_Dry | wafer_id=WFR_0090
+time_utc=2026-04-13T06:10:05Z | tool_name=WET_01 | event_type=SENS_RD | tank=DRYER | spin_rpm=2500 | temp_C=45.0 | n2_flow_lpm=10.0
+time_utc=2026-04-13T06:10:35Z | tool_name=WET_01 | event_type=STEP_END | msg=Step ended | step_seq=5 | step_nm=Spin_Dry | wafer_id=WFR_0090 | dur_s=30 | outcome=OK
+time_utc=2026-04-13T06:10:36Z | tool_name=WET_01 | event_type=WFR_DONE | msg=Wafer process complete | wafer_id=WFR_0090 | lot_id=LOT_0090 | result=PASS_WITH_WARNING | warnings=HF_CONC_LOW
+time_utc=2026-04-13T06:10:37Z | tool_name=WET_01 | event_type=CHEM_REPLEN | msg=Auto chemical replenishment triggered | tank=HF_DIL | added_vol_ml=500 | new_conc_pct=0.51

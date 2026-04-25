@@ -1,0 +1,41 @@
+# TOOL_ETCH_03 Event Log | Generated: 2026-04-13 | Format: syslog+kv
+# Fields: TIMESTAMP TOOL SEVERITY [CODE] MESSAGE [key=value ...]
+
+2026-04-13 07:55:00 TOOL_ETCH_03 INFO STATE=IDLE lot=NONE wafer=NONE step=NONE
+2026-04-13 07:58:12 TOOL_ETCH_03 INFO STATE=SETUP lot=LOT_0044 wafer=NONE step=NONE operator=OPR_005
+2026-04-13 08:00:00 TOOL_ETCH_03 INFO STATE=PROCESSING lot=LOT_0044 wafer=WFR_0001 step=Prerequisites
+2026-04-13 08:00:05 TOOL_ETCH_03 INFO STEP_START step=Prerequisites wafer=WFR_0001 recipe=ETCH_RCP_002
+2026-04-13 08:00:10 TOOL_ETCH_03 INFO VACUUM_START chamber=C1 target_pressure=0.80Pa
+2026-04-13 08:00:15 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.92Pa temp=85.2C rf_power=0W
+2026-04-13 08:00:16 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.90Pa temp=85.4C rf_power=0W
+2026-04-13 08:00:17 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.87Pa temp=85.7C rf_power=150W
+2026-04-13 08:00:18 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.85Pa temp=86.0C rf_power=150W
+2026-04-13 08:00:19 TOOL_ETCH_03 WARN CODE=V101 Vacuum pressure approaching lower threshold chamber=C1 pressure=0.85Pa threshold=0.80Pa
+2026-04-13 08:00:20 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.83Pa temp=86.1C rf_power=148W
+2026-04-13 08:00:21 TOOL_ETCH_03 WARN CODE=V101 Vacuum pressure approaching lower threshold chamber=C1 pressure=0.82Pa threshold=0.80Pa
+2026-04-13 08:00:22 TOOL_ETCH_03 INFO STEP_END step=Prerequisites wafer=WFR_0001 duration=17s status=PASS
+2026-04-13 08:00:23 TOOL_ETCH_03 INFO STEP_START step=EtchMain wafer=WFR_0001 recipe=ETCH_RCP_002
+2026-04-13 08:00:30 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.80Pa temp=88.0C rf_power=150W
+2026-04-13 08:00:31 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.79Pa temp=88.3C rf_power=150W
+2026-04-13 08:00:32 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.78Pa temp=88.5C rf_power=149W
+2026-04-13 08:01:10 TOOL_ETCH_03 ERROR CODE=RF002 RF power mismatch detected chamber=C1 expected=150W actual=132W
+2026-04-13 08:01:11 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.78Pa temp=88.8C rf_power=132W
+2026-04-13 08:01:12 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.78Pa temp=88.9C rf_power=138W
+2026-04-13 08:01:13 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.78Pa temp=89.0C rf_power=145W
+2026-04-13 08:01:14 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.78Pa temp=89.0C rf_power=150W
+2026-04-13 08:01:15 TOOL_ETCH_03 INFO RF_RECOVER chamber=C1 rf_power=150W status=RECOVERED
+2026-04-13 08:02:00 TOOL_ETCH_03 INFO STEP_END step=EtchMain wafer=WFR_0001 duration=97s status=PASS
+2026-04-13 08:02:01 TOOL_ETCH_03 INFO STEP_START step=Cooldown wafer=WFR_0001
+2026-04-13 08:02:05 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.85Pa temp=85.0C rf_power=0W
+2026-04-13 08:02:10 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.88Pa temp=80.2C rf_power=0W
+2026-04-13 08:02:15 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.90Pa temp=75.1C rf_power=0W
+2026-04-13 08:02:30 TOOL_ETCH_03 INFO STEP_END step=Cooldown wafer=WFR_0001 duration=29s status=PASS
+2026-04-13 08:02:31 TOOL_ETCH_03 INFO WAFER_COMPLETE wafer=WFR_0001 lot=LOT_0044 total_steps=3 result=PASS
+2026-04-13 08:03:00 TOOL_ETCH_03 INFO STEP_START step=Prerequisites wafer=WFR_0002 recipe=ETCH_RCP_002
+2026-04-13 08:03:05 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.91Pa temp=72.0C rf_power=0W
+2026-04-13 08:03:06 TOOL_ETCH_03 INFO SENSOR chamber=C1 pressure=0.90Pa temp=71.5C rf_power=0W
+2026-04-13 08:03:10 TOOL_ETCH_03 ERROR CODE=V201 Vacuum system failure chamber=C1 pressure=0.55Pa threshold=0.80Pa
+2026-04-13 08:03:11 TOOL_ETCH_03 ERROR CODE=ABORT Process aborted due to critical vacuum failure wafer=WFR_0002 step=Prerequisites
+2026-04-13 08:03:12 TOOL_ETCH_03 INFO STATE=ALARM lot=LOT_0044 wafer=WFR_0002 fault=V201
+2026-04-13 08:07:00 TOOL_ETCH_03 INFO ALARM_CLEARED code=V201 operator=OPR_005 action=VacuumPumpReset
+2026-04-13 08:07:01 TOOL_ETCH_03 INFO STATE=IDLE lot=NONE wafer=NONE step=NONE

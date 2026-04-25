@@ -1,0 +1,155 @@
+{
+  "envelope": {
+    "schema": "ToolLogV5",
+    "vendor": "PrecisionSemi",
+    "transmission_id": "TX_20260413_FAB2_00042",
+    "sent_at": "2026-04-13T16:00:00+08:00",
+    "compression": "none",
+    "record_count": 4
+  },
+  "device": {
+    "device_id": "DEV_IMP_05",
+    "device_type": "MedCurrent_Implanter",
+    "location": { "fab": "FAB2", "bay": "B7", "row": 3 },
+    "firmware": "MC-IMP-FW-9.1.2",
+    "last_pm_date": "2026-03-15"
+  },
+  "production_context": {
+    "lot_identifier": "LOT_0120",
+    "recipe_identifier": "IMP_As_80K_2E13",
+    "technology_node": "1A",
+    "operator_id": "OPR_033",
+    "process_start": "2026-04-13T13:00:00+08:00",
+    "process_end": "2026-04-13T14:45:00+08:00"
+  },
+  "recipe_blocks": [
+    {
+      "block_id": "BLK_001",
+      "block_name": "BeamSetup",
+      "block_type": "setup",
+      "sequence": 1,
+      "nominal_duration_s": 300,
+      "actual_duration_s": 285,
+      "block_status": "COMPLETED_OK",
+      "setpoints": {
+        "ion_species": "As+",
+        "beam_energy_keV": 80,
+        "target_dose_cm2": 2e13,
+        "beam_current_mA": 5.0,
+        "tilt_angle_deg": 7.0,
+        "twist_angle_deg": 22.0
+      },
+      "actuals": {
+        "beam_energy_keV": 80.1,
+        "beam_current_mA": 5.02,
+        "tilt_angle_deg": 7.0,
+        "twist_angle_deg": 22.0
+      }
+    },
+    {
+      "block_id": "BLK_002",
+      "block_name": "WaferImplant_Batch",
+      "block_type": "process",
+      "sequence": 2,
+      "nominal_duration_s": 3600,
+      "actual_duration_s": 3720,
+      "block_status": "COMPLETED_WITH_EVENTS",
+      "wafer_results": [
+        {
+          "wafer_seq": 1,
+          "wafer_id": "WFR_0120",
+          "implant_start": "2026-04-13T13:05:00+08:00",
+          "implant_end": "2026-04-13T13:12:00+08:00",
+          "dose_achieved_cm2": 2.01e13,
+          "dose_uniformity_pct": 0.8,
+          "wafer_status": "ACCEPTED"
+        },
+        {
+          "wafer_seq": 2,
+          "wafer_id": "WFR_0121",
+          "implant_start": "2026-04-13T13:13:00+08:00",
+          "implant_end": "2026-04-13T13:20:00+08:00",
+          "dose_achieved_cm2": 1.99e13,
+          "dose_uniformity_pct": 0.9,
+          "wafer_status": "ACCEPTED"
+        },
+        {
+          "wafer_seq": 3,
+          "wafer_id": "WFR_0122",
+          "implant_start": "2026-04-13T13:21:00+08:00",
+          "implant_end": "2026-04-13T13:33:00+08:00",
+          "dose_achieved_cm2": 1.87e13,
+          "dose_uniformity_pct": 3.5,
+          "wafer_status": "HOLD",
+          "hold_reason": "Dose uniformity exceeded 3% specification"
+        },
+        {
+          "wafer_seq": 4,
+          "wafer_id": "WFR_0123",
+          "implant_start": "2026-04-13T13:40:00+08:00",
+          "implant_end": "2026-04-13T13:47:00+08:00",
+          "dose_achieved_cm2": 2.00e13,
+          "dose_uniformity_pct": 0.8,
+          "wafer_status": "ACCEPTED"
+        },
+        {
+          "wafer_seq": 5,
+          "wafer_id": "WFR_0124",
+          "implant_start": "2026-04-13T13:48:00+08:00",
+          "implant_end": "2026-04-13T13:55:00+08:00",
+          "dose_achieved_cm2": 2.02e13,
+          "dose_uniformity_pct": 0.7,
+          "wafer_status": "ACCEPTED"
+        }
+      ],
+      "beam_stability_log": [
+        { "ts": "2026-04-13T13:05:00+08:00", "beam_current_mA": 5.01, "beam_energy_keV": 80.0 },
+        { "ts": "2026-04-13T13:10:00+08:00", "beam_current_mA": 5.00, "beam_energy_keV": 80.1 },
+        { "ts": "2026-04-13T13:20:00+08:00", "beam_current_mA": 4.85, "beam_energy_keV": 79.9 },
+        { "ts": "2026-04-13T13:25:00+08:00", "beam_current_mA": 4.50, "beam_energy_keV": 79.5 },
+        { "ts": "2026-04-13T13:30:00+08:00", "beam_current_mA": 4.20, "beam_energy_keV": 79.3 },
+        { "ts": "2026-04-13T13:35:00+08:00", "beam_current_mA": 5.00, "beam_energy_keV": 80.0 },
+        { "ts": "2026-04-13T13:40:00+08:00", "beam_current_mA": 5.02, "beam_energy_keV": 80.1 },
+        { "ts": "2026-04-13T13:55:00+08:00", "beam_current_mA": 5.01, "beam_energy_keV": 80.0 }
+      ]
+    },
+    {
+      "block_id": "BLK_003",
+      "block_name": "BeamOff_Vent",
+      "block_type": "cleanup",
+      "sequence": 3,
+      "nominal_duration_s": 120,
+      "actual_duration_s": 118,
+      "block_status": "COMPLETED_OK"
+    }
+  ],
+  "event_log": [
+    {
+      "ev_id": "EV_001",
+      "ev_ts": "2026-04-13T13:22:00+08:00",
+      "ev_type": "BEAM_INSTABILITY",
+      "ev_severity": "WARNING",
+      "ev_msg": "Beam current dropped below 90% of setpoint",
+      "ev_data": {
+        "setpoint_mA": 5.0,
+        "actual_mA": 4.50,
+        "duration_s": 780
+      },
+      "linked_wafer": "WFR_0122",
+      "auto_action": "DOSE_COMPENSATION_ACTIVE"
+    },
+    {
+      "ev_id": "EV_002",
+      "ev_ts": "2026-04-13T13:35:00+08:00",
+      "ev_type": "BEAM_RECOVERED",
+      "ev_severity": "INFO",
+      "ev_msg": "Beam current recovered to setpoint",
+      "ev_data": {
+        "setpoint_mA": 5.0,
+        "actual_mA": 5.00
+      },
+      "linked_wafer": null,
+      "auto_action": "DOSE_COMPENSATION_DEACTIVATED"
+    }
+  ]
+}
